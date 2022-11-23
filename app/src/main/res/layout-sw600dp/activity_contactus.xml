@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg"
+    tools:context=".activity.ContactUs">
+
+    <RelativeLayout
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <include
+            android:id="@+id/topbar"
+            layout="@layout/top_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/main_rl"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin_20"
+        android:visibility="visible"
+        android:layout_below="@+id/toolbar">
+
+        <ImageView
+            android:id="@+id/logo"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginTop="@dimen/margin_10"
+            android:layout_centerHorizontal="true"
+            android:src="@drawable/logo1"/>
+
+        <EditText
+            android:id="@+id/name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/logo"
+            android:textColorHint="@color/white_full"
+            android:layout_marginTop="@dimen/margin_10"
+            android:padding="@dimen/padding_10"
+            android:inputType="textNoSuggestions"
+            android:hint="Enter name"/>
+
+        <EditText
+            android:id="@+id/email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/name"
+            android:textColorHint="@color/white_full"
+            android:layout_marginTop="@dimen/margin_10"
+            android:padding="@dimen/padding_10"
+            android:inputType="textNoSuggestions"
+            android:hint="Enter email address"/>
+        <EditText
+            android:id="@+id/message"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/email"
+            android:textColorHint="@color/white_full"
+            android:layout_marginTop="@dimen/margin_10"
+            android:gravity="top"
+            android:paddingLeft="@dimen/margin_10"
+            android:paddingTop="@dimen/margin_10"
+            android:maxLines="5"
+            android:lines="5"
+            android:padding="@dimen/margin_15"
+            android:maxLength="200"
+            android:textSize="@dimen/text_mediumsize"
+            android:inputType="textNoSuggestions|textMultiLine"
+            android:textColor="@color/black"
+            android:hint="Enter your message"/>
+
+        <Button
+            android:id="@+id/updateprofile"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white_full"
+            android:layout_marginTop="@dimen/margin_20"
+             android:padding="@dimen/padding_10"
+            android:layout_centerHorizontal="true"
+            style="@style/MaterialAnimations.Buttonblack"
+            android:layout_below="@+id/message"
+            android:textAllCaps="true"
+            android:textSize="@dimen/text_largesize"
+            android:text="Submit"/>
+    </RelativeLayout>
+</RelativeLayout>

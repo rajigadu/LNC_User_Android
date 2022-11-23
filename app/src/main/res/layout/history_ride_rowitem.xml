@@ -1,0 +1,350 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/rowitem_root"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="@dimen/margin_05"
+    android:background="@android:color/transparent"
+    android:clickable="true"
+    android:padding="@dimen/margin_05">
+
+    <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/margin_05"
+        android:layout_marginRight="@dimen/margin_05"
+        android:backgroundTint="@color/off_white"
+        android:elevation="@dimen/margin_10"
+        app:cardCornerRadius="@dimen/margin_15"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_10"
+            android:background="@color/off_white">
+
+            <TextView
+                android:id="@+id/date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_mediumsize" />
+
+            <TextView
+                android:id="@+id/time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/date"
+                android:text=""
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_mediumsize"
+                android:visibility="gone" />
+
+            <Button
+                android:id="@+id/stops"
+                style="@style/MaterialAnimations.Buttonorange"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_marginLeft="@dimen/margin_10"
+                android:layout_marginRight="@dimen/margin_05"
+                android:padding="@dimen/margin_10"
+                android:text="Stops"
+                android:textColor="@color/white_full"
+                android:textSize="@dimen/text_mediumsize"
+                android:visibility="visible" />
+
+            <TextView
+                android:id="@+id/ride"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/stops"
+                android:layout_alignParentLeft="true"
+                android:layout_marginTop="@dimen/margin_05"
+                android:layout_marginRight="@dimen/margin_10"
+                android:text=""
+                android:textColor="@color/black_light"
+                android:textSize="@dimen/text_mediumsize"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/dtitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/ride"
+                android:layout_alignParentLeft="true"
+                android:layout_marginTop="@dimen/margin_05"
+                android:layout_marginRight="@dimen/margin_10"
+                android:text="Distance :"
+                android:textColor="@color/black_light"
+                android:textSize="@dimen/text_smallsize"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/distance"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/ride"
+                android:layout_marginTop="@dimen/margin_05"
+                android:layout_toRightOf="@+id/dtitle"
+                android:text=""
+                android:textColor="@color/green"
+                android:textSize="@dimen/text_smallsize"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/title_trans"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/distance"
+                android:layout_alignParentLeft="true"
+                android:layout_marginTop="@dimen/margin_05"
+                android:layout_marginRight="@dimen/margin_10"
+                android:text="transaction Id :"
+                android:textColor="@color/black_light"
+                android:textSize="@dimen/text_smallsize"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/trans"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/distance"
+                android:layout_marginTop="@dimen/margin_05"
+                android:layout_toRightOf="@+id/title_trans"
+                android:text="hhghhfgh"
+                android:textColor="@color/black_light"
+                android:textSize="@dimen/text_smallsize"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/title_amount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/trans"
+                android:layout_alignParentLeft="true"
+                android:layout_marginTop="@dimen/margin_05"
+                android:layout_marginRight="@dimen/margin_10"
+                android:text="Ride Cost :"
+                android:textColor="@color/black_light"
+                android:textSize="@dimen/text_smallsize"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/amount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/trans"
+                android:layout_marginTop="@dimen/margin_05"
+                android:layout_toRightOf="@+id/title_amount"
+                android:text="777"
+                android:textColor="@color/green"
+                android:textSize="@dimen/text_smallsize"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/title_wcharges"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/title_amount"
+                android:layout_alignParentLeft="true"
+                android:layout_marginTop="@dimen/margin_05"
+                android:layout_marginRight="@dimen/margin_10"
+                android:text="Waiting Charges :"
+                android:textColor="@color/black_light"
+                android:textSize="@dimen/text_smallsize"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/waiting_charges"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/title_amount"
+                android:layout_marginTop="@dimen/margin_05"
+                android:layout_toRightOf="@+id/title_wcharges"
+                android:text="787"
+                android:textColor="@color/green"
+                android:textSize="@dimen/text_smallsize"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/title_tip"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/title_wcharges"
+                android:layout_alignParentLeft="true"
+                android:layout_marginTop="@dimen/margin_05"
+                android:layout_marginRight="@dimen/margin_10"
+                android:text="Tip Amount :"
+                android:textColor="@color/black_light"
+                android:textSize="@dimen/text_smallsize"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tip"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/title_wcharges"
+                android:layout_marginTop="@dimen/margin_05"
+                android:layout_toRightOf="@+id/title_tip"
+                android:text="787"
+                android:textColor="@color/green"
+                android:textSize="@dimen/text_smallsize"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+            <TextView
+                android:id="@+id/title_promo_tile"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/title_tip"
+                android:layout_alignParentLeft="true"
+                android:layout_marginTop="@dimen/margin_05"
+                android:layout_marginRight="@dimen/margin_10"
+                android:text="Promo Amount :"
+                android:textColor="@color/black_light"
+                android:textSize="@dimen/text_smallsize"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/title_promo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/title_tip"
+                android:layout_marginTop="@dimen/margin_05"
+                android:layout_toRightOf="@+id/title_promo_tile"
+                android:text="787"
+                android:textColor="@color/green"
+                android:textSize="@dimen/text_smallsize"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+
+            <TextView
+                android:id="@+id/title_totalcost"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/title_promo_tile"
+                android:layout_alignParentLeft="true"
+                android:layout_marginTop="@dimen/margin_05"
+                android:layout_marginRight="@dimen/margin_10"
+                android:text="Ride Total Cost :"
+                android:textColor="@color/black_light"
+                android:textSize="@dimen/text_smallsize"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/totalcost"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/title_promo_tile"
+                android:layout_marginTop="@dimen/margin_05"
+                android:layout_toRightOf="@+id/title_totalcost"
+                android:text="787"
+                android:textColor="@color/green"
+                android:textSize="@dimen/text_smallsize"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/title_cancelamount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/title_totalcost"
+                android:layout_alignParentLeft="true"
+                android:layout_marginTop="@dimen/margin_05"
+                android:layout_marginRight="@dimen/margin_10"
+                android:text="Ride Cancellation Amount :"
+                android:textColor="@color/black_light"
+                android:textSize="@dimen/text_smallsize"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/cancelamount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/title_totalcost"
+                android:layout_marginTop="@dimen/margin_05"
+                android:layout_toRightOf="@+id/title_cancelamount"
+                android:text="787"
+                android:textColor="@color/green"
+                android:textSize="@dimen/text_smallsize"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <Button
+                android:id="@+id/btnFeedBack"
+                style="@style/MaterialAnimations.Buttonorange"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/title_cancelamount"
+                android:layout_centerHorizontal="true"
+                android:layout_gravity="left"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="@dimen/margin_10"
+                android:padding="@dimen/margin_10"
+                android:text="      Give Feedback      "
+                android:textColor="@color/white_full"
+                android:textSize="@dimen/text_mediumsize"
+                android:visibility="gone" />
+
+
+            <Button
+                android:id="@+id/btnAddTip"
+                style="@style/MaterialAnimations.Buttonorange"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/btnFeedBack"
+                android:layout_centerHorizontal="true"
+                android:layout_gravity="left"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="@dimen/margin_10"
+                android:padding="@dimen/margin_10"
+                android:text="      Add Tip      "
+                android:textColor="@color/white_full"
+                android:textSize="@dimen/text_mediumsize"
+                android:visibility="gone" />
+
+
+            <Button
+                android:id="@+id/psummary"
+                style="@style/MaterialAnimations.Buttonorange"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/btnAddTip"
+                android:layout_centerHorizontal="true"
+                android:layout_gravity="left"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="@dimen/margin_05"
+                android:layout_marginBottom="10dp"
+                android:padding="@dimen/margin_10"
+                android:text="      Payment Summary      "
+                android:textColor="@color/white_full"
+                android:textSize="@dimen/text_mediumsize"
+                android:visibility="visible" />
+
+        </RelativeLayout>
+    </android.support.v7.widget.CardView>
+
+</RelativeLayout>

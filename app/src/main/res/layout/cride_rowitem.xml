@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/rowitem_root"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="@dimen/margin_05"
+    android:background="@android:color/transparent"
+    android:clickable="true"
+    android:padding="@dimen/margin_05">
+
+    <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/margin_05"
+        android:layout_marginRight="@dimen/margin_05"
+        android:backgroundTint="@color/off_white"
+        android:elevation="@dimen/margin_10"
+        app:cardCornerRadius="@dimen/margin_15">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_10"
+            android:background="@color/off_white">
+
+            <TextView
+                android:id="@+id/date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_mediumsize" />
+
+            <Button
+                android:id="@+id/stops"
+                style="@style/MaterialAnimations.Buttonorange"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_marginBottom="@dimen/margin_10"
+                android:layout_marginLeft="@dimen/margin_10"
+                android:layout_marginRight="@dimen/margin_05"
+                android:text="Stops"
+                android:textColor="@color/white_full"
+                android:textSize="@dimen/text_mediumsize"
+                android:visibility="visible" />
+
+            <TextView
+                android:id="@+id/ride"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_below="@+id/stops"
+                android:layout_marginRight="@dimen/margin_10"
+                android:text=""
+                android:textColor="@color/black_light"
+                android:textSize="@dimen/text_mediumsize"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/dtitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_below="@+id/ride"
+                android:layout_marginRight="@dimen/margin_10"
+                android:layout_marginTop="@dimen/margin_05"
+                android:text="Distance :"
+                android:textColor="@color/black_light"
+                android:textSize="@dimen/text_mediumsize"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/distance"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/ride"
+                android:layout_marginTop="@dimen/margin_05"
+                android:layout_toRightOf="@+id/dtitle"
+                android:text=""
+                android:textColor="@color/green"
+                android:textSize="@dimen/text_mediumsize"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/ridestatus_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_below="@+id/dtitle"
+                android:layout_marginRight="@dimen/margin_10"
+                android:layout_marginTop="@dimen/margin_05"
+                android:text="Ride status :"
+                android:textColor="@color/black_light"
+                android:textSize="@dimen/text_mediumsize" />
+
+            <TextView
+                android:id="@+id/ridestatus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/dtitle"
+                android:layout_marginTop="@dimen/margin_05"
+                android:layout_toRightOf="@+id/ridestatus_title"
+                android:text="Pending"
+                android:textColor="@color/green"
+                android:textSize="@dimen/text_largesize" />
+
+            <TextView
+                android:id="@+id/ridestatus_acc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/dtitle"
+                android:layout_marginTop="@dimen/margin_05"
+                android:layout_toRightOf="@+id/ridestatus"
+                android:text="/ Ride Started"
+                android:textColor="@color/green"
+                android:textSize="@dimen/text_largesize"
+                android:layout_marginLeft="@dimen/margin_10"
+                android:visibility="gone"/>
+
+            <LinearLayout
+                android:id="@+id/ll_ride_cost"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/ridestatus"
+                android:layout_marginRight="@dimen/margin_10"
+                android:layout_marginTop="@dimen/margin_05"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:text="@string/ride_cost"
+                    android:textColor="@color/black_light"
+                    android:textSize="@dimen/text_mediumsize" />
+
+                <TextView
+                    android:id="@+id/tv_ride_cost"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:textColor="@color/green"
+                    android:textSize="@dimen/text_largesize" />
+
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/viewdetails"
+                style="@style/MaterialAnimations.Buttonorange"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_below="@+id/ll_ride_cost"
+                android:layout_marginBottom="@dimen/margin_10"
+                android:layout_marginLeft="@dimen/margin_10"
+                android:layout_marginRight="@dimen/margin_05"
+                android:text="View Details"
+                android:textColor="@color/white_full"
+                android:textSize="@dimen/text_mediumsize"
+                android:visibility="visible" />
+
+            <Button
+                android:id="@+id/btn_edit_ride"
+                style="@style/MaterialAnimations.Buttongreen"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/ll_ride_cost"
+                android:layout_marginBottom="@dimen/margin_10"
+                android:layout_marginLeft="@dimen/margin_10"
+                android:layout_marginRight="@dimen/margin_05"
+                android:text="Edit Ride Info"
+                android:textColor="@color/white_full"
+                android:textSize="@dimen/text_mediumsize"
+                android:visibility="visible" />
+
+        </RelativeLayout>
+    </android.support.v7.widget.CardView>
+
+</RelativeLayout>

@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rootlo"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_centerInParent="true"
+    android:layout_margin="@dimen/margin_05"
+    android:background="@drawable/button_border_round_3"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <EditText
+            android:id="@+id/et_apply_promo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/margin_20"
+            android:layout_marginRight="@dimen/margin_20"
+            android:layout_marginTop="30dp"
+            android:background="@color/off_white"
+            android:hint="@string/enter_promo_code"
+            android:padding="@dimen/margin_10"
+            android:textColor="@color/black"
+            android:textColorHint="@color/black_light"
+            android:textSize="@dimen/text_mediumsize" />
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/margin_20"
+            android:layout_marginRight="@dimen/margin_20"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btn_cancel_promo"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="@dimen/margin_20"
+                android:layout_marginRight="@dimen/margin_10"
+                android:layout_marginTop="@dimen/margin_20"
+                android:layout_weight="1"
+                android:background="@drawable/button_border_round_1"
+                android:paddingBottom="@dimen/padding_05"
+                android:paddingLeft="@dimen/padding_10"
+                android:paddingRight="@dimen/padding_10"
+                android:paddingTop="@dimen/padding_05"
+                android:text="Cancel"
+                android:textAllCaps="false"
+                android:textColor="@color/white_full"
+                android:textSize="@dimen/text_mediumsize" />
+
+            <Button
+                android:id="@+id/btn_apply_promo"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="@dimen/margin_20"
+                android:layout_marginTop="@dimen/margin_20"
+                android:layout_weight="1"
+                android:background="@drawable/button_border_round_1"
+                android:paddingBottom="@dimen/padding_05"
+                android:paddingLeft="@dimen/padding_10"
+                android:paddingRight="@dimen/padding_10"
+                android:paddingTop="@dimen/padding_05"
+                android:text="Apply Promo"
+                android:textAllCaps="false"
+                android:textColor="@color/white_full"
+                android:textSize="@dimen/text_mediumsize" />
+
+        </LinearLayout>
+    </LinearLayout>
+</RelativeLayout>

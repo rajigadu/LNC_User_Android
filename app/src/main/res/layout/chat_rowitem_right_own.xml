@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:card_view="http://schemas.android.com/tools"
+    android:id="@+id/rowitem_root"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#CACACA"
+    android:orientation="vertical">
+
+<!--
+    <RelativeLayout
+        android:id="@+id/rl_left"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_10"
+        android:visibility="gone">
+
+        <RelativeLayout
+            android:id="@+id/rl_left11"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:background="@drawable/in_message_bg"
+            android:padding="@dimen/padding_10">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/img_left"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:src="@drawable/user" />
+
+            <TextView
+                android:id="@+id/msg_left"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/margin_10"
+                android:layout_toRightOf="@+id/img_left"
+                android:maxLength="250"
+                android:maxWidth="240dp"
+                android:text=""
+                android:textColor="@android:color/black" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/rl_left11">
+
+            <TextView
+                android:id="@+id/left_dt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/margin_10"
+                android:maxLength="150"
+                android:maxWidth="240dp"
+                android:text=""
+                android:textColor="@android:color/white" />
+        </RelativeLayout>
+
+    </RelativeLayout>
+-->
+
+    <RelativeLayout
+        android:id="@+id/rl_right"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_10"
+        android:visibility="visible">
+
+        <RelativeLayout
+            android:id="@+id/rl_right11"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:background="@drawable/out_message_bg"
+            android:padding="@dimen/padding_10">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/img_right"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_toRightOf="@+id/msg_right"
+                android:src="@drawable/placeholder" />
+
+            <TextView
+                android:id="@+id/msg_right"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/margin_10"
+                android:maxLength="250"
+                android:maxWidth="240dp"
+                android:text=""
+                android:textColor="@android:color/black" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/rl_right11"
+            android:layout_marginRight="@dimen/margin_10">
+
+            <TextView
+                android:id="@+id/right_dt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/margin_10"
+                android:maxLength="150"
+                android:maxWidth="240dp"
+                android:text=""
+                android:textColor="@android:color/white" />
+        </RelativeLayout>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/rl_right">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="@color/white_full" />
+
+    </RelativeLayout>
+
+
+</RelativeLayout>

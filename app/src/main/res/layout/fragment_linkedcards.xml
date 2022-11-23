@@ -1,0 +1,265 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg"
+    android:clickable="true">
+
+    <Button
+        android:id="@+id/add_card"
+        style="@style/MaterialAnimations.Buttonblack"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:paddingBottom="@dimen/padding_15"
+        android:paddingLeft="@dimen/padding_20"
+        android:paddingRight="@dimen/padding_20"
+        android:paddingTop="@dimen/padding_15"
+        android:text="ADD CARD"
+        android:textAllCaps="false"
+        android:textColor="@color/white_full"
+        android:textSize="@dimen/text_mediumsize"
+        android:visibility="gone" />
+
+    <ScrollView
+        android:id="@+id/scrol"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/add_card"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="@dimen/margin_10"
+        android:scrollbars="vertical"
+        android:fitsSystemWindows="true">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+        >
+
+
+
+            <RelativeLayout
+                android:id="@+id/m_btn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:layout_margin="@dimen/margin_10">
+
+
+                <Switch
+                    android:id="@+id/addcard_top"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_weight="3"
+                    android:padding="@dimen/margin_10"
+                    android:singleLine="true"
+                    android:text="Add Card"
+                    android:textColor="#ffffff"
+                    android:textSize="15dp"
+                    android:textStyle="bold"
+                    android:background="@color/color_greenless"
+                    />
+
+
+                <RelativeLayout
+                    android:id="@+id/m_reative"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/addcard_top"
+                    android:visibility="gone"
+                    >
+                    <EditText
+                        android:id="@+id/card_name"
+                        android:layout_width="fill_parent"
+                        android:layout_height="45dp"
+                        android:hint="Card Holder Name"
+                        android:padding="10dp"
+                        android:drawablePadding="10dp"
+                        android:layout_marginTop="5dp"
+                        android:textColorHint="@color/black_light"
+                        android:textColor="@color/black"
+                        android:text=""
+                        android:textSize="15dp"
+                        android:singleLine="true"
+                        android:background="@drawable/fade_green_border_corner_round"
+                        />
+
+
+                    <EditText
+                        android:id="@+id/card_number"
+                        android:layout_width="fill_parent"
+                        android:layout_height="45dp"
+                        android:hint="Card Number"
+                        android:padding="10dp"
+                        android:drawablePadding="10dp"
+                        android:layout_marginTop="10dp"
+                        android:textColorHint="@color/black_light"
+                        android:textColor="@color/black"
+                        android:text=""
+                        android:textSize="15dp"
+                        android:singleLine="true"
+                        android:inputType="number"
+                        android:maxLength="16"
+                        android:layout_below="@+id/card_name"
+                        android:background="@drawable/fade_green_border_corner_round"
+                        />
+
+
+                    <EditText
+                        android:id="@+id/card_type"
+                        android:layout_width="fill_parent"
+                        android:layout_height="50dp"
+                        android:hint="Card Type"
+                        android:padding="10dp"
+                        android:drawablePadding="10dp"
+                        android:layout_marginTop="5dp"
+                        android:textColorHint="@color/black_light"
+                        android:textColor="@color/black"
+                        android:text=""
+                        android:textSize="15dp"
+                        android:layout_below="@+id/card_number"
+                        android:singleLine="true"
+                        android:visibility="gone"
+                        />
+
+
+
+                    <EditText
+                        android:id="@+id/button678789789"
+                        android:layout_width="fill_parent"
+                        android:layout_height="45dp"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true"
+                        android:layout_below="@+id/card_type"
+                        android:hint="Enter Expiration Date(MM/YY)"
+                        android:textColorHint="@color/black_light"
+                        android:textColor="@android:color/black"
+                        android:textSize="14dp"
+                        android:textStyle="normal"
+                        android:padding="10dp"
+                        android:drawablePadding="10dp"
+                        android:layout_marginTop="10dp"
+                        android:gravity="left|center_vertical"
+                        android:textAllCaps="false"
+                        android:maxLength="5"
+                        android:singleLine="true"
+                        android:inputType="number"
+                        android:text=""
+                        android:background="@drawable/fade_green_border_corner_round"/>
+
+
+
+                    <EditText
+                        android:id="@+id/button675768"
+                        android:layout_width="fill_parent"
+                        android:layout_height="45dp"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true"
+                        android:layout_below="@+id/button678789789"
+                        android:hint="Enter CVV"
+                        android:textColorHint="@color/black_light"
+                        android:textColor="@android:color/black"
+                        android:textSize="14dp"
+                        android:textStyle="normal"
+                        android:padding="10dp"
+                        android:drawablePadding="10dp"
+                        android:layout_marginTop="10dp"
+                        android:gravity="left|center_vertical"
+                        android:textAllCaps="false"
+                        android:maxLength="4"
+                        android:inputType="numberPassword"
+                        android:visibility="visible"
+                        android:text=""
+                        android:background="@drawable/fade_green_border_corner_round"
+                        />
+
+
+                    <EditText
+                        android:id="@+id/button423435"
+                        android:layout_width="fill_parent"
+                        android:layout_height="45dp"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true"
+                        android:layout_below="@+id/button675768"
+                        android:hint="Postal Code"
+                        android:textColorHint="@color/black_light"
+                        android:textColor="@android:color/black"
+                        android:textSize="14dp"
+                        android:textStyle="normal"
+                        android:padding="10dp"
+                        android:drawablePadding="10dp"
+                        android:layout_marginTop="10dp"
+                        android:gravity="left|center_vertical"
+                        android:inputType="number"
+                        android:textAllCaps="false"
+                        android:maxLength="6"
+                        android:visibility="visible"
+                        android:background="@drawable/fade_green_border_corner_round"
+                        android:text=""
+                        />
+
+
+
+
+                    <Button
+                        android:id="@+id/submit"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_weight="3"
+                        android:padding="@dimen/margin_10"
+                        android:singleLine="true"
+                        android:text="Add Card"
+                        android:textColor="#ffffff"
+                        android:textSize="@dimen/text_smallsize"
+                        android:textStyle="bold"
+                        android:layout_marginTop="10dp"
+                        android:layout_below="@+id/button423435"
+                        android:background="@color/black"
+                        />
+
+
+                </RelativeLayout>
+
+
+
+            </RelativeLayout>
+
+
+
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rv_loc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/m_btn"/>
+
+
+
+
+        </RelativeLayout>
+
+
+
+
+
+    </ScrollView>
+
+    <com.wang.avi.AVLoadingIndicatorView
+        android:id="@+id/avi"
+        style="@style/AVLoadingIndicatorView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:visibility="visible"
+        app:indicatorColor="@color/green"
+        app:indicatorName="BallPulseIndicator"
+        />
+
+    <LinearLayout
+        android:id="@+id/card_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:visibility="gone"></LinearLayout>
+</RelativeLayout>

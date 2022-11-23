@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+    <android.support.v7.widget.CardView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:id="@+id/rowitem_root"
+        android:layout_marginLeft="@dimen/margin_10"
+        android:layout_marginRight="@dimen/margin_10"
+        android:layout_margin="@dimen/margin_10"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        android:backgroundTint="@color/off_white"
+        android:clickable="true"
+        android:elevation="@dimen/margin_10"
+        app:cardCornerRadius="@dimen/margin_15" >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/off_white">
+
+        <TextView
+            android:id="@+id/name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Name"
+            android:paddingTop="@dimen/margin_20"
+            android:paddingLeft="@dimen/margin_20"
+            android:paddingRight="@dimen/margin_20"
+            android:layout_centerHorizontal="true"
+            android:textColor="@color/colorAccent1"
+            android:textSize="@dimen/text_largesize"/>
+
+        <TextView
+            android:id="@+id/status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/name"
+            android:layout_centerHorizontal="true"
+            android:paddingBottom="@dimen/margin_20"
+            android:text=""
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_largesize" />
+
+
+    </RelativeLayout>
+    </android.support.v7.widget.CardView>

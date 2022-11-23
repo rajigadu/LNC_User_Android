@@ -1,0 +1,14 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".MainActivity">
+
+       <item
+        android:id="@+id/item_bolo_alert_badge"
+        android:actionLayout="@layout/menu_action_bolo_alert_badge"
+        app:showAsAction="always"
+        android:title="Alerte"
+        android:icon="@mipmap/msg_i"/>
+
+
+</menu>

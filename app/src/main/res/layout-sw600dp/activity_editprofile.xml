@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg">
+
+    <RelativeLayout
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <include
+            android:id="@+id/topbar"
+            layout="@layout/top_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+    </RelativeLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/toolbar"
+        android:layout_margin="@dimen/margin_20">
+
+        <RelativeLayout
+            android:id="@+id/main_rl"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="visible">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/userimage"
+                android:layout_width="96dp"
+                android:layout_height="96dp"
+                android:layout_marginTop="@dimen/margin_10"
+                android:layout_centerHorizontal="true"
+                android:src="@drawable/appicon"
+                app:civ_border_width="1dp"
+                app:civ_border_color="#FF000000"/>
+
+            <TextView
+                android:id="@+id/upload"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/upload"
+                android:layout_marginTop="@dimen/margin_10"
+                android:layout_below="@+id/userimage"
+                android:layout_centerHorizontal="true"
+                android:textSize="@dimen/text_mediumsize"
+                android:textColor="@color/black_light"/>
+
+            <EditText
+                android:layout_height="wrap_content"
+                android:id="@+id/fname"
+                android:layout_width="match_parent"
+                android:textColorHint="@color/white_full"
+                android:layout_marginTop="@dimen/margin_10"
+                android:layout_below="@+id/upload"
+                android:layout_marginLeft="@dimen/margin_10"
+                android:layout_marginRight="@dimen/margin_10"
+                android:padding="@dimen/padding_10"
+                android:inputType="textNoSuggestions"
+                android:hint="Enter First Name."/>
+
+            <EditText
+                android:id="@+id/lname"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/fname"
+                android:textColorHint="@color/white_full"
+                android:layout_marginTop="@dimen/margin_10"
+                android:visibility="visible"
+                android:layout_marginLeft="@dimen/margin_10"
+                android:layout_marginRight="@dimen/margin_10"
+                android:padding="@dimen/padding_10"
+                android:inputType="textNoSuggestions"
+                android:hint="Enter Last name."/>
+
+            <EditText
+                android:id="@+id/mobile"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/lname"
+                android:textColorHint="@color/white_full"
+                android:layout_marginTop="@dimen/margin_10"
+                android:layout_marginLeft="@dimen/margin_10"
+                android:layout_marginRight="@dimen/margin_10"
+                android:padding="@dimen/padding_10"
+                android:inputType="phone"
+                android:hint="Enter Mobile Number."/>
+
+            <Button
+                android:id="@+id/updateprofile"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white_full"
+                android:layout_marginTop="@dimen/margin_20"
+                android:layout_marginLeft="@dimen/margin_10"
+                android:layout_marginRight="@dimen/margin_10"
+                android:padding="@dimen/padding_10"
+                android:layout_centerHorizontal="true"
+                style="@style/MaterialAnimations.Buttonblack"
+                android:layout_below="@+id/mobile"
+                android:textAllCaps="false"
+                android:textSize="@dimen/text_largesize"
+                android:text="Update"/>
+        </RelativeLayout>
+    </ScrollView>
+</RelativeLayout>

@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:card_view="http://schemas.android.com/tools"
+    android:background="#cacaca">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/rl111" >
+
+        <include
+            layout="@layout/top_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/main_relative23"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/rl_msg"
+        android:layout_below="@+id/rl111">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv_chat"
+            android:layout_width="match_parent"
+            android:visibility="gone"
+            android:layout_height="wrap_content">
+        </android.support.v7.widget.RecyclerView>
+
+        <TextView
+            android:id="@+id/nodata"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/text_largesize"
+            android:visibility="visible"
+            android:layout_below="@+id/rv_chat"
+            android:layout_centerInParent="true"
+            android:textColor="@color/colorPrimary"
+            android:text="Start Communication now"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl_msg"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@color/white_light">
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/card_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="05dp"
+            android:elevation="10dp"
+            card_view:cardCornerRadius="50dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="5"
+            android:background="@color/off_white"
+            android:orientation="horizontal">
+
+            <EditText
+                android:layout_width="0dp"
+                android:layout_weight="4"
+                android:layout_height="match_parent"
+                android:hint="text message"
+                android:lines="8"
+                android:minLines="6"
+                android:gravity="top|left"
+                android:maxLines="10"
+                android:scrollbars="vertical"
+                android:padding="@dimen/margin_10"
+                android:textColorHint="#bcbcbc"
+                android:id="@+id/message"
+                android:background="@color/white_full"
+                android:inputType="textMultiLine"/>
+
+            <Button
+                android:id="@+id/send"
+                android:text="Send"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:textAllCaps="false"
+                android:padding="@dimen/margin_10"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/margin_10"
+                android:background="@drawable/button_border_round_3"
+                android:textColor="#ffffff"
+                android:textSize="@dimen/text_smallsize"/>
+        </LinearLayout>
+        </android.support.v7.widget.CardView>
+
+    </RelativeLayout>
+</RelativeLayout>
+
+
+
+
+

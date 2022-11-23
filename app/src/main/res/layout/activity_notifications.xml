@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/toolbar"
+        android:visibility="visible"
+
+        >
+        <include
+            layout="@layout/top_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+    </RelativeLayout>
+
+
+
+    <RelativeLayout
+        android:id="@+id/main_relative"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/toolbar"
+        android:background="@drawable/bg" >
+
+
+
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="0dp">
+
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/actionable_items"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="visible"
+                />
+
+
+        </RelativeLayout>
+
+
+
+
+
+        <ProgressBar
+            android:id="@+id/progressBar1444"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:visibility="gone"
+            />
+
+
+        <TextView
+            android:id="@+id/textView123124"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:visibility="gone"
+            android:textSize="15dp"
+            android:layout_margin="10dp"
+            android:textColor="@color/black"
+            />
+
+
+    </RelativeLayout>
+
+
+
+</RelativeLayout>
+

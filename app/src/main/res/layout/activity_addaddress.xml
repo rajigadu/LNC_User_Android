@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity.Forgot"
+    android:background="@drawable/bg">
+
+    <RelativeLayout
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <include layout="@layout/top_bar">
+        </include>
+
+</RelativeLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/toolbar">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/text_largesize"
+        android:textColor="@color/white_full"
+        android:textStyle="italic"
+        android:layout_marginLeft="@dimen/margin_10"
+        android:layout_marginRight="@dimen/margin_10"
+        android:layout_marginTop="@dimen/margin_10"
+        android:text="@string/dropoff"/>
+
+    <AutoCompleteTextView
+        android:id="@+id/street"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="@dimen/margin_10"
+        android:background="@drawable/button_border_round"
+        android:layout_below="@id/title"
+        android:hint="drop address"
+        android:inputType="textNoSuggestions"
+        android:padding="@dimen/padding_05"
+        android:textColor="@color/black"
+        android:textColorHint="@color/black_light"
+        android:textSize="@dimen/text_mediumsize" />
+
+        </RelativeLayout>
+    </ScrollView>
+
+    <Button
+        android:id="@+id/add"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:text="Add ADDRESS"
+        android:textSize="@dimen/text_mediumsize"
+        android:layout_alignParentBottom="true"
+        android:textColor="@color/white_full"
+        style="@style/MaterialAnimations.Buttonblack"/>
+</RelativeLayout>

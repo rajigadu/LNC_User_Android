@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/rootlo"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:baselineAligned="false"
+    android:background="@color/color_toolbar"
+    android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Choose Photo"
+                android:padding="@dimen/padding_20"
+                android:layout_gravity="center_horizontal"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_largesize" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/red"/>
+
+            <TextView
+                android:id="@+id/gallary"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Choose Gallary"
+                android:gravity="center"
+                style="@style/MaterialAnimations.Buttonblack"
+                android:layout_margin="@dimen/padding_10"
+                android:textStyle="normal"
+                android:textColor="@color/white_full"
+                android:textSize="@dimen/text_largesize" />
+
+            <TextView
+                android:id="@+id/takephoto"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                style="@style/MaterialAnimations.Buttonblack"
+                android:layout_marginLeft="@dimen/padding_10"
+                android:layout_marginRight="@dimen/padding_10"
+                android:layout_margin="@dimen/padding_10"
+                android:text="Take a Photo"
+                android:textColor="@color/white_full"
+                android:textSize="@dimen/text_largesize" />
+
+            <TextView
+                android:id="@+id/cancel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                style="@style/MaterialAnimations.Buttonblack"
+                android:layout_margin="@dimen/padding_10"
+                android:layout_marginLeft="@dimen/padding_10"
+                android:layout_marginRight="@dimen/padding_10"
+                android:text="Cancel"
+                android:textColor="@color/white_full"
+                android:textSize="@dimen/text_largesize" />
+        </LinearLayout>
+
+</LinearLayout>

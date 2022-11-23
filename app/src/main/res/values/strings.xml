@@ -1,0 +1,95 @@
+<resources>
+    <string name="app_name">LateNightChauffeurs</string>
+
+    <string name="forgot">Forgot Password?</string>
+    <string name="noaccount">Don\'t have an account?</string>
+    <string name="signupl"><u>Sign Up</u></string>
+    <string name="signup">Sign Up</string>
+    <string name="register"><u>Register</u></string>
+    <string name="signin">Sign In </string>
+    <string name="book_quote">Reservation/Quote Inquiry</string>
+    <string name="dropoff">Drop Off Address</string>
+    <string name="pinfo">Personal Information</string>
+    <string name="savefor">Save as for future reference</string>
+    <string name="pickupinfo">Pickup Location Info</string>
+    <string name="dropinfo">Drop-off  Location</string>
+    <string name="rtext">Fill out the below form to \n book a Reservation with \n "&quot; Late Night Chauffeurs "&quot; </string>
+    <string name="connection_subtext">It seems that internet connection is not available, please check your wi-fi or mobile data connection &amp; try again. </string>
+    <string name="loading">"Please wait while processing...</string>
+
+    <string name="breservation">Book Reservation</string>
+    <string name="bookings">Ride Info</string>
+    <string name="futurerides">Future Rides</string>
+    <string name="cards">Available Cards</string>
+    <string name="service">Change Location</string>
+    <string name="address">Drop Addresses</string>
+    <string name="settings">Settings</string>
+    <string name="payments">Payments History</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="upload"><u>Change profile pic</u></string>
+    <string name="facebook_app_id">441616232930701</string>
+    <string name="fb_login_protocol_scheme">fb441616232930701</string>
+    <string name="ride_cost">Ride Cost : </string>
+    <string name="book_now">BOOK NOW</string>
+    <string name="apply_promo">Apply</string>
+    <string name="enter_promo_code">Enter Promo Code</string>
+    <string name="submit">Submit</string>
+    <string name="submit_quote">Submit for Quote/Reservation</string>
+
+
+
+    <string name="notification_channel_id">01</string>
+
+
+
+
+
+    <array name="indicator_colors">
+        <item>#FFFFFFFF</item>
+        <!--Default-->
+        <item>@color/violet</item>
+        <!--Wrong-->
+        <item>@color/navigationBarColorSkipped</item>
+        <!--Right-->
+        <item>@color/colorAccent2</item>
+        <!--Skipped-->
+        <item>@color/colorAccent2</item>
+        <!--Current-->
+        <item>@color/navigationBarColorAttempted</item>
+        <!--Processed-->
+
+    </array>
+    <array name="border_state_colors">
+        <item>@color/navigationBarColorAttempted</item>
+        <!--Default-->
+        <item>@color/violet</item>
+        <!--Wrong-->
+        <item>@color/navigationBarColorSkipped</item>
+        <!--Right-->
+        <item>@color/colorAccent2</item>
+        <!--Skipped-->
+        <item>@color/colorAccent2</item>
+        <!--Current-->
+        <item>@color/navigationBarColorAttempted</item>
+        <!--Processed-->
+
+    </array>
+
+    <array name="text_state_colors">
+        <item>@color/black1</item>
+        <!--Default-->
+        <item>@color/violet</item>
+        <!--Wrong-->
+        <item>@color/lightGreen</item>
+        <!--Right-->
+        <item>@color/white1</item>
+        <!--Skipped-->
+        <item>@color/white1</item>
+        <!--Current-->
+        <item>@color/white1</item>
+        <!--Processed-->
+    </array>
+
+</resources>

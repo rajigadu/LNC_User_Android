@@ -1,0 +1,61 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/color_greendark</item>
+        <item name="colorAccent">@color/black_light</item>
+    </style>
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+
+    <style name="Theme.MyApp.Button.Primary.black" parent="Widget.AppCompat.Button">
+        <item name="colorButtonNormal">@color/black</item>
+        <item name="android:textColorPrimary">@android:color/white</item>
+    </style>
+
+    <style name="Theme.MyApp.Button.Primary.green" parent="Widget.AppCompat.Button">
+        <item name="colorButtonNormal">@color/color_greendark</item>
+        <item name="android:textColorPrimary">@android:color/white</item>
+    </style>
+
+    <style name="MaterialAnimations.Buttonblack" parent="">
+        <item name="android:theme">@style/Theme.MyApp.Button.Primary.black</item>
+    </style>
+
+    <style name="Theme.MyApp.Button.Primary.orange" parent="Widget.AppCompat.Button">
+        <item name="colorButtonNormal">@color/colorAccent2</item>
+        <item name="android:textColorPrimary">@android:color/white</item>
+    </style>
+
+    <style name="MaterialAnimations.Buttonorange" parent="">
+        <item name="android:theme">@style/Theme.MyApp.Button.Primary.orange</item>
+    </style>
+
+    <style name="MaterialAnimations.Buttonred" parent="">
+        <item name="android:theme">@style/Theme.MyApp.Button.Primary.red</item>
+    </style>
+
+    <style name="Theme.MyApp.Button.Primary.red" parent="Widget.AppCompat.Button">
+        <item name="colorButtonNormal">@color/yellow</item>
+        <item name="android:textColorPrimary">@android:color/white</item>
+    </style>
+
+    <style name="MaterialAnimations.Buttongreen" parent="">
+        <item name="android:theme">@style/Theme.MyApp.Button.Primary.green</item>
+    </style>
+
+    <style name="Theme.Rating" parent="Theme.AppCompat">
+        <item name="colorAccent">@color/pink_color</item>
+    </style>
+
+    <style name="MineCustomTabText" parent="TextAppearance.Design.Tab">
+        <item name="android:textSize">25sp</item>
+    </style>
+
+
+</resources>

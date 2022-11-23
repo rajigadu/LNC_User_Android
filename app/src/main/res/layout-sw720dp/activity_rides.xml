@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white_full"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <RelativeLayout
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <android.support.design.widget.TabLayout
+            android:id="@+id/tabs"
+            android:layout_width="match_parent"
+            android:background="@drawable/color_bg"
+            android:layout_height="wrap_content"
+            app:tabGravity="fill"
+            app:tabSelectedTextColor="@color/white_full"
+            app:tabIndicatorColor="@color/green"
+            app:tabTextColor="@color/black"
+            app:tabMode="fixed"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/toolbar">
+
+    </RelativeLayout>
+</RelativeLayout>

@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:padding="@dimen/margin_05"
+    android:id="@+id/rowitem_root"
+    android:clickable="true"
+    android:background="@android:color/transparent"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <android.support.v7.widget.CardView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_marginLeft="@dimen/margin_05"
+        android:layout_marginRight="@dimen/margin_05"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/off_white"
+        android:elevation="@dimen/margin_05"
+        app:cardCornerRadius="@dimen/margin_05">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_05"
+            android:background="@color/off_white">
+
+
+
+        <RelativeLayout
+            android:id="@+id/rel_1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            >
+            <RadioButton
+                android:id="@+id/radio0"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                />
+
+
+
+            <TextView
+                android:id="@+id/cnumber"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="VISA  543645675676588"
+                android:textColor="@color/black"
+                android:textSize="13dp"
+                android:layout_toRightOf="@+id/radio0"
+                android:layout_marginLeft="@dimen/margin_10"
+                android:layout_centerVertical="true"/>
+
+            <TextView
+                android:id="@+id/emonthtitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Expiry :"
+                android:layout_marginRight="@dimen/margin_05"
+                android:layout_marginTop="@dimen/margin_05"
+                android:layout_below="@+id/cnumber"
+                android:textColor="@color/black_light"
+                android:textSize="15dp"
+                android:layout_toRightOf="@+id/radio0"
+                android:layout_marginLeft="@dimen/margin_10"
+                android:visibility="gone"
+                />
+
+            <TextView
+                android:id="@+id/emonth"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/cnumber"
+                android:layout_marginLeft="@dimen/margin_15"
+                android:textColor="@color/black"
+                android:textSize="13dp"
+                android:text="4356"
+                android:layout_centerVertical="true"
+                />
+
+
+
+            <ImageView
+                android:id="@+id/delete"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:src="@drawable/arrow_down"
+                android:layout_centerVertical="true"/>
+
+
+
+        </RelativeLayout>
+
+
+            <Button
+                android:id="@+id/delete_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="25dp"
+                android:layout_alignParentRight="true"
+                android:layout_below="@+id/rel_1"
+                android:text="Delete"
+                android:textColor="@color/white_full"
+                android:textSize="12dp"
+                android:visibility="gone"
+                android:layout_marginTop="@dimen/margin_05"
+                android:background="@drawable/black_round_bg"
+                android:textAllCaps="false"/>
+
+
+        </RelativeLayout>
+    </android.support.v7.widget.CardView>
+
+</RelativeLayout>

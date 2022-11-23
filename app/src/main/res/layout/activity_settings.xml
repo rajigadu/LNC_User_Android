@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg"
+    android:clickable="true"
+    tools:context=".activity.Navigation">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/toolbar">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="@dimen/margin_10">
+
+            <RelativeLayout
+                android:id="@+id/rl_1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/margin_15"
+                android:layout_marginRight="@dimen/margin_15">
+
+                <TextView
+                    android:id="@+id/vtitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="@dimen/margin_10"
+                    android:text="Current version : "
+                    android:textSize="@dimen/text_mediumsize" />
+
+                <TextView
+                    android:id="@+id/version"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_10"
+                    android:layout_toRightOf="@+id/vtitle"
+                    android:text=""
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_mediumsize" />
+
+                <ImageView
+                    android:id="@+id/logo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/version"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="@dimen/margin_10"
+                    android:src="@drawable/logo" />
+
+                <TextView
+                    android:id="@+id/editprofile"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/logo"
+                    android:layout_marginLeft="@dimen/margin_15"
+                    android:layout_marginRight="@dimen/margin_15"
+                    android:layout_marginTop="@dimen/margin_20"
+                    android:drawableRight="@drawable/rightcolor"
+                    android:text="Edit Personal Info"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_mediumsize" />
+
+                <View
+                    android:id="@+id/line1"
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:layout_below="@+id/editprofile"
+                    android:layout_marginTop="@dimen/margin_10"
+                    android:background="@color/colorPrimary"></View>
+
+                <TextView
+                    android:id="@+id/changepassword"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/line1"
+                    android:layout_marginLeft="@dimen/margin_15"
+                    android:layout_marginRight="@dimen/margin_15"
+                    android:layout_marginTop="@dimen/margin_15"
+                    android:drawableRight="@drawable/rightcolor"
+                    android:text="Change Password"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_mediumsize" />
+
+                <View
+                    android:id="@+id/line2"
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:layout_below="@+id/changepassword"
+                    android:layout_marginTop="@dimen/margin_10"
+                    android:background="@color/colorPrimary"></View>
+
+                <TextView
+                    android:id="@+id/contactus"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/line2"
+                    android:layout_marginLeft="@dimen/margin_15"
+                    android:layout_marginRight="@dimen/margin_15"
+                    android:layout_marginTop="@dimen/margin_15"
+                    android:drawableRight="@drawable/rightcolor"
+                    android:text="Contact Us"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_mediumsize" />
+
+                <View
+                    android:id="@+id/line22"
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:layout_below="@+id/contactus"
+                    android:layout_marginTop="@dimen/margin_10"
+                    android:background="@color/colorPrimary"></View>
+
+                <TextView
+                    android:id="@+id/privacypolicy"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/line22"
+                    android:layout_marginLeft="@dimen/margin_15"
+                    android:layout_marginRight="@dimen/margin_15"
+                    android:layout_marginTop="@dimen/margin_15"
+                    android:drawableRight="@drawable/rightcolor"
+                    android:text="Privacy Policy"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_mediumsize" />
+
+                <View
+                    android:id="@+id/line4"
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:layout_below="@+id/privacypolicy"
+                    android:layout_marginTop="@dimen/margin_10"
+                    android:background="@color/colorPrimary"></View>
+
+                <TextView
+                    android:id="@+id/terms"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/line4"
+                    android:layout_marginLeft="@dimen/margin_15"
+                    android:layout_marginRight="@dimen/margin_15"
+                    android:layout_marginTop="@dimen/margin_15"
+                    android:drawableRight="@drawable/rightcolor"
+                    android:text="Terms &amp; Conditions"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_mediumsize" />
+
+                <View
+                    android:id="@+id/line6"
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:layout_below="@+id/terms"
+                    android:layout_marginTop="@dimen/margin_10"
+                    android:background="@color/colorPrimary"></View>
+
+                <Button
+                    android:id="@+id/logout"
+                    style="@style/MaterialAnimations.Buttonblack"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/line6"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="@dimen/margin_20"
+                    android:paddingBottom="@dimen/padding_15"
+                    android:paddingLeft="@dimen/padding_20"
+                    android:paddingRight="@dimen/padding_20"
+                    android:paddingTop="@dimen/padding_15"
+                    android:text="Logout"
+                    android:textAllCaps="false"
+                    android:textColor="@color/white_full"
+                    android:textSize="@dimen/text_largesize" />
+
+            </RelativeLayout>
+        </RelativeLayout>
+    </ScrollView>
+</RelativeLayout>

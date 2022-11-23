@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout
+    android:id="@+id/root"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/card_pick"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/margin_20"
+        android:layout_marginRight="@dimen/margin_20"
+        android:visibility="gone"
+        android:layout_marginTop="@dimen/margin_10"
+        android:layout_marginBottom="@dimen/margin_10"
+        android:background="@color/white_full">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <AutoCompleteTextView
+                android:id="@+id/pickup"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:background="@color/white_full"
+                android:hint="Current Location"
+                android:layout_toLeftOf="@id/close11"
+                android:padding="@dimen/margin_10"
+                android:inputType="textAutoComplete"
+                android:singleLine="true"
+                android:textColorHint="@color/black_light"/>
+
+            <ImageView
+                android:id="@+id/close11"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="@dimen/margin_10"
+                android:visibility="visible"
+                android:src="@drawable/cancel"/>
+
+        </RelativeLayout>
+
+    </android.support.v7.widget.CardView>
+
+    <fragment
+        android:id="@+id/map"
+        android:name="com.google.android.gms.maps.SupportMapFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".MapsActivity"/>
+
+    <include
+        android:id="@+id/bottom_sheet"
+        layout="@layout/bottom_sheet"
+        android:visibility="visible"/>
+
+    <Button
+        android:id="@+id/bookreserve"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="@dimen/margin_20"
+        android:layout_marginLeft="@dimen/margin_10"
+        android:layout_marginRight="@dimen/margin_10"
+        android:layout_gravity="bottom"
+        android:padding="@dimen/margin_10"
+        android:visibility="visible"
+        android:textSize="@dimen/text_mediumsize"
+        android:layout_alignParentBottom="true"
+        android:text="@string/book_quote"
+        android:textColor="@color/white_full"
+        style="@style/MaterialAnimations.Buttonblack"/>
+
+</android.support.design.widget.CoordinatorLayout>

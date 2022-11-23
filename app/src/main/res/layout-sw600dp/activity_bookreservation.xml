@@ -1,0 +1,735 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/bg">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_above="@id/price">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/text_largesize"
+        android:textColor="@color/black_light"
+        android:textStyle="italic"
+        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="@dimen/margin_10"
+        android:layout_marginRight="@dimen/margin_10"
+        android:layout_marginTop="@dimen/margin_10"
+        android:text="@string/rtext"/>
+
+    <TextView
+        android:id="@+id/ptitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black_light"
+        android:drawableRight="@drawable/down"
+        android:padding="@dimen/margin_10"
+        android:layout_marginLeft="@dimen/margin_10"
+        android:layout_marginRight="@dimen/margin_10"
+        android:textSize="@dimen/text_mediumsize"
+        android:visibility="gone"
+        android:layout_marginTop="@dimen/margin_10"
+        android:background="@color/off_white"
+        android:gravity="center_vertical"
+        android:layout_below="@+id/title"
+        android:text="@string/pinfo"/>
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/pinfo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/ptitle"
+        android:visibility="gone"
+        android:layout_marginLeft="@dimen/margin_10"
+        android:layout_marginRight="@dimen/margin_10"
+        android:background="@color/black_light">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/black_light">
+
+            <EditText
+                android:id="@+id/fname"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="@dimen/margin_10"
+                android:background="@drawable/button_border_round"
+                android:drawableLeft="@drawable/user"
+                android:drawablePadding="@dimen/margin_10"
+                android:hint="First Name"
+                android:inputType="textNoSuggestions"
+                android:padding="@dimen/padding_10"
+                android:textColor="@color/black"
+                android:textColorHint="@color/black_light"
+                android:textSize="@dimen/text_mediumsize" />
+
+            <EditText
+                android:id="@+id/mobile"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_below="@id/fname"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="@dimen/margin_10"
+                android:background="@drawable/button_border_round"
+                android:drawableLeft="@drawable/call"
+                android:drawablePadding="@dimen/margin_10"
+                android:hint="Enter Mobile number"
+                android:inputType="number"
+                android:padding="@dimen/padding_10"
+                android:textColor="@color/black"
+                android:textColorHint="@color/black_light"
+                android:textSize="@dimen/text_mediumsize"/>
+
+            <EditText
+                android:id="@+id/email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/margin_10"
+                android:layout_marginRight="@dimen/margin_10"
+                android:layout_marginTop="@dimen/margin_10"
+                android:background="@drawable/button_border_round"
+                android:drawableLeft="@drawable/email"
+                android:layout_below="@id/mobile"
+                android:drawablePadding="@dimen/margin_10"
+                android:layout_marginBottom="@dimen/margin_10"
+                android:hint="Enter Email Address"
+                android:inputType="textEmailAddress"
+                android:padding="@dimen/padding_10"
+                android:textColor="@color/black"
+                android:textColorHint="@color/black_light"
+                android:textSize="@dimen/text_mediumsize"/>
+        </RelativeLayout>
+    </android.support.v7.widget.CardView>
+
+    <TextView
+        android:id="@+id/pickupinfotitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black_light"
+        android:drawableRight="@drawable/down"
+        android:padding="@dimen/margin_10"
+        android:layout_marginLeft="@dimen/margin_10"
+        android:layout_marginRight="@dimen/margin_10"
+        android:textSize="@dimen/text_mediumsize"
+        android:layout_marginTop="@dimen/margin_10"
+        android:background="@color/white_full"
+        android:gravity="center_vertical"
+        android:layout_below="@+id/pinfo"
+        android:text="@string/pickupinfo"/>
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/card_pickup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/pickupinfotitle"
+        android:visibility="visible"
+        android:layout_marginLeft="@dimen/margin_10"
+        android:layout_marginRight="@dimen/margin_10"
+        android:background="@color/black_light">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/black_light">
+
+            <EditText
+                android:id="@+id/pdate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/margin_10"
+                android:layout_marginRight="@dimen/margin_10"
+                android:layout_marginTop="@dimen/margin_10"
+                android:background="@color/off_white"
+                android:drawableRight="@drawable/date"
+                android:hint="Pickup date"
+                android:visibility="gone"
+                android:clickable="false"
+                android:focusableInTouchMode="false"
+                android:focusable="false"
+                android:inputType="none"
+                android:padding="@dimen/padding_05"
+                android:textColor="@color/black"
+                android:textColorHint="@color/black_light"
+                android:textSize="@dimen/text_mediumsize"/>
+
+            <EditText
+                android:id="@+id/ptime"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/margin_10"
+                android:layout_below="@id/pdate"
+                android:layout_marginRight="@dimen/margin_10"
+                android:layout_marginTop="@dimen/margin_10"
+                android:background="@color/off_white"
+                android:drawableRight="@drawable/time"
+                android:clickable="false"
+                android:visibility="gone"
+                android:focusableInTouchMode="false"
+                android:focusable="false"
+                android:hint="Pickup time"
+                android:inputType="number"
+                android:padding="@dimen/padding_05"
+                android:textColor="@color/black"
+                android:textColorHint="@color/black_light"
+                android:textSize="@dimen/text_mediumsize"/>
+
+            <TextView
+                android:id="@+id/ctitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/text_mediumsize"
+                android:layout_marginLeft="@dimen/margin_10"
+                android:visibility="gone"
+                android:layout_below="@+id/ptime"
+                android:textColor="@color/white_full"
+                android:layout_alignParentLeft="true"
+                android:textStyle="bold"
+                android:text="No of Persons :"/>
+
+            <HorizontalScrollView
+                android:id="@+id/navContainer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/padding_10"
+                android:scrollbars="none"
+                android:layout_below="@+id/ctitle">
+
+                <com.library.NavigationBar
+                    android:id="@+id/navBar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="2dp"
+                    app:central_line_height="2dp"
+                    android:layout_gravity="center_horizontal"
+                    app:enable_border="true"
+                    app:only_border="false"
+                    android:visibility="gone"
+                    app:tab_border_color_array="@array/border_state_colors"
+                    app:tab_color_array="@array/indicator_colors"
+                    app:tab_indicator_color="@color/lightGreen"
+                    app:tab_padding="10dp"
+                    app:tab_strok_width="3dp"
+                    app:tab_text_color_array="@array/text_state_colors"
+                    app:tab_text_size="18sp"/>
+            </HorizontalScrollView>
+
+            <AutoCompleteTextView
+                android:id="@+id/street"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/margin_10"
+                android:layout_marginRight="@dimen/margin_10"
+                android:layout_marginTop="@dimen/margin_10"
+                android:background="@color/off_white"
+                android:layout_below="@id/navContainer"
+                android:hint="Street address"
+                android:inputType="textNoSuggestions"
+                android:padding="@dimen/padding_05"
+                android:textColor="@color/black"
+                android:textColorHint="@color/black_light"
+                android:textSize="@dimen/text_mediumsize"/>
+
+            <EditText
+                android:id="@+id/ainel2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/margin_10"
+                android:layout_marginRight="@dimen/margin_10"
+                android:layout_marginTop="@dimen/margin_10"
+                android:background="@color/off_white"
+                android:layout_below="@id/street"
+                android:hint="Address line 2"
+                android:inputType="textNoSuggestions"
+                android:padding="@dimen/padding_05"
+                android:textColor="@color/black"
+                android:textColorHint="@color/black_light"
+                android:textSize="@dimen/text_mediumsize"/>
+
+            <LinearLayout
+                android:id="@+id/ll_city"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/ainel2"
+                android:orientation="horizontal"
+                android:weightSum="2">
+
+                <EditText
+                    android:id="@+id/city"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/margin_10"
+                    android:layout_marginRight="@dimen/margin_10"
+                    android:layout_marginTop="@dimen/margin_10"
+                    android:background="@color/off_white"
+                    android:hint="City"
+                    android:inputType="textNoSuggestions"
+                    android:padding="@dimen/padding_05"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/black_light"
+                    android:textSize="@dimen/text_mediumsize"/>
+
+                <EditText
+                    android:id="@+id/state"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="@dimen/margin_10"
+                    android:layout_marginTop="@dimen/margin_10"
+                    android:background="@color/off_white"
+                    android:hint="State"
+                    android:inputType="textNoSuggestions"
+                    android:padding="@dimen/padding_05"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/black_light"
+                    android:textSize="@dimen/text_mediumsize"/>
+            </LinearLayout>
+
+            <EditText
+                android:id="@+id/zipcode"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/margin_10"
+                android:layout_marginRight="@dimen/margin_10"
+                android:layout_marginTop="@dimen/margin_10"
+                android:background="@color/off_white"
+                android:layout_below="@id/ll_city"
+                android:hint="Zipcode"
+                android:inputType="number"
+                android:padding="@dimen/padding_05"
+                android:layout_marginBottom="@dimen/margin_10"
+                android:textColor="@color/black"
+                android:textColorHint="@color/black_light"
+                android:textSize="@dimen/text_mediumsize"/>
+
+            <EditText
+                android:id="@+id/type"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColorHint="@color/black_light"
+                android:textColor="@color/black"
+                android:layout_below="@+id/zipcode"
+                android:layout_marginTop="@dimen/margin_10"
+                android:drawablePadding="@dimen/padding_10"
+                android:layout_marginLeft="@dimen/margin_10"
+                android:layout_marginRight="@dimen/margin_10"
+                android:padding="@dimen/padding_05"
+                android:clickable="false"
+                android:focusableInTouchMode="false"
+                android:drawableRight="@drawable/down"
+                android:maxLength="15"
+                android:inputType="none"
+                android:background="@color/off_white"
+                android:hint="Choose address type"/>
+
+        </RelativeLayout>
+    </android.support.v7.widget.CardView>
+
+       <RelativeLayout
+           android:id="@+id/rl_droptitle"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:layout_below="@+id/card_pickup"
+           android:background="@color/white_full"
+           android:layout_marginTop="@dimen/margin_10"
+           android:layout_marginLeft="@dimen/margin_10"
+           android:layout_marginRight="@dimen/margin_10">
+
+           <TextView
+               android:id="@+id/dropinfotitle"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:textColor="@color/black_light"
+               android:drawableLeft="@drawable/down"
+               android:drawablePadding="@dimen/margin_10"
+               android:layout_centerVertical="true"
+               android:padding="@dimen/margin_10"
+               android:textSize="@dimen/text_mediumsize"
+               android:background="@color/white_full"
+               android:gravity="center_vertical"
+               android:text="@string/dropinfo"/>
+
+           <Button
+               android:id="@+id/choose"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:layout_alignParentRight="true"
+               android:layout_centerVertical="true"
+               android:layout_marginRight="@dimen/margin_10"
+               android:textSize="@dimen/text_mediumsize"
+               android:textColor="@color/colorAccent1"
+               android:text="Choose"/>
+       </RelativeLayout>
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/card_dropinfo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/rl_droptitle"
+        android:visibility="visible"
+        android:layout_marginLeft="@dimen/margin_10"
+        android:layout_marginRight="@dimen/margin_10"
+        android:background="@color/black_light">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/black_light">
+
+            <AutoCompleteTextView
+                android:id="@+id/street1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/margin_10"
+                android:layout_marginRight="@dimen/margin_10"
+                android:layout_marginTop="@dimen/margin_10"
+                android:background="@color/off_white"
+                android:hint="Street address"
+                android:inputType="textNoSuggestions"
+                android:padding="@dimen/padding_05"
+                android:textColor="@color/black"
+                android:textColorHint="@color/black_light"
+                android:textSize="@dimen/text_mediumsize"/>
+
+            <EditText
+                android:id="@+id/ainel21"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/margin_10"
+                android:layout_marginRight="@dimen/margin_10"
+                android:layout_marginTop="@dimen/margin_10"
+                android:background="@color/off_white"
+                android:layout_below="@id/street1"
+                android:hint="Address line 2"
+                android:inputType="textNoSuggestions"
+                android:padding="@dimen/padding_05"
+                android:textColor="@color/black"
+                android:textColorHint="@color/black_light"
+                android:textSize="@dimen/text_mediumsize"/>
+
+            <LinearLayout
+                android:id="@+id/ll_city1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/ainel21"
+                android:orientation="horizontal"
+                android:weightSum="2">
+
+                <EditText
+                    android:id="@+id/city1"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/margin_10"
+                    android:layout_marginRight="@dimen/margin_10"
+                    android:layout_marginTop="@dimen/margin_10"
+                    android:background="@color/off_white"
+                    android:hint="City"
+                    android:inputType="textNoSuggestions"
+                    android:padding="@dimen/padding_05"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/black_light"
+                    android:textSize="@dimen/text_mediumsize"/>
+
+                <EditText
+                    android:id="@+id/state1"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="@dimen/margin_10"
+                    android:layout_marginTop="@dimen/margin_10"
+                    android:background="@color/off_white"
+                    android:hint="State"
+                    android:inputType="textNoSuggestions"
+                    android:padding="@dimen/padding_05"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/black_light"
+                    android:textSize="@dimen/text_mediumsize"/>
+            </LinearLayout>
+
+            <EditText
+                android:id="@+id/zipcode1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/margin_10"
+                android:layout_marginRight="@dimen/margin_10"
+                android:layout_marginTop="@dimen/margin_10"
+                android:background="@color/off_white"
+                android:layout_below="@id/ll_city1"
+                android:hint="Zipcode"
+                android:inputType="number"
+                android:padding="@dimen/padding_05"
+                android:layout_marginBottom="@dimen/margin_10"
+                android:textColor="@color/black"
+                android:textColorHint="@color/black_light"
+                android:textSize="@dimen/text_mediumsize"/>
+
+            <EditText
+                android:id="@+id/note"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/zipcode1"
+                android:layout_marginLeft="@dimen/margin_10"
+                android:layout_marginRight="@dimen/margin_10"
+                android:layout_marginTop="@dimen/margin_10"
+                android:gravity="top"
+                android:paddingLeft="@dimen/margin_10"
+                android:paddingTop="@dimen/margin_10"
+                android:maxLines="3"
+                android:lines="3"
+                android:background="@color/off_white"
+                android:padding="@dimen/margin_15"
+                android:maxLength="200"
+                android:textSize="@dimen/text_mediumsize"
+                android:inputType="textNoSuggestions|textMultiLine"
+                android:textColor="@color/black"
+                android:textColorHint="@color/black_light"
+                android:hint="Note"/>
+
+            <TextView
+                android:id="@+id/stopstitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/text_mediumsize"
+                android:layout_marginLeft="@dimen/margin_10"
+                android:layout_below="@+id/note"
+                android:textColor="@color/white_full"
+                android:layout_alignParentLeft="true"
+                android:layout_marginTop="@dimen/margin_10"
+                android:textStyle="bold"
+                android:text="No of Stops :"/>
+
+            <EditText
+                android:id="@+id/nstops"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColorHint="@color/black_light"
+                android:textColor="@color/black"
+                android:layout_below="@+id/stopstitle"
+                android:layout_marginTop="@dimen/margin_10"
+                android:drawablePadding="@dimen/padding_10"
+                android:layout_marginLeft="@dimen/margin_10"
+                android:layout_marginRight="@dimen/margin_10"
+                android:padding="@dimen/padding_05"
+                android:clickable="false"
+                android:focusableInTouchMode="false"
+                android:drawableRight="@drawable/down"
+                android:maxLength="15"
+                android:inputType="none"
+                android:background="@color/off_white"
+                android:hint="add stop address(optional)"/>
+
+            <TextView
+                android:id="@+id/stopstatus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/green"
+                android:padding="@dimen/margin_10"
+                android:drawableLeft="@drawable/tick"
+                android:layout_centerHorizontal="true"
+                android:layout_marginLeft="@dimen/margin_10"
+                android:layout_marginRight="@dimen/margin_10"
+                android:textSize="@dimen/text_mediumsize"
+                android:layout_marginTop="@dimen/margin_10"
+                android:gravity="center_vertical"
+                android:layout_below="@+id/nstops"
+                android:text="Added"/>
+
+            <CheckBox
+                android:id="@+id/savedrop"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/stopstatus"
+                android:textSize="@dimen/text_mediumsize"
+                android:checked="true"
+                android:layout_marginBottom="@dimen/margin_10"
+                android:textColor="@color/white_full"
+                android:text="@string/savefor"/>
+        </RelativeLayout>
+    </android.support.v7.widget.CardView>
+
+            <RelativeLayout
+                android:id="@+id/rl_payment"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/card_dropinfo"
+                android:background="@color/white_full"
+                android:layout_marginTop="@dimen/margin_10"
+                android:layout_marginLeft="@dimen/margin_10"
+                android:layout_marginRight="@dimen/margin_10">
+
+                <TextView
+                    android:id="@+id/payment6infotitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/black_light"
+                    android:drawableLeft="@drawable/down"
+                    android:drawablePadding="@dimen/margin_10"
+                    android:layout_centerVertical="true"
+                    android:padding="@dimen/margin_10"
+                    android:textSize="@dimen/text_mediumsize"
+                    android:background="@color/white_full"
+                    android:gravity="center_vertical"
+                    android:text="Active Card Info"/>
+
+                <Button
+                    android:id="@+id/card_choose"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="@dimen/margin_10"
+                    android:layout_centerVertical="true"
+                    android:textSize="@dimen/text_mediumsize"
+                    android:textColor="@color/colorAccent1"
+                    android:text="Choose Card"/>
+            </RelativeLayout>
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/card_payment"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/rl_payment"
+                android:visibility="visible"
+                android:layout_marginLeft="@dimen/margin_10"
+                android:layout_marginRight="@dimen/margin_10"
+                android:background="@color/black_light">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/black_light">
+
+                    <TextView
+                        android:id="@+id/des"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/margin_10"
+                        android:layout_marginRight="@dimen/margin_10"
+                        android:text="Payment will be deduct after TRIP completion."
+                        android:padding="@dimen/padding_05"
+                        android:textStyle="bold"
+                        android:textColor="@color/colorPrimaryDark1"
+                        android:textSize="@dimen/text_mediumsize"/>
+
+                    <TextView
+                        android:id="@+id/cnumner"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/margin_10"
+                        android:layout_marginRight="@dimen/margin_10"
+                        android:layout_below="@id/des"
+                        android:layout_marginTop="@dimen/margin_10"
+                        android:text=""
+                        android:padding="@dimen/padding_05"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/text_mediumsize" />
+
+                    <TextView
+                        android:id="@+id/emonthtitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/margin_10"
+                        android:layout_marginRight="@dimen/margin_10"
+                        android:layout_marginTop="@dimen/margin_10"
+                        android:layout_below="@id/cnumner"
+                        android:text="Expiry month :"
+                        android:padding="@dimen/padding_05"
+                        android:textColor="@color/off_white"
+                        android:textSize="@dimen/text_mediumsize"/>
+
+                    <EditText
+                        android:id="@+id/emonth"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/margin_10"
+                        android:layout_marginRight="@dimen/margin_10"
+                        android:layout_below="@id/emonthtitle"
+                        android:text=""
+                        android:padding="@dimen/padding_05"
+                        android:layout_marginBottom="@dimen/margin_10"
+                        android:textColor="@color/off_white"
+                        android:textSize="@dimen/text_mediumsize"/>
+
+                    <EditText
+                        android:id="@+id/eyeartitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/margin_10"
+                        android:layout_marginRight="@dimen/margin_10"
+                        android:layout_marginTop="@dimen/margin_10"
+                        android:layout_alignParentRight="true"
+                        android:layout_below="@id/cnumner"
+                        android:text="Expiry year :"
+                        android:padding="@dimen/padding_05"
+                        android:textColor="@color/off_white"
+                        android:textSize="@dimen/text_mediumsize"/>
+
+                    <EditText
+                        android:id="@+id/eyear"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/margin_10"
+                        android:layout_marginRight="@dimen/margin_10"
+                        android:layout_below="@id/eyeartitle"
+                        android:layout_alignParentRight="true"
+                        android:text=""
+                        android:padding="@dimen/padding_05"
+                        android:layout_marginBottom="@dimen/margin_10"
+                        android:textColor="@color/off_white"
+                        android:textSize="@dimen/text_mediumsize"/>
+
+                    <TextView
+                        android:id="@+id/nocard"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:layout_below="@+id/eyear"
+                        android:textSize="@dimen/text_mediumsize"
+                        android:textColor="@color/off_white"
+                        android:text="SELECT CARD TO PROCEED "/>
+
+                </RelativeLayout>
+            </android.support.v7.widget.CardView>
+
+        </RelativeLayout>
+    </ScrollView>
+
+    <Button
+        android:id="@+id/price"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="ESTIMATED PRICE"
+        android:padding="@dimen/margin_15"
+        android:textSize="@dimen/text_mediumsize"
+        android:layout_above="@+id/submit"
+        android:textColor="@color/white_full"
+        style="@style/MaterialAnimations.Buttonblack"/>
+
+    <Button
+        android:id="@+id/submit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="BOOK NOW"
+        android:padding="@dimen/margin_15"
+        android:textSize="@dimen/text_mediumsize"
+        android:layout_alignParentBottom="true"
+        android:textColor="@color/white_full"
+        style="@style/MaterialAnimations.Buttonblack"/>
+
+</RelativeLayout>

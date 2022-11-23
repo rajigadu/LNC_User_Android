@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity.Forgot"
+    android:background="@drawable/bg">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+<TextView
+    android:id="@+id/title"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:textSize="@dimen/text_largesize"
+    android:textColor="@color/white_full"
+    android:textStyle="italic"
+    android:layout_marginLeft="@dimen/margin_10"
+    android:layout_marginRight="@dimen/margin_10"
+    android:layout_marginTop="@dimen/margin_10"
+    android:text="@string/dropoff"/>
+
+    <RadioGroup
+        android:id="@+id/agroups"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/title"
+        android:layout_marginLeft="@dimen/margin_20"
+        android:layout_marginRight="@dimen/margin_20"
+        android:layout_marginTop="@dimen/margin_20"
+        android:gravity="center_horizontal"
+        android:weightSum="2"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/radio1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:checked="true"
+            android:textSize="@dimen/text_mediumsize"
+            android:drawablePadding="@dimen/padding_10"
+            android:textColor="@color/white"
+            android:text="Home " />
+
+        <RadioButton
+            android:id="@+id/radio2"
+            android:layout_width="0dp"
+            android:textColor="@color/white"
+            android:layout_weight="1"
+            android:drawablePadding="@dimen/padding_10"
+            android:textSize="@dimen/text_mediumsize"
+            android:layout_height="wrap_content"
+            android:text="Office"/>
+    </RadioGroup>
+
+    <AutoCompleteTextView
+        android:id="@+id/street"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="@dimen/margin_10"
+        android:background="@drawable/button_border_round"
+        android:layout_below="@+id/agroups"
+        android:hint="Street address"
+        android:inputType="textNoSuggestions"
+        android:padding="@dimen/padding_05"
+        android:textColor="@color/black"
+        android:textColorHint="@color/black_light"
+        android:textSize="@dimen/text_mediumsize" />
+
+    <EditText
+        android:id="@+id/ainel2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/margin_10"
+        android:layout_marginRight="@dimen/margin_10"
+        android:layout_marginTop="@dimen/margin_10"
+        android:background="@drawable/button_border_round"
+        android:layout_below="@id/street"
+        android:hint="Address line 2"
+        android:inputType="textNoSuggestions"
+        android:padding="@dimen/padding_05"
+        android:textColor="@color/black"
+        android:textColorHint="@color/black_light"
+        android:textSize="@dimen/text_mediumsize" />
+
+    <LinearLayout
+        android:id="@+id/ll_city"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/ainel2"
+        android:orientation="horizontal"
+        android:weightSum="2">
+
+        <EditText
+            android:id="@+id/city"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/margin_10"
+            android:layout_marginRight="@dimen/margin_10"
+            android:layout_marginTop="@dimen/margin_10"
+            android:background="@drawable/button_border_round"
+            android:hint="City"
+            android:inputType="textNoSuggestions"
+            android:padding="@dimen/padding_05"
+            android:textColor="@color/black"
+            android:textColorHint="@color/black_light"
+            android:textSize="@dimen/text_mediumsize" />
+
+        <EditText
+            android:id="@+id/state"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/margin_10"
+            android:layout_marginTop="@dimen/margin_10"
+            android:background="@drawable/button_border_round"
+            android:hint="State"
+            android:inputType="textNoSuggestions"
+            android:padding="@dimen/padding_05"
+            android:textColor="@color/black"
+            android:textColorHint="@color/black_light"
+            android:textSize="@dimen/text_mediumsize" />
+    </LinearLayout>
+
+    <EditText
+        android:id="@+id/zipcode"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/margin_10"
+        android:layout_marginRight="@dimen/margin_10"
+        android:layout_marginTop="@dimen/margin_10"
+        android:background="@drawable/button_border_round"
+        android:layout_below="@id/ll_city"
+        android:hint="Zipcode"
+        android:inputType="number"
+        android:padding="@dimen/padding_05"
+        android:textColor="@color/black"
+        android:textColorHint="@color/black_light"
+        android:textSize="@dimen/text_mediumsize"/>
+
+    <EditText
+        android:id="@+id/notes"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/margin_10"
+        android:layout_marginRight="@dimen/margin_10"
+        android:layout_marginTop="@dimen/margin_10"
+        android:background="@drawable/button_border_round"
+        android:lines="3"
+        android:maxLines="5"
+        android:gravity="top"
+        android:layout_below="@id/zipcode"
+        android:hint="Additional notes"
+        android:inputType="textMultiLine|textNoSuggestions"
+        android:padding="@dimen/padding_05"
+        android:textColor="@color/black"
+        android:textColorHint="@color/black_light"
+        android:textSize="@dimen/text_mediumsize" />
+
+        </RelativeLayout>
+    </ScrollView>
+
+    <Button
+        android:id="@+id/add"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="@dimen/margin_10"
+        android:paddingLeft="@dimen/margin_20"
+        android:paddingRight="@dimen/margin_20"
+        android:text="Add"
+        android:textSize="@dimen/text_mediumsize"
+        android:layout_marginStart="10dp"
+        android:layout_alignParentBottom="true"
+        android:textColor="@color/white_full"
+        style="@style/MaterialAnimations.Buttonblack"/>
+</RelativeLayout>

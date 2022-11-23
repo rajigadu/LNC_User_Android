@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/rootlo"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/colorAccent2"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <RelativeLayout
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <include
+            android:id="@+id/topbar"
+            layout="@layout/top_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+    </RelativeLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/toolbar"
+        android:layout_above="@id/m_btn">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:id="@+id/linearLayout1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="visible">
+
+                <TextView
+                    android:id="@+id/title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:text="Your Feedback(Last Trip)"
+                    android:layout_margin="@dimen/padding_05"
+                    android:padding="@dimen/margin_05"
+                    android:layout_marginLeft="@dimen/padding_10"
+                    android:textColor="@color/orange"
+                    android:textSize="@dimen/text_largesize"/>
+            </RelativeLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_data"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/linearLayout1"
+                android:orientation="vertical"
+                android:paddingLeft="@dimen/margin_10"
+                android:paddingRight="@dimen/margin_10"
+                android:paddingTop="@dimen/margin_10">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    xmlns:app="http://schemas.android.com/apk/res-auto"
+                    android:id="@+id/driverimage"
+                    android:layout_width="96dp"
+                    android:layout_height="96dp"
+                    android:layout_gravity="center_horizontal"
+                    android:src="@drawable/appicon"
+                    app:civ_border_width="1dp"
+                    app:civ_border_color="#FF000000"/>
+
+                <TextView
+                    android:id="@+id/dname"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white_full"
+                    android:layout_marginTop="@dimen/margin_10"
+                    android:layout_gravity="center_horizontal"
+                    android:textSize="@dimen/text_mediumsize"
+                    android:textStyle="bold"
+                    android:text="D Name"/>
+
+                <RatingBar
+                    android:id="@+id/rating"
+                    style="?android:attr/rating"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_20"
+                    android:layout_gravity="center_horizontal"
+                    android:numStars="5"
+                    android:clickable="false"
+                    android:rating="0"
+                    android:stepSize="1"/>
+
+                <EditText
+                    android:id="@+id/msg"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:textColor="@color/black"
+                    android:padding="@dimen/margin_10"
+                    android:lines="3"
+                    android:gravity="top"
+                    android:maxLength="500"
+                    android:inputType="textMultiLine"
+                    android:maxLines="5"
+                    android:textSize="@dimen/text_mediumsize"
+                    android:layout_margin="@dimen/margin_10"
+                    android:background="@color/white_full"
+                    android:textColorHint="@color/black_light"
+                    android:hint="About Drivers"/>
+
+                <TextView
+                    android:id="@+id/tip"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white_full"
+                    android:layout_marginLeft="@dimen/margin_20"
+                    android:buttonTint="@color/white_full"
+                    android:textSize="@dimen/text_highsize"
+                    android:text="TIP : "/>
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/recyclerView"
+                    android:layout_marginTop="@dimen/margin_10"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                </android.support.v7.widget.RecyclerView>
+
+                <Button
+                    android:id="@+id/clear"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/margin_10"
+                    android:textSize="@dimen/text_mediumsize"
+                    android:textColor="@color/colorAccent1"
+                    android:text="Clear"/>
+
+                <TextView
+                    android:id="@+id/or"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white_full"
+                    android:layout_marginTop="@dimen/margin_10"
+                    android:buttonTint="@color/white_full"
+                    android:textSize="@dimen/text_mediumsize"
+                    android:layout_gravity="center_horizontal"
+                    android:text="OR"/>
+
+                <EditText
+                    android:id="@+id/amount"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:textColor="@color/black"
+                    android:padding="@dimen/margin_10"
+                    android:lines="1"
+                    android:visibility="visible"
+                    android:gravity="top"
+                    android:maxLength="10"
+                    android:inputType="number"
+                    android:maxLines="1"
+                    android:layout_margin="@dimen/margin_10"
+                    android:background="@color/white_full"
+                    android:textColorHint="@color/black_light"
+                    android:hint=" Enter tip amount $ "/>
+
+            </LinearLayout>
+        </RelativeLayout>
+    </ScrollView>
+
+    <RelativeLayout
+        android:id="@+id/m_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin_10"
+        android:layout_alignParentBottom="true" >
+
+        <Button
+            android:id="@+id/submit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            android:singleLine="true"
+            android:padding="@dimen/margin_10"
+            android:textStyle="bold"
+            android:text="SUBMIT FEEDBACK"
+            style="@style/MaterialAnimations.Buttonblack"
+            android:textColor="#ffffff"
+            android:textSize="@dimen/text_smallsize" />
+
+    </RelativeLayout>
+</RelativeLayout>

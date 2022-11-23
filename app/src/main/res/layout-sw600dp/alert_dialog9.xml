@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/rootlo"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@drawable/button_border_round_3"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/linearLayout1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/padding_05"
+            android:gravity="center|center_vertical"
+            android:padding="@dimen/padding_05"
+            android:visibility="visible">
+
+            <TextView
+                android:id="@+id/title"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:layout_marginLeft="@dimen/padding_10"
+                android:gravity="center_vertical"
+                android:text="Late Night Chauffeurs"
+                android:textColor="@color/white_full"
+                android:textSize="@dimen/text_largesize" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/imagetxtview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:padding="@dimen/margin_10">
+
+            <TextView
+                android:id="@+id/desc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:gravity="center"
+                android:padding="@dimen/padding_05"
+                android:text="Paymentn Summary"
+                android:textColor="@color/white_full"
+                android:textSize="@dimen/text_mediumsize"
+                android:textStyle="bold" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/margin_05">
+
+                <LinearLayout
+                    android:id="@+id/payments"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/tidtitle"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="@dimen/margin_05"
+                                android:text="Transaction Id :"
+                                android:textColor="@color/off_white"
+                                android:textSize="@dimen/text_largesize" />
+
+                            <TextView
+                                android:id="@+id/tid"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_margin="@dimen/margin_05"
+                                android:layout_weight="1"
+                                android:gravity="right"
+                                android:textColor="@color/colorPrimaryDark1"
+                                android:textSize="@dimen/text_smallsize" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/baseptitle"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="@dimen/margin_05"
+                                android:text="Base Price :"
+                                android:textColor="@color/off_white"
+                                android:textSize="@dimen/text_largesize" />
+
+                            <TextView
+                                android:id="@+id/baseprice"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_margin="@dimen/margin_05"
+                                android:layout_weight="1"
+                                android:gravity="right"
+                                android:textColor="@color/colorPrimaryDark1"
+                                android:textSize="@dimen/text_largesize" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/tiptitle"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@+id/baseptitle"
+                                android:layout_margin="@dimen/margin_05"
+                                android:text="Tip: "
+                                android:textColor="@color/off_white"
+                                android:textSize="@dimen/text_largesize" />
+
+                            <TextView
+                                android:id="@+id/tip"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_margin="@dimen/margin_05"
+                                android:layout_weight="1"
+                                android:gravity="right"
+                                android:textColor="@color/colorPrimaryDark1"
+                                android:textSize="@dimen/text_largesize" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/tvWaitinCharges"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@+id/baseptitle"
+                                android:layout_margin="@dimen/margin_05"
+                                android:text="Waiting Charges: "
+                                android:textColor="@color/off_white"
+                                android:textSize="@dimen/text_largesize" />
+
+                            <TextView
+                                android:id="@+id/tv_waitin_chg"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_margin="@dimen/margin_05"
+                                android:layout_weight="1"
+                                android:gravity="right"
+                                android:textColor="@color/colorPrimaryDark1"
+                                android:textSize="@dimen/text_largesize" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/fatitle"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@+id/tiptitle"
+                                android:layout_margin="@dimen/margin_05"
+                                android:text="Final Price : "
+                                android:textColor="@color/off_white"
+                                android:textSize="@dimen/text_largesize" />
+
+                            <TextView
+                                android:id="@+id/fprice"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@+id/time"
+                                android:layout_gravity="center"
+                                android:layout_margin="@dimen/margin_05"
+                                android:layout_weight="1"
+                                android:gravity="right"
+                                android:textColor="@color/colorPrimaryDark1"
+                                android:textSize="@dimen/text_largesize" />
+                        </LinearLayout>
+                    </LinearLayout>
+
+                </LinearLayout>
+            </RelativeLayout>
+        </LinearLayout>
+
+        <RelativeLayout
+            android:id="@+id/m_btn"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:baselineAligned="false"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/ok"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_margin="@dimen/margin_20"
+                android:background="@drawable/button_border_round_1"
+                android:paddingBottom="@dimen/padding_10"
+                android:paddingLeft="@dimen/padding_10"
+                android:paddingRight="@dimen/padding_10"
+                android:paddingTop="@dimen/padding_10"
+                android:text="OK"
+                android:textAllCaps="false"
+                android:textColor="@color/white_full"
+                android:textSize="@dimen/text_mediumsize" />
+        </RelativeLayout>
+    </LinearLayout>
+</RelativeLayout>

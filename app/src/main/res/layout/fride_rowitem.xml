@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:padding="@dimen/margin_05"
+    android:layout_marginTop="@dimen/margin_05"
+    android:id="@+id/rowitem_root"
+    android:clickable="true"
+    android:background="@android:color/transparent"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+        <android.support.v7.widget.CardView
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:layout_width="match_parent"
+            android:layout_marginLeft="@dimen/margin_05"
+            android:layout_marginRight="@dimen/margin_05"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/off_white"
+            android:elevation="@dimen/margin_10"
+            app:cardCornerRadius="@dimen/margin_15">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_10"
+            android:background="@color/off_white">
+
+        <TextView
+            android:id="@+id/date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_mediumsize"/>
+
+        <Button
+            android:id="@+id/stops"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/margin_10"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="@dimen/margin_05"
+            style="@style/MaterialAnimations.Buttonred"
+            android:visibility="visible"
+            android:text="Stops"
+            android:textSize="@dimen/text_mediumsize"
+            android:layout_marginLeft="@dimen/margin_10"
+            android:textColor="@color/white_full"/>
+
+        <TextView
+            android:id="@+id/ride"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:layout_alignParentLeft="true"
+            android:layout_marginRight="@dimen/margin_10"
+            android:layout_below="@+id/stops"
+            android:textColor="@color/black_light"
+            android:textSize="@dimen/text_mediumsize"        />
+
+        <TextView
+            android:id="@+id/dtitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Distance :"
+            android:layout_alignParentLeft="true"
+            android:layout_marginRight="@dimen/margin_10"
+            android:layout_marginTop="@dimen/margin_05"
+            android:layout_below="@+id/ride"
+            android:textColor="@color/black_light"
+            android:textSize="@dimen/text_mediumsize"
+           />
+
+        <TextView
+            android:id="@+id/distance"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:layout_marginTop="@dimen/margin_05"
+            android:layout_below="@+id/ride"
+            android:layout_toRightOf="@+id/dtitle"
+            android:textColor="@color/green"
+            android:textSize="@dimen/text_mediumsize" />
+
+                <TextView
+                    android:id="@+id/ridestatus_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Ride status :"
+                    android:layout_alignParentLeft="true"
+                    android:layout_marginRight="@dimen/margin_10"
+                    android:layout_marginTop="@dimen/margin_05"
+                    android:layout_below="@+id/dtitle"
+                    android:textColor="@color/black_light"
+                    android:textSize="@dimen/text_mediumsize" />
+
+                <TextView
+                    android:id="@+id/ridestatus"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Pending"
+                    android:layout_marginTop="@dimen/margin_05"
+                    android:layout_below="@+id/dtitle"
+                    android:layout_toRightOf="@+id/ridestatus_title"
+                    android:textColor="@color/green"
+                    android:textSize="@dimen/text_largesize"/>
+
+                <Button
+                    android:id="@+id/viewdetails"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/margin_10"
+                    android:layout_alignParentRight="true"
+                    android:layout_below="@+id/ridestatus_title"
+                    android:layout_marginRight="@dimen/margin_05"
+                    style="@style/MaterialAnimations.Buttonorange"
+                    android:visibility="visible"
+                    android:text="View Details"
+                    android:textSize="@dimen/text_mediumsize"
+                    android:layout_marginLeft="@dimen/margin_10"
+                    android:textColor="@color/white_full"/>
+
+        </RelativeLayout>
+        </android.support.v7.widget.CardView>
+
+</RelativeLayout>

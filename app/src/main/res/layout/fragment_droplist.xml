@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg"
+    android:clickable="true"
+    tools:context=".activity.Splash">
+
+    <Button
+        android:id="@+id/add_drop"
+        style="@style/MaterialAnimations.Buttonblack"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:paddingBottom="@dimen/padding_15"
+        android:paddingLeft="@dimen/padding_20"
+        android:paddingRight="@dimen/padding_20"
+        android:paddingTop="@dimen/padding_15"
+        android:text="ADD Drop Address"
+        android:textAllCaps="false"
+        android:textColor="@color/white_full"
+        android:textSize="@dimen/text_mediumsize"
+        android:visibility="visible" />
+
+    <ScrollView
+        android:id="@+id/scrol"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/add_drop"
+        android:layout_alignParentTop="true"
+        android:scrollbars="vertical">
+
+        <RelativeLayout
+            android:id="@+id/constraintLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/toolbar"
+            android:background="@android:color/transparent">
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rv_loc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent" />
+        </RelativeLayout>
+    </ScrollView>
+
+</RelativeLayout>

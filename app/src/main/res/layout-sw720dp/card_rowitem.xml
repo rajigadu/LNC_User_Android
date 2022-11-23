@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:padding="@dimen/margin_05"
+    android:layout_marginTop="@dimen/margin_05"
+    android:id="@+id/rowitem_root"
+    android:clickable="true"
+    android:background="@android:color/transparent"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+        <android.support.v7.widget.CardView
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:layout_width="match_parent"
+            android:layout_marginLeft="@dimen/margin_05"
+            android:layout_marginRight="@dimen/margin_05"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/off_white"
+            android:elevation="@dimen/margin_10"
+            app:cardCornerRadius="@dimen/margin_15">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_10"
+            android:background="@color/off_white">
+
+            <ImageView
+                android:id="@+id/delete"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="@dimen/padding_10"
+                android:src="@drawable/delete1"/>
+
+        <TextView
+            android:id="@+id/cnumber"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_mediumsize"/>
+
+        <TextView
+            android:id="@+id/emonthtitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Expiry month :"
+            android:layout_alignParentLeft="true"
+            android:layout_marginRight="@dimen/margin_10"
+            android:layout_marginTop="@dimen/margin_05"
+            android:layout_below="@+id/cnumber"
+            android:textColor="@color/black_light"
+            android:textSize="@dimen/text_mediumsize"
+            />
+
+        <TextView
+            android:id="@+id/emonth"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:layout_alignParentLeft="true"
+            android:layout_marginRight="@dimen/margin_10"
+            android:layout_marginTop="@dimen/margin_05"
+            android:layout_below="@+id/emonthtitle"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_mediumsize"
+            />
+
+        <TextView
+            android:id="@+id/eyeartitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Expiry year :"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="@dimen/margin_05"
+            android:layout_below="@+id/cnumber"
+            android:textColor="@color/black_light"
+            android:textSize="@dimen/text_mediumsize"         />
+
+            <TextView
+                android:id="@+id/eyear"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:layout_alignParentRight="true"
+                android:layout_marginTop="@dimen/margin_05"
+                android:layout_below="@+id/eyeartitle"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_mediumsize"   />
+
+        </RelativeLayout>
+        </android.support.v7.widget.CardView>
+
+</RelativeLayout>

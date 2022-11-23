@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:id="@+id/rootlo"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/button_border_round_1"
+    android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/linearLayout1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/margin_05"
+                android:gravity="center|center_vertical"
+                android:layout_margin="@dimen/padding_05"
+                android:visibility="visible">
+
+                <TextView
+                    android:id="@+id/title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="fill_parent"
+                    android:gravity="center_vertical"
+                    android:text="@string/app_name"
+                    android:layout_marginLeft="@dimen/padding_10"
+                    android:textColor="@color/white_full"
+                    android:textSize="@dimen/text_mediumsize" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/imagetxtview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_marginTop="@dimen/padding_10"
+                android:orientation="horizontal"
+                android:paddingBottom="@dimen/margin_10"
+                android:paddingLeft="@dimen/margin_10"
+                android:paddingRight="@dimen/margin_10"
+                android:paddingTop="@dimen/margin_10">
+
+                <TextView
+                    android:id="@+id/desc"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:padding="3dp"
+                    android:textColor="@color/white_full"
+                    android:textSize="@dimen/text_mediumsize" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/m_btn"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:baselineAligned="false"
+                android:orientation="horizontal"
+                android:weightSum="6">
+
+                <Button
+                    android:id="@+id/buttonOk"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="3"
+                    android:layout_margin="@dimen/margin_20"
+                    android:singleLine="true"
+                    android:text="ok"
+                    android:padding="@dimen/margin_10"
+                    style="@style/MaterialAnimations.Buttonblack"
+                    android:textColor="#ffffff"
+                    android:textSize="@dimen/text_mediumsize" />
+            </LinearLayout>
+        </LinearLayout>
+</RelativeLayout>
