@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.latenightchauffeurs">
 
     <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
@@ -14,7 +15,8 @@
     <uses-permission android:name="android.permission.CALL_PHONE" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.ACCESS_NOTIFICATION_POLICY" />
-
+    <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION"
+        tools:node="remove" />
     <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
 
     <uses-feature
@@ -23,6 +25,13 @@
     <uses-feature
         android:name="android.hardware.location.gps"
         android:required="false" />
+    <uses-feature
+        android:name="android.hardware.camera.any"
+        android:required="true" />
+    <uses-feature
+        android:name="android.hardware.camera.autofocus"
+        android:required="false" />
+
 
     <uses-permission android:name="com.latenightchauffeurs.permission.MAPS_RECEIVE" />
     <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
@@ -33,30 +42,30 @@
     <application
         android:name=".Utils.MyApplication"
         android:allowBackup="true"
-        android:largeHeap="true"
         android:icon="@drawable/appicon"
         android:label="@string/app_name"
+        android:largeHeap="true"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
 
-        <uses-library android:name="org.apache.http.legacy"
-            android:required="false"/>
+        <uses-library
+            android:name="org.apache.http.legacy"
+            android:required="false" />
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyDhDD6XROfPs4WkFmbTHvV1KqkNVP1kEmk" />
 
 
-<!--        <meta-data-->
-<!--            android:name="com.google.android.geo.API_KEY"-->
-<!--            android:value="AIzaSyBRzUCMhC0dooTNbHeIpD2iycfIawOHM6g" />-->
+        <!--        <meta-data-->
+        <!--            android:name="com.google.android.geo.API_KEY"-->
+        <!--            android:value="AIzaSyBRzUCMhC0dooTNbHeIpD2iycfIawOHM6g" />-->
 
 
-
-<!--        <meta-data-->
-<!--            android:name="com.google.android.geo.API_KEY"-->
-<!--            android:value="AIzaSyCu3uKvAohPy9jgqw1CluTCAsSS6XKRvq4" />-->
+        <!--        <meta-data-->
+        <!--            android:name="com.google.android.geo.API_KEY"-->
+        <!--            android:value="AIzaSyCu3uKvAohPy9jgqw1CluTCAsSS6XKRvq4" />-->
 
 
         <meta-data
@@ -81,7 +90,6 @@
         </activity>
 
 
-
         <activity
             android:name=".activity.Notifications"
             android:configChanges="orientation"
@@ -89,11 +97,10 @@
 
         </activity>
 
-
-
         <activity
             android:name=".activity.Splash"
             android:configChanges="orientation"
+            android:exported="true"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -133,13 +140,13 @@
             android:name=".activity.ChangePassword"
             android:configChanges="orientation"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden"/>
+            android:windowSoftInputMode="stateHidden" />
 
         <activity
             android:name=".activity.EditProfile"
             android:configChanges="orientation"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden"/>
+            android:windowSoftInputMode="stateHidden" />
 
         <activity
             android:name=".activity.WebViewAll"
@@ -244,8 +251,6 @@
             android:windowSoftInputMode="stateHidden"></activity>
 
 
-
-
         <activity
             android:name=".activity.Feedback"
             android:configChanges="orientation"
@@ -260,12 +265,11 @@
             android:windowSoftInputMode="stateHidden" />
 
 
-
         <activity
             android:name=".activity.AddCard"
             android:configChanges="orientation"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden" >
+            android:windowSoftInputMode="stateHidden">
 
         </activity>
 
@@ -278,9 +282,9 @@
 
         </activity>
 
-
-
-        <service android:name=".fcm.MyFirebaseInstanceIDService">
+        <service
+            android:name=".fcm.MyFirebaseInstanceIDService"
+            android:exported="true">
             <intent-filter>
                 <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
             </intent-filter>
@@ -288,6 +292,7 @@
 
         <service
             android:name=".fcm.MyFirebaseMessagingService"
+            android:exported="true"
             android:stopWithTask="false">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
@@ -304,11 +309,14 @@
 
 
         <!--Declare Consumer Sdk Activities in order to be able to change themes-->
-        <activity android:name="com.cardconnect.consumersdk.views.payment.accounts.PaymentAccountsActivity"
+        <activity
+            android:name="com.cardconnect.consumersdk.views.payment.accounts.PaymentAccountsActivity"
             android:theme="@style/ConsumerAppImplementer.Theme" />
-        <activity android:name="com.cardconnect.consumersdk.views.payment.createaccount.CreateAccountActivity"
+        <activity
+            android:name="com.cardconnect.consumersdk.views.payment.createaccount.CreateAccountActivity"
             android:theme="@style/ConsumerAppImplementer.Theme" />
-        <activity android:name="com.cardconnect.consumersdk.views.payment.editaccount.EditAccountActivity"
+        <activity
+            android:name="com.cardconnect.consumersdk.views.payment.editaccount.EditAccountActivity"
             android:theme="@style/ConsumerAppImplementer.Theme" />
         <activity
             android:name="com.cardconnect.consumersdk.androidpay.CConsumerConfirmationActivity"
@@ -321,9 +329,6 @@
         <meta-data
             android:name="com.google.android.gms.wallet.api.enabled"
             android:value="true" />
-
-
-
 
 
     </application>

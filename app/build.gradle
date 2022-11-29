@@ -18,18 +18,16 @@ repositories {
 
 
 android {
-    compileSdkVersion 28
+    compileSdkVersion 31
     defaultConfig {
         applicationId "com.latenightchauffeurs"
         minSdkVersion 19
-        targetSdkVersion 28
-        versionCode 39
-        versionName "0.0.0039"
+        targetSdkVersion 31
+        versionCode 42
+        versionName "0.0.0040"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
     }
-//    E:\latenightchauffeurs.jks
-
 
     buildTypes {
         release {

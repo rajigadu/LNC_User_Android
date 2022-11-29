@@ -10,7 +10,8 @@ public class Settings extends Application {
 
 //    public static String MIAN = "https://latenightchauffeurs.com/lnc-administrator/";
 
-    public static String MIAN = "https://lnc.latenightchauffeurs.com/lnc-administrator/";
+//    public static String MIAN = "https://lnc.latenightchauffeurs.com/lnc-administrator/";
+    public static String MIAN = "https://lnc.latenightchauffeurs.com/lnc-administrator/android-test";
 
     public static String URLMAINDATA = MIAN+"android/";
     public static String URLIMAGEBASE = MIAN+"uploads/";

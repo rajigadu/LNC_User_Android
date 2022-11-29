@@ -569,13 +569,37 @@ public class EditProfile extends AppCompatActivity implements View.OnClickListen
                 finish();
                 break;
             case R.id.upload:
-                pickProfileImage();
+                if (!hasPermissions(EditProfile.this, PERMISSIONS)) {
+                    showAlertDialog();
+                } else {
+                    pickProfileImage();
+                }
                 break;
             case R.id.updateprofile:
                 submit();
                 break;
+        }
 
+    }
+    private void showAlertDialog() {
+        try {
+            String appName = getPackageManager().getApplicationLabel(
+                    getPackageManager().getApplicationInfo(
+                            getPackageName(),PackageManager.GET_META_DATA)).toString();
+            AlertDialog.Builder dialog = new AlertDialog.Builder((this));
+            dialog.setTitle( appName +
+                    " Would Like to Access Your Photos");
+            dialog.setMessage(appName + " only will upload photo you choose");
+            dialog.setCancelable(false);
+            dialog.setPositiveButton("Allow", (dialog1, which) -> {
+                dialog1.dismiss();
+                pickProfileImage();
+            });
 
+            dialog.setNegativeButton("Don't Allow", (dialog12, which) -> dialog12.dismiss());
+            dialog.show();
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
         }
 
     }

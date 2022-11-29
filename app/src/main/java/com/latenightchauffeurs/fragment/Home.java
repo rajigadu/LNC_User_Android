@@ -22,8 +22,10 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.BottomSheetBehavior;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.CardView;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -101,10 +103,11 @@ import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
 public class Home extends Fragment implements OnMapReadyCallback, View.OnClickListener,
-        GoogleApiClient.OnConnectionFailedListener, GoogleApiClient.ConnectionCallbacks, IonAppListners {
+        GoogleApiClient.OnConnectionFailedListener, GoogleApiClient.ConnectionCallbacks, IonAppListners, ProminentDisclosureFragment.Callback {
     SendData sd;
 
     private Unbinder unbinder;
+    private DialogFragment dialogFragment;
 
     @BindView(R.id.bookreserve)
     Button bookReservation;
@@ -192,8 +195,14 @@ public class Home extends Fragment implements OnMapReadyCallback, View.OnClickLi
     private int count = 0;
 
     @Override
-    public void isAppOpen() {
+    public void isAppOpen() { }
 
+    @Override
+    public void permissionStatus(Boolean status, DialogFragment dialogFragment) {
+        if (status) {
+            this.dialogFragment = dialogFragment;
+            checkLocationPermission();
+        }
     }
 
     public interface SendData {
@@ -526,7 +535,10 @@ public class Home extends Fragment implements OnMapReadyCallback, View.OnClickLi
         mMap.isMyLocationEnabled();
 
         if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            checkLocationPermission();
+            if(ContextCompat.checkSelfPermission(mcontext, Manifest.permission.ACCESS_FINE_LOCATION)
+                    != PackageManager.PERMISSION_GRANTED){
+                permissionProminentDisclosure();
+            } else  checkLocationPermission();
         } else {
             gps = new GPSTracker(mcontext);
 
@@ -548,12 +560,17 @@ public class Home extends Fragment implements OnMapReadyCallback, View.OnClickLi
         }
     }
 
+    private void permissionProminentDisclosure() {
+        ProminentDisclosureFragment prominentDisclosure = new ProminentDisclosureFragment();
+        prominentDisclosure.setTargetFragment(this,1);
+        prominentDisclosure.setCancelable(false);
+        prominentDisclosure.show(getActivity().getSupportFragmentManager(),"Prominent Disclosure Fragment");
+    }
+
     public void checkLocationPermission() {
         if (ContextCompat.checkSelfPermission(mcontext, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
             // Utils.toastTxt("permissions granted",mContext);
-
             gps = new GPSTracker(mcontext);
-
             if (gps.canGetLocation()) {
                 LatLng latLng = new LatLng(gps.getLatitude(), gps.getLongitude());
                 MarkerOptions markerOptions = new MarkerOptions();
@@ -605,6 +622,7 @@ public class Home extends Fragment implements OnMapReadyCallback, View.OnClickLi
                             gps.showSettingsAlert();
                         }
                     }
+                    if (dialogFragment != null) dialogFragment.dismissAllowingStateLoss();
                     return;
                 } else {
                     Utils.toastTxt("need permissions for location update", mcontext);
