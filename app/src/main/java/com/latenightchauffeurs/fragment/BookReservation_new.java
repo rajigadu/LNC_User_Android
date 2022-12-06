@@ -119,7 +119,7 @@ public class BookReservation_new extends Fragment implements View.OnClickListene
     private static final String TAG = "BookReservation_new";
 
     public Call<ResponseBody> call = null;
-    public APIInterface apiInterface  = APIClient.getClientVO().create(APIInterface.class);
+    public APIInterface apiInterface = APIClient.getClientVO().create(APIInterface.class);
 
     static RecyclerView rv_locCard;
     public static MyRewardProgramAdapter requestsAdapterCard;
@@ -132,7 +132,6 @@ public class BookReservation_new extends Fragment implements View.OnClickListene
 
     RelativeLayout relativeLayoutCardContainer;
     Switch aSwitch;
-
 
 
     EditText editTextCardName, editTextCardNumber, editTextExpiryDate, editTextCVV, editTextPostalCode;
@@ -271,7 +270,7 @@ public class BookReservation_new extends Fragment implements View.OnClickListene
     public static List<modelItem> requestsList;
     private AlertDialog alertDialog = null;
     private static OnFragmentInteractionListenerBooking mListener;
-    private String pickUpCityName = "", dropCityName = "", pickUpText, dropText ;
+    private String pickUpCityName = "", dropCityName = "", pickUpText, dropText;
 
     @BindView(R.id.ll_apply_promo)
     LinearLayout llPromo;
@@ -352,10 +351,9 @@ public class BookReservation_new extends Fragment implements View.OnClickListene
         rv_loc.setLayoutManager(new LinearLayoutManager(mContext, LinearLayoutManager.VERTICAL, false));
 
 
-
         rv_locCard = v.findViewById(R.id.rv_loc_cards);
         requestsListManCard = new LinearLayoutManager(mContext, LinearLayoutManager.VERTICAL, false);
-          rv_locCard.setHasFixedSize(true);
+        rv_locCard.setHasFixedSize(true);
         rv_locCard.setLayoutManager(requestsListManCard);
 
 //        requestsAdapterCard = new MyRewardProgramAdapter(mContext, requestsListCard, rv_locCard, R.layout.card_rowitem, ConstVariable.CurrentRides);
@@ -363,8 +361,7 @@ public class BookReservation_new extends Fragment implements View.OnClickListene
         requestsAdapterCard = new MyRewardProgramAdapter(getActivity(), itemCardLists);
         rv_locCard.setAdapter(requestsAdapterCard);
 
-         rv_locCard.setVisibility(View.GONE);
-
+        rv_locCard.setVisibility(View.GONE);
 
         aSwitch = (Switch) v.findViewById(R.id.addcard_top);
         relativeLayoutCardContainer = (RelativeLayout) v.findViewById(R.id.m_reative);
@@ -374,16 +371,13 @@ public class BookReservation_new extends Fragment implements View.OnClickListene
         aSwitch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(aSwitch.isChecked() == true){
+                if (aSwitch.isChecked() == true) {
                     relativeLayoutCardContainer.setVisibility(View.VISIBLE);
-                }else{
+                } else {
                     relativeLayoutCardContainer.setVisibility(View.GONE);
                 }
             }
         });
-
-
-
 
         editTextCardName = (EditText) v.findViewById(R.id.card_name);
         editTextCardNumber = (EditText) v.findViewById(R.id.card_number);
@@ -392,10 +386,6 @@ public class BookReservation_new extends Fragment implements View.OnClickListene
         editTextPostalCode = (EditText) v.findViewById(R.id.button423435);
 
         buttonSubmit = (Button) v.findViewById(R.id.submit_card);
-
-
-
-
 
         buttonSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -424,11 +414,10 @@ public class BookReservation_new extends Fragment implements View.OnClickListene
 
                 } else {
 
-                    Toast.makeText(mContext , "All field is required!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(mContext, "All field is required!", Toast.LENGTH_SHORT).show();
                 }
             }
         });
-
 
         editTextExpiryDate.addTextChangedListener(new TextWatcher() {
             @Override
@@ -483,13 +472,7 @@ public class BookReservation_new extends Fragment implements View.OnClickListene
             }
         });
 
-
-
-
         cardList();
-
-
-
 
         btnApply.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -575,9 +558,7 @@ public class BookReservation_new extends Fragment implements View.OnClickListene
 
         pickupLoc.addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
@@ -591,9 +572,7 @@ public class BookReservation_new extends Fragment implements View.OnClickListene
             }
 
             @Override
-            public void afterTextChanged(Editable s) {
-
-            }
+            public void afterTextChanged(Editable s) { }
         });
 
         dropLoc.addTextChangedListener(new TextWatcher() {
@@ -673,15 +652,6 @@ public class BookReservation_new extends Fragment implements View.OnClickListene
     }
 
 
-
-
-
-
-
-
-
-
-
     public void cardList() {
         SavePref pref1 = new SavePref();
         pref1.SavePref(mContext);
@@ -694,18 +664,18 @@ public class BookReservation_new extends Fragment implements View.OnClickListene
 
                 String responseCode = "";
                 try {
-                    if(response.body() != null) {
+                    if (response.body() != null) {
                         responseCode = response.body().string();
 
                         Log.e(TAG, "Refreshed getMyRewardresponseCode: " + responseCode);
 
-                        if(!responseCode.equals("")){
+                        if (!responseCode.equals("")) {
                             itemCardLists = new ParsingHelper().getCardList(responseCode);
                             Log.e(TAG, "Refreshed getMyRewardProgramList: " + itemCardLists.size());
                         }
 
                         requestsAdapterCard.updateData(itemCardLists);
-                    }else{
+                    } else {
 
                     }
                 } catch (Exception e) {
@@ -721,12 +691,7 @@ public class BookReservation_new extends Fragment implements View.OnClickListene
         });
 
 
-
-
     }
-
-
-
 
 
     public class MyRewardProgramAdapter extends RecyclerView.Adapter<MyRewardProgramAdapter.ViewHolder> {
@@ -786,31 +751,31 @@ public class BookReservation_new extends Fragment implements View.OnClickListene
 
             public void bindItems(final ItemCardList itemMyRewardProgram, int i, final Activity context) {
 
-                TextView cnumber=(TextView) itemView.findViewById(R.id.cnumber);
-                TextView emonth=(TextView) itemView.findViewById(R.id.emonth);
-                ImageView delete=(ImageView) itemView.findViewById(R.id.delete);
+                TextView cnumber = (TextView) itemView.findViewById(R.id.cnumber);
+                TextView emonth = (TextView) itemView.findViewById(R.id.emonth);
+                ImageView delete = (ImageView) itemView.findViewById(R.id.delete);
 
-                Button buttonDelete =(Button) itemView.findViewById(R.id.delete_btn);
+                Button buttonDelete = (Button) itemView.findViewById(R.id.delete_btn);
 
 
-               // delete.setVisibility(View.GONE);
+                // delete.setVisibility(View.GONE);
                 RadioButton radioButton = (RadioButton) itemView.findViewById(R.id.radio0);
 
                 String number = itemMyRewardProgram.getToken();
                 String mask = number.replaceAll("\\w(?=\\w{4})", "*");
 
-                cnumber.setText(itemMyRewardProgram.getAccttype()+"  "+mask);
+                cnumber.setText(itemMyRewardProgram.getAccttype() + "  " + mask);
 
 
                 String expiryTotal = "";
-                    if(itemMyRewardProgram.getExpiry().toString().length() >= 2){
-                        String cc = itemMyRewardProgram.getExpiry().toString().substring(0, 2);
-                        expiryTotal = cc;
-                    }
-                    if(itemMyRewardProgram.getExpiry().toString().length() >= 4){
-                        String substring = itemMyRewardProgram.getExpiry().toString().substring(Math.max(itemMyRewardProgram.getExpiry().toString().length() - 2, 0));
-                        expiryTotal = expiryTotal+"/"+substring;
-                    }
+                if (itemMyRewardProgram.getExpiry().toString().length() >= 2) {
+                    String cc = itemMyRewardProgram.getExpiry().toString().substring(0, 2);
+                    expiryTotal = cc;
+                }
+                if (itemMyRewardProgram.getExpiry().toString().length() >= 4) {
+                    String substring = itemMyRewardProgram.getExpiry().toString().substring(Math.max(itemMyRewardProgram.getExpiry().toString().length() - 2, 0));
+                    expiryTotal = expiryTotal + "/" + substring;
+                }
                 emonth.setText(expiryTotal);
 
                 radioButton.setChecked(i == selectedPosition);
@@ -828,21 +793,18 @@ public class BookReservation_new extends Fragment implements View.OnClickListene
                 });
 
 
-
-
-
                 delete.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                            if(itemMyRewardProgram.isUpDown() == true){
-                                delete.setImageResource(R.drawable.arrow_down);
-                                itemMyRewardProgram.setUpDown(false);
-                                buttonDelete.setVisibility(View.GONE);
-                            }else{
-                                delete.setImageResource(R.drawable.arrow_up);
-                                itemMyRewardProgram.setUpDown(true);
-                                buttonDelete.setVisibility(View.VISIBLE);
-                            }
+                        if (itemMyRewardProgram.isUpDown() == true) {
+                            delete.setImageResource(R.drawable.arrow_down);
+                            itemMyRewardProgram.setUpDown(false);
+                            buttonDelete.setVisibility(View.GONE);
+                        } else {
+                            delete.setImageResource(R.drawable.arrow_up);
+                            itemMyRewardProgram.setUpDown(true);
+                            buttonDelete.setVisibility(View.VISIBLE);
+                        }
                     }
                 });
 
@@ -876,7 +838,6 @@ public class BookReservation_new extends Fragment implements View.OnClickListene
         }
 
 
-
         public void updateData(ArrayList<ItemCardList> arrayList2) {
             // TODO Auto-generated method stub
             //arrayList.clear();
@@ -886,11 +847,7 @@ public class BookReservation_new extends Fragment implements View.OnClickListene
         }
 
 
-
     }
-
-
-
 
 
     public void deleteCardRequest(String card_id) {
@@ -915,10 +872,6 @@ public class BookReservation_new extends Fragment implements View.OnClickListene
     }
 
 
-
-
-
-
     private void callRefreshMethod(String cardName, String cardNumber, String expiry, String cardCVV, String postal) {
         final ProgressDialog progressDialog = new ProgressDialog(getActivity());
         progressDialog.setMessage("Doing something, please wait.");
@@ -927,13 +880,13 @@ public class BookReservation_new extends Fragment implements View.OnClickListene
 
         String expiryMonth = "";
         String expiryYear = "";
-        if(expiry.contains("/")) {
+        if (expiry.contains("/")) {
             expiryMonth = expiry.split("/")[0];
-            expiryYear = "20"+expiry.split("/")[1];
+            expiryYear = "20" + expiry.split("/")[1];
         }
 
-        Log.e(TAG , "expiryMonth: "+expiryMonth);
-        Log.e(TAG , "expiryYear: "+expiryYear);
+        Log.e(TAG, "expiryMonth: " + expiryMonth);
+        Log.e(TAG, "expiryYear: " + expiryYear);
 
 
         ArrayList<MultipartBody.Part> arrayListMash = new ArrayList<MultipartBody.Part>();
@@ -986,10 +939,10 @@ public class BookReservation_new extends Fragment implements View.OnClickListene
 
                             if (status.equals("1")) {
                                 JSONArray array = jsonObject.getJSONArray("data");
-                                if(array.length() > 0){
+                                if (array.length() > 0) {
                                     JSONObject jsonObject1 = array.getJSONObject(0);
                                     String msg = jsonObject1.getString("msg");
-                                    Toast.makeText(getActivity() , ""+msg, Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(getActivity(), "" + msg, Toast.LENGTH_SHORT).show();
 
 
                                     editTextCardName.setText("");
@@ -999,20 +952,19 @@ public class BookReservation_new extends Fragment implements View.OnClickListene
                                     editTextPostalCode.setText("");
 
 
-
                                     cardList();
 
                                 }
                             } else {
                                 JSONArray array = jsonObject.getJSONArray("data");
-                                if(array.length() > 0){
+                                if (array.length() > 0) {
                                     JSONObject jsonObject1 = array.getJSONObject(0);
                                     String msg = jsonObject1.getString("msg");
 
-                                    if(msg.equalsIgnoreCase("Service not allowed") || msg.equalsIgnoreCase("Bad card check digit")){
-                                        Toast.makeText(getActivity() , "Invalid Card", Toast.LENGTH_SHORT).show();
-                                    }else{
-                                        Toast.makeText(getActivity() , ""+msg, Toast.LENGTH_SHORT).show();
+                                    if (msg.equalsIgnoreCase("Service not allowed") || msg.equalsIgnoreCase("Bad card check digit")) {
+                                        Toast.makeText(getActivity(), "Invalid Card", Toast.LENGTH_SHORT).show();
+                                    } else {
+                                        Toast.makeText(getActivity(), "" + msg, Toast.LENGTH_SHORT).show();
 
                                     }
 
@@ -1024,7 +976,7 @@ public class BookReservation_new extends Fragment implements View.OnClickListene
                             Log.e(TAG, "Exception MSG " + ex.getMessage());
                             //  new ShowMsg().createSnackbar(AddCardInformation.this, "" + ex.getMessage());
                         }
-                    }else{
+                    } else {
                         //new ShowMsg().createSnackbar(AddCardInformation.this,  getString(R.string.something_went_wrong));
                     }
                 } catch (Exception ex) {
@@ -1464,10 +1416,10 @@ public class BookReservation_new extends Fragment implements View.OnClickListene
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                try{
+                try {
                     //btnEstimatePrice.setVisibility(View.GONE);
 
-                    Log.e(TAG , "NavigationBookNowBack "+Navigation.BookNowBack);
+                    Log.e(TAG, "NavigationBookNowBack " + Navigation.BookNowBack);
 
 //                    if(buttonHide == false){
 //                        btnEstimatePrice.setVisibility(View.VISIBLE);
@@ -1483,7 +1435,7 @@ public class BookReservation_new extends Fragment implements View.OnClickListene
 
                     //if()
 
-                    Log.e(TAG , "isBookVisibleAA "+isBookVisible);
+                    Log.e(TAG, "isBookVisibleAA " + isBookVisible);
 
                     btnSubmit.setVisibility(isBookVisible ? View.GONE : View.VISIBLE);
                     viewShow.setVisibility(isBookVisible ? View.GONE : View.VISIBLE);
@@ -1499,7 +1451,7 @@ public class BookReservation_new extends Fragment implements View.OnClickListene
                     // btnEstimatePrice.setVisibility(isBookVisible ? View.VISIBLE : View.VISIBLE);
                     //rlChooseCard.setVisibility(isBookVisible ? View.VISIBLE : View.GONE);
                     btnBookNow.setVisibility(isBookVisible ? View.VISIBLE : View.GONE);
-                  //  cardPaymentView.setVisibility(isBookVisible ? View.VISIBLE : View.GONE);
+                    //  cardPaymentView.setVisibility(isBookVisible ? View.VISIBLE : View.GONE);
 
                     rv_locCard.setVisibility(isBookVisible ? View.VISIBLE : View.GONE);
                     aSwitch.setVisibility(isBookVisible ? View.VISIBLE : View.GONE);
@@ -1507,7 +1459,7 @@ public class BookReservation_new extends Fragment implements View.OnClickListene
                     relativeLayoutCardContainer.setVisibility(View.GONE);
                     aSwitch.setSelected(false);
 
-                }catch (Exception e){
+                } catch (Exception e) {
 
                 }
 
@@ -1520,12 +1472,12 @@ public class BookReservation_new extends Fragment implements View.OnClickListene
         if (btnSubmit.getVisibility() == View.VISIBLE) {
             Navigation.BookNowBack = true;
             //setVisibility(false);
-            Log.e(TAG , "checkVisibility AAAA");
+            Log.e(TAG, "checkVisibility AAAA");
         } else {
             Navigation.BookNowBack = false;
             buttonHide = false;
             setVisibility(false);
-            Log.e(TAG , "checkVisibility BBBB");
+            Log.e(TAG, "checkVisibility BBBB");
         }
     }
 
@@ -1566,10 +1518,7 @@ public class BookReservation_new extends Fragment implements View.OnClickListene
                     Utils.toastTxt("Please enter pickup location.", mContext);
                 } else if (dropLoc.getText().toString().trim().isEmpty()) {
                     Utils.toastTxt("Please enter drop location.", mContext);
-                }
-
-
-                else{
+                } else {
                     buttonHide = true;
                     setVisibility(true);
                 }
@@ -1773,9 +1722,6 @@ public class BookReservation_new extends Fragment implements View.OnClickListene
     }
 
 
-
-
-
     @SuppressLint("ValidFragment")
     public static class DatePickerFragment extends DialogFragment implements DatePickerDialog.OnDateSetListener {
 
@@ -1824,7 +1770,6 @@ public class BookReservation_new extends Fragment implements View.OnClickListene
             date.setText(mm + "-" + dd + "-" + yy);
 
 
-
             calendarSelected = Calendar.getInstance();
 
 
@@ -1832,16 +1777,14 @@ public class BookReservation_new extends Fragment implements View.OnClickListene
             selectedMM = Integer.valueOf(mm) - 1;
             selectedDD = Integer.valueOf(dd);
 
-            calendarSelected.set(Calendar.AM_PM , Calendar.AM);
+            calendarSelected.set(Calendar.AM_PM, Calendar.AM);
 
 
             calendarSelected.set(selectedYY, selectedMM, selectedDD);
 
 
-
         }
     }
-
 
 
     @SuppressLint("ValidFragment")
@@ -1854,7 +1797,6 @@ public class BookReservation_new extends Fragment implements View.OnClickListene
             hour = calendar.get(Calendar.HOUR_OF_DAY);
             minute = calendar.get(Calendar.MINUTE);
             second = calendar.get(Calendar.SECOND);
-
 
 
             TimePickerDialog timePickerDialog = new TimePickerDialog(getActivity(), this, hour, minute, DateFormat.is24HourFormat(getActivity()));
@@ -1899,26 +1841,19 @@ public class BookReservation_new extends Fragment implements View.OnClickListene
             calendarSelected.set(Calendar.SECOND, 0);
 
 
-
-
-
-
             Log.e(TAG, "calendarSelected1 " + calendarSelected.getTime());
             Log.e(TAG, "calendarSelectedgetTimeInMillis " + calendarSelected.getTimeInMillis());
-
 
 
             Log.e(TAG, "calendarCurrent1 " + calendarCurrent.getTime());
             Log.e(TAG, "calendarCurrentgetTimeInMillis " + calendarCurrent.getTimeInMillis());
 
 
-
-
-            if(calendarSelected.getTimeInMillis() >= calendarCurrent.getTimeInMillis()){
+            if (calendarSelected.getTimeInMillis() >= calendarCurrent.getTimeInMillis()) {
                 Log.e(TAG, "AAAAAAAAAAAAA ");
-            }else{
+            } else {
                 Log.e(TAG, "BBBBBBBBBBBBB ");
-               // Toast.makeText(getActivity(), "Invalid Time! Please Select greater than current time.", Toast.LENGTH_LONG).show();
+                // Toast.makeText(getActivity(), "Invalid Time! Please Select greater than current time.", Toast.LENGTH_LONG).show();
                 android.support.v7.app.AlertDialog.Builder builder = new android.support.v7.app.AlertDialog.Builder(getActivity());
                 builder.setTitle(getActivity().getString(R.string.app_name));
 //                builder.setMessage("To select this time please select future date.")
@@ -1935,9 +1870,6 @@ public class BookReservation_new extends Fragment implements View.OnClickListene
                 time.setText("");
                 return;
             }
-
-
-
 
 
 //            if ((dateCalendar == calendar.getTime().getDate()) && (hourOfDay >= hour && selectedMinute >= minute)) {// && (calendar.getTimeInMillis() >= datetime.getTimeInMillis())
@@ -1964,8 +1896,7 @@ public class BookReservation_new extends Fragment implements View.OnClickListene
             time_24 = hh + ":" + mm;
 
 
-
-            Log.e(TAG , hh+" HHMM "+mm);
+            Log.e(TAG, hh + " HHMM " + mm);
 
             try {
                 String _24HourTime = time_24;
@@ -1980,7 +1911,7 @@ public class BookReservation_new extends Fragment implements View.OnClickListene
 
                 time.setText(_12HourSDF.format(_24HourDt));
 
-                Log.e(TAG , "_12HourSDF.format(_24HourDt) "+_12HourSDF.format(_24HourDt));
+                Log.e(TAG, "_12HourSDF.format(_24HourDt) " + _12HourSDF.format(_24HourDt));
 
             } catch (Exception e) {
                 e.printStackTrace();
@@ -1988,7 +1919,6 @@ public class BookReservation_new extends Fragment implements View.OnClickListene
         }
 
     }
-
 
 
     public static long getTimeInMillis(int day, int month, int year) {
@@ -2020,7 +1950,7 @@ public class BookReservation_new extends Fragment implements View.OnClickListene
 
     @Override
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
-
+        Log.e(TAG,"ConnectionResult: "+connectionResult);
     }
 
     @Override
@@ -2067,20 +1997,17 @@ public class BookReservation_new extends Fragment implements View.OnClickListene
         }
 
 
-
         calendarCurrent = Calendar.getInstance();
         calendarCurrent.set(Calendar.SECOND, 0);
 
 
-
-        try{
+        try {
             SimpleDateFormat sdf = new SimpleDateFormat("M-dd-yyyy hh:mm a");
-            Date date = sdf.parse(date_ride+" "+time_ride);
+            Date date = sdf.parse(date_ride + " " + time_ride);
 
             long dateXX = date.getTime();
 
-            Log.e(TAG, "AAAAAAAAAAAAA "+dateXX);
-
+            Log.e(TAG, "AAAAAAAAAAAAA " + dateXX);
 
 
 //            calendarSelected = Calendar.getInstance();
@@ -2097,19 +2024,17 @@ public class BookReservation_new extends Fragment implements View.OnClickListene
             System.out.println("Converted String: " + strDate);
 
 
-          //  SimpleDateFormat sdfCu = new SimpleDateFormat("M-dd-yyyy hh:mm a");
+            //  SimpleDateFormat sdfCu = new SimpleDateFormat("M-dd-yyyy hh:mm a");
             Date dateCu = sdf.parse(strDate);
 
 
-
             long dateCurLong = dateCu.getTime();
-            Log.e(TAG, "BBBBBBBBBBBBB "+dateCurLong);
+            Log.e(TAG, "BBBBBBBBBBBBB " + dateCurLong);
 
 
-
-            if(dateXX >= dateCurLong){
+            if (dateXX >= dateCurLong) {
                 Log.e(TAG, "AAAAAAAAAAAAA ");
-            }else{
+            } else {
                 Log.e(TAG, "BBBBBBBBBBBBB ");
                 android.support.v7.app.AlertDialog.Builder builder = new android.support.v7.app.AlertDialog.Builder(getActivity());
                 builder.setTitle(getActivity().getString(R.string.app_name));
@@ -2129,14 +2054,9 @@ public class BookReservation_new extends Fragment implements View.OnClickListene
 //
 //            System.out.println(dateInString);
 //            System.out.println("Date - Time in milliseconds : " + date.getTime());
-        }catch (Exception e){
+        } catch (Exception e) {
 
         }
-
-
-
-
-
 
 
         new Utils(mContext);
@@ -2144,23 +2064,14 @@ public class BookReservation_new extends Fragment implements View.OnClickListene
             Utils.toastTxt("Please select date.", mContext);
         } else if (status_BookingType.equalsIgnoreCase("2") && time.getText().toString().trim().isEmpty()) {
             Utils.toastTxt("Please select time.", mContext);
-        }
-        else if (pickupLoc.getText().toString().trim().isEmpty()) {
+        } else if (pickupLoc.getText().toString().trim().isEmpty()) {
             Utils.toastTxt("Please enter pickup location.", mContext);
         } else if (dropLoc.getText().toString().trim().isEmpty()) {
             Utils.toastTxt("Please enter drop location.", mContext);
-        }
-
-
-
-
-
-
-
-        else if (card_numberSelect.isEmpty()) {
+        } else if (card_numberSelect.isEmpty()) {
             Utils.toastTxt("Please choose a credit card to continue.", mContext);
         } else {
-            Log.e(TAG , "card_numberSelect: "+card_numberSelect);
+            Log.e(TAG, "card_numberSelect: " + card_numberSelect);
 
             jsonStops = new JSONObject();
 
@@ -2190,24 +2101,24 @@ public class BookReservation_new extends Fragment implements View.OnClickListene
                 json.put("booking_type", status_BookingType);
 
 
-                Log.e(TAG , "date_ride "+date_ride);
-                Log.e(TAG , "time_ride "+time_ride);
+                Log.e(TAG, "date_ride " + date_ride);
+                Log.e(TAG, "time_ride " + time_ride);
 
 
-                if(pickupBoolean == true){
-                    if(pickUpText != null) {
+                if (pickupBoolean == true) {
+                    if (pickUpText != null) {
                         Log.e(TAG, "dropText11111 " + pickUpText);
                         json.put("pickup_address", pickUpText);
                     }
-                }else{
-                    if(!pickupLoc.getText().toString().equalsIgnoreCase("")) {
-                        Log.e(TAG ,  "dropLoc33333 "+pickupLoc.getText().toString());
-                        LatLng latLng = Utils.getLocationFromAddress(getActivity() , pickupLoc.getText().toString());
+                } else {
+                    if (!pickupLoc.getText().toString().equalsIgnoreCase("")) {
+                        Log.e(TAG, "dropLoc33333 " + pickupLoc.getText().toString());
+                        LatLng latLng = Utils.getLocationFromAddress(getActivity(), pickupLoc.getText().toString());
 
                         Log.e(TAG, "dropLoclatLng33333 " + latLng);
-                        if(latLng != null){
-                            lat_pickup = latLng.latitude+"";
-                            long_pick = latLng.longitude+"";
+                        if (latLng != null) {
+                            lat_pickup = latLng.latitude + "";
+                            long_pick = latLng.longitude + "";
                         }
 
                         pickUpCityName = pickupLoc.getText().toString();
@@ -2216,30 +2127,26 @@ public class BookReservation_new extends Fragment implements View.OnClickListene
                 }
 
 
-
-
-                if(dropBoolean == true){
-                    if(dropText != null) {
+                if (dropBoolean == true) {
+                    if (dropText != null) {
                         Log.e(TAG, "dropText11111 " + dropText);
                         json.put("drop_address", dropText);
                     }
-                }else{
-                    if(!dropLoc.getText().toString().equalsIgnoreCase("")) {
-                        Log.e(TAG ,  "dropLoc33333 "+dropLoc.getText().toString());
-                        LatLng latLng = Utils.getLocationFromAddress2(getActivity() , dropLoc.getText().toString());
+                } else {
+                    if (!dropLoc.getText().toString().equalsIgnoreCase("")) {
+                        Log.e(TAG, "dropLoc33333 " + dropLoc.getText().toString());
+                        LatLng latLng = Utils.getLocationFromAddress2(getActivity(), dropLoc.getText().toString());
 
                         Log.e(TAG, "dropLoclatLng33333 " + latLng);
-                        if(latLng != null){
-                            lat_drop = latLng.latitude+"";
-                            long_drop = latLng.longitude+"";
+                        if (latLng != null) {
+                            lat_drop = latLng.latitude + "";
+                            long_drop = latLng.longitude + "";
                         }
 
                         dropCityName = dropLoc.getText().toString();
                         json.put("drop_address", dropLoc.getText().toString());
                     }
                 }
-
-
 
 
                 json.put("notes", etNote.getText().toString());
@@ -2266,22 +2173,21 @@ public class BookReservation_new extends Fragment implements View.OnClickListene
             map.put("jsonstops", jsonStops);
 
 
-
-            try{
+            try {
                 SimpleDateFormat sdf = new SimpleDateFormat("M-dd-yyyy hh:mm a");
-                Date date = sdf.parse(date_ride+" "+time_ride);
+                Date date = sdf.parse(date_ride + " " + time_ride);
 
                 long dateXX = date.getTime();
 
-                Log.e(TAG, "FFFFFFFFF "+dateXX);
+                Log.e(TAG, "FFFFFFFFF " + dateXX);
 
-               String ffg = convertDate(""+dateXX,"EEEE dd MMMM yyyy hh:mm a");
-                Log.e(TAG, "FFFFFFFFFXX "+ffg);
+                String ffg = convertDate("" + dateXX, "EEEE dd MMMM yyyy hh:mm a");
+                Log.e(TAG, "FFFFFFFFFXX " + ffg);
 
 
                 android.support.v7.app.AlertDialog.Builder builder = new android.support.v7.app.AlertDialog.Builder(getActivity());
                 builder.setTitle(getActivity().getString(R.string.app_name));
-                builder.setMessage("Are you sure to book this ride for "+ffg+" ?")
+                builder.setMessage("Are you sure to book this ride for " + ffg + " ?")
                         .setCancelable(false)
                         .setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
@@ -2295,10 +2201,9 @@ public class BookReservation_new extends Fragment implements View.OnClickListene
                             }
                         });
                 builder.show();
-            }catch (Exception e){
+            } catch (Exception e) {
 
             }
-
 
 
             Log.e("Tagggg", map.toString());
@@ -2306,41 +2211,38 @@ public class BookReservation_new extends Fragment implements View.OnClickListene
     }
 
 
-    public static String convertDate(String dateInMilliseconds,String dateFormat) {
+    public static String convertDate(String dateInMilliseconds, String dateFormat) {
         return DateFormat.format(dateFormat, Long.parseLong(dateInMilliseconds)).toString();
     }
 
- 
- 
- 
+
     public void estimatedRideCostRequest() {
         //Utils.startActivity(ActivityLogin.this,ActivityEvents.class);
 
 
-            if(!pickupLoc.getText().toString().equalsIgnoreCase("")) {
-                Log.e(TAG ,  "dropLoc33333 "+pickupLoc.getText().toString());
-                LatLng latLng = Utils.getLocationFromAddress2(getActivity() , pickupLoc.getText().toString());
+        if (!pickupLoc.getText().toString().equalsIgnoreCase("")) {
+            Log.e(TAG, "dropLoc33333 " + pickupLoc.getText().toString());
+            LatLng latLng = Utils.getLocationFromAddress2(getActivity(), pickupLoc.getText().toString());
 
-                Log.e(TAG, "dropLoclatLng33333 " + latLng);
-                if(latLng != null){
-                    lat_pickup = latLng.latitude+"";
-                    long_pick = latLng.longitude+"";
-                }
-
+            Log.e(TAG, "dropLoclatLng33333 " + latLng);
+            if (latLng != null) {
+                lat_pickup = latLng.latitude + "";
+                long_pick = latLng.longitude + "";
             }
 
-            if(!dropLoc.getText().toString().equalsIgnoreCase("")) {
-                Log.e(TAG ,  "dropLoc33333 "+dropLoc.getText().toString());
-                LatLng latLng = Utils.getLocationFromAddress2(getActivity() , dropLoc.getText().toString());
+        }
 
-                Log.e(TAG, "dropLoclatLng33333 " + latLng);
-                if(latLng != null){
-                    lat_drop = latLng.latitude+"";
-                    long_drop = latLng.longitude+"";
-                }
+        if (!dropLoc.getText().toString().equalsIgnoreCase("")) {
+            Log.e(TAG, "dropLoc33333 " + dropLoc.getText().toString());
+            LatLng latLng = Utils.getLocationFromAddress2(getActivity(), dropLoc.getText().toString());
 
+            Log.e(TAG, "dropLoclatLng33333 " + latLng);
+            if (latLng != null) {
+                lat_drop = latLng.latitude + "";
+                long_drop = latLng.longitude + "";
             }
 
+        }
 
 
         if (lat_pickup.toString().trim().isEmpty()) {
@@ -2367,8 +2269,8 @@ public class BookReservation_new extends Fragment implements View.OnClickListene
             Log.e("date 131233=====", date_ride);
             Log.e("Time 131233=====", time_ride);
             map = new HashMap<String, Object>();
-            map.put("date", ""+date_ride);
-            map.put("time", ""+time_ride);
+            map.put("date", "" + date_ride);
+            map.put("time", "" + time_ride);
             map.put("pick_lat", lat_pickup);
             map.put("pick_lng", long_pick);
             map.put("dest_lat", lat_drop);
@@ -2376,13 +2278,13 @@ public class BookReservation_new extends Fragment implements View.OnClickListene
             map.put("promo", promoCode);
             map.put("count", stopsAddList != null ? stopsAddList.size() : 0);
 
-            Log.e(TAG, "PPPPPPPPPP "+map.toString());
+            Log.e(TAG, "PPPPPPPPPP " + map.toString());
 
             OnlineRequest.estimatedPriceRequest(mContext, map);
         }
     }
-	
-        //Utils.startActivity(ActivityLogin.this,ActivityEvents.class);
+
+    //Utils.startActivity(ActivityLogin.this,ActivityEvents.class);
 
 
 //            if(!dropLoc.getText().toString().equalsIgnoreCase("")) {
@@ -2542,13 +2444,13 @@ public class BookReservation_new extends Fragment implements View.OnClickListene
                         payment_Id = cardMap.get("token").toString();
                     }
 
-                    if(cardMap.containsKey("expiry")){
-                        if(cardMap.get("expiry").toString().length() >= 2){
+                    if (cardMap.containsKey("expiry")) {
+                        if (cardMap.get("expiry").toString().length() >= 2) {
                             String cc = cardMap.get("expiry").toString().substring(0, 2);
                             emonth.setText(cc);
                         }
 
-                        if(cardMap.get("expiry").toString().length() >= 4){
+                        if (cardMap.get("expiry").toString().length() >= 4) {
                             String substring = cardMap.get("expiry").toString().substring(Math.max(cardMap.get("expiry").toString().length() - 2, 0));
                             eyear.setText(substring);
                         }
@@ -2587,7 +2489,7 @@ public class BookReservation_new extends Fragment implements View.OnClickListene
 
 
     public static void getBookingResponce() {
-        Log.e(TAG , "getBookingResponce");
+        Log.e(TAG, "getBookingResponce");
         mListener.onFragmentInteraction(ConstVariable.ChangePassword);
     }
 
@@ -2695,8 +2597,6 @@ public class BookReservation_new extends Fragment implements View.OnClickListene
     }
 
 
-
-
     public void showBookingSuccessDialog(final String message) {
         LayoutInflater inflater = LayoutInflater.from(mContext);
         final View dialogLayout = inflater.inflate(R.layout.alert_dialog8, null);
@@ -2711,9 +2611,7 @@ public class BookReservation_new extends Fragment implements View.OnClickListene
         final TextView bookingMsg = dialog.findViewById(R.id.tv_booking_msg);
         bookingMsg.setVisibility(View.VISIBLE);
 
-
-
-        if(message.contains("Congratulations! your reservation has been completed")){
+        if (message.contains("Congratulations! your reservation has been completed")) {
             bookingMsg.setText(message);
 
             TextView tvPont1 = dialog.findViewById(R.id.tv_point_1);
@@ -2735,10 +2633,12 @@ public class BookReservation_new extends Fragment implements View.OnClickListene
             TextView tvPont5 = dialog.findViewById(R.id.tv_point_5);
             tvPont5.setVisibility(View.VISIBLE);
             tvPont5.setText("♦ 4 Hour Cancellation Policy from the time of pickup.");
-        } else if(message.contains("It looks you are using older version")){
+        } else if (message.contains("It looks you are using older version")) {
             bookingMsg.setText(message);
-        }else if(message.equalsIgnoreCase("Service not allowed") || message.equalsIgnoreCase("Bad card check digit")){
+        } else if (message.equalsIgnoreCase("Service not allowed") || message.equalsIgnoreCase("Bad card check digit")) {
             bookingMsg.setText("Invalid Card");
+        } else {
+            bookingMsg.setText(message);
         }
 
         final TextView title = dialog.findViewById(R.id.title);
@@ -2748,25 +2648,24 @@ public class BookReservation_new extends Fragment implements View.OnClickListene
         title.setText(R.string.app_name);
 
 
-
         ok.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 try {
-                    if(message.contains("It looks you are using older version")){
+                    if (message.contains("It looks you are using older version")) {
                         final String appPackageName = getActivity().getPackageName();
                         try {
                             startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=" + appPackageName)));
                         } catch (android.content.ActivityNotFoundException anfe) {
                             startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + appPackageName)));
                         }
-                    }else if(message.equalsIgnoreCase("Service not allowed") || message.equalsIgnoreCase("Bad card check digit")){
+                    } else if (message.equalsIgnoreCase("Service not allowed") || message.equalsIgnoreCase("Bad card check digit")) {
 
-                    }else{
+                    } else {
 
                         if (bookingAsap) {
 
-                            Log.e(TAG , "AAAAAAAAAAAAA");
+                            Log.e(TAG, "AAAAAAAAAAAAA");
 
                             BookReservation_new.getBookingResponce();
 //                        Home.Instance.updateRideStatus(Utils.global.mapMain);
@@ -2775,7 +2674,7 @@ public class BookReservation_new extends Fragment implements View.OnClickListene
                     }
 
 
-                    Log.e(TAG , "BBBBBBBBBBBBBB");
+                    Log.e(TAG, "BBBBBBBBBBBBBB");
 
                     dialog.cancel();
                 } catch (Exception e) {
