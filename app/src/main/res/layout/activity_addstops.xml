@@ -60,7 +60,7 @@
         android:layout_below="@id/add_stop"
         android:layout_above="@+id/submit">
 
-        <android.support.v7.widget.RecyclerView
+        <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_loc"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

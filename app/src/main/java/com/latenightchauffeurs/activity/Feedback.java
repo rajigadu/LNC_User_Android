@@ -2,9 +2,8 @@ package com.latenightchauffeurs.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import androidx.appcompat.app.AppCompatActivity;
+
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -18,15 +17,12 @@ import com.latenightchauffeurs.Utils.ConstVariable;
 import com.latenightchauffeurs.Utils.JsonPost;
 import com.latenightchauffeurs.Utils.Settings;
 import com.latenightchauffeurs.Utils.Utils;
-import com.latenightchauffeurs.adapter.SingleSelectionAdapter;
 import com.latenightchauffeurs.fragment.Home;
 import com.latenightchauffeurs.model.ItemModel;
 import com.latenightchauffeurs.model.SavePref;
 import com.squareup.picasso.Picasso;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;

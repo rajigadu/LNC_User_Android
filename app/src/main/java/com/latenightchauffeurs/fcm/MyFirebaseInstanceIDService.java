@@ -2,22 +2,22 @@ package com.latenightchauffeurs.fcm;
 
 import android.content.SharedPreferences;
 import android.util.Log;
-import com.google.firebase.iid.FirebaseInstanceId;
-import com.google.firebase.iid.FirebaseInstanceIdService;
+import androidx.annotation.NonNull;
+import com.google.firebase.messaging.FirebaseMessagingService;
 
 /**
  * Created by AnaadIT on 3/30/2017.
  */
 
-public class MyFirebaseInstanceIDService extends FirebaseInstanceIdService
+public class MyFirebaseInstanceIDService extends FirebaseMessagingService
 {
     public  int i=0;
     private static final String TAG = "MyFirebaseIIDService";
 
     @Override
-    public void onTokenRefresh()
-    {
-        String refreshedToken = FirebaseInstanceId.getInstance().getToken();
+    public void onNewToken(@NonNull String token) {
+        super.onNewToken(token);
+        String refreshedToken = token;
 
         //Displaying token on logcat
         Log.e(TAG, "Refreshed token: " + refreshedToken);
@@ -25,6 +25,18 @@ public class MyFirebaseInstanceIDService extends FirebaseInstanceIdService
         if ((refreshedToken != null || refreshedToken != "") && i == 0)
             sendRegistrationToServer(refreshedToken);
     }
+
+//    @Override
+//    public void onTokenRefresh()
+//    {
+//        String refreshedToken = FirebaseInstanceId.getInstance().getToken();
+//
+//        //Displaying token on logcat
+//        Log.e(TAG, "Refreshed token: " + refreshedToken);
+//
+//        if ((refreshedToken != null || refreshedToken != "") && i == 0)
+//            sendRegistrationToServer(refreshedToken);
+//    }
 
     private void sendRegistrationToServer(String token)
     {

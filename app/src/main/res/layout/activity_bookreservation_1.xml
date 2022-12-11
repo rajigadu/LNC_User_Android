@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/bg"
@@ -52,13 +53,13 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/margin_10"
-                    android:layout_marginRight="@dimen/margin_10"
                     android:layout_marginTop="@dimen/margin_10"
+                    android:layout_marginRight="@dimen/margin_10"
                     android:layout_weight="1"
                     android:background="@color/off_white"
                     android:clickable="false"
-                    android:drawablePadding="@dimen/padding_10"
                     android:drawableRight="@drawable/down"
+                    android:drawablePadding="@dimen/padding_10"
                     android:focusableInTouchMode="false"
                     android:hint="Date"
                     android:inputType="none"
@@ -66,20 +67,21 @@
                     android:padding="@dimen/padding_05"
                     android:textColor="@color/black"
                     android:textColorHint="@color/black_light"
-                    android:textSize="@dimen/text_mediumsize" />
+                    android:textSize="@dimen/text_mediumsize"
+                    tools:ignore="TouchTargetSizeCheck" />
 
                 <EditText
                     android:id="@+id/time"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/margin_10"
-                    android:layout_marginRight="@dimen/margin_10"
                     android:layout_marginTop="@dimen/margin_10"
+                    android:layout_marginRight="@dimen/margin_10"
                     android:layout_weight="1"
                     android:background="@color/off_white"
                     android:clickable="false"
-                    android:drawablePadding="@dimen/padding_10"
                     android:drawableRight="@drawable/down"
+                    android:drawablePadding="@dimen/padding_10"
                     android:focusableInTouchMode="false"
                     android:hint="Time"
                     android:inputType="none"
@@ -87,11 +89,12 @@
                     android:padding="@dimen/padding_05"
                     android:textColor="@color/black"
                     android:textColorHint="@color/black_light"
-                    android:textSize="@dimen/text_mediumsize" />
+                    android:textSize="@dimen/text_mediumsize"
+                    tools:ignore="TouchTargetSizeCheck" />
 
             </LinearLayout>
 
-            <android.support.v7.widget.CardView
+            <androidx.cardview.widget.CardView
                 android:id="@+id/card_pick"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -115,7 +118,8 @@
                         android:layout_toLeftOf="@id/close11"
                         android:background="@color/white_full"
                         android:hint="Pickup Location"
-                        android:inputType="textAutoComplete"
+                        android:editable="false"
+                        android:inputType="none"
                         android:padding="@dimen/margin_10"
                         android:singleLine="true"
                         android:textColorHint="@color/black_light"
@@ -132,9 +136,9 @@
                         android:visibility="visible" />
 
                 </RelativeLayout>
-            </android.support.v7.widget.CardView>
+            </androidx.cardview.widget.CardView>
 
-            <android.support.v7.widget.CardView
+            <androidx.cardview.widget.CardView
                 android:id="@+id/card_drop"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -158,7 +162,8 @@
                         android:layout_toLeftOf="@id/close22"
                         android:background="@color/white_full"
                         android:hint="Destination"
-                        android:inputType="textAutoComplete"
+                        android:editable="false"
+                        android:inputType="none"
                         android:padding="@dimen/padding_10"
                         android:singleLine="true"
                         android:textColorHint="@color/black_light"
@@ -175,9 +180,9 @@
                         android:visibility="visible" />
 
                 </RelativeLayout>
-            </android.support.v7.widget.CardView>
+            </androidx.cardview.widget.CardView>
 
-            <android.support.v7.widget.CardView
+            <androidx.cardview.widget.CardView
                 android:id="@+id/card_stops"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -276,7 +281,7 @@
                         android:textSize="@dimen/text_mediumsize"
                         android:visibility="gone" />
 
-                    <android.support.v7.widget.RecyclerView
+                    <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/rv_loc"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -306,12 +311,12 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_below="@id/stopstatus"
-                        android:layout_marginBottom="@dimen/margin_05"
                         android:layout_marginTop="@dimen/margin_10"
+                        android:layout_marginBottom="@dimen/margin_05"
                         android:background="@color/green"
                         android:checked="false"
                         android:text="Car Is Manual Transmission"
-                        android:textColor="@color/white_full"
+                        android:textColor="#000000"
                         android:textSize="@dimen/text_mediumsize"
                         android:visibility="visible" />
 
@@ -323,7 +328,7 @@
                         android:background="@color/black_light"
                         android:visibility="visible" />
                 </RelativeLayout>
-            </android.support.v7.widget.CardView>
+            </androidx.cardview.widget.CardView>
 
             <RelativeLayout
                 android:id="@+id/rl_payment"
@@ -362,7 +367,7 @@
                     android:textSize="@dimen/text_mediumsize" />
             </RelativeLayout>
 
-            <android.support.v7.widget.CardView
+            <androidx.cardview.widget.CardView
                 android:id="@+id/card_payment"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -485,7 +490,7 @@
                 </RelativeLayout>
 
 
-            </android.support.v7.widget.CardView>
+            </androidx.cardview.widget.CardView>
 
 
 
@@ -678,7 +683,7 @@
 
             </RelativeLayout>
 
-            <android.support.v7.widget.RecyclerView
+            <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_loc_cards"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

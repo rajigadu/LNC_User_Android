@@ -1,8 +1,8 @@
 package com.latenightchauffeurs.adapter;
 
 import android.content.Context;
-import android.content.Intent;
-import android.support.v7.widget.RecyclerView;
+
+import androidx.recyclerview.widget.RecyclerView;
 import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,7 +14,6 @@ import com.latenightchauffeurs.R;
 import com.latenightchauffeurs.Utils.Utils;
 import com.latenightchauffeurs.model.modelItem;
 
-import java.io.Serializable;
 import java.util.HashMap;
 import java.util.List;
 

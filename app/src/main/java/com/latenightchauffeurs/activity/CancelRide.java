@@ -3,8 +3,8 @@ package com.latenightchauffeurs.activity;
 import android.content.Context;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
@@ -19,7 +19,6 @@ import com.latenightchauffeurs.R;
 import com.latenightchauffeurs.Utils.ConstVariable;
 import com.latenightchauffeurs.Utils.JsonPost;
 import com.latenightchauffeurs.Utils.OnlineRequest;
-import com.latenightchauffeurs.Utils.Utils;
 import com.latenightchauffeurs.model.SavePref;
 
 import java.util.HashMap;
@@ -101,7 +100,7 @@ public class CancelRide extends AppCompatActivity implements View.OnClickListene
         if (!data.get("amount").toString().equalsIgnoreCase("") && !data.get("amount").toString().equalsIgnoreCase("null")) {
             LayoutInflater inflater = LayoutInflater.from(context);
             final View dialogLayout = inflater.inflate(R.layout.alert_dialog6, null);
-            final android.support.v7.app.AlertDialog dialog = new android.support.v7.app.AlertDialog.Builder(context).create();
+            final androidx.appcompat.app.AlertDialog dialog = new androidx.appcompat.app.AlertDialog.Builder(context).create();
             dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
             dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
             dialog.setView(dialogLayout);

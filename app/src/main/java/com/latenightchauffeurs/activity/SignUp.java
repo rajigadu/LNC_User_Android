@@ -1,14 +1,12 @@
 package com.latenightchauffeurs.activity;
 
 import android.annotation.SuppressLint;
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -315,6 +313,7 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener, G
     }
 
     public void onActivityResult(int reqCode, int resultCode, Intent data) {
+        super.onActivityResult(reqCode, resultCode, data);
         if (resultCode == RESULT_OK) {
 //            Debug.printToast("Result Code is OK", getApplicationContext());
 

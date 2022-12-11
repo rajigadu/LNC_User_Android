@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <attr format="reference" name="accountsAndroidPaySetupText"/>
+    <attr format="reference" name="accountsDisclaimerTextViewText"/>
+    <attr format="reference" name="accountsDisclaimerTextViewTextColor"/>
+    <attr format="reference" name="accountsDisclaimerTextViewTextSize"/>
+    <attr format="reference" name="accountsListBackgroundColor"/>
+    <attr format="reference" name="accountsListItemAccessoryColor"/>
+    <attr format="reference" name="accountsListItemBackgroundColor"/>
+    <attr format="reference" name="accountsListItemDefaultTextColor"/>
+    <attr format="reference" name="accountsListItemTextColor"/>
+    <attr format="reference" name="accountsListItemTextSize"/>
+    <attr format="reference" name="confirmationActionButtonTextColor"/>
+    <attr format="reference" name="confirmationDividerColor"/>
+    <attr format="reference" name="confirmationTitleTextColor"/>
+    <attr format="reference" name="consumerActionButtonBackgroundColor"/>
+    <attr format="reference" name="consumerActionButtonTextColor"/>
+    <attr format="reference" name="consumerActionButtonTextSize"/>
+    <attr format="reference" name="consumerCardExpirationDateTextSize"/>
+    <attr format="reference" name="consumerCardNumberTextSize"/>
+    <attr format="reference" name="consumerDividerColor"/>
+    <attr format="reference" name="consumerFieldsBackgroundColor"/>
+    <attr format="reference" name="consumerFieldsTextColor"/>
+    <attr format="reference" name="consumerFieldsTextSize"/>
+    <attr format="reference" name="consumerFontBold"/>
+    <attr format="reference" name="consumerFontLight"/>
+    <attr format="reference" name="consumerFontMedium"/>
+    <attr format="reference" name="consumerFontRegular"/>
+    <attr format="reference" name="consumerHeaderTextViewTextColor"/>
+    <attr format="reference" name="consumerHeaderTextViewTextSize"/>
+    <attr format="reference|color" name="consumerSpinningIndicatorColor"/>
+    <attr format="reference" name="consumerToolbarBackgroundColor"/>
+    <attr format="reference" name="consumerToolbarNavItemTextSize"/>
+    <attr format="reference" name="consumerToolbarTextColor"/>
+    <attr format="reference" name="consumerToolbarTitleTextSize"/>
+    <attr format="reference" name="consumerUiBackgroundColor"/>
+    <attr format="reference" name="editAccountDefaultExplanationTextColor"/>
+    <attr format="reference" name="editAccountDefaultExplanationTextSize"/>
+    <attr format="reference" name="editAccountDisableTextColor"/>
+    <bool name="is_phone">true</bool>
+    <color name="color_accent">#D48E30</color>
+    <color name="color_amex_end">#7fd7b1</color>
+    <color name="color_amex_start">#47c58f</color>
+    <color name="color_blue">#0076ff</color>
+    <color name="color_blue_three">#5B8BC5</color>
+    <color name="color_blue_two">#224179</color>
+    <color name="color_diners_end">#6c6967</color>
+    <color name="color_diners_start">#2c2825</color>
+    <color name="color_discover_end">#ff904d</color>
+    <color name="color_discover_start">#ff6000</color>
+    <color name="color_divider">#C8C7CC</color>
+    <color name="color_gray">#EFEFF4</color>
+    <color name="color_gray_dark">#8A9499</color>
+    <color name="color_gray_light">#C7C7CC</color>
+    <color name="color_gray_light_two">#c0c5c7</color>
+    <color name="color_green">#59d78d</color>
+    <color name="color_initial_end">#d9d9da</color>
+    <color name="color_initial_start">#c8c9ca</color>
+    <color name="color_jcb_end">#a4a4a5</color>
+    <color name="color_jcb_start">#7c7c7e</color>
+    <color name="color_maestro_end">#ff4d66</color>
+    <color name="color_maestro_start">#ff0024</color>
+    <color name="color_mastercard_end">#dfc78a</color>
+    <color name="color_mastercard_start">#d1af58</color>
+    <color name="color_primary">#384147</color>
+    <color name="color_primary_dark">#2C3336</color>
+    <color name="color_red">#ff3b30</color>
+    <color name="color_visa_end">#4d91c9</color>
+    <color name="color_visa_start">#0061b2</color>
+    <declare-styleable name="ConsumerTextView"><attr format="reference" name="font"/></declare-styleable>
+    <dimen name="height_accounts_container">200dp</dimen>
+    <dimen name="height_card_field_container">50dp</dimen>
+    <dimen name="height_card_type">50dp</dimen>
+    <dimen name="height_new_card_container">175dp</dimen>
+    <dimen name="margin_medium">10dp</dimen>
+    <dimen name="margin_small">8dp</dimen>
+    <dimen name="margin_x_small">5dp</dimen>
+    <dimen name="margin_xx_large">20dp</dimen>
+    <dimen name="no_padding">0dp</dimen>
+    <dimen name="padding_medium">10dp</dimen>
+    <dimen name="padding_small">8dp</dimen>
+    <dimen name="padding_x_large">15dp</dimen>
+    <dimen name="padding_x_large_two">16dp</dimen>
+    <dimen name="padding_x_small">5dp</dimen>
+    <dimen name="padding_xx_large">20dp</dimen>
+    <dimen name="padding_xxx_large">25dp</dimen>
+    <dimen name="padding_xxxx_large">45dp</dimen>
+    <dimen name="radius_new_card">15dp</dimen>
+    <dimen name="text_size_large">20sp</dimen>
+    <dimen name="text_size_medium">18sp</dimen>
+    <dimen name="text_size_small">16sp</dimen>
+    <dimen name="text_size_x_small">14sp</dimen>
+    <dimen name="text_size_xx_small">8sp</dimen>
+    <dimen name="width_button_add_account">200dp</dimen>
+    <dimen name="width_button_save_account">200dp</dimen>
+    <dimen name="width_card_type">50dp</dimen>
+    <dimen name="width_confirmation_action_button">150dp</dimen>
+    <dimen name="width_confirmation_detail_container">300dp</dimen>
+    <dimen name="width_new_card_container">275dp</dimen>
+    <string name="accounts_add_new_card_text">Add New Account</string>
+    <string name="accounts_confirm_delete_text">Confirm Delete</string>
+    <string name="accounts_default_text">Default</string>
+    <string name="accounts_default_with_format_text">%1$20s</string>
+    <string name="accounts_delete_account_text">Do you want to delete this account?</string>
+    <string name="accounts_edit_text">Edit</string>
+    <string name="accounts_not_found_text">You do not have any payment methods</string>
+    <string name="accounts_pay_setup_text">Want to use Android Pay instead?\n Set it up using the Android Pay
+        app, and you\'ll be all set to pay.
+    </string>
+    <string name="accounts_pay_with_android_text">Pay with AndroidPay:</string>
+    <string name="accounts_payment_methods_text">Payment Methods</string>
+    <string name="accounts_read_terms_text">Put some explanatory text here. Tell the user about whatever legal stuff
+        you need to.
+    </string>
+    <string name="accounts_text">Accounts</string>
+    <string name="app_name">CardConnectSdk</string>
+    <string name="back_text">Back</string>
+    <string name="battery_low_error">Battery low error</string>
+    <string name="card_details_text">Card Details</string>
+    <string name="confirmation_activity_android_pay_comm_error">An error occurred trying to communicate with
+        Android Pay. Please try again or use another payment method.
+    </string>
+    <string name="confirmation_activity_order_text">Confirm Order</string>
+    <string name="confirmation_activity_title">Payment Confirmation</string>
+    <string name="create_account_billing_info_text">Billing Address</string>
+    <string name="create_account_card_invalid_text">Your card is invalid</string>
+    <string name="create_account_card_number_text">Card Number</string>
+    <string name="create_account_city_text">City</string>
+    <string name="create_account_contact_info_text">Contact Info</string>
+    <string name="create_account_cvv_hint_text">Required</string>
+    <string name="create_account_cvv_text">Cvv</string>
+    <string name="create_account_email_text">Email</string>
+    <string name="create_account_expiration_date_text">Expiration Date</string>
+    <string name="create_account_name_text">Name</string>
+    <string name="create_account_optional_hint_text">Optional</string>
+    <string name="create_account_phone_text">Phone</string>
+    <string name="create_account_required_hint_text">Required</string>
+    <string name="create_account_single_dot_text">\u2022</string>
+    <string name="create_account_state_text">State</string>
+    <string name="create_account_street_text">Street</string>
+    <string name="create_account_swipe_to_add_card">Swipe to add Card</string>
+    <string name="create_account_text">Create Account</string>
+    <string name="create_account_zip_text">Postal Code</string>
+    <string name="device_comm_error">Device communication error</string>
+    <string name="edit_account_card_invalid_expiration_date_text">Please set a valid expiration date.</string>
+    <string name="edit_account_default_account_explanation_text">To change the default card, set the new card
+        as default.
+    </string>
+    <string name="edit_account_save_text">Save</string>
+    <string name="edit_account_set_default_text">Set as Default Card</string>
+    <string name="edit_account_text">Edit Account</string>
+    <string name="ellipsis_text">\u2022 \u2022 \u2022 \u2022</string>
+    <string name="error">Error</string>
+    <string name="failed">Failed</string>
+    <string name="no_connection_error">No internet connection</string>
+    <string name="no_update_required">No update required</string>
+    <string name="poppins_bold">Poppins-Bold.ttf</string>
+    <string name="poppins_light">Poppins-Light.ttf</string>
+    <string name="poppins_medium">Poppins-Medium.ttf</string>
+    <string name="poppins_regular">Poppins-Regular.ttf</string>
+    <string name="remote_config_update_result">"Remote config update result: "</string>
+    <string name="remote_firmware_update_result">"Remote firmware update result: "</string>
+    <string name="remote_key_injection_result">"Remote key injection result: "</string>
+    <string name="server_comm_error">Server communication error</string>
+    <string name="setup_error">Setup error</string>
+    <string name="stopped">Stopped</string>
+    <string name="success">Success</string>
+    <string name="swiper_not_connected">Swiper Not Connected</string>
+    <style name="AppConsumerTheme.NoActionBar" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/color_primary</item>
+        <item name="colorPrimaryDark">@color/color_primary_dark</item>
+        <item name="colorAccent">@color/color_green</item>
+        <!--Setting general theme attributes-->
+        <item name="consumerUiBackgroundColor">@color/color_gray</item>
+        <item name="consumerToolbarBackgroundColor">@color/color_primary</item>
+        <item name="consumerToolbarTextColor">@android:color/white</item>
+        <item name="consumerToolbarNavItemTextSize">@dimen/text_size_small</item>
+        <item name="consumerToolbarTitleTextSize">@dimen/text_size_large</item>
+
+        <item name="consumerHeaderTextViewTextColor">@color/color_gray_dark</item>
+        <item name="consumerHeaderTextViewTextSize">@dimen/text_size_x_small</item>
+
+        <item name="consumerSpinningIndicatorColor">@color/color_green</item>
+
+        <item name="consumerActionButtonTextColor">@android:color/white</item>
+        <item name="consumerActionButtonTextSize">@dimen/text_size_small</item>
+        <item name="consumerActionButtonBackgroundColor">@color/color_green</item>
+        <item name="consumerDividerColor">@color/color_divider</item>
+
+        <item name="consumerFieldsTextColor">@color/color_primary</item>
+        <item name="consumerFieldsTextSize">@dimen/text_size_x_small</item>
+        <item name="consumerFieldsBackgroundColor">@android:color/white</item>
+
+        <item name="consumerCardNumberTextSize">@dimen/text_size_medium</item>
+        <item name="consumerCardExpirationDateTextSize">@dimen/text_size_x_small</item>
+
+        <item name="consumerFontBold">@string/poppins_bold</item>
+        <item name="consumerFontLight">@string/poppins_light</item>
+        <item name="consumerFontMedium">@string/poppins_medium</item>
+        <item name="consumerFontRegular">@string/poppins_regular</item>
+
+        <!--Accounts UI-->
+        <item name="accountsDisclaimerTextViewTextColor">@color/color_gray_dark</item>
+        <item name="accountsDisclaimerTextViewTextSize">@dimen/text_size_x_small</item>
+        <item name="accountsDisclaimerTextViewText">@string/accounts_read_terms_text</item>
+
+        <item name="accountsListBackgroundColor">@android:color/white</item>
+        <item name="accountsListItemBackgroundColor">@android:color/transparent</item>
+        <item name="accountsListItemAccessoryColor">@color/color_gray_light</item>
+        <item name="accountsListItemTextColor">@color/color_primary</item>
+        <item name="accountsListItemDefaultTextColor">@color/color_blue</item>
+        <item name="accountsListItemTextSize">@dimen/text_size_x_small</item>
+
+        <!--Android Pay if Available-->
+        <item name="accountsAndroidPaySetupText">@string/accounts_pay_setup_text</item>
+        <item name="confirmationActionButtonTextColor">@color/color_green</item>
+        <item name="confirmationTitleTextColor">@color/color_primary</item>
+        <item name="confirmationDividerColor">@color/color_primary</item>
+
+        <!--Edit Account-->
+        <item name="editAccountDisableTextColor">@color/color_gray_light_two</item>
+        <item name="editAccountDefaultExplanationTextColor">@color/color_gray_dark</item>
+        <item name="editAccountDefaultExplanationTextSize">@dimen/text_size_x_small</item>
+
+    </style>
+    <style name="AppConsumerTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light"/>
+    <style name="AppConsumerTheme.Translucent" parent="AppConsumerTheme.NoActionBar">
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:colorBackgroundCacheHint">@null</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:backgroundDimEnabled">true</item>
+        <item name="android:windowAnimationStyle">@android:style/Animation</item>
+
+    </style>
+    <style name="ConfirmationWalletFragmentDetailsButtonTextAppearance" parent="Base.TextAppearance.AppCompat.Button">
+        <item name="android:textColor">@color/color_primary</item>
+    </style>
+    <style name="ConfirmationWalletFragmentDetailsHeaderTextAppearance" parent="ConfirmationWalletFragmentDetailsTextAppearance">
+        <item name="android:textStyle">bold</item>
+    </style>
+    <style name="ConfirmationWalletFragmentDetailsTextAppearance">
+        <item name="android:textColor">@color/color_primary</item>
+        <item name="android:textSize">@dimen/text_size_x_small</item>
+        <item name="android:textStyle">normal</item>
+    </style>
+</resources>

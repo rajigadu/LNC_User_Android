@@ -14,17 +14,18 @@ import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.design.internal.NavigationMenuView;
-import android.support.design.widget.NavigationView;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
-import android.support.v4.view.GravityCompat;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.DividerItemDecoration;
-import android.support.v7.widget.Toolbar;
+
+import com.google.android.material.internal.NavigationMenuView;
+import com.google.android.material.navigation.NavigationView;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.appcompat.widget.Toolbar;
 import android.text.Html;
 import android.util.Base64;
 import android.util.Log;
@@ -37,7 +38,6 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.facebook.AccessToken;
 import com.facebook.GraphRequest;
@@ -793,7 +793,7 @@ public class Navigation extends AppCompatActivity implements NavigationView.OnNa
     public static void showCancelRideStatusDialog(String mtitle, String dlgText, Context mcontext) {
         LayoutInflater inflater = LayoutInflater.from(mcontext);
         final View dialogLayout = inflater.inflate(R.layout.alert_dialog1, null);
-        final android.support.v7.app.AlertDialog dialog = new android.support.v7.app.AlertDialog.Builder(mcontext, android.R.style.Theme_Material_Dialog_Alert).create();
+        final androidx.appcompat.app.AlertDialog dialog = new androidx.appcompat.app.AlertDialog.Builder(mcontext, android.R.style.Theme_Material_Dialog_Alert).create();
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
         dialog.setView(dialogLayout);

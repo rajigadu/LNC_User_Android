@@ -1,12 +1,11 @@
 package com.latenightchauffeurs.adapter;
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.widget.RecyclerView;
+import androidx.appcompat.app.AlertDialog;
+import androidx.recyclerview.widget.RecyclerView;
 import android.text.Html;
 import android.text.TextUtils;
 import android.util.Log;
@@ -25,24 +24,10 @@ import com.latenightchauffeurs.Utils.JsonPost;
 import com.latenightchauffeurs.Utils.ServiceApi;
 import com.latenightchauffeurs.Utils.ServiceGenerator;
 import com.latenightchauffeurs.Utils.Utils;
-import com.latenightchauffeurs.activity.ActivityChat;
 import com.latenightchauffeurs.activity.ActivityEditBookingInfo;
-import com.latenightchauffeurs.activity.AddAddress;
-import com.latenightchauffeurs.activity.CardsList;
-import com.latenightchauffeurs.activity.Forgot;
-import com.latenightchauffeurs.activity.Navigation;
-import com.latenightchauffeurs.activity.Rating;
-import com.latenightchauffeurs.activity.SignUp;
-import com.latenightchauffeurs.activity.SocialSignUp;
 import com.latenightchauffeurs.activity.StopLocationsList;
-import com.latenightchauffeurs.activity.UserLocation;
 import com.latenightchauffeurs.activity.ViewAvailableRide;
 import com.latenightchauffeurs.activity.ViewRideDetails;
-import com.latenightchauffeurs.fragment.BookReservation_new;
-import com.latenightchauffeurs.fragment.Cards;
-import com.latenightchauffeurs.fragment.DashBorad;
-import com.latenightchauffeurs.fragment.DropAddressList;
-import com.latenightchauffeurs.fragment.Home;
 import com.latenightchauffeurs.model.SavePref;
 import com.latenightchauffeurs.model.modelItem;
 
@@ -58,9 +43,6 @@ import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-
-import static com.latenightchauffeurs.fragment.BookReservation_new.bookingAsap;
-import static com.latenightchauffeurs.fragment.BookReservation_new.mContext;
 
 /**
  * Created by Lenovo on 2/18/2017.

@@ -7,7 +7,7 @@
     android:background="@drawable/color_bg"
     android:orientation="vertical"
     android:visibility="visible"
-    app:layout_behavior="android.support.design.widget.BottomSheetBehavior">
+    app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
 
     <TextView
         android:id="@+id/ridestatus"
@@ -22,7 +22,7 @@
         android:textStyle="bold"
         android:visibility="gone" />
 
-    <android.support.v7.widget.CardView
+    <androidx.cardview.widget.CardView
         android:id="@+id/card_driver"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -220,5 +220,5 @@
             </LinearLayout>
 
         </RelativeLayout>
-    </android.support.v7.widget.CardView>
+    </androidx.cardview.widget.CardView>
 </RelativeLayout>

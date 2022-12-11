@@ -24,9 +24,9 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Build;
-import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
-import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
-import android.support.v7.widget.AppCompatCheckBox;
+import androidx.core.graphics.drawable.RoundedBitmapDrawable;
+import androidx.core.graphics.drawable.RoundedBitmapDrawableFactory;
+import androidx.appcompat.widget.AppCompatCheckBox;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -51,7 +51,6 @@ import com.latenightchauffeurs.model.SavePref;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
-import com.nostra13.universalimageloader.core.assist.ImageScaleType;
 import com.nostra13.universalimageloader.core.display.CircleBitmapDisplayer;
 import com.nostra13.universalimageloader.core.display.RoundedBitmapDisplayer;
 import com.squareup.picasso.Picasso;
@@ -80,7 +79,6 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import android.location.Address;
 import android.location.Geocoder;
-import android.location.Location;
 
 import com.google.android.gms.maps.model.LatLng;
 /**
@@ -230,7 +228,7 @@ public class Utils {
 
         LayoutInflater inflater = LayoutInflater.from(Utils.context);
         final View dialogLayout = inflater.inflate(R.layout.alert_dialog1, null);
-        final android.support.v7.app.AlertDialog dialog = new android.support.v7.app.AlertDialog.Builder(Utils.context).create();
+        final androidx.appcompat.app.AlertDialog dialog = new androidx.appcompat.app.AlertDialog.Builder(Utils.context).create();
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
         dialog.setView(dialogLayout);

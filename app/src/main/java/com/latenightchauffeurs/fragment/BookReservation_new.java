@@ -1,6 +1,8 @@
 package com.latenightchauffeurs.fragment;
 
-import android.Manifest;
+import static android.app.Activity.RESULT_CANCELED;
+import static android.app.Activity.RESULT_OK;
+
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.DatePickerDialog;
@@ -10,33 +12,31 @@ import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Point;
 import android.graphics.drawable.ColorDrawable;
 import android.location.Geocoder;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v4.app.DialogFragment;
-import android.support.v4.app.Fragment;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.widget.CardView;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.DialogFragment;
+import androidx.fragment.app.Fragment;
+import androidx.appcompat.app.AlertDialog;
+import androidx.cardview.widget.CardView;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.text.format.DateFormat;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
-import android.widget.AdapterView;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -52,13 +52,14 @@ import com.daimajia.androidanimations.library.Techniques;
 import com.daimajia.androidanimations.library.YoYo;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.gms.common.api.PendingResult;
-import com.google.android.gms.common.api.ResultCallback;
-import com.google.android.gms.location.places.Place;
-import com.google.android.gms.location.places.PlaceBuffer;
-import com.google.android.gms.location.places.Places;
+import com.google.android.gms.common.api.Status;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
+import com.google.android.libraries.places.api.Places;
+import com.google.android.libraries.places.api.model.Place;
+import com.google.android.libraries.places.widget.Autocomplete;
+import com.google.android.libraries.places.widget.AutocompleteActivity;
+import com.google.android.libraries.places.widget.model.AutocompleteActivityMode;
 import com.latenightchauffeurs.R;
 import com.latenightchauffeurs.Utils.APIClient;
 import com.latenightchauffeurs.Utils.APIInterface;
@@ -71,19 +72,13 @@ import com.latenightchauffeurs.Utils.ParsingHelper;
 import com.latenightchauffeurs.Utils.ServiceApi;
 import com.latenightchauffeurs.Utils.ServiceGenerator;
 import com.latenightchauffeurs.Utils.Utils;
-import com.latenightchauffeurs.activity.AddCard;
 import com.latenightchauffeurs.activity.AddStops;
-import com.latenightchauffeurs.activity.CancelFutureRide;
 import com.latenightchauffeurs.activity.CardsList;
 import com.latenightchauffeurs.activity.DropAddressList;
 import com.latenightchauffeurs.activity.Navigation;
-import com.latenightchauffeurs.activity.ViewRideDetails;
-import com.latenightchauffeurs.adapter.CardsList2Adapter;
-import com.latenightchauffeurs.adapter.CardsListAdapter;
 import com.latenightchauffeurs.adapter.PlaceArrayAdapter;
 import com.latenightchauffeurs.adapter.StopsAddressAdapter;
 import com.latenightchauffeurs.model.GApiKeyPojo;
-import com.latenightchauffeurs.model.GPSTracker;
 import com.latenightchauffeurs.model.ItemCardList;
 import com.latenightchauffeurs.model.SavePref;
 import com.latenightchauffeurs.model.modelItem;
@@ -97,8 +92,8 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
-import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
@@ -114,9 +109,12 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+@SuppressLint("ClickableViewAccessibility")
 public class BookReservation_new extends Fragment implements View.OnClickListener, GoogleApiClient.OnConnectionFailedListener,
         GoogleApiClient.ConnectionCallbacks, IonListners {
     private static final String TAG = "BookReservation_new";
+    private static int AUTOCOMPLETE_DROP_REQUEST_CODE = 999;
+    private static int AUTOCOMPLETE_PICK_REQUEST_CODE = 901;
 
     public Call<ResponseBody> call = null;
     public APIInterface apiInterface = APIClient.getClientVO().create(APIInterface.class);
@@ -337,85 +335,77 @@ public class BookReservation_new extends Fragment implements View.OnClickListene
     @Override
     public void onViewCreated(View v, Bundle savedInstanceState) {
         super.onViewCreated(v, savedInstanceState);
-        unbinder = ButterKnife.bind(this, v);
 
+        initBinding(v);
 
-        rv_loc = v.findViewById(R.id.rv_loc);
-        date = v.findViewById(R.id.date);
-        time = v.findViewById(R.id.time);
+        setOnClickListener();
 
-        mContext = getContext();
-        Instance = this;
+        cardList();
 
-        rv_loc.setHasFixedSize(true);
-        rv_loc.setLayoutManager(new LinearLayoutManager(mContext, LinearLayoutManager.VERTICAL, false));
+        /**
+         *  Commented due  to code deprecated and not working.
+         */
+        /*Utils.global.mGoogleApiClient_pickup = new GoogleApiClient.Builder(getActivity())
+                .addApi(Places.GEO_DATA_API)
+                .enableAutoManage(getActivity(), GOOGLE_API_CLIENT_ID_PICK, this)
+                .addConnectionCallbacks(this)
+                .build();
 
+        Utils.global.mGoogleApiClient_drop = new GoogleApiClient.Builder(getActivity())
+                .addApi(Places.GEO_DATA_API)
+                .enableAutoManage(getActivity(), GOOGLE_API_CLIENT_ID_DROP, this)
+                .addConnectionCallbacks(this)
+                .build();
 
-        rv_locCard = v.findViewById(R.id.rv_loc_cards);
-        requestsListManCard = new LinearLayoutManager(mContext, LinearLayoutManager.VERTICAL, false);
-        rv_locCard.setHasFixedSize(true);
-        rv_locCard.setLayoutManager(requestsListManCard);
+        pickupLoc.setThreshold(3);
+        pickupLoc.setOnItemClickListener(mAutocompleteClickListener_pick);
+        mPlaceArrayAdapter_pickup = new PlaceArrayAdapter(getActivity(), android.R.layout.simple_list_item_1,
+                BOUNDS_MOUNTAIN_VIEW, null);
+        pickupLoc.setAdapter(mPlaceArrayAdapter_pickup);
 
-//        requestsAdapterCard = new MyRewardProgramAdapter(mContext, requestsListCard, rv_locCard, R.layout.card_rowitem, ConstVariable.CurrentRides);
+        dropLoc.setThreshold(3);
+        dropLoc.setOnItemClickListener(mAutocompleteClickListener_drop);
+        mPlaceArrayAdapter_drop = new PlaceArrayAdapter(getActivity(), android.R.layout.simple_list_item_1,
+                BOUNDS_MOUNTAIN_VIEW, null);
+        dropLoc.setAdapter(mPlaceArrayAdapter_drop);
+        dropLoc.setText("");*/
 
-        requestsAdapterCard = new MyRewardProgramAdapter(getActivity(), itemCardLists);
-        rv_locCard.setAdapter(requestsAdapterCard);
+        if (car_ManualT.isChecked()) {
+            isCarML = "manual";
+        } else {
+            isCarML = "automatic";
+        }
 
-        rv_locCard.setVisibility(View.GONE);
+    }
 
-        aSwitch = (Switch) v.findViewById(R.id.addcard_top);
-        relativeLayoutCardContainer = (RelativeLayout) v.findViewById(R.id.m_reative);
+    private void setOnClickListener() {
 
-        relativeLayoutCardContainer.setVisibility(View.GONE);
+        buttonSubmit.setOnClickListener(v -> {
 
-        aSwitch.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (aSwitch.isChecked() == true) {
-                    relativeLayoutCardContainer.setVisibility(View.VISIBLE);
-                } else {
-                    relativeLayoutCardContainer.setVisibility(View.GONE);
-                }
-            }
-        });
-
-        editTextCardName = (EditText) v.findViewById(R.id.card_name);
-        editTextCardNumber = (EditText) v.findViewById(R.id.card_number);
-        editTextExpiryDate = (EditText) v.findViewById(R.id.button678789789);
-        editTextCVV = (EditText) v.findViewById(R.id.button675768);
-        editTextPostalCode = (EditText) v.findViewById(R.id.button423435);
-
-        buttonSubmit = (Button) v.findViewById(R.id.submit_card);
-
-        buttonSubmit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                if (
-                        !editTextCardName.getText().toString().equalsIgnoreCase("") ||
-                                !editTextCardNumber.getText().toString().equalsIgnoreCase("") ||
-                                !editTextExpiryDate.getText().toString().equalsIgnoreCase("") ||
-                                !editTextCVV.getText().toString().equalsIgnoreCase("") ||
-                                !editTextPostalCode.getText().toString().equalsIgnoreCase("")
+            if (
+                    !editTextCardName.getText().toString().equalsIgnoreCase("") ||
+                            !editTextCardNumber.getText().toString().equalsIgnoreCase("") ||
+                            !editTextExpiryDate.getText().toString().equalsIgnoreCase("") ||
+                            !editTextCVV.getText().toString().equalsIgnoreCase("") ||
+                            !editTextPostalCode.getText().toString().equalsIgnoreCase("")
 //                                    ||
 //                                    !editTextCVV.getText().toString().equalsIgnoreCase("")
-                ) {
+            ) {
 
 
-                    callRefreshMethod(
-                            editTextCardName.getText().toString(),
-                            editTextCardNumber.getText().toString(),
-                            editTextExpiryDate.getText().toString(),
-                            editTextCVV.getText().toString(),
-                            editTextPostalCode.getText().toString()
+                callRefreshMethod(
+                        editTextCardName.getText().toString(),
+                        editTextCardNumber.getText().toString(),
+                        editTextExpiryDate.getText().toString(),
+                        editTextCVV.getText().toString(),
+                        editTextPostalCode.getText().toString()
 
-                    );
+                );
 
 
-                } else {
+            } else {
 
-                    Toast.makeText(mContext, "All field is required!", Toast.LENGTH_SHORT).show();
-                }
+                Toast.makeText(mContext, "All field is required!", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -472,20 +462,15 @@ public class BookReservation_new extends Fragment implements View.OnClickListene
             }
         });
 
-        cardList();
-
-        btnApply.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (!etPromoName.getText().toString().trim().equals("")) {
-                    map = new HashMap<>();
-                    promoCode = etPromoName.getText().toString();
-                    map.put("promo", promoCode);
-                    OnlineRequest.applyPromo(mContext, map);
-                    Utils.hideSoftKeyboard(getActivity());
-                } else {
-                    Utils.toastTxt("Please Enter Promo Code", mContext);
-                }
+        btnApply.setOnClickListener(v12 -> {
+            if (!etPromoName.getText().toString().trim().equals("")) {
+                map = new HashMap<>();
+                promoCode = etPromoName.getText().toString();
+                map.put("promo", promoCode);
+                OnlineRequest.applyPromo(mContext, map);
+                Utils.hideSoftKeyboard(getActivity());
+            } else {
+                Utils.toastTxt("Please Enter Promo Code", mContext);
             }
         });
         car_ManualT.setOnClickListener(this);
@@ -498,7 +483,6 @@ public class BookReservation_new extends Fragment implements View.OnClickListene
         dropLoc.setOnClickListener(this);
         close11.setOnClickListener(this);
         close22.setOnClickListener(this);
-//        etBookingType.setOnClickListener(this);
         date.setOnClickListener(this);
         time.setOnClickListener(this);
         car_ManualT.setOnClickListener(this);
@@ -556,7 +540,7 @@ public class BookReservation_new extends Fragment implements View.OnClickListene
             eyear.setVisibility(View.VISIBLE);
         }
 
-        pickupLoc.addTextChangedListener(new TextWatcher() {
+        /*pickupLoc.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
 
@@ -596,59 +580,311 @@ public class BookReservation_new extends Fragment implements View.OnClickListene
             public void afterTextChanged(Editable s) {
 
             }
-        });
+        });*/
 
-        if (!cnumber.toString().equalsIgnoreCase("")) {
+        dropLoc.setOnClickListener(v -> initializeAutoCompleteFragment(AUTOCOMPLETE_DROP_REQUEST_CODE));
+
+        pickupLoc.setOnClickListener(v -> initializeAutoCompleteFragment(AUTOCOMPLETE_PICK_REQUEST_CODE));
+
+        if (!cnumber.equalsIgnoreCase("")) {
             card_number.setText(cnumber);
             payment_Id = cid;
         }
-        if (!cmonth.toString().equalsIgnoreCase("")) {
+        if (!cmonth.equalsIgnoreCase("")) {
             emonth.setText(cmonth);
         }
-        if (!cyear.toString().equalsIgnoreCase("")) {
+        if (!cyear.equalsIgnoreCase("")) {
             eyear.setText(cyear);
         }
+    }
 
-        Utils.global.mGoogleApiClient_pickup = new GoogleApiClient.Builder(getActivity())
-                .addApi(Places.GEO_DATA_API)
-                .enableAutoManage(getActivity(), GOOGLE_API_CLIENT_ID_PICK, this)
-                .addConnectionCallbacks(this)
-                .build();
+    private void initBinding(View v) {
+        buttonSubmit = v.findViewById(R.id.submit_card);
+        unbinder = ButterKnife.bind(this, v);
+        rv_loc = v.findViewById(R.id.rv_loc);
+        date = v.findViewById(R.id.date);
+        time = v.findViewById(R.id.time);
+        mContext = getContext();
+        Instance = this;
+        rv_loc.setHasFixedSize(true);
+        rv_loc.setLayoutManager(new LinearLayoutManager(mContext, LinearLayoutManager.VERTICAL, false));
+        rv_locCard = v.findViewById(R.id.rv_loc_cards);
+        requestsListManCard = new LinearLayoutManager(mContext, LinearLayoutManager.VERTICAL, false);
+        rv_locCard.setHasFixedSize(true);
+        rv_locCard.setLayoutManager(requestsListManCard);
+        requestsAdapterCard = new MyRewardProgramAdapter(getActivity(), itemCardLists);
+        rv_locCard.setAdapter(requestsAdapterCard);
 
-        Utils.global.mGoogleApiClient_drop = new GoogleApiClient.Builder(getActivity())
-                .addApi(Places.GEO_DATA_API)
-                .enableAutoManage(getActivity(), GOOGLE_API_CLIENT_ID_DROP, this)
-                .addConnectionCallbacks(this)
-                .build();
+        rv_locCard.setVisibility(View.GONE);
 
-        pickupLoc.setThreshold(3);
-        pickupLoc.setOnItemClickListener(mAutocompleteClickListener_pick);
-        mPlaceArrayAdapter_pickup = new PlaceArrayAdapter(getActivity(), android.R.layout.simple_list_item_1,
-                BOUNDS_MOUNTAIN_VIEW, null);
-        pickupLoc.setAdapter(mPlaceArrayAdapter_pickup);
+        aSwitch = v.findViewById(R.id.addcard_top);
+        relativeLayoutCardContainer = v.findViewById(R.id.m_reative);
 
-        dropLoc.setThreshold(3);
-        dropLoc.setOnItemClickListener(mAutocompleteClickListener_drop);
-        mPlaceArrayAdapter_drop = new PlaceArrayAdapter(getActivity(), android.R.layout.simple_list_item_1,
-                BOUNDS_MOUNTAIN_VIEW, null);
-        dropLoc.setAdapter(mPlaceArrayAdapter_drop);
-        dropLoc.setText("");
+        relativeLayoutCardContainer.setVisibility(View.GONE);
 
-        if (car_ManualT.isChecked()) {
-            isCarML = "manual";
-        } else {
-            isCarML = "automatic";
+        aSwitch.setOnClickListener(v1 -> {
+            if (aSwitch.isChecked() == true) {
+                relativeLayoutCardContainer.setVisibility(View.VISIBLE);
+            } else {
+                relativeLayoutCardContainer.setVisibility(View.GONE);
+            }
+        });
+
+        editTextCardName = v.findViewById(R.id.card_name);
+        editTextCardNumber = v.findViewById(R.id.card_number);
+        editTextExpiryDate = v.findViewById(R.id.button678789789);
+        editTextCVV = v.findViewById(R.id.button675768);
+        editTextPostalCode = v.findViewById(R.id.button423435);
+    }
+
+    private void initializeAutoCompleteFragment(int autocompletePickRequestCode) {
+        /** Initializing the Places API with the help of our API_KEY*/
+        if (!Places.isInitialized()) {
+            Places.initialize(
+                    getActivity().getApplicationContext(),
+                    getString(R.string.google_api_key));
         }
+        startAutoCompleteTextFragment(autocompletePickRequestCode);
+    }
 
-       /* pref1.SavePref(mContext);
-        String firstName = pref1.getUserFName();
-        String lastName = pref1.getUserLName();
-        String mobile = pref1.getMobile();
-        String email = pref1.getEmail();
-*/
-        //StringBuilder sb = new StringBuilder();
-        //rideCount = 1;
-        //isLocationPermissionEnabled();
+    private void startAutoCompleteTextFragment(int autocompletePickRequestCode) {
+        /**
+         * Set the fields to specify which types of place data to
+         * return after the user has made a selection.
+         * */
+        List<Place.Field> fields = Arrays.asList(
+                Place.Field.ID,
+                Place.Field.LAT_LNG,
+                Place.Field.ADDRESS,
+                Place.Field.NAME);
+
+        /**
+         * Start the autocomplete intent.
+         */
+        Intent intent = new Autocomplete.IntentBuilder(AutocompleteActivityMode.FULLSCREEN, fields)
+                .build(getActivity());
+        startActivityForResult(intent, autocompletePickRequestCode);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (resultCode == RESULT_OK) {
+            if (requestCode == 1) {
+                if (resultCode == RESULT_OK) {
+                    dropMap = new HashMap<>();
+
+                    dropMap = (HashMap<String, Object>) data.getSerializableExtra("map");
+
+                    if (dropMap != null && dropMap.size() > 0) {
+                        if (dropMap.containsKey("street_address") && !dropMap.get("street_address").toString().equalsIgnoreCase("")) {
+                            dropLoc.post(new Runnable() {
+                                public void run() {
+                                    dropLoc.dismissDropDown();
+                                }
+                            });
+
+                            //  dropLoc.setText(dropMap.get("street_address").toString());
+                        }
+
+                        if (dropMap.containsKey("notes") && !dropMap.get("notes").toString().equalsIgnoreCase("")) {
+                            etNote.setText(dropMap.get("notes").toString());
+                        }
+
+                        if (dropMap.containsKey("lat") && !dropMap.get("lat").toString().equalsIgnoreCase("")) {
+                            lat_drop = dropMap.get("lat").toString();
+                            long_drop = dropMap.get("lon").toString();
+                        }
+                    }
+                }
+                if (resultCode == RESULT_CANCELED) {
+
+                }
+            } else if (requestCode == 2) {
+                cardMap = new HashMap<>();
+                cardMap = (HashMap<String, Object>) data.getSerializableExtra("map");
+
+                if (cardMap != null && cardMap.size() > 0) {
+                    nodata.setVisibility(View.GONE);
+                    card_number.setVisibility(View.VISIBLE);
+                    emonthtitle.setVisibility(View.VISIBLE);
+                    emonth.setVisibility(View.VISIBLE);
+                    eyeartitle.setVisibility(View.VISIBLE);
+                    eyear.setVisibility(View.VISIBLE);
+
+                    if (cardMap.containsKey("token") && !cardMap.get("token").toString().
+                            equalsIgnoreCase("")) {
+                        card_number.setText("" + cardMap.get("token").toString());
+                        payment_Id = cardMap.get("token").toString();
+                    }
+
+                    if (cardMap.containsKey("expiry")) {
+                        if (cardMap.get("expiry").toString().length() >= 2) {
+                            String cc = cardMap.get("expiry").toString().substring(0, 2);
+                            emonth.setText(cc);
+                        }
+
+                        if (cardMap.get("expiry").toString().length() >= 4) {
+                            String substring = cardMap.get("expiry").toString().substring(Math.max(cardMap.get("expiry").toString().length() - 2, 0));
+                            eyear.setText(substring);
+                        }
+                    }
+
+
+//                    if (cardMap.containsKey("exp_month") && !cardMap.get("exp_month").toString().
+//                            equalsIgnoreCase("")) {
+//                        emonth.setText(cardMap.get("exp_month").toString());
+//                    }
+//                    if (cardMap.containsKey("exp_year") && !cardMap.get("exp_year").toString().
+//                            equalsIgnoreCase("")) {
+//                        eyear.setText(cardMap.get("exp_year").toString());
+//                    }
+
+                    SavePref pref1 = new SavePref();
+                    pref1.SavePref(mContext);
+                    pref1.setCardId(payment_Id);
+                    pref1.setCardNumber(card_number.getText().toString());
+                    pref1.setCardExMonth(emonth.getText().toString());
+                    pref1.setCardExYear(eyear.getText().toString());
+                }
+            } else if (requestCode == 3) {
+                stopsAddList = new ArrayList<>();
+                stopsAddList = (List<HashMap<String, Object>>) data.getSerializableExtra("map");
+                if (stopsAddList != null)
+                    loadRequestsList(mContext, stopsAddList, "");
+            }
+        }
+        if (requestCode == AUTOCOMPLETE_DROP_REQUEST_CODE) {
+            if (resultCode == RESULT_OK) {
+                Place place = Autocomplete.getPlaceFromIntent(data);
+                Log.i(TAG, "Place: " + place.getName() + ", " + place.getId()+ ", " + place.getLatLng());
+                dropLoc.setText(place.getAddress());
+
+                Geocoder geocoder = new Geocoder(mContext);
+                try {
+                    List<android.location.Address> addresses = geocoder.getFromLocation(place.getLatLng().latitude,
+                            place.getLatLng().longitude, 1);
+
+                    if (addresses != null && addresses.size() > 0) {
+                        if (addresses.get(0).getAddressLine(0) != null) {
+                            dropText = addresses.get(0).getAddressLine(0);
+                            Utils.e(Utils.Tag, " mcountryPick " + " cityName1 " + dropText);
+                        } else {
+                            dropText = dropLoc.getText().toString();
+                        }
+
+                        if (addresses.get(0).getCountryName() != null) {
+                            String cityName = addresses.get(0).getLocality();
+                            Utils.e(Utils.Tag, " mcountryDrop " + "  " + cityName);
+                            if (cityName != null && cityName.length() > 0)
+                                dropCityName = cityName;
+                        }
+                    } else {
+                        new Utils(mContext);
+                        Utils.toastTxt("No location found with these address.", mContext);
+                    }
+                } catch (Exception e) {e.printStackTrace();}
+                lat_drop = String.valueOf(place.getLatLng().latitude);
+                long_drop = String.valueOf(place.getLatLng().longitude);
+
+                new_lat_pickup = lat_pickup;
+                new_long_pick = long_pick;
+                new_lat_drop = lat_drop;
+                new_long_drop = long_drop;
+                Utils.hideSoftKeyboard(getActivity());
+
+                if ((!new_lat_pickup.trim().isEmpty() && !new_long_pick.trim().isEmpty()) &&
+                        (!new_lat_drop.trim().isEmpty() && !new_long_drop.trim().isEmpty())) {
+                    String distanceUrl = "https://maps.googleapis.com/maps/api/distancematrix/json?origins=" +
+                            lat_pickup + "," + long_pick + "&destinations=" + lat_drop + "," + long_drop +
+                            "&mode=driving&sensor=false&key=" + googleApiKey;
+
+                    new GetDistanceTimeAsyncTask(getActivity(), distanceUrl, listners).execute();
+                }
+
+            } else if (resultCode == AutocompleteActivity.RESULT_ERROR) {
+                Status status = Autocomplete.getStatusFromIntent(data);
+                Log.i(TAG, status.getStatusMessage());
+            } else if (resultCode == RESULT_CANCELED) {
+                /** The user canceled the operation.*/
+            }
+            return;
+        }
+        if (requestCode == AUTOCOMPLETE_PICK_REQUEST_CODE) {
+            if (resultCode == RESULT_OK) {
+                Place place = Autocomplete.getPlaceFromIntent(data);
+                Log.i(TAG, "Place: " + place.getName() + ", " + place.getId());
+                pickupLoc.setText(place.getAddress());
+
+                Geocoder geocoder = new Geocoder(mContext);
+                try {
+                    List<android.location.Address> addresses = geocoder.getFromLocation(place.getLatLng().latitude,
+                            place.getLatLng().longitude, 1);
+
+                    if (addresses != null && addresses.size() > 0) {
+                        if (addresses.get(0).getAddressLine(0) != null) {
+                            //String fulladdress = addresses.get(0).getAddressLine(0).toString();
+                            // Log.d("fulladdress", fulladdress);
+                        }
+
+                        if (addresses.get(0).getCountryName() != null) {
+                            //String mcountry = addresses.get(0).getCountryName();
+                            String cityName = addresses.get(0).getLocality();
+                            if (cityName != null && cityName.length() > 0) {
+                                pickUpCityName = cityName;
+                            } else if (addresses.get(0).getSubLocality() != null) {
+                                cityName = addresses.get(0).getSubLocality();
+                                pickUpCityName = cityName;
+                            } else {
+                                cityName = addresses.get(0).getAdminArea();
+                                pickUpCityName = cityName;
+                            }
+
+                            if (addresses.get(0).getAddressLine(0) != null) {
+                                pickUpText = addresses.get(0).getAddressLine(0);
+                            } else {
+                                pickUpText = dropLoc.getText().toString();
+                            }
+
+                            Utils.e(Utils.Tag, "getLocality " + " " + cityName + "  " +
+                                    addresses.get(0).getAdminArea());
+                            //Log.d("country", mcountry);
+                        }
+                    } else {
+                        new Utils(mContext);
+                        Utils.toastTxt("No location found with these address.", mContext);
+                    }
+                } catch (IOException e) {
+                    Log.e("error123", e.getMessage());
+                    e.printStackTrace();
+                }
+
+                lat_pickup = String.valueOf(place.getLatLng().latitude);
+                long_pick = String.valueOf(place.getLatLng().longitude);
+                // new_lat_pickup = "", new_long_pick = "", new_lat_drop = "", new_long_drop = ""
+                new_lat_pickup = lat_pickup;
+                new_long_pick = long_pick;
+                new_lat_drop = lat_drop;
+                new_long_drop = long_drop;
+                Utils.hideSoftKeyboard(getActivity());
+
+                if ((!new_lat_pickup.trim().isEmpty() && !new_long_pick.trim().isEmpty()) &&
+                        (!new_lat_drop.trim().isEmpty() && !new_long_drop.trim().isEmpty())) {
+                    String distanceUrl = "https://maps.googleapis.com/maps/api/distancematrix/json?origins=" +
+                            lat_pickup + "," + long_pick + "&destinations=" + lat_drop + "," + long_drop +
+                            "&mode=driving&sensor=false&key=" + googleApiKey;
+
+                    new GetDistanceTimeAsyncTask(getActivity(), distanceUrl, listners).execute();
+                }
+
+            } else if (resultCode == AutocompleteActivity.RESULT_ERROR) {
+                Status status = Autocomplete.getStatusFromIntent(data);
+                Log.i(TAG, status.getStatusMessage());
+            } else if (resultCode == RESULT_CANCELED) {
+                /** The user canceled the operation.*/
+            }
+            return;
+        }
+        super.onActivityResult(requestCode, resultCode, data);
     }
 
 
@@ -812,7 +1048,7 @@ public class BookReservation_new extends Fragment implements View.OnClickListene
                 buttonDelete.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        android.support.v7.app.AlertDialog.Builder builder = new android.support.v7.app.AlertDialog.Builder(getActivity());
+                        androidx.appcompat.app.AlertDialog.Builder builder = new androidx.appcompat.app.AlertDialog.Builder(getActivity());
                         builder.setTitle(getActivity().getString(R.string.app_name));
                         builder.setMessage("Are you sure you want to delete this card.")
                                 .setCancelable(false)
@@ -993,151 +1229,14 @@ public class BookReservation_new extends Fragment implements View.OnClickListene
         });
     }
 
-
-
-
-    /*public void checkLocationPermission() {
-        if (ContextCompat.checkSelfPermission(mContext, Manifest.permission.ACCESS_FINE_LOCATION) ==
-                PackageManager.PERMISSION_GRANTED) {
-            // Utils.toastTxt("permissions granted",mContext);
-
-            gps = new GPSTracker(mContext);
-
-            if (gps.canGetLocation()) {
-                LatLng latLng = new LatLng(gps.getLatitude(), gps.getLongitude());
-                MarkerOptions markerOptions = new MarkerOptions();
-                markerOptions.position(latLng);
-                markerOptions.title("My Location");
-                markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
-
-                str_pickup = getCurrentLocationData(latLng);
-                pickupLoc.setText(str_pickup);
-                pickupLoc.setCursorVisible(false);
-                close11.setVisibility(View.GONE);
-
-                lat_pickup = String.valueOf(latLng.latitude);
-                long_pick = String.valueOf(latLng.longitude);
-            } else {
-                gps.showSettingsAlert();
-            }
-        } else {
-            requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, MY_PERMISSIONS_REQUEST_LOCATION);
-        }
-    }*/
-
-    /*public void isLocationPermissionEnabled() {
-        if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            checkLocationPermission();
-        } else {
-            gps = new GPSTracker(mContext);
-
-            if (gps.canGetLocation()) {
-                LatLng latLng = new LatLng(gps.getLatitude(), gps.getLongitude());
-                MarkerOptions markerOptions = new MarkerOptions();
-                markerOptions.position(latLng);
-                markerOptions.title("My Location");
-                markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
-                str_pickup = getCurrentLocationData(latLng);
-                pickupLoc.setText(str_pickup);
-                pickupLoc.setCursorVisible(false);
-                close11.setVisibility(View.GONE);
-
-                lat_pickup = String.valueOf(latLng.latitude);
-                long_pick = String.valueOf(latLng.longitude);
-            } else {
-                gps.showSettingsAlert();
-            }
-        }
-    }*/
-
-    /*public String getCurrentLocationData(LatLng latLng) {
-        return getAddress(mContext, latLng.latitude, latLng.longitude);
-    }*/
-
-   /* public String getAddress(Context context, double LATITUDE, double LONGITUDE) {
-        String result = "";
-        //Set Address
-        try {
-            Geocoder geocoder = new Geocoder(context, Locale.getDefault());
-            List<Address> addresses = geocoder.getFromLocation(LATITUDE, LONGITUDE, 1);
-            if (addresses != null && addresses.size() > 0) {
-                if (addresses != null && addresses.size() > 0) {
-                   *//* Address address = addresses .get(0);
-                    StringBuilder sb = new StringBuilder();
-
-                    for (int i = 0; i < address .getMaxAddressLineIndex();i++)
-                    {
-                        sb.append(address .getAddressLine(i)).append("\n");
-                    }
-                    sb.append(address .getLocality()).append("\n");
-                    sb.append(address .getPostalCode()).append("\n");
-                    sb.append(address .getCountryName());
-
-                    String city = addresses.get(0).getLocality();
-                    String state = addresses.get(0).getAdminArea();
-                    String country = addresses.get(0).getCountryName();
-                    String postalCode = addresses.get(0).getPostalCode();
-                    String knownName = addresses.get(0).getFeatureName();
-                   *//*
-
-                    String b = addresses.get(0).getAddressLine(0);
-                   *//* String b1=addresses.get(0).getPremises();
-                    String b2=addresses.get(0).getSubLocality();
-                    String b3=addresses.get(0).getSubAdminArea();
-
-                    StringBuilder sb = new StringBuilder();
-
-                    if (b1!=null&&!b1.equalsIgnoreCase(""))
-                    sb.append(b1).append(",");
-                    if (b2!=null&&!b2.equalsIgnoreCase(""))
-                    sb.append(b2).append(",");
-                    if (b3!=null&&!b3.equalsIgnoreCase(""))
-                        sb.append(b3).append(",");*//*
-
-                    result = b.toString();
-                }
-
-               *//*String address = addresses.get(0).getAddressLine(0); // If any additional address line present than only, check with max available address lines by getMaxAddressLineIndex()
-
-                Log.d(TAG, "getAddress:  address" + address);
-                Log.d(TAG, "getAddress:  city" + city);
-                Log.d(TAG, "getAddress:  state" + state);
-                Log.d(TAG, "getAddress:  postalCode" + postalCode);
-                Log.d(TAG, "getAddress:  knownName" + knownName);*//*
-            }
-        } catch (IOException e) {
-            Log.e("error123", e.getMessage());
-            e.printStackTrace();
-        }
-        return result;
-    }*/
-
-    /*public void polulateActiveCardInfo(Context context, List<HashMap<String, Object>> viewList) {
-        if (viewList != null) {
-            card_number.setVisibility(View.VISIBLE);
-            emonthtitle.setVisibility(View.VISIBLE);
-            emonth.setVisibility(View.VISIBLE);
-            eyeartitle.setVisibility(View.VISIBLE);
-            eyear.setVisibility(View.VISIBLE);
-            nodata.setVisibility(View.GONE);
-        } else {
-            card_number.setVisibility(View.GONE);
-            emonthtitle.setVisibility(View.GONE);
-            emonth.setVisibility(View.GONE);
-            eyeartitle.setVisibility(View.GONE);
-            eyear.setVisibility(View.GONE);
-            nodata.setVisibility(View.VISIBLE);
-        }
-    }*/
-
     @Override
     public void onPause() {
         super.onPause();
-        Utils.global.mGoogleApiClient_pickup.stopAutoManage(getActivity());
-        Utils.global.mGoogleApiClient_pickup.disconnect();
-
-        Utils.global.mGoogleApiClient_drop.stopAutoManage(getActivity());
-        Utils.global.mGoogleApiClient_drop.disconnect();
+//        Utils.global.mGoogleApiClient_pickup.stopAutoManage(getActivity());
+//        Utils.global.mGoogleApiClient_pickup.disconnect();
+//
+//        Utils.global.mGoogleApiClient_drop.stopAutoManage(getActivity());
+//        Utils.global.mGoogleApiClient_drop.disconnect();
        /* mGoogleApiClient_pickup.stopAutoManage(getActivity());
         mGoogleApiClient_pickup.disconnect();
 
@@ -1145,7 +1244,10 @@ public class BookReservation_new extends Fragment implements View.OnClickListene
         mGoogleApiClient_drop.disconnect();*/
     }
 
-    private AdapterView.OnItemClickListener mAutocompleteClickListener_pick
+    /**
+     *  Commented due  to code deprecated and not working.
+     */
+   /* private AdapterView.OnItemClickListener mAutocompleteClickListener_pick
             = new AdapterView.OnItemClickListener() {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -1254,7 +1356,7 @@ public class BookReservation_new extends Fragment implements View.OnClickListene
                 new GetDistanceTimeAsyncTask(getActivity(), distanceUrl, listners).execute();
             }
 
-           /* mNameTextView.setText(Html.fromHtml(place.getName() + ""));
+           *//* mNameTextView.setText(Html.fromHtml(place.getName() + ""));
             mAddressTextView.setText(Html.fromHtml(place.getAddress() + ""));
             mIdTextView.setText(Html.fromHtml(place.getId() + ""));
             mPhoneTextView.setText(Html.fromHtml(place.getPhoneNumber() + ""));
@@ -1262,7 +1364,7 @@ public class BookReservation_new extends Fragment implements View.OnClickListene
             if(attributions != null)
             {
                 mAttTextView.setText(Html.fromHtml(attributions.toString()));
-            }*/
+            }*//*
         }
     };
 
@@ -1364,7 +1466,7 @@ public class BookReservation_new extends Fragment implements View.OnClickListene
             // &destinations=30.685086999999992,76.741748&mode=driving&sensor=false&key=
             // AIzaSyDac9yBJCmt8Tyry6JJ6GOvNQPx0_j76-o
 
-           /* mNameTextView.setText(Html.fromHtml(place.getName() + ""));
+           *//* mNameTextView.setText(Html.fromHtml(place.getName() + ""));
             mAddressTextView.setText(Html.fromHtml(place.getAddress() + ""));
             mIdTextView.setText(Html.fromHtml(place.getId() + ""));
             mPhoneTextView.setText(Html.fromHtml(place.getPhoneNumber() + ""));
@@ -1372,15 +1474,9 @@ public class BookReservation_new extends Fragment implements View.OnClickListene
             if (attributions != null)
             {
                 mAttTextView.setText(Html.fromHtml(attributions.toString()));
-            }*/
+            }*//*
         }
-    };
-
-
-    private void getDistanceAndTime() {
-
-    }
-
+    };*/
 
     @Override
     public void onAttach(Context context) {
@@ -1480,8 +1576,6 @@ public class BookReservation_new extends Fragment implements View.OnClickListene
             Log.e(TAG, "checkVisibility BBBB");
         }
     }
-
-
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
@@ -1581,43 +1675,43 @@ public class BookReservation_new extends Fragment implements View.OnClickListene
                 long_drop = "";
                 break;
 
-            case R.id.pickup:
-                close22.setVisibility(View.GONE);
-                pickupLoc.setSelection(0);
-                pickupLoc.setCursorVisible(true);
-                dropLoc.setSelection(0);
-                dropLoc.setCursorVisible(false);
-                Log.e("error123", "error123");
-
-                if (pickupLoc.getText().length() > 0) {
-                    pickupLoc.setSelection(pickupLoc.getText().length());
-                    iscursor = true;
-                    close11.setVisibility(View.VISIBLE);
-                } else {
-                    close11.setVisibility(View.GONE);
-                }
-                isClick = 1;
-                break;
-
-            case R.id.drop:
-                close11.setVisibility(View.GONE);
-                dropLoc.setSelection(0);
-                dropLoc.setCursorVisible(true);
-                pickupLoc.setSelection(0);
-                pickupLoc.setCursorVisible(false);
-
-                isdcursor = true;
-
-                Log.e("error123", "error123");
-
-                if (dropLoc.getText().length() > 0) {
-                    dropLoc.setSelection(dropLoc.getText().length());
-                    close22.setVisibility(View.VISIBLE);
-                } else {
-                    close22.setVisibility(View.GONE);
-                }
-                isClick = 2;
-                break;
+//            case R.id.pickup:
+//                close22.setVisibility(View.GONE);
+//                pickupLoc.setSelection(0);
+//                pickupLoc.setCursorVisible(true);
+//                dropLoc.setSelection(0);
+//                dropLoc.setCursorVisible(false);
+//                Log.e("error123", "error123");
+//
+//                if (pickupLoc.getText().length() > 0) {
+//                    pickupLoc.setSelection(pickupLoc.getText().length());
+//                    iscursor = true;
+//                    close11.setVisibility(View.VISIBLE);
+//                } else {
+//                    close11.setVisibility(View.GONE);
+//                }
+//                isClick = 1;
+//                break;
+//
+//            case R.id.drop:
+//                close11.setVisibility(View.GONE);
+//                dropLoc.setSelection(0);
+//                dropLoc.setCursorVisible(true);
+//                pickupLoc.setSelection(0);
+//                pickupLoc.setCursorVisible(false);
+//
+//                isdcursor = true;
+//
+//                Log.e("error123", "error123");
+//
+//                if (dropLoc.getText().length() > 0) {
+//                    dropLoc.setSelection(dropLoc.getText().length());
+//                    close22.setVisibility(View.VISIBLE);
+//                } else {
+//                    close22.setVisibility(View.GONE);
+//                }
+//                isClick = 2;
+//                break;
 
             case R.id.btn_apply_promo:
                 showPromoDialog();
@@ -1666,38 +1760,6 @@ public class BookReservation_new extends Fragment implements View.OnClickListene
         startActivityForResult(i, 3);
     }
 
-
-//    void pickBookingType() {
-//        new Utils(mContext);
-//        // Utils.toastTxt("ok",UserSignup.this);
-//
-//        final CharSequence[] items;
-//        items = bTypeList.toArray(new CharSequence[bTypeList.size()]);
-//
-//        if (items.length > 0) {
-//            AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
-//            builder.setTitle("Booking Type");
-//            builder.setItems(items, new DialogInterface.OnClickListener() {
-//                public void onClick(DialogInterface dialog, int item) {
-//                    etBookingType.setText(items[item]);
-//                    if (etBookingType.getText().toString().equalsIgnoreCase("AS SOON AS POSSIBLE")) {
-//                        date.setVisibility(View.GONE);
-//                        time.setVisibility(View.GONE);
-//                        status_BookingType = "1";
-//                        time.setText("");
-//                        date.setText("");
-//                    } else {
-//                        date.setVisibility(View.VISIBLE);
-//                        time.setVisibility(View.VISIBLE);
-//                        status_BookingType = "2";
-//                    }
-//                }
-//            });
-//            AlertDialog alert = builder.create();
-//            alert.show();
-//        }
-//    }
-
     public void showTimePickerDialog() {
         /*Calendar calendar = Calendar.getInstance();
         TimePickerDialog tpd = TimePickerDialog.newInstance(
@@ -1720,7 +1782,6 @@ public class BookReservation_new extends Fragment implements View.OnClickListene
         DialogFragment newFragment = new DatePickerFragment();
         newFragment.show(getFragmentManager(), "datePicker");
     }
-
 
     @SuppressLint("ValidFragment")
     public static class DatePickerFragment extends DialogFragment implements DatePickerDialog.OnDateSetListener {
@@ -1786,7 +1847,6 @@ public class BookReservation_new extends Fragment implements View.OnClickListene
         }
     }
 
-
     @SuppressLint("ValidFragment")
     public static class TimePickerFragment extends DialogFragment implements TimePickerDialog.OnTimeSetListener {
 
@@ -1815,7 +1875,7 @@ public class BookReservation_new extends Fragment implements View.OnClickListene
 
             if (dateCalendar == 0) {
                 //Toast.makeText(getActivity(), "Please select date first", Toast.LENGTH_LONG).show();
-                android.support.v7.app.AlertDialog.Builder builder = new android.support.v7.app.AlertDialog.Builder(getActivity());
+                androidx.appcompat.app.AlertDialog.Builder builder = new androidx.appcompat.app.AlertDialog.Builder(getActivity());
                 builder.setTitle(getActivity().getString(R.string.app_name));
                 builder.setMessage("Please select date first.")
                         .setCancelable(false)
@@ -1854,7 +1914,7 @@ public class BookReservation_new extends Fragment implements View.OnClickListene
             } else {
                 Log.e(TAG, "BBBBBBBBBBBBB ");
                 // Toast.makeText(getActivity(), "Invalid Time! Please Select greater than current time.", Toast.LENGTH_LONG).show();
-                android.support.v7.app.AlertDialog.Builder builder = new android.support.v7.app.AlertDialog.Builder(getActivity());
+                androidx.appcompat.app.AlertDialog.Builder builder = new androidx.appcompat.app.AlertDialog.Builder(getActivity());
                 builder.setTitle(getActivity().getString(R.string.app_name));
 //                builder.setMessage("To select this time please select future date.")
                 builder.setMessage("Please select a date in the future.")
@@ -1919,7 +1979,6 @@ public class BookReservation_new extends Fragment implements View.OnClickListene
         }
 
     }
-
 
     public static long getTimeInMillis(int day, int month, int year) {
         Calendar calendar = Calendar.getInstance();
@@ -2036,7 +2095,7 @@ public class BookReservation_new extends Fragment implements View.OnClickListene
                 Log.e(TAG, "AAAAAAAAAAAAA ");
             } else {
                 Log.e(TAG, "BBBBBBBBBBBBB ");
-                android.support.v7.app.AlertDialog.Builder builder = new android.support.v7.app.AlertDialog.Builder(getActivity());
+                androidx.appcompat.app.AlertDialog.Builder builder = new androidx.appcompat.app.AlertDialog.Builder(getActivity());
                 builder.setTitle(getActivity().getString(R.string.app_name));
                 builder.setMessage("Please select a date in future.")
                         .setCancelable(false)
@@ -2185,7 +2244,7 @@ public class BookReservation_new extends Fragment implements View.OnClickListene
                 Log.e(TAG, "FFFFFFFFFXX " + ffg);
 
 
-                android.support.v7.app.AlertDialog.Builder builder = new android.support.v7.app.AlertDialog.Builder(getActivity());
+                androidx.appcompat.app.AlertDialog.Builder builder = new androidx.appcompat.app.AlertDialog.Builder(getActivity());
                 builder.setTitle(getActivity().getString(R.string.app_name));
                 builder.setMessage("Are you sure to book this ride for " + ffg + " ?")
                         .setCancelable(false)
@@ -2210,11 +2269,9 @@ public class BookReservation_new extends Fragment implements View.OnClickListene
         }
     }
 
-
     public static String convertDate(String dateInMilliseconds, String dateFormat) {
         return DateFormat.format(dateFormat, Long.parseLong(dateInMilliseconds)).toString();
     }
-
 
     public void estimatedRideCostRequest() {
         //Utils.startActivity(ActivityLogin.this,ActivityEvents.class);
@@ -2284,57 +2341,6 @@ public class BookReservation_new extends Fragment implements View.OnClickListene
         }
     }
 
-    //Utils.startActivity(ActivityLogin.this,ActivityEvents.class);
-
-
-//            if(!dropLoc.getText().toString().equalsIgnoreCase("")) {
-//                Log.e(TAG ,  "dropLoc33333 "+dropLoc.getText().toString());
-//                LatLng latLng = Utils.getLocationFromAddress2(getActivity() , dropLoc.getText().toString());
-//
-//                Log.e(TAG, "dropLoclatLng33333 " + latLng);
-//                if(latLng != null){
-//                    lat_drop = latLng.latitude+"";
-//                    long_drop = latLng.longitude+"";
-//                }
-//
-//            }
-//
-//
-//
-//        if (lat_pickup.toString().trim().isEmpty()) {
-//            Utils.toastTxt("Please enter pickup location.", mContext);
-//        } else if (lat_drop.toString().trim().isEmpty()) {
-//            Utils.toastTxt("Please enter destination location.", mContext);
-//        } else {
-//
-//
-//            date_ride = date.getText().toString();
-//            time_ride = time.getText().toString();
-//
-//
-//            if (date_ride.toString().trim().isEmpty()) {
-//                Utils.toastTxt("Please select date.", mContext);
-//                return;
-//            }
-//
-//            if (time_ride.toString().trim().isEmpty()) {
-//                Utils.toastTxt("Please select time.", mContext);
-//                return;
-//            }
-//
-//            map = new HashMap<String, Object>();
-//            map.put("date", ""+date_ride);
-//            map.put("time", ""+time_ride);
-//            map.put("pick_lat", lat_pickup);
-//            map.put("pick_lng", long_pick);
-//            map.put("dest_lat", lat_drop);
-//            map.put("dest_lng", long_drop);
-//            map.put("promo", promoCode);
-//            map.put("count", stopsAddList != null ? stopsAddList.size() : 0);
-//            OnlineRequest.estimatedPriceRequest(mContext, map);
-//        }
-//    }
-
     public void displayReceivedData(HashMap<String, Object> smap) {
         //txtData.setText("Data received: "+message);
 
@@ -2391,102 +2397,6 @@ public class BookReservation_new extends Fragment implements View.OnClickListene
         i.putExtra("stopsList", (Serializable) list1);
         startActivityForResult(i, 1);
     }
-
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode == Activity.RESULT_OK) {
-            if (requestCode == 1) {
-                if (resultCode == Activity.RESULT_OK) {
-                    dropMap = new HashMap<>();
-
-                    dropMap = (HashMap<String, Object>) data.getSerializableExtra("map");
-
-                    if (dropMap != null && dropMap.size() > 0) {
-                        if (dropMap.containsKey("street_address") && !dropMap.get("street_address").toString().equalsIgnoreCase("")) {
-                            dropLoc.post(new Runnable() {
-                                public void run() {
-                                    dropLoc.dismissDropDown();
-                                }
-                            });
-
-                            //  dropLoc.setText(dropMap.get("street_address").toString());
-                        }
-
-                        if (dropMap.containsKey("notes") && !dropMap.get("notes").toString().equalsIgnoreCase("")) {
-                            etNote.setText(dropMap.get("notes").toString());
-                        }
-
-                        if (dropMap.containsKey("lat") && !dropMap.get("lat").toString().equalsIgnoreCase("")) {
-                            lat_drop = dropMap.get("lat").toString();
-                            long_drop = dropMap.get("lon").toString();
-                        }
-                    }
-                }
-                if (resultCode == Activity.RESULT_CANCELED) {
-
-                }
-            } else if (requestCode == 2) {
-                cardMap = new HashMap<>();
-                cardMap = (HashMap<String, Object>) data.getSerializableExtra("map");
-
-                if (cardMap != null && cardMap.size() > 0) {
-                    nodata.setVisibility(View.GONE);
-                    card_number.setVisibility(View.VISIBLE);
-                    emonthtitle.setVisibility(View.VISIBLE);
-                    emonth.setVisibility(View.VISIBLE);
-                    eyeartitle.setVisibility(View.VISIBLE);
-                    eyear.setVisibility(View.VISIBLE);
-
-                    if (cardMap.containsKey("token") && !cardMap.get("token").toString().
-                            equalsIgnoreCase("")) {
-                        card_number.setText("" + cardMap.get("token").toString());
-                        payment_Id = cardMap.get("token").toString();
-                    }
-
-                    if (cardMap.containsKey("expiry")) {
-                        if (cardMap.get("expiry").toString().length() >= 2) {
-                            String cc = cardMap.get("expiry").toString().substring(0, 2);
-                            emonth.setText(cc);
-                        }
-
-                        if (cardMap.get("expiry").toString().length() >= 4) {
-                            String substring = cardMap.get("expiry").toString().substring(Math.max(cardMap.get("expiry").toString().length() - 2, 0));
-                            eyear.setText(substring);
-                        }
-                    }
-
-
-//                    if (cardMap.containsKey("exp_month") && !cardMap.get("exp_month").toString().
-//                            equalsIgnoreCase("")) {
-//                        emonth.setText(cardMap.get("exp_month").toString());
-//                    }
-//                    if (cardMap.containsKey("exp_year") && !cardMap.get("exp_year").toString().
-//                            equalsIgnoreCase("")) {
-//                        eyear.setText(cardMap.get("exp_year").toString());
-//                    }
-
-                    SavePref pref1 = new SavePref();
-                    pref1.SavePref(mContext);
-                    pref1.setCardId(payment_Id);
-                    pref1.setCardNumber(card_number.getText().toString());
-                    pref1.setCardExMonth(emonth.getText().toString());
-                    pref1.setCardExYear(eyear.getText().toString());
-                }
-            } else if (requestCode == 3) {
-                stopsAddList = new ArrayList<>();
-                stopsAddList = (List<HashMap<String, Object>>) data.getSerializableExtra("map");
-
-                // status_stops.setText("Added");
-                // status_stops.setTextColor(getResources().getColor(R.color.green));
-                // status_stops.setCompoundDrawablesWithIntrinsicBounds(R.drawable.tick, 0, 0, 0);
-
-                if (stopsAddList != null)
-                    loadRequestsList(mContext, stopsAddList, "");
-            }
-        }
-    }
-
 
     public static void getBookingResponce() {
         Log.e(TAG, "getBookingResponce");
@@ -2595,7 +2505,6 @@ public class BookReservation_new extends Fragment implements View.OnClickListene
             }
         });
     }
-
 
     public void showBookingSuccessDialog(final String message) {
         LayoutInflater inflater = LayoutInflater.from(mContext);
@@ -2756,6 +2665,5 @@ public class BookReservation_new extends Fragment implements View.OnClickListene
         new_lat_drop = "";
         new_long_drop = "";
     }
-
 
 }

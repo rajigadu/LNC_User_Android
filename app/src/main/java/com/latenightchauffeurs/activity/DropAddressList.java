@@ -3,15 +3,12 @@ package com.latenightchauffeurs.activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.constraint.ConstraintLayout;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
-import android.view.Menu;
-import android.view.MenuItem;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.appcompat.widget.Toolbar;
+
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -20,16 +17,10 @@ import android.widget.TextView;
 import com.latenightchauffeurs.R;
 import com.latenightchauffeurs.Utils.ConstVariable;
 import com.latenightchauffeurs.Utils.OnlineRequest;
-import com.latenightchauffeurs.Utils.Utils;
 import com.latenightchauffeurs.adapter.DropAddressAdapter;
 import com.latenightchauffeurs.model.SavePref;
 import com.latenightchauffeurs.model.modelItem;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;

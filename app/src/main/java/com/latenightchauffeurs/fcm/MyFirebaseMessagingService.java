@@ -8,12 +8,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Color;
 import android.media.MediaPlayer;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Build;
-import android.support.v4.app.NotificationCompat;
+import androidx.core.app.NotificationCompat;
 import android.util.Log;
 
 import com.google.firebase.messaging.FirebaseMessagingService;
@@ -26,13 +25,10 @@ import com.latenightchauffeurs.activity.Notifications;
 import com.latenightchauffeurs.model.SavePref;
 
 import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.Serializable;
-import java.util.Date;
 import java.util.HashMap;
-import java.util.Map;
 
 /**
  * Created by AnaadIT on 3/30/2017.
@@ -45,7 +41,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
     @Override
     public void onMessageReceived(RemoteMessage remoteMessage) {
 
-        Log.e(TAG, "NotificationMessageBody:================= " + remoteMessage.getData().toString());
+        //Log.e(TAG, "NotificationMessageBody:================= " + remoteMessage.getData().toString());
         if (remoteMessage.getData().size() > 0)
             if (remoteMessage.getData().get("data") != null && !remoteMessage.getData().get("data").toString().equalsIgnoreCase("")) {
                 try {

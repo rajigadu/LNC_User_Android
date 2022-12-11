@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="@dimen/width_confirmation_detail_container"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:background="@android:color/white"
+    android:clickable="true"
+    android:orientation="vertical"
+    android:paddingLeft="@dimen/padding_small"
+    android:paddingRight="@dimen/padding_small"
+    android:paddingTop="@dimen/padding_medium">
+
+    <com.cardconnect.consumersdk.views.payment.components.ConsumerTextView
+        android:id="@+id/text_view_total"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:padding="@dimen/padding_small"
+        android:text="@string/confirmation_activity_title"
+        android:textColor="?attr/confirmationTitleTextColor"
+        android:textSize="@dimen/text_size_small"
+        app:font="?attr/consumerFontLight" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="?attr/confirmationDividerColor" />
+
+    <FrameLayout
+        android:id="@+id/frame_layout_android_pay_confirmation_fragment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_x_small" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="@dimen/margin_xx_large"
+        android:background="?attr/confirmationDividerColor" />
+
+    <com.cardconnect.consumersdk.views.payment.components.ConsumerButton
+        android:id="@+id/button_confirm_order"
+        style="?attr/borderlessButtonStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:width="@dimen/width_confirmation_action_button"
+        android:text="@string/confirmation_activity_order_text"
+        android:textAllCaps="false"
+        android:textColor="?attr/confirmationActionButtonTextColor"
+        android:textSize="?attr/consumerActionButtonTextSize"
+        app:font="?attr/consumerFontRegular" />
+
+</LinearLayout>

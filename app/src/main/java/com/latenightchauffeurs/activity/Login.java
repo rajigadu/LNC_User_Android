@@ -4,8 +4,8 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Paint;
 import android.os.StrictMode;
-import android.support.annotation.NonNull;
-import android.support.v7.app.AppCompatActivity;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -50,7 +50,7 @@ import butterknife.ButterKnife;
 
 public class Login extends AppCompatActivity implements View.OnClickListener, GoogleApiClient.OnConnectionFailedListener {
     CallbackManager mCallbackManager;
-    private GoogleApiClient mGoogleApiClient;
+//    private GoogleApiClient mGoogleApiClient;
     private static final String TAG = Login.class.getSimpleName();
     private static final int RC_SIGN_IN = 007;
 
@@ -133,10 +133,10 @@ public class Login extends AppCompatActivity implements View.OnClickListener, Go
                 .requestEmail()
                 .build();
 
-        mGoogleApiClient = new GoogleApiClient.Builder(Login.this)
-                .enableAutoManage(Login.this, (GoogleApiClient.OnConnectionFailedListener) Login.this)
-                .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
-                .build();
+//        mGoogleApiClient = new GoogleApiClient.Builder(Login.this)
+//                .enableAutoManage(Login.this, (GoogleApiClient.OnConnectionFailedListener) Login.this)
+//                .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
+//                .build();
     }
 
     @Override
@@ -155,7 +155,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener, Go
                 LoginManager.getInstance().logInWithReadPermissions(Login.this, Arrays.asList("email"));
                 break;
             case R.id.goo:
-                signIn();
+                //signIn();
                 break;
             case R.id.noaccount:
                 signup.performClick();
@@ -202,7 +202,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener, Go
             if (resultCode == RESULT_OK) {
                 Log.e("inside", "123");
                 GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
-                handleSignInResult(result);
+//                handleSignInResult(result);
             }
         } else {
             if (mCallbackManager.onActivityResult(requestCode, resultCode, data)) {
@@ -288,62 +288,62 @@ public class Login extends AppCompatActivity implements View.OnClickListener, Go
         }
     }
 
-    private void handleSignInResult(GoogleSignInResult result) {
-        Log.d(TAG, "handleSignInResult:" + result.isSuccess());
-        if (result.isSuccess()) {
-            // Signed in successfully, show authenticated UI.
-            GoogleSignInAccount acct = result.getSignInAccount();
+//    private void handleSignInResult(GoogleSignInResult result) {
+//        Log.d(TAG, "handleSignInResult:" + result.isSuccess());
+//        if (result.isSuccess()) {
+//            // Signed in successfully, show authenticated UI.
+//            GoogleSignInAccount acct = result.getSignInAccount();
+//
+//            Log.e(TAG, "display name: " + acct.getDisplayName());
+//
+//            String personName = acct.getDisplayName();
+//            String email = acct.getEmail();
+//            String url = String.valueOf(acct.getPhotoUrl());
+//
+//
+//            Log.e(TAG, "Name: " + personName + ", email: " + email + ", Image123: " + url);
+//
+//            //Toast.makeText(Login.this,email,Toast.LENGTH_LONG).show();
+//
+//           /* txtName.setText(personName);
+//            txtEmail.setText(email);
+//            Glide.with(getApplicationContext()).load(personPhotoUrl)
+//                    .thumbnail(0.5f)
+//                    .crossFade()
+//                    .diskCacheStrategy(DiskCacheStrategy.ALL)
+//                    .into(imgProfilePic);*/
+//
+//            // updateUI(true);
+//
+//            Auth.GoogleSignInApi.signOut(mGoogleApiClient).setResultCallback(
+//                    new ResultCallback<Status>() {
+//                        @Override
+//                        public void onResult(Status status) {
+//
+//                        }
+//                    });
+//
+//            SavePref pref1 = new SavePref();
+//            pref1.SavePref(Login.this);
+//            pref1.setsocialmail(email);
+//            pref1.setUserFName(personName);
+//            pref1.setImage(url);
+//
+//            checkemailvalidity("googleplus");
+//        } else {
+//            // Signed out, show unauthenticated UI.
+//            // updateUI(false);
+//        }
+//    }
 
-            Log.e(TAG, "display name: " + acct.getDisplayName());
-
-            String personName = acct.getDisplayName();
-            String email = acct.getEmail();
-            String url = String.valueOf(acct.getPhotoUrl());
-
-
-            Log.e(TAG, "Name: " + personName + ", email: " + email + ", Image123: " + url);
-
-            //Toast.makeText(Login.this,email,Toast.LENGTH_LONG).show();
-
-           /* txtName.setText(personName);
-            txtEmail.setText(email);
-            Glide.with(getApplicationContext()).load(personPhotoUrl)
-                    .thumbnail(0.5f)
-                    .crossFade()
-                    .diskCacheStrategy(DiskCacheStrategy.ALL)
-                    .into(imgProfilePic);*/
-
-            // updateUI(true);
-
-            Auth.GoogleSignInApi.signOut(mGoogleApiClient).setResultCallback(
-                    new ResultCallback<Status>() {
-                        @Override
-                        public void onResult(Status status) {
-
-                        }
-                    });
-
-            SavePref pref1 = new SavePref();
-            pref1.SavePref(Login.this);
-            pref1.setsocialmail(email);
-            pref1.setUserFName(personName);
-            pref1.setImage(url);
-
-            checkemailvalidity("googleplus");
-        } else {
-            // Signed out, show unauthenticated UI.
-            // updateUI(false);
-        }
-    }
-
-    private void signIn() {
-        try {
-            Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
-            startActivityForResult(signInIntent, RC_SIGN_IN);
-        } catch (Exception e) {
-            Log.e("error123", e.getMessage());
-        }
-    }
+//    private void signIn() {
+//        try {
+//            Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
+//            startActivityForResult(signInIntent, RC_SIGN_IN);
+//        } catch (Exception e) {
+//            Log.e("error123", e.getMessage());
+//        }
+//    }
 
     public void registrationIDtoServer() {
         SharedPreferences pref = getApplicationContext().getSharedPreferences("lnctoken", 0);

@@ -4,11 +4,11 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -25,9 +25,7 @@ import com.cardconnect.consumersdk.CCConsumerTokenCallback;
 import com.cardconnect.consumersdk.domain.CCConsumerAccount;
 import com.cardconnect.consumersdk.domain.CCConsumerCardInfo;
 import com.cardconnect.consumersdk.domain.CCConsumerError;
-import com.cooltechworks.creditcarddesign.CardEditActivity;
 import com.cooltechworks.creditcarddesign.CreditCardUtils;
-import com.cooltechworks.creditcarddesign.CreditCardView;
 import com.latenightchauffeurs.R;
 import com.latenightchauffeurs.Utils.APIClient;
 import com.latenightchauffeurs.Utils.APIInterface;
@@ -36,13 +34,8 @@ import com.latenightchauffeurs.Utils.JsonPost;
 import com.latenightchauffeurs.Utils.MyApplication;
 import com.latenightchauffeurs.Utils.Utils;
 import com.latenightchauffeurs.adapter.CardsList2Adapter;
-import com.latenightchauffeurs.fragment.Cards;
 import com.latenightchauffeurs.model.SavePref;
 import com.latenightchauffeurs.model.modelItem;
-import com.stripe.android.Stripe;
-import com.stripe.android.TokenCallback;
-import com.stripe.android.model.Card;
-import com.stripe.android.model.Token;
 import com.wang.avi.AVLoadingIndicatorView;
 
 import org.json.JSONArray;
@@ -498,6 +491,7 @@ public class CardsList extends AppCompatActivity {
 
     public void onActivityResult(int reqCode, int resultCode, Intent data) {
 
+        super.onActivityResult(reqCode, resultCode, data);
         if (reqCode == CREATE_NEW_CARD) {
             MyrequestsListRequest();
         }
@@ -579,10 +573,9 @@ public class CardsList extends AppCompatActivity {
                     @Override
                     public void onCCConsumerTokenResponse(CCConsumerAccount consumerAccount) {
                         progressDialog.dismiss();
-                        addCreditCardRequest(consumerAccount.getToken() , expiry);
+                        addCreditCardRequest(consumerAccount.getToken(), expiry);
                     }
                 });
-
 
 
             } else {

@@ -1,8 +1,5 @@
 package com.latenightchauffeurs.activity;
 
-import android.annotation.SuppressLint;
-import android.app.Activity;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
@@ -11,14 +8,12 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.annotation.Nullable;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Window;
 import android.view.WindowManager;
-import com.crashlytics.android.Crashlytics;
-import com.latenightchauffeurs.BuildConfig;
 import com.latenightchauffeurs.R;
 import com.latenightchauffeurs.Utils.Utils;
 import com.latenightchauffeurs.model.SavePref;
@@ -28,10 +23,7 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
-import java.io.IOException;
 import java.util.concurrent.ExecutionException;
-
-import io.fabric.sdk.android.Fabric;
 
 /**
  * Created by narayana on 10/25/2017.
@@ -47,7 +39,7 @@ public class Splash extends AppCompatActivity
     protected void onCreate(@Nullable Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        Fabric.with(this, new Crashlytics());
+        //Fabric.with(this, new Crashlytics());
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_splash);

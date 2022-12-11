@@ -1,7 +1,7 @@
 package com.latenightchauffeurs.adapter;
 
 import android.content.Context;
-import android.support.v7.widget.RecyclerView;
+import androidx.recyclerview.widget.RecyclerView;
 import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,7 +10,6 @@ import android.widget.RadioButton;
 import android.widget.TextView;
 
 import com.latenightchauffeurs.R;
-import com.latenightchauffeurs.activity.AddTip;
 import com.latenightchauffeurs.activity.Rating;
 import com.latenightchauffeurs.model.ItemModel;
 

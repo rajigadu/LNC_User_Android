@@ -4,17 +4,18 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.design.widget.TabLayout;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentManager;
+import androidx.annotation.Nullable;
+import com.google.android.material.tabs.TabLayout;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
-import android.widget.Toast;
 
 import com.latenightchauffeurs.R;
 import com.latenightchauffeurs.Utils.Utils;
@@ -25,7 +26,7 @@ import java.util.List;
  * Created by narayana on 3/6/2018.
  */
 
-public class Rides extends android.support.v4.app.Fragment {
+public class Rides extends Fragment {
     private FragmentActivity myContext;
     public static Rides Instance;
     public static String TAG = Rides.class.getName();
@@ -109,10 +110,10 @@ public class Rides extends android.support.v4.app.Fragment {
         super.onViewCreated(v, savedInstanceState);
     }
 
-    public void replaceFragment(android.support.v4.app.Fragment fragment) {
+    public void replaceFragment(Fragment fragment) {
         String backStateName = fragment.getClass().getName();
         FragmentManager fragmentManager = getChildFragmentManager();
-        android.support.v4.app.FragmentTransaction transaction = fragmentManager.beginTransaction();
+        FragmentTransaction transaction = fragmentManager.beginTransaction();
         transaction.replace(R.id.container, fragment);
         transaction.addToBackStack(backStateName);
         transaction.commit();

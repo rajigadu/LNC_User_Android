@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="?attr/accountsListBackgroundColor"
+    android:clickable="true"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/linear_layout_android_pay"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:visibility="gone">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingBottom="@dimen/padding_x_small"
+            android:paddingTop="@dimen/padding_x_small">
+
+            <com.cardconnect.consumersdk.views.payment.components.ConsumerTextView
+                android:id="@+id/text_view_pay_with_android_pay"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:paddingEnd="@dimen/no_padding"
+                android:paddingLeft="@dimen/padding_x_large"
+                android:paddingRight="@dimen/no_padding"
+                android:paddingStart="@dimen/padding_x_large"
+                android:text="@string/accounts_pay_with_android_text"
+                android:textColor="?attr/accountsListItemTextColor"
+                android:textSize="?attr/accountsListItemTextSize"
+                app:font="?attr/consumerFontRegular" />
+
+            <com.cardconnect.consumersdk.views.payment.components.ConsumerTextView
+                android:id="@+id/text_view_android_pay_total"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:paddingEnd="@dimen/no_padding"
+                android:paddingLeft="@dimen/padding_x_small"
+                android:paddingRight="@dimen/no_padding"
+                android:paddingStart="@dimen/padding_x_small"
+                android:textColor="?attr/accountsListItemTextColor"
+                android:textSize="?attr/accountsListItemTextSize"
+                app:font="?attr/consumerFontRegular"
+                tools:text="$2:00" />
+
+            <FrameLayout
+                android:id="@+id/frame_layout_android_pay_buy_button"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:paddingEnd="@dimen/padding_x_small"
+                android:paddingLeft="@dimen/no_padding"
+                android:paddingRight="@dimen/padding_x_small"
+                android:paddingStart="@dimen/no_padding" />
+
+        </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginBottom="1dp"
+            android:background="?attr/consumerDividerColor" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linear_layout_setup_android_pay"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:visibility="gone">
+        <com.cardconnect.consumersdk.views.payment.components.ConsumerTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:paddingBottom="@dimen/padding_x_small"
+            android:paddingEnd="@dimen/padding_x_large"
+            android:paddingLeft="@dimen/padding_x_large"
+            android:paddingRight="@dimen/padding_x_large"
+            android:paddingStart="@dimen/padding_x_large"
+            android:paddingTop="@dimen/padding_x_small"
+            android:text="?attr/accountsAndroidPaySetupText"
+            android:textColor="?attr/accountsListItemTextColor"
+            android:textSize="?attr/accountsListItemTextSize"
+            app:font="?attr/consumerFontRegular" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginBottom="1dp"
+            android:background="?attr/consumerDividerColor" />
+
+    </LinearLayout>
+
+</RelativeLayout>

@@ -125,7 +125,7 @@
 
             </LinearLayout>
 
-            <android.support.v7.widget.CardView
+            <androidx.cardview.widget.CardView
                 android:id="@+id/card_pick"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -166,9 +166,9 @@
                         android:visibility="visible" />
 
                 </RelativeLayout>
-            </android.support.v7.widget.CardView>
+            </androidx.cardview.widget.CardView>
 
-            <android.support.v7.widget.CardView
+            <androidx.cardview.widget.CardView
                 android:id="@+id/card_drop"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -209,9 +209,9 @@
                         android:visibility="visible" />
 
                 </RelativeLayout>
-            </android.support.v7.widget.CardView>
+            </androidx.cardview.widget.CardView>
 
-            <android.support.v7.widget.CardView
+            <androidx.cardview.widget.CardView
                 android:id="@+id/card_stops"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -310,7 +310,7 @@
                         android:textSize="@dimen/text_mediumsize"
                         android:visibility="gone" />
 
-                    <android.support.v7.widget.RecyclerView
+                    <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/rv_loc"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -357,7 +357,7 @@
                         android:background="@color/black_light"
                         android:visibility="visible" />
                 </RelativeLayout>
-            </android.support.v7.widget.CardView>
+            </androidx.cardview.widget.CardView>
 
             <RelativeLayout
                 android:id="@+id/rl_payment"
@@ -396,7 +396,7 @@
                     android:textSize="@dimen/text_mediumsize" />
             </RelativeLayout>
 
-            <android.support.v7.widget.CardView
+            <androidx.cardview.widget.CardView
                 android:id="@+id/card_payment"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -516,7 +516,7 @@
                         android:visibility="visible" />
 
                 </RelativeLayout>
-            </android.support.v7.widget.CardView>
+            </androidx.cardview.widget.CardView>
 
             <LinearLayout
                 android:id="@+id/ll_apply_promo"

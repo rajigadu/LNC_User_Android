@@ -9,11 +9,11 @@ import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.location.*;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.widget.CardView;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.appcompat.app.AlertDialog;
+import androidx.cardview.widget.CardView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -26,13 +26,9 @@ import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.TimePicker;
-import android.widget.Toast;
 
-import com.cooltechworks.creditcarddesign.CreditCardUtils;
-import com.cooltechworks.creditcarddesign.CreditCardView;
 import com.daimajia.androidanimations.library.Techniques;
 import com.daimajia.androidanimations.library.YoYo;
 import com.google.android.gms.common.ConnectionResult;
@@ -49,24 +45,13 @@ import com.latenightchauffeurs.Utils.ConstVariable;
 import com.latenightchauffeurs.Utils.JsonPost;
 import com.latenightchauffeurs.Utils.OnlineRequest;
 import com.latenightchauffeurs.Utils.Utils;
-import com.latenightchauffeurs.activity.AddAddress;
 import com.latenightchauffeurs.activity.AddStops;
 import com.latenightchauffeurs.activity.CardsList;
-import com.latenightchauffeurs.activity.ChangePassword;
-import com.latenightchauffeurs.activity.ContactUs;
 import com.latenightchauffeurs.activity.DropAddressList;
-import com.latenightchauffeurs.activity.EditProfile;
-import com.latenightchauffeurs.activity.Login;
-import com.latenightchauffeurs.activity.WebViewAll;
 import com.latenightchauffeurs.adapter.PlaceArrayAdapter;
 import com.latenightchauffeurs.model.SavePref;
 import com.library.NavigationBar;
 import com.library.NvTab;
-import com.stripe.android.Stripe;
-import com.stripe.android.TokenCallback;
-import com.stripe.android.model.Card;
-import com.stripe.android.model.Token;
-import com.wang.avi.AVLoadingIndicatorView;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -82,8 +67,6 @@ import java.util.Map;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
-
-import static android.app.Activity.RESULT_OK;
 
 public class BookReservation extends Fragment implements View.OnClickListener, GoogleApiClient.OnConnectionFailedListener,
         GoogleApiClient.ConnectionCallbacks, NavigationBar.OnTabSelected, NavigationBar.OnTabClick {
@@ -1152,7 +1135,7 @@ public class BookReservation extends Fragment implements View.OnClickListener, G
     public void showEstimatedPriceDilog(final HashMap<String, Object> data) {
         LayoutInflater inflater = LayoutInflater.from(mcontext);
         final View dialogLayout = inflater.inflate(R.layout.alert_dialog8, null);
-        final android.support.v7.app.AlertDialog dialog = new android.support.v7.app.AlertDialog.Builder(mcontext).create();
+        final androidx.appcompat.app.AlertDialog dialog = new androidx.appcompat.app.AlertDialog.Builder(mcontext).create();
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
         dialog.setView(dialogLayout);

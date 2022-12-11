@@ -1,23 +1,18 @@
 package com.latenightchauffeurs.activity;
 
 import android.annotation.SuppressLint;
-import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.TimePickerDialog;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v4.app.DialogFragment;
-import android.support.v7.app.AppCompatActivity;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.DialogFragment;
+import androidx.appcompat.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.TimePicker;
-import android.widget.Toast;
 
 import com.latenightchauffeurs.R;
-import com.latenightchauffeurs.fragment.BookReservation_new;
 
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
 
 public class Demo extends AppCompatActivity {
 

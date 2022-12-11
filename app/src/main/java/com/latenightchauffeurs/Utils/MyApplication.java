@@ -2,19 +2,13 @@ package com.latenightchauffeurs.Utils;
 
 import android.app.Application;
 import android.content.Context;
-import android.support.annotation.NonNull;
-import android.support.multidex.MultiDex;
+import androidx.annotation.NonNull;
+import androidx.multidex.MultiDex;
 
 import com.cardconnect.consumersdk.CCConsumer;
-import com.cardconnect.consumersdk.CCConsumerApiCallbacks;
-import com.cardconnect.consumersdk.androidpay.CCConsumerAndroidPayConfiguration;
-import com.cardconnect.consumersdk.domain.request.CCConsumerAndroidPayGetTokenRequest;
-import com.cardconnect.consumersdk.domain.response.CCConsumerApiResponse;
-import com.crashlytics.android.Crashlytics;
 
 import java.util.HashMap;
 
-import io.fabric.sdk.android.Fabric;
 import com.cardconnect.consumersdk.network.CCConsumerApi;
 
 /**

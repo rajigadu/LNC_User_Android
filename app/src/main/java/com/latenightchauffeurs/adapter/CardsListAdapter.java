@@ -1,10 +1,9 @@
 package com.latenightchauffeurs.adapter;
 
 import android.content.Context;
-import android.content.Intent;
-import android.support.v7.widget.RecyclerView;
-import android.text.Html;
-import android.text.TextUtils;
+
+import androidx.recyclerview.widget.RecyclerView;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,12 +13,9 @@ import android.widget.TextView;
 
 import com.latenightchauffeurs.R;
 import com.latenightchauffeurs.Utils.Utils;
-import com.latenightchauffeurs.activity.ViewAvailableRide;
 import com.latenightchauffeurs.fragment.Cards;
 import com.latenightchauffeurs.model.modelItem;
 
-import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 

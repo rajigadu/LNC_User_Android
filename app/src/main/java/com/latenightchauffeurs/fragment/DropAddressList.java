@@ -3,58 +3,35 @@ package com.latenightchauffeurs.fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
-import android.location.Geocoder;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.util.Log;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
-import android.widget.AdapterView;
-import android.widget.AutoCompleteTextView;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import com.daimajia.androidanimations.library.Techniques;
 import com.daimajia.androidanimations.library.YoYo;
-import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.gms.common.api.PendingResult;
-import com.google.android.gms.common.api.ResultCallback;
-import com.google.android.gms.location.places.Place;
-import com.google.android.gms.location.places.PlaceBuffer;
-import com.google.android.gms.location.places.Places;
-import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.LatLngBounds;
 import com.latenightchauffeurs.R;
 import com.latenightchauffeurs.Utils.ConstVariable;
 import com.latenightchauffeurs.Utils.OnlineRequest;
-import com.latenightchauffeurs.Utils.Utils;
 import com.latenightchauffeurs.activity.AddAddress;
-import com.latenightchauffeurs.adapter.DropAddressAdapter;
 import com.latenightchauffeurs.adapter.DropAddressAdapter2;
 import com.latenightchauffeurs.adapter.PlaceArrayAdapter;
 import com.latenightchauffeurs.model.SavePref;
 import com.latenightchauffeurs.model.modelItem;
 
-import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.Unbinder;
 
 public class DropAddressList extends Fragment {
     Button addDropButton;
@@ -191,7 +168,7 @@ public class DropAddressList extends Fragment {
     public void showMessage(String dlgText, final HashMap<String, Object> data, final Integer type) {
         LayoutInflater inflater = LayoutInflater.from(mcontext);
         final View dialogLayout = inflater.inflate(R.layout.alert_dialog5, null);
-        final android.support.v7.app.AlertDialog dialog = new android.support.v7.app.AlertDialog.Builder(mcontext).create();
+        final androidx.appcompat.app.AlertDialog dialog = new androidx.appcompat.app.AlertDialog.Builder(mcontext).create();
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
         dialog.setView(dialogLayout);

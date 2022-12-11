@@ -2,7 +2,7 @@ package com.latenightchauffeurs.adapter;
 
 import android.content.Context;
 import android.content.Intent;
-import android.support.v7.widget.RecyclerView;
+import androidx.recyclerview.widget.RecyclerView;
 import android.text.Html;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -15,7 +15,6 @@ import android.widget.TextView;
 import com.latenightchauffeurs.R;
 import com.latenightchauffeurs.Utils.Utils;
 import com.latenightchauffeurs.activity.StopLocationsList;
-import com.latenightchauffeurs.activity.ViewAvailableRide;
 import com.latenightchauffeurs.activity.ViewRideDetails;
 import com.latenightchauffeurs.model.modelItem;
 

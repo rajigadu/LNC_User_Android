@@ -9,9 +9,9 @@ import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AppCompatActivity;
+import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
+import androidx.appcompat.app.AppCompatActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -28,7 +28,6 @@ import com.latenightchauffeurs.R;
 import com.latenightchauffeurs.Utils.ConstVariable;
 import com.latenightchauffeurs.Utils.OnlineRequest;
 import com.latenightchauffeurs.Utils.Settings;
-import com.latenightchauffeurs.adapter.CurrenrRideAdapter;
 import com.squareup.picasso.Picasso;
 
 import java.io.Serializable;
@@ -146,7 +145,7 @@ public class ViewRideDetails extends AppCompatActivity implements View.OnClickLi
                 // Utils.startActivity(ViewRideDetails.this, ActivityChat.class);
                 break;
             case R.id.ridecancel:
-                android.support.v7.app.AlertDialog.Builder builder = new android.support.v7.app.AlertDialog.Builder(ViewRideDetails.this);
+                androidx.appcompat.app.AlertDialog.Builder builder = new androidx.appcompat.app.AlertDialog.Builder(ViewRideDetails.this);
                 builder.setTitle(ViewRideDetails.this.getString(R.string.app_name));
                 builder.setMessage("Ride canceled successfully please note if you are cancelling within four hours you are subject to being billed for your ride. To keep the ride please press cancel.")
                         .setCancelable(false)
@@ -172,7 +171,7 @@ public class ViewRideDetails extends AppCompatActivity implements View.OnClickLi
     public void showMessage(String dlgText, final HashMap<String, Object> data) {
         LayoutInflater inflater = LayoutInflater.from(ViewRideDetails.this);
         final View dialogLayout = inflater.inflate(R.layout.alert_dialog6, null);
-        final android.support.v7.app.AlertDialog dialog = new android.support.v7.app.AlertDialog.
+        final androidx.appcompat.app.AlertDialog dialog = new androidx.appcompat.app.AlertDialog.
                 Builder(ViewRideDetails.this).create();
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
