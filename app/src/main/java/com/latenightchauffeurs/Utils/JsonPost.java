@@ -494,6 +494,9 @@ public class JsonPost implements ConstVariable {
 
                                     Utils.e("" + "73", "login  mapdata====" + Utils.global.crideslist);
                                     DashBorad.Instance.loadRequestsList(context, Utils.global.crideslist, "mode");
+                                }else {
+                                    new Utils(context);
+                                    Utils.toastTxt(Utils.global.mapMain.get("status").toString(), context);
                                 }
                                 break;
                             case FutureRides:
@@ -1242,7 +1245,7 @@ public class JsonPost implements ConstVariable {
                         progressBar.setVisibility(View.GONE);
                     }*/
                     // other stuff...
-                    //Utils.e(TAG+"98","Exception==================Exception===================Exception"+throwable.getMessage());
+                    Utils.e(TAG+"98","Exception==================Exception===================Exception"+throwable.getMessage());
                 }
             });
         } catch (Exception e) {

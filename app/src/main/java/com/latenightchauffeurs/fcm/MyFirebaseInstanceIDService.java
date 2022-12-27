@@ -47,7 +47,7 @@ public class MyFirebaseInstanceIDService extends FirebaseMessagingService
         SharedPreferences pref = getApplicationContext().getSharedPreferences("lnctoken", 0); // 0 - for private mode
         SharedPreferences.Editor editor = pref.edit();
         editor.putString("tokenid", token);
-        editor.commit();
+        editor.apply();
 
         // Log.e(TAG, "db token token123456: " +pref1.getdToken());
         i=1;
