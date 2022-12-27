@@ -26,7 +26,7 @@
         android:background="@color/off_white"
         android:layout_below="@id/toolbar"
         android:hint="Stop location"
-        android:inputType="textNoSuggestions"
+        android:inputType="none"
         android:padding="@dimen/padding_10"
         android:textColor="@color/black"
         android:textColorHint="@color/black_light"

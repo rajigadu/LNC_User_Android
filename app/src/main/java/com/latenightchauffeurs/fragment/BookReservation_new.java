@@ -25,6 +25,8 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import android.os.SystemClock;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.text.format.DateFormat;
@@ -124,6 +126,7 @@ public class BookReservation_new extends Fragment implements View.OnClickListene
     public static RecyclerView.LayoutManager requestsListManCard;
     public static List<modelItem> requestsListCard;
     public HashMap<String, Object> mapCard;
+    private Long lastClickTime = Long.valueOf(0);
 
     public ArrayList<ItemCardList> itemCardLists = new ArrayList<ItemCardList>();
 
@@ -341,6 +344,8 @@ public class BookReservation_new extends Fragment implements View.OnClickListene
         setOnClickListener();
 
         cardList();
+
+        initializeAutoCompleteFragment();
 
         /**
          *  Commented due  to code deprecated and not working.
@@ -582,9 +587,27 @@ public class BookReservation_new extends Fragment implements View.OnClickListene
             }
         });*/
 
-        dropLoc.setOnClickListener(v -> initializeAutoCompleteFragment(AUTOCOMPLETE_DROP_REQUEST_CODE));
+        dropLoc.setOnTouchListener((v, motionEvent) -> {
+            if (motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
+                if (SystemClock.elapsedRealtime() - lastClickTime < 1000) {
+                    return false;
+                }
+                lastClickTime = SystemClock.elapsedRealtime();
+                launchPlaceIntentBuilder(AUTOCOMPLETE_DROP_REQUEST_CODE);
+            }
+            return false;
+        });
 
-        pickupLoc.setOnClickListener(v -> initializeAutoCompleteFragment(AUTOCOMPLETE_PICK_REQUEST_CODE));
+        pickupLoc.setOnTouchListener((v, motionEvent) -> {
+            if (motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
+                if (SystemClock.elapsedRealtime() - lastClickTime < 1000) {
+                    return false;
+                }
+                lastClickTime = SystemClock.elapsedRealtime();
+                launchPlaceIntentBuilder(AUTOCOMPLETE_PICK_REQUEST_CODE);
+            }
+            return false;
+        });
 
         if (!cnumber.equalsIgnoreCase("")) {
             card_number.setText(cnumber);
@@ -596,6 +619,12 @@ public class BookReservation_new extends Fragment implements View.OnClickListene
         if (!cyear.equalsIgnoreCase("")) {
             eyear.setText(cyear);
         }
+    }
+
+    private void launchPlaceIntentBuilder(int requestCode) {
+        Intent intent = new Autocomplete.IntentBuilder(
+                AutocompleteActivityMode.FULLSCREEN, fields).build(getContext());
+        startActivityForResult(intent, requestCode);
     }
 
     private void initBinding(View v) {
@@ -637,33 +666,23 @@ public class BookReservation_new extends Fragment implements View.OnClickListene
         editTextPostalCode = v.findViewById(R.id.button423435);
     }
 
-    private void initializeAutoCompleteFragment(int autocompletePickRequestCode) {
+    private List<Place.Field> fields;
+    private void initializeAutoCompleteFragment() {
         /** Initializing the Places API with the help of our API_KEY*/
         if (!Places.isInitialized()) {
             Places.initialize(
                     getActivity().getApplicationContext(),
-                    getString(R.string.google_api_key));
+                    getString(R.string.google_map_key));
         }
-        startAutoCompleteTextFragment(autocompletePickRequestCode);
-    }
-
-    private void startAutoCompleteTextFragment(int autocompletePickRequestCode) {
         /**
          * Set the fields to specify which types of place data to
          * return after the user has made a selection.
          * */
-        List<Place.Field> fields = Arrays.asList(
+        fields = Arrays.asList(
                 Place.Field.ID,
                 Place.Field.LAT_LNG,
                 Place.Field.ADDRESS,
                 Place.Field.NAME);
-
-        /**
-         * Start the autocomplete intent.
-         */
-        Intent intent = new Autocomplete.IntentBuilder(AutocompleteActivityMode.FULLSCREEN, fields)
-                .build(getActivity());
-        startActivityForResult(intent, autocompletePickRequestCode);
     }
 
     @Override
@@ -1675,44 +1694,6 @@ public class BookReservation_new extends Fragment implements View.OnClickListene
                 long_drop = "";
                 break;
 
-//            case R.id.pickup:
-//                close22.setVisibility(View.GONE);
-//                pickupLoc.setSelection(0);
-//                pickupLoc.setCursorVisible(true);
-//                dropLoc.setSelection(0);
-//                dropLoc.setCursorVisible(false);
-//                Log.e("error123", "error123");
-//
-//                if (pickupLoc.getText().length() > 0) {
-//                    pickupLoc.setSelection(pickupLoc.getText().length());
-//                    iscursor = true;
-//                    close11.setVisibility(View.VISIBLE);
-//                } else {
-//                    close11.setVisibility(View.GONE);
-//                }
-//                isClick = 1;
-//                break;
-//
-//            case R.id.drop:
-//                close11.setVisibility(View.GONE);
-//                dropLoc.setSelection(0);
-//                dropLoc.setCursorVisible(true);
-//                pickupLoc.setSelection(0);
-//                pickupLoc.setCursorVisible(false);
-//
-//                isdcursor = true;
-//
-//                Log.e("error123", "error123");
-//
-//                if (dropLoc.getText().length() > 0) {
-//                    dropLoc.setSelection(dropLoc.getText().length());
-//                    close22.setVisibility(View.VISIBLE);
-//                } else {
-//                    close22.setVisibility(View.GONE);
-//                }
-//                isClick = 2;
-//                break;
-
             case R.id.btn_apply_promo:
                 showPromoDialog();
                 break;
@@ -1720,37 +1701,6 @@ public class BookReservation_new extends Fragment implements View.OnClickListene
     }
 
     void pickStops() {
-       /* new Utils(mContext);
-        // Utils.toastTxt("ok",UserSignup.this);
-
-        final CharSequence[] items;
-        items=stopsList.toArray(new CharSequence[stopsList.size()]);
-
-        if(items.length>0)
-        {
-            AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
-            builder.setTitle("Stop Address Options");
-            builder.setItems(items, new DialogInterface.OnClickListener()
-            {
-                public void onClick(DialogInterface dialog,int item)
-                {
-                    // Do something with the selection
-                    no_stops.setText(items[item]);
-
-                    if(no_stops.getText().toString().equalsIgnoreCase("Yes"))
-                    {
-
-                    }
-                    else
-                    {
-                        stopsAddList.clear();
-                        loadRequestsList(mContext,stopsAddList,"");
-                    }
-                }
-            });
-            AlertDialog alert = builder.create();
-            alert.show();
-        }*/
 
         Intent i = new Intent(mContext, AddStops.class);
 
@@ -1761,19 +1711,6 @@ public class BookReservation_new extends Fragment implements View.OnClickListene
     }
 
     public void showTimePickerDialog() {
-        /*Calendar calendar = Calendar.getInstance();
-        TimePickerDialog tpd = TimePickerDialog.newInstance(
-                new TimePickerDialog.OnTimeSetListener() {
-                    @Override
-                    public void onTimeSet(TimePickerDialog view, int hourOfDay, int minute, int second) {
-
-                    }
-
-                }, calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE),
-                false);
-
-        tpd.setMinTime(10, 0, 0); // MIN: hours, minute, secconds
-        tpd.show(getActivity().getFragmentManager(), "TimePickerDialog");*/
         DialogFragment newFragment = new TimePickerFragment();
         newFragment.show(getFragmentManager(), "timePicker");
     }

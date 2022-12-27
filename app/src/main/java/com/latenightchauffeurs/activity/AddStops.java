@@ -1,5 +1,6 @@
 package com.latenightchauffeurs.activity;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -11,7 +12,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.os.SystemClock;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AutoCompleteTextView;
@@ -26,8 +29,11 @@ import com.google.android.gms.common.api.ResultCallback;
 import com.google.android.gms.location.places.Place;
 import com.google.android.gms.location.places.PlaceBuffer;
 import com.google.android.gms.location.places.Places;
+import com.google.android.libraries.places.api.model.Place.Field;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
+import com.google.android.libraries.places.widget.Autocomplete;
+import com.google.android.libraries.places.widget.model.AutocompleteActivityMode;
 import com.latenightchauffeurs.R;
 import com.latenightchauffeurs.Utils.ConstVariable;
 import com.latenightchauffeurs.Utils.Utils;
@@ -38,6 +44,7 @@ import com.latenightchauffeurs.model.modelItem;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
@@ -60,7 +67,10 @@ public class AddStops extends AppCompatActivity implements GoogleApiClient.OnCon
             -122.180831), new LatLng(37.430610, -121.972090));
     private PlaceArrayAdapter mPlaceArrayAdapter_stop;
     String location_address = "";
+    private Long lastClickTime = Long.valueOf(0);
+    private List<Field> fields;
 
+    @SuppressLint("ClickableViewAccessibility")
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -76,7 +86,9 @@ public class AddStops extends AppCompatActivity implements GoogleApiClient.OnCon
 //        title.setText(Html.fromHtml(title11));
         title.setText("Stop Address");
 
-        Utils.global.mGoogleApiClient_stopaddress = new GoogleApiClient.Builder(AddStops.this)
+        initializeAutoCompleteIntent();
+
+        /*Utils.global.mGoogleApiClient_stopaddress = new GoogleApiClient.Builder(AddStops.this)
                 .addApi(Places.GEO_DATA_API)
                 .enableAutoManage(AddStops.this, GOOGLE_API_CLIENT_ID_PICK, (GoogleApiClient.OnConnectionFailedListener) AddStops.this)
                 .addConnectionCallbacks((GoogleApiClient.ConnectionCallbacks) this)
@@ -85,7 +97,18 @@ public class AddStops extends AppCompatActivity implements GoogleApiClient.OnCon
         location.setThreshold(3);
         location.setOnItemClickListener(mAutocompleteClickListener_stop);
         mPlaceArrayAdapter_stop = new PlaceArrayAdapter(AddStops.this, android.R.layout.simple_list_item_1, BOUNDS_MOUNTAIN_VIEW, null);
-        location.setAdapter(mPlaceArrayAdapter_stop);
+        location.setAdapter(mPlaceArrayAdapter_stop);*/
+
+        location.setOnTouchListener((v, motionEvent) -> {
+            if (motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
+                if (SystemClock.elapsedRealtime() - lastClickTime < 1000) {
+                    return false;
+                }
+                lastClickTime = SystemClock.elapsedRealtime();
+                launchPlaceIntentBuilder(007);
+            }
+            return false;
+        });
 
         back.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -105,14 +128,8 @@ public class AddStops extends AppCompatActivity implements GoogleApiClient.OnCon
                     }else{
                         map.put("location", location.getText().toString());
                     }
-
-
-
                     stopsList.add(map);
                     location.setText("");
-
-
-
                 } else {
                     Utils.toastTxt("please enter location address.", AddStops.this);
                 }
@@ -153,6 +170,41 @@ public class AddStops extends AppCompatActivity implements GoogleApiClient.OnCon
             if (stopsList != null)
                 loadRequestsList(mcontext, stopsList, "");
         }
+    }
+
+    private void launchPlaceIntentBuilder(int requestCode) {
+        Intent intent = new Autocomplete.IntentBuilder(
+                AutocompleteActivityMode.FULLSCREEN, fields).build(this);
+        startActivityForResult(intent, requestCode);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK) {
+            if (requestCode == 007) {
+                com.google.android.libraries.places.api.model.Place place = Autocomplete.getPlaceFromIntent(data);
+                location.setText(place.getAddress());
+            }
+        }
+    }
+
+    private void initializeAutoCompleteIntent() {
+        /** Initializing the Places API with the help of our API_KEY*/
+        if (!com.google.android.libraries.places.api.Places.isInitialized()) {
+            com.google.android.libraries.places.api.Places.initialize(
+                    getApplicationContext(),
+                    getString(R.string.google_map_key));
+        }
+        /**
+         * Set the fields to specify which types of place data to
+         * return after the user has made a selection.
+         * */
+        fields = Arrays.asList(
+                com.google.android.libraries.places.api.model.Place.Field.ID,
+                com.google.android.libraries.places.api.model.Place.Field.LAT_LNG,
+                com.google.android.libraries.places.api.model.Place.Field.ADDRESS,
+                com.google.android.libraries.places.api.model.Place.Field.NAME);
     }
 
     @Override
