@@ -284,7 +284,7 @@
 
         <service
             android:name=".fcm.MyFirebaseInstanceIDService"
-            android:exported="true">
+            android:exported="false">
             <intent-filter>
                 <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
             </intent-filter>
@@ -292,8 +292,7 @@
 
         <service
             android:name=".fcm.MyFirebaseMessagingService"
-            android:exported="true"
-            android:stopWithTask="false">
+            android:exported="false">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>

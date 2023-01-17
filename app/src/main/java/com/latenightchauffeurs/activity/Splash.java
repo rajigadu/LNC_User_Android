@@ -53,12 +53,15 @@ public class Splash extends AppCompatActivity
         handler = new Handler();
 
         FirebaseMessaging.getInstance().getToken().addOnCompleteListener(task -> {
-            if (task.isSuccessful()) {
-                SharedPreferences pref = getApplicationContext().getSharedPreferences("lnctoken", 0); // 0 - for private mode
-                SharedPreferences.Editor editor = pref.edit();
-                editor.putString("tokenid", task.getResult());
-                editor.apply();
+            if (!task.isSuccessful()) {
+                Log.w(TAG, "Fetching FCM registration token failed", task.getException());
+                return;
             }
+            SharedPreferences pref = getApplicationContext().getSharedPreferences("lnctoken", 0); // 0 - for private mode
+            SharedPreferences.Editor editor = pref.edit();
+            editor.putString("tokenid", task.getResult());
+            editor.apply();
+            Log.e(TAG, "Lnc user token: " + task.getResult());
         });
 
 //        try {

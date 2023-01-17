@@ -6,12 +6,15 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.media.MediaPlayer;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Build;
+
+import androidx.annotation.NonNull;
 import androidx.core.app.NotificationCompat;
 import android.util.Log;
 
@@ -29,6 +32,7 @@ import org.json.JSONObject;
 
 import java.io.Serializable;
 import java.util.HashMap;
+import java.util.Objects;
 
 /**
  * Created by AnaadIT on 3/30/2017.
@@ -43,9 +47,9 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
         //Log.e(TAG, "NotificationMessageBody:================= " + remoteMessage.getData().toString());
         if (remoteMessage.getData().size() > 0)
-            if (remoteMessage.getData().get("data") != null && !remoteMessage.getData().get("data").toString().equalsIgnoreCase("")) {
+            if (remoteMessage.getData().get("data") != null && !Objects.requireNonNull(remoteMessage.getData().get("data")).equalsIgnoreCase("")) {
                 try {
-                    JSONObject json = new JSONObject(remoteMessage.getData().get("data").toString());
+                    JSONObject json = new JSONObject(Objects.requireNonNull(remoteMessage.getData().get("data")));
                     String title = json.getString("title").toString();
                     //String body=json.getString("body").toString();
 
@@ -66,7 +70,19 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
             }
     }
 
+    @Override
+    public void onNewToken(@NonNull String token) {
+        super.onNewToken(token);
+        sendRegistrationToServer(token);
+    }
 
+    private void sendRegistrationToServer(String token)
+    {
+        SharedPreferences pref = getApplicationContext().getSharedPreferences("lnctoken", 0); // 0 - for private mode
+        SharedPreferences.Editor editor = pref.edit();
+        editor.putString("tokenid", token);
+        editor.apply();
+    }
 
     private void sendNotification(String title, HashMap<String, Object> map) {
         Intent intent = null;
