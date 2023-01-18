@@ -386,7 +386,7 @@ public class Home extends Fragment implements OnMapReadyCallback, View.OnClickLi
         };
     }
 
-    private void showNotificationPermission() {
+    private void showNotificationPermissionRequest() {
         if (Build.VERSION.SDK_INT >= 33 &&
                 !shouldShowRequestPermissionRationale(Manifest.permission.POST_NOTIFICATIONS)) {
             ActivityCompat.requestPermissions(
@@ -680,16 +680,14 @@ public class Home extends Fragment implements OnMapReadyCallback, View.OnClickLi
                         }
                     }
                     if (dialogFragment != null) dialogFragment.dismissAllowingStateLoss();
-                    if (ContextCompat.checkSelfPermission(mcontext,
-                            Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
-                        showNotificationPermission();
-                    }
                     return;
                 } else {
                     Utils.toastTxt("need permissions for location update", mcontext);
                     // permission denied, boo! Disable the
                     // functionality that depends on this permission.
                 }
+                //Fixme: Show Notification Permission Dialog
+                showNotificationPermission();
             }
             break;
             case RC_CALL_PERM:
@@ -709,6 +707,13 @@ public class Home extends Fragment implements OnMapReadyCallback, View.OnClickLi
                     }
                 }
                 break;
+        }
+    }
+
+    private void showNotificationPermission() {
+        if (ContextCompat.checkSelfPermission(mcontext,
+                Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
+            showNotificationPermissionRequest();
         }
     }
 
