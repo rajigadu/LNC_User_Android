@@ -22,13 +22,13 @@ repositories {
 
 
 android {
-    compileSdkVersion 31
+    compileSdkVersion 33
     defaultConfig {
         applicationId "com.latenightchauffeurs"
         minSdkVersion 19
-        targetSdkVersion 31
+        targetSdkVersion 33
         versionCode 42
-        versionName "0.0.0040"
+        versionName "0.0.0041"
         testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
         multiDexEnabled true
     }
@@ -134,7 +134,7 @@ dependencies {
     }
 
     //noinspection GradleCompatible
-    implementation 'androidx.appcompat:appcompat:1.0.0'
+    implementation 'androidx.appcompat:appcompat:1.6.0'
     //noinspection GradleCompatible
     implementation 'com.google.android.material:material:1.0.0'
     //noinspection GradleCompatible

@@ -4,6 +4,7 @@ import android.Manifest;
 import android.app.ProgressDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
@@ -18,15 +19,20 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Handler;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
+
+import androidx.annotation.RequiresApi;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 import androidx.core.content.ContextCompat;
 import androidx.appcompat.app.AlertDialog;
 import androidx.cardview.widget.CardView;
+
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -91,12 +97,15 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Serializable;
+import java.lang.reflect.Type;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.security.Permission;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Objects;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -172,6 +181,7 @@ public class Home extends Fragment implements OnMapReadyCallback, View.OnClickLi
     public Marker uMarker = null, dMarker;
     private static OnFragmentInteractionListenerHome mListener;
     public static final int MY_PERMISSIONS_REQUEST_LOCATION = 99;
+    public static final int NOTIFICATION_PERMISSION = 277;
     private static final int RC_CALL_PERM = 101;
     private static final int GOOGLE_API_CLIENT_ID = 0;
     private PlaceArrayAdapter mPlaceArrayAdapter;
@@ -195,7 +205,8 @@ public class Home extends Fragment implements OnMapReadyCallback, View.OnClickLi
     private int count = 0;
 
     @Override
-    public void isAppOpen() { }
+    public void isAppOpen() {
+    }
 
     @Override
     public void permissionStatus(Boolean status, DialogFragment dialogFragment) {
@@ -207,6 +218,12 @@ public class Home extends Fragment implements OnMapReadyCallback, View.OnClickLi
 
     public interface SendData {
         void sendData(HashMap<String, Object> smap);
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        mcontext = getActivity();
     }
 
     @Nullable
@@ -236,7 +253,6 @@ public class Home extends Fragment implements OnMapReadyCallback, View.OnClickLi
         call.setOnClickListener(this);
         msg.setOnClickListener(this);
 
-        mcontext = getActivity();
         Instance = this;
 
         sPoint = new ArrayList<>();
@@ -368,6 +384,41 @@ public class Home extends Fragment implements OnMapReadyCallback, View.OnClickLi
                     mtimer.start();
             }
         };
+    }
+
+    private void showNotificationPermission() {
+        if (Build.VERSION.SDK_INT >= 33 &&
+                !shouldShowRequestPermissionRationale(Manifest.permission.POST_NOTIFICATIONS)) {
+            ActivityCompat.requestPermissions(
+                    requireActivity(), new String[] {Manifest.permission.POST_NOTIFICATIONS}, NOTIFICATION_PERMISSION
+            );
+        }
+    }
+
+    private void showPermissionDeniedDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(mcontext);
+        builder.setTitle(getString(R.string.notification_permission_denied_title));
+        builder.setMessage(getString(R.string.notification_permission_denied_message));
+        builder.setCancelable(false);
+        builder.setPositiveButton("Ok", (dialogInterface, i) -> {
+            navigateToSettings();
+            dialogInterface.dismiss();
+        });
+        builder.setNegativeButton("Cancel", (dialogInterface, i) -> {
+            dialogInterface.cancel();
+        });
+
+        AlertDialog dialog = builder.create();
+        dialog.show();
+    }
+
+    private void navigateToSettings() {
+        try {
+            Uri uri = Uri.fromParts("package", getActivity().getPackageName(), null);
+            Intent intent = new Intent(android.provider.Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+            intent.setData(uri);
+            startActivity(intent);
+        } catch (Exception e) {}
     }
 
     public static void DriverLocationUpdateRequest() {
@@ -535,10 +586,10 @@ public class Home extends Fragment implements OnMapReadyCallback, View.OnClickLi
         mMap.isMyLocationEnabled();
 
         if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            if(ContextCompat.checkSelfPermission(mcontext, Manifest.permission.ACCESS_FINE_LOCATION)
-                    != PackageManager.PERMISSION_GRANTED){
+            if (ContextCompat.checkSelfPermission(mcontext, Manifest.permission.ACCESS_FINE_LOCATION)
+                    != PackageManager.PERMISSION_GRANTED) {
                 permissionProminentDisclosure();
-            } else  checkLocationPermission();
+            } else checkLocationPermission();
         } else {
             gps = new GPSTracker(mcontext);
 
@@ -562,9 +613,9 @@ public class Home extends Fragment implements OnMapReadyCallback, View.OnClickLi
 
     private void permissionProminentDisclosure() {
         ProminentDisclosureFragment prominentDisclosure = new ProminentDisclosureFragment();
-        prominentDisclosure.setTargetFragment(this,1);
+        prominentDisclosure.setTargetFragment(this, 1);
         prominentDisclosure.setCancelable(false);
-        prominentDisclosure.show(getActivity().getSupportFragmentManager(),"Prominent Disclosure Fragment");
+        prominentDisclosure.show(getActivity().getSupportFragmentManager(), "Prominent Disclosure Fragment");
     }
 
     public void checkLocationPermission() {
@@ -594,6 +645,12 @@ public class Home extends Fragment implements OnMapReadyCallback, View.OnClickLi
     @Override
     public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
         switch (requestCode) {
+            case NOTIFICATION_PERMISSION: {
+                if (grantResults.length > 0 && grantResults[0] != PackageManager.PERMISSION_GRANTED) {
+                    showPermissionDeniedDialog();
+                }
+            }
+            break;
             case MY_PERMISSIONS_REQUEST_LOCATION: {
                 // If request is cancelled, the result arrays are empty.
                 if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
@@ -623,6 +680,10 @@ public class Home extends Fragment implements OnMapReadyCallback, View.OnClickLi
                         }
                     }
                     if (dialogFragment != null) dialogFragment.dismissAllowingStateLoss();
+                    if (ContextCompat.checkSelfPermission(mcontext,
+                            Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
+                        showNotificationPermission();
+                    }
                     return;
                 } else {
                     Utils.toastTxt("need permissions for location update", mcontext);
@@ -640,7 +701,7 @@ public class Home extends Fragment implements OnMapReadyCallback, View.OnClickLi
 
                         if (!cmap.equalsIgnoreCase("")) {
                             Gson gson = new Gson();
-                            java.lang.reflect.Type type = new TypeToken<HashMap<String, String>>() {
+                            Type type = new TypeToken<HashMap<String, String>>() {
                             }.getType();
                             HashMap<String, Object> map = gson.fromJson(cmap, type);
                             getCall(map);

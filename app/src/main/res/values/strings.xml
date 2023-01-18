@@ -43,6 +43,8 @@
     <string name="prominent_disclosure_discription"><b>LateNightChauffeurs</b> App collects location data to enable the App to determine current location for calculating distance and cost between Current Location and Target Location. \n\n This information is accessed even when the app is closed or not in use. It is not used to support any advertising.
         \n\n WE may collect Mac Address, performance data about your device, carrier/operating system including device and connection type, and IP address. Unless you have elected to remain anonymous through your device and/or platform settings, this information may be collected and used by us automatically if you use the User or Driver App through your mobile device(s) via any OUR mobile application, through your mobile’s browser or otherwise.</string>
     <string name="google_map_key">AIzaSyAK7N4kOTSAWpSlzoOQk9_dKp9Sci2sshY</string>
+    <string name="notification_permission_denied_message">You won\'t be receiving notification\'s from us. You will miss out exciting offers, exchange rate changes and rewards!. Please press \'OK\' to open app settings</string>
+    <string name="notification_permission_denied_title">Please allow us to send notifications</string>
 
 
     <array name="indicator_colors">
