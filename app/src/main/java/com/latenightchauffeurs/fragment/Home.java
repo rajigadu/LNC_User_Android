@@ -390,9 +390,7 @@ public class Home extends Fragment implements OnMapReadyCallback, View.OnClickLi
     private void showNotificationPermissionRequest() {
         if (Build.VERSION.SDK_INT >= 33 &&
                 !shouldShowRequestPermissionRationale(Manifest.permission.POST_NOTIFICATIONS)) {
-            ActivityCompat.requestPermissions(
-                    requireActivity(), new String[] {Manifest.permission.POST_NOTIFICATIONS}, NOTIFICATION_PERMISSION
-            );
+            requestPermissions(new String[] {Manifest.permission.POST_NOTIFICATIONS}, NOTIFICATION_PERMISSION);
         }
     }
 
