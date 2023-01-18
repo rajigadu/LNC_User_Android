@@ -224,6 +224,7 @@ public class Home extends Fragment implements OnMapReadyCallback, View.OnClickLi
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mcontext = getActivity();
+        showNotificationPermission();
     }
 
     @Nullable
@@ -686,8 +687,6 @@ public class Home extends Fragment implements OnMapReadyCallback, View.OnClickLi
                     // permission denied, boo! Disable the
                     // functionality that depends on this permission.
                 }
-                //Fixme: Show Notification Permission Dialog
-                showNotificationPermission();
             }
             break;
             case RC_CALL_PERM:
