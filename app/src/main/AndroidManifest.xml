@@ -19,6 +19,10 @@
         tools:node="remove" />
     <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS"/>
+    <uses-permission android:name="com.latenightchauffeurs.permission.MAPS_RECEIVE" />
+    <uses-permission android:name="com.android.alarm.permission.SET_ALARM" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS" />
 
 
     <uses-feature
@@ -33,13 +37,6 @@
     <uses-feature
         android:name="android.hardware.camera.autofocus"
         android:required="false" />
-
-
-    <uses-permission android:name="com.latenightchauffeurs.permission.MAPS_RECEIVE" />
-    <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
-    <uses-permission android:name="com.android.alarm.permission.SET_ALARM" />
-    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
-    <uses-permission android:name="android.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS" />
 
     <application
         android:name=".Utils.MyApplication"
@@ -58,17 +55,6 @@
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyDhDD6XROfPs4WkFmbTHvV1KqkNVP1kEmk" />
-
-
-        <!--        <meta-data-->
-        <!--            android:name="com.google.android.geo.API_KEY"-->
-        <!--            android:value="AIzaSyBRzUCMhC0dooTNbHeIpD2iycfIawOHM6g" />-->
-
-
-        <!--        <meta-data-->
-        <!--            android:name="com.google.android.geo.API_KEY"-->
-        <!--            android:value="AIzaSyCu3uKvAohPy9jgqw1CluTCAsSS6XKRvq4" />-->
-
 
         <meta-data
             android:name="com.google.android.gms.version"
@@ -154,103 +140,103 @@
             android:name=".activity.WebViewAll"
             android:configChanges="orientation"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden"></activity>
+            android:windowSoftInputMode="stateHidden"/>
 
         <activity
             android:name=".activity.Forgot"
             android:configChanges="orientation"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden"></activity>
+            android:windowSoftInputMode="stateHidden"/>
 
         <activity
             android:name=".activity.AddAddress"
             android:configChanges="orientation"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden"></activity>
+            android:windowSoftInputMode="stateHidden"/>
 
         <activity
             android:name=".activity.SocialSignUp"
             android:configChanges="orientation"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden"></activity>
+            android:windowSoftInputMode="stateHidden"/>
 
         <activity
             android:name=".activity.DropAddressList"
             android:configChanges="orientation"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden"></activity>
+            android:windowSoftInputMode="stateHidden"/>
 
         <activity
             android:name=".activity.ContactUs"
             android:configChanges="orientation"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden"></activity>
+            android:windowSoftInputMode="stateHidden"/>
 
         <activity
             android:name=".activity.ViewAvailableRide"
             android:configChanges="orientation"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden"></activity>
+            android:windowSoftInputMode="stateHidden"/>
 
         <activity
             android:name=".activity.UserLocation"
             android:configChanges="orientation"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden"></activity>
+            android:windowSoftInputMode="stateHidden"/>
 
         <activity
             android:name=".activity.ActivityChat"
             android:configChanges="orientation"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden"></activity>
+            android:windowSoftInputMode="stateHidden"/>
 
         <activity
             android:name=".activity.CancelRide"
             android:configChanges="orientation"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden"></activity>
+            android:windowSoftInputMode="stateHidden"/>
 
         <activity
             android:name=".activity.CardsList"
             android:configChanges="orientation"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden"></activity>
+            android:windowSoftInputMode="stateHidden"/>
 
         <activity
             android:name=".activity.Rating"
             android:configChanges="orientation"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden"></activity>
+            android:windowSoftInputMode="stateHidden"/>
 
         <activity
             android:name=".activity.AddStops"
             android:configChanges="orientation"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden"></activity>
+            android:windowSoftInputMode="stateHidden"/>
 
         <activity
             android:name=".activity.StopLocationsList"
             android:configChanges="orientation"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden"></activity>
+            android:windowSoftInputMode="stateHidden"/>
 
         <activity
             android:name=".activity.ViewRideDetails"
             android:configChanges="orientation"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden"></activity>
+            android:windowSoftInputMode="stateHidden"/>
 
         <activity
             android:name=".activity.ActivityFutureChat"
             android:configChanges="orientation"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden"></activity>
+            android:windowSoftInputMode="stateHidden"/>
 
         <activity
             android:name=".activity.CancelFutureRide"
             android:configChanges="orientation"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden"></activity>
+            android:windowSoftInputMode="stateHidden"/>
 
 
         <activity

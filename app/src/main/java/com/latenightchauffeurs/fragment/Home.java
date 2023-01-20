@@ -390,7 +390,7 @@ public class Home extends Fragment implements OnMapReadyCallback, View.OnClickLi
     private void showNotificationPermissionRequest() {
         if (Build.VERSION.SDK_INT >= 33 &&
                 !shouldShowRequestPermissionRationale(Manifest.permission.POST_NOTIFICATIONS)) {
-            requestPermissions(new String[] {Manifest.permission.POST_NOTIFICATIONS}, NOTIFICATION_PERMISSION);
+            requestPermissions(new String[]{Manifest.permission.POST_NOTIFICATIONS}, NOTIFICATION_PERMISSION);
         }
     }
 
@@ -417,7 +417,8 @@ public class Home extends Fragment implements OnMapReadyCallback, View.OnClickLi
             Intent intent = new Intent(android.provider.Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
             intent.setData(uri);
             startActivity(intent);
-        } catch (Exception e) {}
+        } catch (Exception e) {
+        }
     }
 
     public static void DriverLocationUpdateRequest() {
@@ -644,13 +645,12 @@ public class Home extends Fragment implements OnMapReadyCallback, View.OnClickLi
     @Override
     public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
         switch (requestCode) {
-            case NOTIFICATION_PERMISSION: {
+            case NOTIFICATION_PERMISSION:
                 if (grantResults.length > 0 && grantResults[0] != PackageManager.PERMISSION_GRANTED) {
                     showPermissionDeniedDialog();
                 }
-            }
-            break;
-            case MY_PERMISSIONS_REQUEST_LOCATION: {
+                break;
+            case MY_PERMISSIONS_REQUEST_LOCATION:
                 // If request is cancelled, the result arrays are empty.
                 if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     // permission was granted, yay! Do the
@@ -685,8 +685,7 @@ public class Home extends Fragment implements OnMapReadyCallback, View.OnClickLi
                     // permission denied, boo! Disable the
                     // functionality that depends on this permission.
                 }
-            }
-            break;
+                break;
             case RC_CALL_PERM:
                 if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     if (requestCode == RC_CALL_PERM) {
