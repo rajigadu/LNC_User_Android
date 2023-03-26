@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:clickable="true"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/linear_layout_account_info"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/accountsListItemBackgroundColor"
+        android:orientation="horizontal"
+        android:paddingBottom="@dimen/padding_x_small"
+        android:paddingTop="@dimen/padding_x_small">
+
+        <ImageView
+            android:id="@+id/image_view_card_type"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@null"
+            android:paddingBottom="@dimen/padding_x_small"
+            android:paddingEnd="@dimen/padding_x_small"
+            android:paddingLeft="@dimen/padding_medium"
+            android:paddingRight="@dimen/padding_x_small"
+            android:paddingStart="@dimen/padding_medium"
+            android:paddingTop="@dimen/padding_x_small"
+            android:src="@drawable/ic_card_color_amex" />
+
+        <com.cardconnect.consumersdk.views.payment.components.ConsumerTextView
+            android:id="@+id/text_view_account_type"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:paddingEnd="@dimen/no_padding"
+            android:paddingLeft="@dimen/padding_medium"
+            android:paddingRight="@dimen/no_padding"
+            android:paddingStart="@dimen/padding_medium"
+            android:textColor="?attr/accountsListItemTextColor"
+            android:textSize="?attr/accountsListItemTextSize"
+            app:font="?attr/consumerFontRegular"
+            tools:text="AMEX" />
+
+        <com.cardconnect.consumersdk.views.payment.components.ConsumerTextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:paddingLeft="@dimen/padding_x_small"
+            android:paddingRight="@dimen/padding_x_small"
+            android:text="@string/ellipsis_text"
+            android:textColor="?attr/accountsListItemTextColor"
+            android:textSize="?attr/accountsListItemTextSize"
+            app:font="?attr/consumerFontRegular"
+            tools:text="@string/ellipsis_text" />
+
+        <com.cardconnect.consumersdk.views.payment.components.ConsumerTextView
+            android:id="@+id/text_view_account_last_four"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:textColor="?attr/accountsListItemTextColor"
+            android:textSize="?attr/accountsListItemTextSize"
+            app:font="?attr/consumerFontRegular"
+            tools:text="1111" />
+
+        <com.cardconnect.consumersdk.views.payment.components.ConsumerTextView
+            android:id="@+id/text_view_account_default"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:padding="@dimen/padding_medium"
+            android:text="@string/accounts_default_text"
+            android:textColor="?attr/accountsListItemDefaultTextColor"
+            android:textSize="?attr/accountsListItemTextSize"
+            app:font="?attr/consumerFontLight" />
+
+        <ImageView
+            android:id="@+id/image_view_arrow"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:contentDescription="@null"
+            android:src="@drawable/ic_arrow_right"
+            android:visibility="gone" />
+    </LinearLayout>
+
+    <View
+        android:id="@+id/view_divider"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@+id/linear_layout_account_info"
+        android:layout_marginBottom="1dp"
+        android:background="?attr/consumerDividerColor" />
+
+</RelativeLayout>

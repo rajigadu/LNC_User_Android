@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?attr/consumerUiBackgroundColor"
+    android:orientation="vertical"
+    tools:context="com.cardconnect.consumersdk.views.payment.accounts.PaymentAccountsActivity">
+
+    <include layout="@layout/toolbar_container" />
+
+    <com.cardconnect.consumersdk.views.payment.components.ConsumerTextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="@dimen/padding_medium"
+        android:paddingEnd="@dimen/no_padding"
+        android:paddingLeft="@dimen/padding_medium"
+        android:paddingRight="@dimen/no_padding"
+        android:paddingStart="@dimen/padding_medium"
+        android:paddingTop="@dimen/padding_xxxx_large"
+        android:text="@string/accounts_payment_methods_text"
+        android:textAllCaps="true"
+        android:textColor="?attr/consumerHeaderTextViewTextColor"
+        android:textSize="?attr/consumerHeaderTextViewTextSize"
+        app:font="?attr/consumerFontMedium" />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="?attr/consumerDividerColor" />
+
+    <include
+        android:id="@+id/relative_layout_android_pay_container"
+        layout="@layout/android_pay_container" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/height_accounts_container">
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_view_accounts"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/height_accounts_container"
+            android:background="?attr/accountsListBackgroundColor" />
+        <com.cardconnect.consumersdk.views.payment.components.ConsumerTextView
+            android:id="@+id/textview_not_found_message"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:alpha="0"
+            android:gravity="center"
+            android:padding="@dimen/padding_x_large_two"
+            android:text="@string/accounts_not_found_text"
+            android:textColor="@color/color_primary"
+            android:textSize="@dimen/text_size_x_small"
+            app:font="?attr/consumerFontRegular" />
+
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="?attr/consumerDividerColor" />
+
+    <com.cardconnect.consumersdk.views.payment.components.ConsumerTextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/padding_x_large"
+        android:text="?attr/accountsDisclaimerTextViewText"
+        android:textColor="?attr/accountsDisclaimerTextViewTextColor"
+        android:textSize="?attr/accountsDisclaimerTextViewTextSize"
+        app:font="?attr/consumerFontLight" />
+
+    <com.cardconnect.consumersdk.views.payment.components.ConsumerButton
+        android:id="@+id/button_add_new_card"
+        style="?attr/borderlessButtonStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/margin_medium"
+        android:width="@dimen/width_button_add_account"
+        android:background="@drawable/background_active_button"
+        android:paddingBottom="@dimen/padding_x_large"
+        android:paddingTop="@dimen/padding_x_large"
+        android:text="@string/accounts_add_new_card_text"
+        android:textAllCaps="false"
+        android:textColor="?attr/consumerActionButtonTextColor"
+        android:textSize="?attr/consumerActionButtonTextSize"
+        app:font="?attr/consumerFontRegular" />
+
+</LinearLayout>

@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/AppConsumerTheme.PopupOverlay">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar_consumer"
+            android:layout_width="match_parent"
+            android:layout_height="?android:attr/actionBarSize"
+            android:background="?attr/consumerToolbarBackgroundColor"
+            app:contentInsetEnd="@dimen/no_padding"
+            app:contentInsetLeft="@dimen/no_padding"
+            app:contentInsetRight="@dimen/no_padding"
+            app:contentInsetStart="@dimen/no_padding"
+            app:popupTheme="@style/AppConsumerTheme.PopupOverlay">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <com.cardconnect.consumersdk.views.payment.components.ConsumerButton
+                    android:id="@+id/button_back"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:background="@android:color/transparent"
+                    android:gravity="start|center_vertical"
+                    android:paddingEnd="@dimen/no_padding"
+                    android:paddingLeft="@dimen/padding_medium"
+                    android:paddingRight="@dimen/no_padding"
+                    android:paddingStart="@dimen/padding_medium"
+                    android:text="@string/back_text"
+                    android:textAllCaps="false"
+                    android:textColor="?attr/consumerToolbarTextColor"
+                    android:textSize="?attr/consumerToolbarNavItemTextSize"
+                    app:font="?attr/consumerFontLight"
+                    tools:text="Back">
+
+                </com.cardconnect.consumersdk.views.payment.components.ConsumerButton>
+
+                <com.cardconnect.consumersdk.views.payment.components.ConsumerButton
+                    android:id="@+id/button_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_centerInParent="true"
+                    android:background="@android:color/transparent"
+                    android:textAllCaps="false"
+                    android:textColor="?attr/consumerToolbarTextColor"
+                    android:textSize="?attr/consumerToolbarTitleTextSize"
+                    app:font="?attr/consumerFontLight"
+                    tools:text="Title">
+
+                </com.cardconnect.consumersdk.views.payment.components.ConsumerButton>
+
+                <com.cardconnect.consumersdk.views.payment.components.ConsumerButton
+                    android:id="@+id/button_edit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:background="@android:color/transparent"
+                    android:gravity="end|center_vertical"
+                    android:paddingEnd="@dimen/padding_medium"
+                    android:paddingLeft="@dimen/no_padding"
+                    android:paddingRight="@dimen/padding_medium"
+                    android:paddingStart="@dimen/no_padding"
+                    android:text="@string/accounts_edit_text"
+                    android:visibility="gone"
+                    android:textAllCaps="false"
+                    android:textColor="?attr/consumerToolbarTextColor"
+                    android:textSize="?attr/consumerToolbarNavItemTextSize"
+                    app:font="?attr/consumerFontLight"
+                    tools:text="Edit" />
+            </RelativeLayout>
+
+        </android.support.v7.widget.Toolbar>
+
+    </android.support.design.widget.AppBarLayout>
+</LinearLayout>

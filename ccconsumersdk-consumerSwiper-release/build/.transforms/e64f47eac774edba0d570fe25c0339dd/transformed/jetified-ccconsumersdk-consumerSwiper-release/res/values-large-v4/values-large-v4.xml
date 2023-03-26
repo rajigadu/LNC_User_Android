@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <bool name="is_phone">false</bool>
+    <dimen name="height_accounts_container">300dp</dimen>
+    <dimen name="width_confirmation_detail_container">350dp</dimen>
+</resources>

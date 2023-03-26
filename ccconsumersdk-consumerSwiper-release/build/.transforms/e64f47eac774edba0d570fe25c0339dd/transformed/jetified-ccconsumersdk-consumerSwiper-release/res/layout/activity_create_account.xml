@@ -1,0 +1,617 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?attr/consumerUiBackgroundColor"
+    android:orientation="vertical"
+    tools:context="com.cardconnect.consumersdk.views.payment.createaccount.CreateAccountActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <include layout="@layout/toolbar_container" />
+        <RelativeLayout
+            android:id="@+id/relative_layout_swipe_card"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/margin_medium"
+            android:orientation="horizontal"
+            android:visibility="gone">
+            <ImageView
+                android:id="@+id/image_view_left_arrow"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:contentDescription="@null"
+                android:rotation="180"
+                android:src="@drawable/ic_swipe_arrow" />
+            <com.cardconnect.consumersdk.views.payment.components.ConsumerTextView
+                android:id="@+id/text_view_swipe_card"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toEndOf="@+id/image_view_left_arrow"
+                android:layout_toRightOf="@+id/image_view_left_arrow"
+                android:paddingEnd="@dimen/padding_medium"
+                android:paddingLeft="@dimen/padding_medium"
+                android:paddingRight="@dimen/padding_medium"
+                android:paddingStart="@dimen/padding_medium"
+                android:text="@string/create_account_swipe_to_add_card"
+                android:textColor="?attr/consumerFieldsTextColor"
+                app:font="?attr/consumerFontLight" />
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toEndOf="@+id/text_view_swipe_card"
+                android:layout_toRightOf="@+id/text_view_swipe_card"
+                android:contentDescription="@null"
+                android:src="@drawable/ic_swipe_arrow" />
+
+        </RelativeLayout>
+        <include
+            android:id="@+id/relative_layout_card"
+            layout="@layout/card_container" />
+
+        <com.cardconnect.consumersdk.views.payment.components.ConsumerTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="@dimen/padding_small"
+            android:paddingEnd="@dimen/no_padding"
+            android:paddingLeft="@dimen/padding_medium"
+            android:paddingRight="@dimen/no_padding"
+            android:paddingStart="@dimen/padding_medium"
+            android:paddingTop="@dimen/padding_xxxx_large"
+            android:text="@string/card_details_text"
+            android:textAllCaps="true"
+            android:textColor="?attr/consumerHeaderTextViewTextColor"
+            android:textSize="?attr/consumerHeaderTextViewTextSize"
+            app:font="?attr/consumerFontMedium" />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="?attr/consumerDividerColor" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?attr/consumerFieldsBackgroundColor"
+            android:orientation="vertical"
+            android:paddingEnd="@dimen/no_padding"
+            android:paddingLeft="@dimen/padding_x_large"
+            android:paddingRight="@dimen/no_padding"
+            android:paddingStart="@dimen/padding_x_large"
+            android:paddingTop="@dimen/no_padding">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/height_card_field_container"
+                android:orientation="horizontal"
+                android:weightSum="3">
+                <com.cardconnect.consumersdk.views.payment.components.ConsumerTextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="1"
+                    android:text="@string/create_account_card_number_text"
+                    android:textColor="?attr/consumerFieldsTextColor"
+                    android:textSize="?attr/consumerFieldsTextSize"
+                    app:font="?attr/consumerFontLight"
+                    tools:text="@string/create_account_card_number_text" />
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2"
+                    android:orientation="horizontal">
+                    <com.cardconnect.consumersdk.views.CCConsumerCreditCardNumberEditText
+                        android:id="@+id/edit_text_card_number"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_centerVertical="true"
+                        android:layout_toLeftOf="@+id/image_view_valid_card_number"
+                        android:layout_toStartOf="@+id/image_view_valid_card_number"
+                        android:background="@android:color/transparent"
+                        android:hint="@string/create_account_required_hint_text"
+                        android:maxLines="1"
+                        android:paddingEnd="@dimen/no_padding"
+                        android:paddingLeft="@dimen/padding_medium"
+                        android:paddingRight="@dimen/no_padding"
+                        android:paddingStart="@dimen/padding_medium"
+                        android:textSize="?attr/consumerFieldsTextSize"
+                        app:font="?attr/consumerFontRegular" />
+                    <ImageView
+                        android:id="@+id/image_view_valid_card_number"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_gravity="center_vertical"
+                        android:layout_toLeftOf="@+id/image_view_card_type_accessory"
+                        android:layout_toStartOf="@+id/image_view_card_type_accessory"
+                        android:contentDescription="@null" />
+                    <ImageView
+                        android:id="@+id/image_view_card_type_accessory"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_gravity="center_vertical"
+                        android:contentDescription="@null"
+                        android:paddingEnd="@dimen/padding_medium"
+                        android:paddingLeft="@dimen/no_padding"
+                        android:paddingRight="@dimen/padding_medium"
+                        android:paddingStart="@dimen/no_padding"
+                        tools:src="@drawable/ic_card_color_visa" />
+                </RelativeLayout>
+
+            </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="?attr/consumerDividerColor" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/height_card_field_container"
+                android:orientation="horizontal"
+                android:weightSum="3">
+                <com.cardconnect.consumersdk.views.payment.components.ConsumerTextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="1"
+                    android:text="@string/create_account_expiration_date_text"
+                    android:textColor="?attr/consumerFieldsTextColor"
+                    android:textSize="?attr/consumerFieldsTextSize"
+                    app:font="?attr/consumerFontLight"
+
+                    tools:text="@string/create_account_expiration_date_text" />
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2"
+                    android:orientation="horizontal">
+                    <com.cardconnect.consumersdk.views.CCConsumerExpirationDateEditText
+                        android:id="@+id/edit_text_expiration_date"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_centerVertical="true"
+                        android:layout_toLeftOf="@+id/image_view_valid_expiration_date"
+                        android:layout_toStartOf="@+id/image_view_valid_expiration_date"
+                        android:background="@android:color/transparent"
+                        android:hint="@string/create_account_required_hint_text"
+                        android:maxLines="1"
+                        android:paddingEnd="@dimen/no_padding"
+                        android:paddingLeft="@dimen/padding_medium"
+                        android:paddingRight="@dimen/no_padding"
+                        android:paddingStart="@dimen/padding_medium"
+                        android:textSize="?attr/consumerFieldsTextSize"
+                        app:font="?attr/consumerFontRegular" />
+                    <ImageView
+                        android:id="@+id/image_view_valid_expiration_date"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_gravity="center_vertical"
+                        android:contentDescription="@null"
+                        android:paddingEnd="@dimen/padding_small"
+                        android:paddingLeft="@dimen/no_padding"
+                        android:paddingRight="@dimen/padding_small"
+                        android:paddingStart="@dimen/no_padding"
+                        tools:src="@drawable/ic_validation_error" />
+                </RelativeLayout>
+
+            </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginBottom="1dp"
+                android:background="?attr/consumerDividerColor" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/height_card_field_container"
+                android:orientation="horizontal"
+                android:weightSum="3">
+                <com.cardconnect.consumersdk.views.payment.components.ConsumerTextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="1"
+                    android:text="@string/create_account_zip_text"
+                    android:textColor="?attr/consumerFieldsTextColor"
+                    android:textSize="?attr/consumerFieldsTextSize"
+                    app:font="?attr/consumerFontLight"
+                    tools:text="@string/create_account_zip_text" />
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2"
+                    android:orientation="horizontal">
+                    <com.cardconnect.consumersdk.views.payment.components.ConsumerEditText
+                        android:id="@+id/edit_text_zip"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_centerVertical="true"
+                        android:background="@android:color/transparent"
+                        android:hint="@string/create_account_optional_hint_text"
+                        android:inputType="number"
+                        android:maxLines="1"
+                        android:paddingEnd="@dimen/no_padding"
+                        android:paddingLeft="@dimen/padding_medium"
+                        android:paddingRight="@dimen/no_padding"
+                        android:paddingStart="@dimen/padding_medium"
+                        android:textSize="?attr/consumerFieldsTextSize"
+                        app:font="?attr/consumerFontRegular" />
+                </RelativeLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="?attr/consumerDividerColor" />
+
+        <com.cardconnect.consumersdk.views.payment.components.ConsumerTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="@dimen/padding_small"
+            android:paddingEnd="@dimen/no_padding"
+            android:paddingLeft="@dimen/padding_medium"
+            android:paddingRight="@dimen/no_padding"
+            android:paddingStart="@dimen/padding_medium"
+            android:paddingTop="@dimen/padding_xxxx_large"
+            android:text="@string/create_account_contact_info_text"
+            android:textAllCaps="true"
+            android:textColor="?attr/consumerHeaderTextViewTextColor"
+            android:textSize="?attr/consumerHeaderTextViewTextSize"
+            app:font="?attr/consumerFontMedium" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="?attr/consumerDividerColor" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?attr/consumerFieldsBackgroundColor"
+            android:orientation="vertical"
+            android:paddingEnd="@dimen/no_padding"
+            android:paddingLeft="@dimen/padding_x_large"
+            android:paddingRight="@dimen/no_padding"
+            android:paddingStart="@dimen/padding_x_large"
+            android:paddingTop="@dimen/no_padding">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/height_card_field_container"
+                android:orientation="horizontal"
+                android:weightSum="3">
+                <com.cardconnect.consumersdk.views.payment.components.ConsumerTextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="1"
+                    android:text="@string/create_account_name_text"
+                    android:textColor="?attr/consumerFieldsTextColor"
+                    android:textSize="?attr/consumerFieldsTextSize"
+                    app:font="?attr/consumerFontLight"
+                    tools:text="@string/create_account_name_text" />
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2"
+                    android:orientation="horizontal">
+                    <com.cardconnect.consumersdk.views.payment.components.ConsumerEditText
+                        android:id="@+id/edit_text_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_centerVertical="true"
+                        android:background="@android:color/transparent"
+                        android:hint="@string/create_account_optional_hint_text"
+                        android:inputType="textPersonName"
+                        android:maxLines="1"
+                        android:nextFocusRight="@+id/edit_text_email"
+                        android:paddingEnd="@dimen/no_padding"
+                        android:paddingLeft="@dimen/padding_medium"
+                        android:paddingRight="@dimen/no_padding"
+                        android:paddingStart="@dimen/padding_medium"
+                        android:textSize="?attr/consumerFieldsTextSize"
+                        app:font="?attr/consumerFontRegular" />
+                </RelativeLayout>
+
+            </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="?attr/consumerDividerColor" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/height_card_field_container"
+                android:orientation="horizontal"
+                android:weightSum="3">
+                <com.cardconnect.consumersdk.views.payment.components.ConsumerTextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="1"
+                    android:text="@string/create_account_email_text"
+                    android:textColor="?attr/consumerFieldsTextColor"
+                    android:textSize="?attr/consumerFieldsTextSize"
+                    app:font="?attr/consumerFontLight"
+                    tools:text="@string/create_account_email_text" />
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2"
+                    android:orientation="horizontal">
+                    <com.cardconnect.consumersdk.views.payment.components.ConsumerEditText
+                        android:id="@+id/edit_text_email"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_centerVertical="true"
+                        android:background="@android:color/transparent"
+                        android:hint="@string/create_account_optional_hint_text"
+                        android:inputType="textEmailAddress"
+                        android:maxLines="1"
+                        android:nextFocusRight="@+id/edit_text_phone"
+                        android:paddingEnd="@dimen/no_padding"
+                        android:paddingLeft="@dimen/padding_medium"
+                        android:paddingRight="@dimen/no_padding"
+                        android:paddingStart="@dimen/padding_medium"
+                        android:textSize="?attr/consumerFieldsTextSize"
+                        app:font="?attr/consumerFontRegular" />
+                </RelativeLayout>
+
+            </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="?attr/consumerDividerColor" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/height_card_field_container"
+                android:orientation="horizontal"
+                android:weightSum="3">
+                <com.cardconnect.consumersdk.views.payment.components.ConsumerTextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="1"
+                    android:text="@string/create_account_phone_text"
+                    android:textColor="?attr/consumerFieldsTextColor"
+                    android:textSize="?attr/consumerFieldsTextSize"
+                    app:font="?attr/consumerFontLight"
+                    tools:text="@string/create_account_phone_text" />
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2"
+                    android:orientation="horizontal">
+                    <com.cardconnect.consumersdk.views.payment.components.ConsumerEditText
+                        android:id="@+id/edit_text_phone"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_centerVertical="true"
+                        android:background="@android:color/transparent"
+                        android:hint="@string/create_account_optional_hint_text"
+                        android:inputType="phone"
+                        android:maxLines="1"
+                        android:nextFocusRight="@+id/edit_text_street"
+                        android:paddingEnd="@dimen/no_padding"
+                        android:paddingLeft="@dimen/padding_medium"
+                        android:paddingRight="@dimen/no_padding"
+                        android:paddingStart="@dimen/padding_medium"
+                        android:textSize="?attr/consumerFieldsTextSize"
+                        app:font="?attr/consumerFontRegular" />
+                </RelativeLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginBottom="1dp"
+            android:background="?attr/consumerDividerColor" />
+
+        <com.cardconnect.consumersdk.views.payment.components.ConsumerTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="@dimen/padding_small"
+            android:paddingEnd="@dimen/no_padding"
+            android:paddingLeft="@dimen/padding_medium"
+            android:paddingRight="@dimen/no_padding"
+            android:paddingStart="@dimen/padding_medium"
+            android:paddingTop="@dimen/padding_xxxx_large"
+            android:text="@string/create_account_billing_info_text"
+            android:textAllCaps="true"
+            android:textColor="?attr/consumerHeaderTextViewTextColor"
+            android:textSize="?attr/consumerHeaderTextViewTextSize"
+            app:font="?attr/consumerFontMedium" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="?attr/consumerDividerColor" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?attr/consumerFieldsBackgroundColor"
+            android:orientation="vertical"
+            android:paddingEnd="@dimen/no_padding"
+            android:paddingLeft="@dimen/padding_x_large"
+            android:paddingRight="@dimen/no_padding"
+            android:paddingStart="@dimen/padding_x_large"
+            android:paddingTop="@dimen/no_padding">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/height_card_field_container"
+                android:orientation="horizontal"
+                android:weightSum="3">
+                <com.cardconnect.consumersdk.views.payment.components.ConsumerTextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="1"
+                    android:text="@string/create_account_street_text"
+                    android:textColor="?attr/consumerFieldsTextColor"
+                    android:textSize="?attr/consumerFieldsTextSize"
+                    app:font="?attr/consumerFontLight"
+                    tools:text="@string/create_account_street_text" />
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2"
+                    android:orientation="horizontal">
+                    <com.cardconnect.consumersdk.views.payment.components.ConsumerEditText
+                        android:id="@+id/edit_text_street"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_centerVertical="true"
+                        android:background="@android:color/transparent"
+                        android:hint="@string/create_account_optional_hint_text"
+                        android:inputType="text"
+                        android:maxLines="1"
+                        android:nextFocusRight="@+id/edit_text_city"
+                        android:paddingEnd="@dimen/no_padding"
+                        android:paddingLeft="@dimen/padding_medium"
+                        android:paddingRight="@dimen/no_padding"
+                        android:paddingStart="@dimen/padding_medium"
+                        android:textSize="?attr/consumerFieldsTextSize"
+                        app:font="?attr/consumerFontRegular" />
+                </RelativeLayout>
+
+            </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="?attr/consumerDividerColor" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/height_card_field_container"
+                android:orientation="horizontal"
+                android:weightSum="3">
+                <com.cardconnect.consumersdk.views.payment.components.ConsumerTextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="1"
+                    android:text="@string/create_account_city_text"
+                    android:textColor="?attr/consumerFieldsTextColor"
+                    android:textSize="?attr/consumerFieldsTextSize"
+                    app:font="?attr/consumerFontLight"
+                    tools:text="@string/create_account_city_text" />
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2"
+                    android:orientation="horizontal">
+                    <com.cardconnect.consumersdk.views.payment.components.ConsumerEditText
+                        android:id="@+id/edit_text_city"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_centerVertical="true"
+                        android:background="@android:color/transparent"
+                        android:hint="@string/create_account_optional_hint_text"
+                        android:inputType="text"
+                        android:maxLines="1"
+                        android:nextFocusRight="@+id/edit_text_state"
+                        android:paddingEnd="@dimen/no_padding"
+                        android:paddingLeft="@dimen/padding_medium"
+                        android:paddingRight="@dimen/no_padding"
+                        android:paddingStart="@dimen/padding_medium"
+                        android:textSize="?attr/consumerFieldsTextSize"
+                        app:font="?attr/consumerFontRegular" />
+                </RelativeLayout>
+
+            </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="?attr/consumerDividerColor" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/height_card_field_container"
+                android:orientation="horizontal"
+                android:weightSum="3">
+                <com.cardconnect.consumersdk.views.payment.components.ConsumerTextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="1"
+                    android:text="@string/create_account_state_text"
+                    android:textColor="?attr/consumerFieldsTextColor"
+                    android:textSize="?attr/consumerFieldsTextSize"
+                    app:font="?attr/consumerFontLight"
+                    tools:text="@string/create_account_state_text" />
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2"
+                    android:orientation="horizontal">
+                    <com.cardconnect.consumersdk.views.payment.components.ConsumerEditText
+                        android:id="@+id/edit_text_state"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_centerVertical="true"
+                        android:background="@android:color/transparent"
+                        android:hint="@string/create_account_optional_hint_text"
+                        android:imeOptions="actionDone"
+                        android:inputType="text"
+                        android:maxLines="1"
+                        android:nextFocusRight="@+id/edit_text_zip"
+                        android:paddingEnd="@dimen/no_padding"
+                        android:paddingLeft="@dimen/padding_medium"
+                        android:paddingRight="@dimen/no_padding"
+                        android:paddingStart="@dimen/padding_medium"
+                        android:textSize="?attr/consumerFieldsTextSize"
+                        app:font="?attr/consumerFontRegular" />
+                </RelativeLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginBottom="1dp"
+            android:background="?attr/consumerDividerColor" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal">
+            <com.cardconnect.consumersdk.views.payment.components.ConsumerButton
+                android:id="@+id/button_create_account"
+                style="?attr/borderlessButtonStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/margin_medium"
+                android:layout_marginTop="@dimen/margin_xx_large"
+                android:width="@dimen/width_button_save_account"
+                android:background="@drawable/background_active_button"
+                android:paddingBottom="@dimen/padding_x_large"
+                android:paddingTop="@dimen/padding_x_large"
+                android:text="@string/create_account_text"
+                android:textAllCaps="false"
+                android:textColor="?attr/consumerActionButtonTextColor"
+                android:textSize="?attr/consumerActionButtonTextSize"
+                app:font="?attr/consumerFontRegular" />
+        </LinearLayout>
+    </LinearLayout>
+
+</ScrollView>
