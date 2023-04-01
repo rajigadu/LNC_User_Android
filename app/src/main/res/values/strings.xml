@@ -46,6 +46,7 @@
     <string name="notification_permission_denied_message">You won\'t be receiving notification\'s from us. You will miss out exciting offers, exchange rate changes and rewards!. Please press \'OK\' to open app settings</string>
     <string name="notification_permission_denied_title">Please allow us to send notifications</string>
     <string name="lorem_ipsum">Lorem Ipsum</string>
+    <string name="note">Note</string>
 
 
     <array name="indicator_colors">
