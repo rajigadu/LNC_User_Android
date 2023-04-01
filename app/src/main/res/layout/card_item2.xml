@@ -94,19 +94,19 @@
 
         </RelativeLayout>
 
-
-            <Button
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/delete_btn"
                 android:layout_width="wrap_content"
-                android:layout_height="25dp"
+                android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:layout_below="@+id/rel_1"
                 android:text="Delete"
+                android:paddingHorizontal="36dp"
                 android:textColor="@color/white_full"
-                android:textSize="12dp"
+                android:textSize="11sp"
                 android:visibility="gone"
                 android:layout_marginTop="@dimen/margin_05"
-                android:background="@drawable/black_round_bg"
+                app:cornerRadius="25dp"
                 android:textAllCaps="false"/>
 
 

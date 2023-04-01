@@ -2,8 +2,8 @@
   <library name="Gradle: com.google.android.libraries.places:places:2.7.0@aar">
     <CLASSES>
       <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/30535518f9ec6c00cfe0b607aa3279e3/transformed/jetified-places-2.7.0/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/30535518f9ec6c00cfe0b607aa3279e3/transformed/jetified-places-2.7.0/AndroidManifest.xml" />
       <root url="file://$USER_HOME$/.gradle/caches/transforms-3/30535518f9ec6c00cfe0b607aa3279e3/transformed/jetified-places-2.7.0/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/30535518f9ec6c00cfe0b607aa3279e3/transformed/jetified-places-2.7.0/AndroidManifest.xml" />
     </CLASSES>
     <JAVADOC>
       <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.google.android.libraries.places/places/2.7.0/791082807ecb8c0f5b4f9571fb956e74fbdeda12/places-2.7.0-javadoc.jar!/" />

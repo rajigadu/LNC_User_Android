@@ -162,17 +162,14 @@
                 android:background="@drawable/fade_green_border_corner_round"
                 android:text=""
                 />
-
-
-
-
             <Button
                 android:id="@+id/submit"
                 android:layout_width="match_parent"
-                android:layout_height="35dp"
+                android:layout_height="wrap_content"
                 android:layout_weight="3"
                 android:singleLine="true"
                 android:text="Add Card"
+                android:textAllCaps="false"
                 android:textColor="#ffffff"
                 android:textSize="@dimen/text_smallsize"
                 android:textStyle="bold"

@@ -30,8 +30,6 @@ import androidx.fragment.app.Fragment;
 import androidx.core.content.ContextCompat;
 import androidx.appcompat.app.AlertDialog;
 import androidx.cardview.widget.CardView;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -84,7 +82,7 @@ import com.latenightchauffeurs.Utils.Settings;
 import com.latenightchauffeurs.Utils.Utils;
 import com.latenightchauffeurs.activity.ActivityChat;
 import com.latenightchauffeurs.activity.CancelRide;
-import com.latenightchauffeurs.activity.DriveByHourActivity;
+import com.latenightchauffeurs.dbh.DriveByHourActivity;
 import com.latenightchauffeurs.activity.Navigation;
 import com.latenightchauffeurs.activity.Rating;
 import com.latenightchauffeurs.adapter.PlaceArrayAdapter;
@@ -107,7 +105,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
-import java.util.Objects;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;

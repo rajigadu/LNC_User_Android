@@ -47,6 +47,8 @@
     <string name="notification_permission_denied_title">Please allow us to send notifications</string>
     <string name="lorem_ipsum">Lorem Ipsum</string>
     <string name="note">Note</string>
+    <string name="book_my_chauffeur">Book My Chauffeur</string>
+    <string name="add_new_card">Add New Card</string>
 
 
     <array name="indicator_colors">
