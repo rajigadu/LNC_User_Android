@@ -1,0 +1,14 @@
+<component name="libraryTable">
+  <library name="Gradle: artifacts:ccconsumersdk-consumerSwiper-release:unspecified">
+    <ANNOTATIONS>
+      <root url="jar://$PROJECT_DIR$/ccconsumersdk-consumerSwiper-release/build/.transforms/8229451e65af5b2e737f2f3b3763f94c/transformed/jetified-ccconsumersdk-consumerSwiper-release/annotations.zip!/" />
+    </ANNOTATIONS>
+    <CLASSES>
+      <root url="file://$PROJECT_DIR$/ccconsumersdk-consumerSwiper-release/build/.transforms/8229451e65af5b2e737f2f3b3763f94c/transformed/jetified-ccconsumersdk-consumerSwiper-release/res" />
+      <root url="jar://$PROJECT_DIR$/ccconsumersdk-consumerSwiper-release/build/.transforms/8229451e65af5b2e737f2f3b3763f94c/transformed/jetified-ccconsumersdk-consumerSwiper-release/jars/classes.jar!/" />
+      <root url="file://$PROJECT_DIR$/ccconsumersdk-consumerSwiper-release/build/.transforms/8229451e65af5b2e737f2f3b3763f94c/transformed/jetified-ccconsumersdk-consumerSwiper-release/AndroidManifest.xml" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

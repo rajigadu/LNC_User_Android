@@ -78,6 +78,11 @@
 
         </activity>
 
+        <activity
+            android:name=".activity.DriveByHourActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait"/>
+
 
         <activity
             android:name=".activity.Notifications"

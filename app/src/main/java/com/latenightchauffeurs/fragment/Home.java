@@ -4,7 +4,6 @@ import android.Manifest;
 import android.app.ProgressDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
@@ -25,13 +24,14 @@ import androidx.annotation.Nullable;
 
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 
-import androidx.annotation.RequiresApi;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 import androidx.core.content.ContextCompat;
 import androidx.appcompat.app.AlertDialog;
 import androidx.cardview.widget.CardView;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -70,11 +70,13 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
+import com.google.android.material.button.MaterialButton;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.latenightchauffeurs.R;
 import com.latenightchauffeurs.Utils.AppManager;
 import com.latenightchauffeurs.Utils.ConstVariable;
+import com.latenightchauffeurs.Utils.ConstantUtil;
 import com.latenightchauffeurs.Utils.IonAppListners;
 import com.latenightchauffeurs.Utils.JsonPost;
 import com.latenightchauffeurs.Utils.OnlineRequest;
@@ -82,6 +84,7 @@ import com.latenightchauffeurs.Utils.Settings;
 import com.latenightchauffeurs.Utils.Utils;
 import com.latenightchauffeurs.activity.ActivityChat;
 import com.latenightchauffeurs.activity.CancelRide;
+import com.latenightchauffeurs.activity.DriveByHourActivity;
 import com.latenightchauffeurs.activity.Navigation;
 import com.latenightchauffeurs.activity.Rating;
 import com.latenightchauffeurs.adapter.PlaceArrayAdapter;
@@ -100,7 +103,6 @@ import java.io.Serializable;
 import java.lang.reflect.Type;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.security.Permission;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -119,7 +121,7 @@ public class Home extends Fragment implements OnMapReadyCallback, View.OnClickLi
     private DialogFragment dialogFragment;
 
     @BindView(R.id.bookreserve)
-    Button bookReservation;
+    MaterialButton bookReservation;
 
     @BindView(R.id.pickup)
     AutoCompleteTextView pickup;
@@ -168,6 +170,9 @@ public class Home extends Fragment implements OnMapReadyCallback, View.OnClickLi
 
     @BindView(R.id.newchatmsg)
     TextView ischatmsg;
+
+    @BindView(R.id.btnBookByHour)
+    MaterialButton btnBookByHour;
 
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
@@ -248,6 +253,7 @@ public class Home extends Fragment implements OnMapReadyCallback, View.OnClickLi
         layout_bottom.setVisibility(View.GONE);
         sheetBehavior = BottomSheetBehavior.from(layoutBottomSheet);
         bookReservation.setOnClickListener(this);
+        btnBookByHour.setOnClickListener(this);
         close11.setOnClickListener(this);
         partner.setOnClickListener(this);
         cancel.setOnClickListener(this);
@@ -765,6 +771,11 @@ public class Home extends Fragment implements OnMapReadyCallback, View.OnClickLi
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
+            case R.id.btnBookByHour:
+                Intent intent = new Intent(requireActivity(), DriveByHourActivity.class);
+                intent.putExtra(ConstantUtil.DATA_MAP, curentMdata);
+                startActivity(intent);
+                break;
             case R.id.bookreserve:
                 pickup.setText("");
                 lat = "";
@@ -791,8 +802,6 @@ public class Home extends Fragment implements OnMapReadyCallback, View.OnClickLi
                 if (naviAct != null) {
                     naviAct.checkBottomTabsVisibility(false);
                 }
-
-
                 break;
             case R.id.close11:
                 pickup.setText("");
