@@ -1,18 +1,21 @@
 package com.latenightchauffeurs.dbh
 
+import android.annotation.SuppressLint
 import android.os.Bundle
+import android.text.TextUtils
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.latenightchauffeurs.FragmentCallBack
-import com.latenightchauffeurs.Utils.APIClient
-import com.latenightchauffeurs.Utils.APIInterface
-import com.latenightchauffeurs.Utils.ParsingHelper
-import com.latenightchauffeurs.Utils.Utils
+import com.latenightchauffeurs.R
+import com.latenightchauffeurs.Utils.*
 import com.latenightchauffeurs.databinding.FragmentAddNewCardBinding
+import com.latenightchauffeurs.fragment.BookReservation_new
 import com.latenightchauffeurs.model.ItemCardList
 import com.latenightchauffeurs.model.SavePref
 import okhttp3.ResponseBody
@@ -21,7 +24,8 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import java.nio.charset.Charset
-import java.util.ArrayList
+import java.text.SimpleDateFormat
+import java.util.*
 
 /**
  * Create by Sirumalayil on 01-04-2023.
@@ -31,6 +35,7 @@ class AddNewCardFragment: Fragment() {
     private var binding: FragmentAddNewCardBinding? = null
     private var dataMap: HashMap<String,Any>? = null
     private var cardListAdapter: CardListAdapter? = null
+    private var selectedCard: ItemCardList? = null
 
 
     companion object {
@@ -53,6 +58,109 @@ class AddNewCardFragment: Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         getCardDetails()
+        onClickListeners()
+    }
+
+    private fun onClickListeners() {
+        binding?.btnBookMtChauffeur?.setOnClickListener {
+
+        }
+        binding?.btnPromoCode?.setOnClickListener {
+            binding?.btnPromoCodeView?.isVisible = true
+            binding?.btnPromoCode?.visibility = View.INVISIBLE
+        }
+        binding?.applyPromoCode?.setOnClickListener {
+            val promoCode = binding?.extTextPromoCode?.text?.toString()?.trim()
+            if (!TextUtils.isEmpty(promoCode)) {
+                dataMap!!["promo"] = promoCode.toString()
+                OnlineRequest.applyPromo(activity,dataMap)
+                Utils.hideSoftKeyboard(activity)
+            } else {
+                Utils.toastTxt("Enter a valid Promo Code", activity)
+                ProgressCaller.hideProgressDialog()
+            }
+        }
+        binding?.btnBookMtChauffeur?.setOnClickListener {
+            if (validated()) submitDetails()
+        }
+    }
+
+    @SuppressLint("SimpleDateFormat")
+    private fun submitDetails() {
+        val dateRide = dataMap?.get("date_ride").toString()
+        val timeRide = dataMap?.get("time_ride").toString()
+        val dateCurrent = Calendar.getInstance().time
+        val sdf = SimpleDateFormat("M-dd-yyyy hh:mm a")
+        val date = sdf.parse("$dateRide $timeRide")
+
+        val rideDateAndTime = date?.time
+        val formattedCurrentDate = sdf.format(dateCurrent)
+        val currentDateAndTime = sdf.parse(formattedCurrentDate)
+        val currentDateLong = currentDateAndTime?.time
+
+        if (rideDateAndTime != null) {
+            if (rideDateAndTime >= currentDateLong!!) {
+                Log.e("TAG","")
+            } else {
+                activity?.let { activity ->
+                    MaterialAlertDialogBuilder(activity)
+                        .setTitle(getActivity()?.getString(R.string.app_name))
+                        .setMessage("Please select a date in future.")
+                        .setCancelable(false)
+                        .setPositiveButton("Ok") { dialogInterface, i ->
+                            dialogInterface?.dismiss()
+                            activity.supportFragmentManager.popBackStack()
+                        }
+                        .create()
+                        .show()
+                }
+            }
+        }
+        else {
+            val rideDate = BookReservation_new.convertDate("" + rideDateAndTime, "EEEE dd MMMM yyyy hh:mm a")
+
+            val json = JSONObject()
+            json.put("date", dateRide)
+            json.put("time", timeRide)
+            json.put("pickup_address", dataMap?.get("one"))
+            json.put("notes", dataMap?.get("notes"))
+            json.put("platitude", dataMap?.get("two"))
+            json.put("plongitude", dataMap?.get("three"))
+            json.put("card_id", selectedCard?.token)
+            json.put("acctid", selectedCard?.acctid)
+            json.put("promo", )
+
+            activity?.let { activity ->
+                MaterialAlertDialogBuilder(activity)
+                    .setTitle(getActivity()?.getString(R.string.app_name))
+                    .setMessage("Are you sure to book this ride for $rideDate ?")
+                    .setCancelable(false)
+                    .setPositiveButton("Ok") { dialogInterface, i ->
+                        dialogInterface?.dismiss()
+                        OnlineRequest.bookingRequest(BookReservation_new.mContext, dataMap)
+                    }
+                    .create()
+                    .show()
+            }
+        }
+    }
+
+    private fun validated(): Boolean {
+        val dateRide = dataMap?.get("date_ride")
+        val timeRide = dataMap?.get("time_ride")
+        if (selectedCard == null) {
+            Utils.toastTxt("Please select a card", activity)
+            return false
+        }
+        if (dateRide == null) {
+            Utils.toastTxt("Please select a Ride Datae", activity)
+            return false
+        }
+        if (timeRide == null) {
+            Utils.toastTxt("Please select Ride Time", activity)
+            return false
+        }
+        return true
     }
 
     /**
@@ -62,7 +170,7 @@ class AddNewCardFragment: Fragment() {
     private fun initializeCardListAdapter(cardList: ArrayList<ItemCardList>) {
         cardListAdapter = CardListAdapter(object : FragmentCallBack {
             override fun onResult(param1: Any?, param2: Any?, param3: Any?) {
-
+                selectedCard = param1 as? ItemCardList
             }
         })
         binding?.rvCardList?.apply {
@@ -77,6 +185,7 @@ class AddNewCardFragment: Fragment() {
      * Adapter for listing card items
      */
     private fun getCardDetails() {
+        activity?.let { ProgressCaller.showProgressDialog(it) }
         val preferences = SavePref()
         preferences.SavePref(activity)
 
@@ -92,10 +201,12 @@ class AddNewCardFragment: Fragment() {
                         initializeCardListAdapter(cardList)
                     }
                 }
+                ProgressCaller.hideProgressDialog()
             }
 
             override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
                 Utils.toastTxt(t.message, activity)
+                ProgressCaller.hideProgressDialog()
             }
         })
     }

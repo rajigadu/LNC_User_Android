@@ -722,6 +722,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/padding_05"
+                    android:layout_marginEnd="@dimen/padding_05"
                     android:text="@string/apply_promo"
                     android:textColor="@color/white_full"
                     android:textSize="@dimen/text_mediumsize" />

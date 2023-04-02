@@ -61,6 +61,7 @@ class CardListAdapter(private var callback: FragmentCallBack? = null): ListAdapt
                     selectedPosition = absoluteAdapterPosition
                     notifyDataSetChanged()
                 }
+                callback?.onResult(card)
             }
         }
 

@@ -114,6 +114,9 @@ class DriverByTheHourFragment: Fragment() {
     }
 
     private fun bookMyChauffeur() {
+        dataMap!!["date_ride"] = binding?.textDate?.text?.trim().toString()
+        dataMap!!["time_ride"] = binding?.textTime?.text?.trim().toString()
+        dataMap!!["notes"] = binding?.edtTextNotes?.text?.trim().toString()
         (activity as? AppCompatActivity)?.navigate(
             fragment = AddNewCardFragment.newInstance(dataMap)
         )
@@ -140,6 +143,14 @@ class DriverByTheHourFragment: Fragment() {
         timePicker.addOnPositiveButtonClickListener {
             val selectedHour = timePicker.hour
             val selectedMinute = timePicker.minute
+            val isAM = selectedHour < 12
+
+            // Convert the hour to 12-hour format
+            val hour12 = if (selectedHour == 0) 12 else if (selectedHour > 12) selectedHour - 12 else selectedHour
+
+            // Format the time as a string with AM/PM indicator
+            val timeString = String.format("%02d:%02d %s", hour12, selectedMinute, if (isAM) "AM" else "PM")
+
             val calendar = Calendar.getInstance()
             calendar.set(Calendar.HOUR_OF_DAY, selectedHour)
             calendar.set(Calendar.MINUTE, selectedMinute)
@@ -148,7 +159,7 @@ class DriverByTheHourFragment: Fragment() {
             if (calendar.timeInMillis > System.currentTimeMillis()) {
                 // Do something with the selected time
                 val selectedTime = "${selectedHour}:${selectedMinute}"
-                binding?.textTime?.setText(selectedTime)
+                binding?.textTime?.setText(timeString)
             } else {
                 Toast.makeText(activity, "Please select a future time", Toast.LENGTH_SHORT).show()
             }
@@ -193,4 +204,5 @@ class DriverByTheHourFragment: Fragment() {
      */
     private val constraintsBuilder = CalendarConstraints.Builder()
             .setValidator(DateValidatorPointForward.now())
+
 }
