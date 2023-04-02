@@ -49,6 +49,7 @@
     <string name="note">Note</string>
     <string name="book_my_chauffeur">Book My Chauffeur</string>
     <string name="add_new_card">Add New Card</string>
+    <string name="promo_code">Promo Code</string>
 
 
     <array name="indicator_colors">
