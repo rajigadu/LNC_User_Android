@@ -116,32 +116,35 @@ class AddNewCardFragment: Fragment() {
                 }
             }
         }
-        else {
-            val rideDate = BookReservation_new.convertDate("" + rideDateAndTime, "EEEE dd MMMM yyyy hh:mm a")
+        val rideDate = BookReservation_new.convertDate("" + rideDateAndTime, "EEEE dd MMMM yyyy hh:mm a")
 
-            val json = JSONObject()
-            json.put("date", dateRide)
-            json.put("time", timeRide)
-            json.put("pickup_address", dataMap?.get("one"))
-            json.put("notes", dataMap?.get("notes"))
-            json.put("platitude", dataMap?.get("two"))
-            json.put("plongitude", dataMap?.get("three"))
-            json.put("card_id", selectedCard?.token)
-            json.put("acctid", selectedCard?.acctid)
-            json.put("promo", )
+        val json = JSONObject()
+        json.put("date", dateRide)
+        json.put("time", timeRide)
+        json.put("pickup_address", dataMap?.get("one"))
+        json.put("notes", dataMap?.get("notes"))
+        json.put("platitude", dataMap?.get("two"))
+        json.put("plongitude", dataMap?.get("three"))
+        json.put("card_id", selectedCard?.token)
+        json.put("acctid", selectedCard?.acctid)
+        json.put("promo", dataMap?.get("promo"))
+        //json.put("pickup_city", dataMap?.get("promo"))
+        json.put("version", "yes")
 
-            activity?.let { activity ->
-                MaterialAlertDialogBuilder(activity)
-                    .setTitle(getActivity()?.getString(R.string.app_name))
-                    .setMessage("Are you sure to book this ride for $rideDate ?")
-                    .setCancelable(false)
-                    .setPositiveButton("Ok") { dialogInterface, i ->
-                        dialogInterface?.dismiss()
-                        OnlineRequest.bookingRequest(BookReservation_new.mContext, dataMap)
-                    }
-                    .create()
-                    .show()
-            }
+        val map = HashMap<String, Any>()
+        map["json"] = json
+
+        activity?.let { activity ->
+            MaterialAlertDialogBuilder(activity)
+                .setTitle(getActivity()?.getString(R.string.app_name))
+                .setMessage("Are you sure to book this ride for $rideDate ?")
+                .setCancelable(false)
+                .setPositiveButton("Ok") { dialogInterface, i ->
+                    dialogInterface?.dismiss()
+                    OnlineRequest.bookingRequest(BookReservation_new.mContext, map)
+                }
+                .create()
+                .show()
         }
     }
 
