@@ -119,16 +119,19 @@ class AddNewCardFragment: Fragment() {
         val rideDate = BookReservation_new.convertDate("" + rideDateAndTime, "EEEE dd MMMM yyyy hh:mm a")
 
         val json = JSONObject()
-        json.put("date", dateRide)
-        json.put("time", timeRide)
-        json.put("pickup_address", dataMap?.get("one"))
-        json.put("notes", dataMap?.get("notes"))
-        json.put("platitude", dataMap?.get("two"))
-        json.put("plongitude", dataMap?.get("three"))
+        json.put("userid", userId)
         json.put("card_id", selectedCard?.token)
         json.put("acctid", selectedCard?.acctid)
+        json.put("platitude", dataMap?.get("two"))
+        json.put("plongitude", dataMap?.get("three"))
+        json.put("pickup_address", dataMap?.get("one"))
+        json.put("pickup_city", "")
+        json.put("notes", dataMap?.get("notes"))
+        json.put("booking_type", "")
+        json.put("date", dateRide)
+        json.put("time", timeRide)
+        json.put("transmission", "automatic")
         json.put("promo", dataMap?.get("promo"))
-        //json.put("pickup_city", dataMap?.get("promo"))
         json.put("version", "yes")
 
         val map = HashMap<String, Any>()
@@ -141,11 +144,16 @@ class AddNewCardFragment: Fragment() {
                 .setCancelable(false)
                 .setPositiveButton("Ok") { dialogInterface, i ->
                     dialogInterface?.dismiss()
-                    OnlineRequest.bookingRequest(BookReservation_new.mContext, map)
+                    invokeDbhBookingRequest(map)
                 }
                 .create()
                 .show()
         }
+    }
+
+    private fun invokeDbhBookingRequest(map: HashMap<String, Any>) {
+        val URL = "https://lnc.latenightchauffeurs.com/lnc-administrator/android-test/dbh-booking-reservation.php"
+
     }
 
     private fun validated(): Boolean {
