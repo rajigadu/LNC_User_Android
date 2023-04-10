@@ -36,6 +36,7 @@ class AddNewCardFragment: Fragment() {
     private var dataMap: HashMap<String,Any>? = null
     private var cardListAdapter: CardListAdapter? = null
     private var selectedCard: ItemCardList? = null
+    private var preferences: SavePref? = null
 
 
     companion object {
@@ -57,6 +58,7 @@ class AddNewCardFragment: Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        preferences = SavePref()
         getCardDetails()
         onClickListeners()
     }
@@ -119,7 +121,7 @@ class AddNewCardFragment: Fragment() {
         val rideDate = BookReservation_new.convertDate("" + rideDateAndTime, "EEEE dd MMMM yyyy hh:mm a")
 
         val json = JSONObject()
-        json.put("userid", userId)
+        json.put("userid", preferences?.userId)
         json.put("card_id", selectedCard?.token)
         json.put("acctid", selectedCard?.acctid)
         json.put("platitude", dataMap?.get("two"))
@@ -197,11 +199,10 @@ class AddNewCardFragment: Fragment() {
      */
     private fun getCardDetails() {
         activity?.let { ProgressCaller.showProgressDialog(it) }
-        val preferences = SavePref()
-        preferences.SavePref(activity)
+        preferences?.SavePref(activity)
 
         val apiInterface = APIClient.getClientVO().create(APIInterface::class.java)
-        val call = apiInterface.cardList(preferences.userId)
+        val call = apiInterface.cardList(preferences?.userId)
         call.enqueue(object : Callback<ResponseBody> {
             override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
                 if (response.isSuccessful) {
