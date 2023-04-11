@@ -72,6 +72,8 @@ public class Settings extends Application {
     public static String URL_CANCEL_RIDE_AMOUNT = "cancel-ride-amount.php";
     public static String URL_APPLY_PROMO = "promo-check.php";
 
+    public static String URL_DBH_BOOKING_RESERVATION = "dbh-booking-reservation.php";
+
     public static String NETWORK_STATUS = "Online";
     public static String NETWORK_TYPE = "";
     public static String USERNAME = "username";

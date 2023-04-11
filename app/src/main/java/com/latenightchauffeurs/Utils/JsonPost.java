@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.util.Log;
 import android.widget.ProgressBar;
 
+import com.latenightchauffeurs.FragmentCallBack;
 import com.latenightchauffeurs.activity.ActivityChat;
 import com.latenightchauffeurs.activity.ActivityEditBookingInfo;
 import com.latenightchauffeurs.activity.AddAddress;
@@ -34,12 +35,15 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 
 import static com.latenightchauffeurs.fragment.BookReservation_new.bookingAsap;
+
+import androidx.annotation.Nullable;
 
 /**
  * Created by narip on 2/4/2017.
@@ -447,7 +451,6 @@ public class JsonPost implements ConstVariable {
                                             (Utils.global.mapMain.get(ConstVariable.MESSAGE).toString());
                                 }
                                 break;
-
                             case UpdateBookingReservation:
                                 //result = JsonHelper.getResults(result.toString(), context, mode);
                                 try {

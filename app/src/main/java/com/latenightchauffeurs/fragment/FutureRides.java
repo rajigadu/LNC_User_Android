@@ -91,7 +91,8 @@ public class FutureRides extends Fragment {
         Utils.global.mapMain.put(ConstVariable.URL, com.latenightchauffeurs.Utils.Settings.URL_FUTURE_RIDE);
 
         if (Utils.isNetworkAvailable(mcontext)) {
-            JsonPost.getNetworkResponse(mcontext, null, Utils.global.mapMain, ConstVariable.FutureRides);
+            JsonPost.getNetworkResponse(mcontext, null, Utils.global.mapMain,
+                    ConstVariable.FutureRides, null);
         } else {
             Utils.showInternetErrorMessage(mcontext);
         }

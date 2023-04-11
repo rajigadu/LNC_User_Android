@@ -176,7 +176,8 @@ public class Feedback extends AppCompatActivity implements View.OnClickListener 
         Log.e(TAG, "Utils.global.mapMainAA "+Utils.global.mapMain.toString());
 
         if (Utils.isNetworkAvailable(Feedback.this)) {
-            JsonPost.getNetworkResponse(Feedback.this, null, Utils.global.mapMain, ConstVariable.UserRating1);
+            JsonPost.getNetworkResponse(Feedback.this, null,
+                    Utils.global.mapMain, ConstVariable.UserRating1, null);
         } else {
             Utils.showInternetErrorMessage(Feedback.this);
         }

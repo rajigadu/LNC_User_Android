@@ -436,7 +436,8 @@ public class Home extends Fragment implements OnMapReadyCallback, View.OnClickLi
         Utils.global.mapMain.put(ConstVariable.URL, com.latenightchauffeurs.Utils.Settings.URL_DRIVER_LOCATION_UPDATE);
 
         if (Utils.isNetworkAvailable(mcontext)) {
-            JsonPost.getNetworkResponse(mcontext, null, Utils.global.mapMain, ConstVariable.DriverLocationUpdate);
+            JsonPost.getNetworkResponse(mcontext, null, Utils.global.mapMain,
+                    ConstVariable.DriverLocationUpdate, null);
         } else {
             Utils.showInternetErrorMessage(mcontext);
         }
@@ -455,7 +456,8 @@ public class Home extends Fragment implements OnMapReadyCallback, View.OnClickLi
         Utils.global.mapMain.put(ConstVariable.URL, com.latenightchauffeurs.Utils.Settings.URL_RIDE_AUTO_CANCEL);
 
         if (Utils.isNetworkAvailable(mcontext)) {
-            JsonPost.getNetworkResponse(mcontext, null, Utils.global.mapMain, ConstVariable.RideAutoCancel);
+            JsonPost.getNetworkResponse(mcontext, null, Utils.global.mapMain,
+                    ConstVariable.RideAutoCancel, null);
         } else {
             Utils.showInternetErrorMessage(mcontext);
         }
@@ -1611,7 +1613,7 @@ public class Home extends Fragment implements OnMapReadyCallback, View.OnClickLi
         Utils.global.mapMain.put(ConstVariable.URL, com.latenightchauffeurs.Utils.Settings.URL_CURRENT_RIDE);
 
         if (Utils.isNetworkAvailable(mcontext)) {
-            JsonPost.getNetworkResponse(mcontext, null, Utils.global.mapMain, ConstVariable.CCRide);
+            JsonPost.getNetworkResponse(mcontext, null, Utils.global.mapMain, ConstVariable.CCRide, null);
         } else {
             Utils.showInternetErrorMessage(mcontext);
         }

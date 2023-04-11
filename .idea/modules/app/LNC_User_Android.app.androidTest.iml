@@ -40,8 +40,6 @@
                 <arg>$USER_HOME$/.gradle/caches/transforms-3/7b567075e7297873b3c97edab623de2a/transformed/jetified-facebook-login-4.42.0-api.jar</arg>
                 <arg>$USER_HOME$/.gradle/caches/transforms-3/2a3b6390dda6bc48c3107bc89b560f4c/transformed/jetified-facebook-share-4.42.0-api.jar</arg>
                 <arg>$USER_HOME$/.gradle/caches/transforms-3/5ca047c3bf7448978ad7924362f7841a/transformed/jetified-facebook-common-4.42.0-api.jar</arg>
-                <arg>$USER_HOME$/.gradle/caches/transforms-3/e583e22b65383ee7b91191ed4f504c11/transformed/jetified-koin-androidx-viewmodel-2.2.3-api.jar</arg>
-                <arg>$USER_HOME$/.gradle/caches/transforms-3/b11fc4de1e85461969d90c0bd8815f29/transformed/jetified-koin-androidx-scope-2.2.3-api.jar</arg>
                 <arg>$USER_HOME$/.gradle/caches/transforms-3/fa908f29d9f64ce91461504bdd91ee07/transformed/appcompat-1.6.0-api.jar</arg>
                 <arg>$USER_HOME$/.gradle/caches/transforms-3/024e2fddea45c716cb41e4352643d929/transformed/jetified-viewpager2-1.0.0-api.jar</arg>
                 <arg>$USER_HOME$/.gradle/caches/transforms-3/2fd85a4a2f2f2fd710cb82ab67894c90/transformed/recyclerview-1.2.1-api.jar</arg>
@@ -99,20 +97,10 @@
                 <arg>$USER_HOME$/.gradle/caches/transforms-3/3f964db7cd67edd9c8a3c448673c8e0c/transformed/jetified-play-services-basement-18.1.0-api.jar</arg>
                 <arg>$USER_HOME$/.gradle/caches/transforms-3/cb446b734db5951019495ddb26d8e9db/transformed/legacy-support-v13-1.0.0-api.jar</arg>
                 <arg>$USER_HOME$/.gradle/caches/transforms-3/0bd535c0c2aaefdff2e1f6ec9fc7d065/transformed/legacy-support-v4-1.0.0-api.jar</arg>
-                <arg>$USER_HOME$/.gradle/caches/transforms-3/12ab615bb89a75828c095fe34a3955cb/transformed/lifecycle-extensions-2.2.0-api.jar</arg>
-                <arg>$USER_HOME$/.gradle/caches/transforms-3/2a24f06e3a589260ca62618a40902236/transformed/jetified-fragment-ktx-1.2.5-api.jar</arg>
                 <arg>$USER_HOME$/.gradle/caches/transforms-3/c5aa6a105f47f3891ba3e27816eef852/transformed/fragment-1.3.6-api.jar</arg>
-                <arg>$USER_HOME$/.gradle/caches/transforms-3/534dac182bfa004f5ed4136f8a3988f5/transformed/jetified-activity-ktx-1.1.0-api.jar</arg>
                 <arg>$USER_HOME$/.gradle/caches/transforms-3/74455ac26fec5c21cd854b422dc1d8be/transformed/jetified-activity-1.6.0-api.jar</arg>
                 <arg>$USER_HOME$/.gradle/caches/transforms-3/28759fcc1d04ab80624feb38e038135a/transformed/jetified-lifecycle-viewmodel-savedstate-2.5.1-api.jar</arg>
                 <arg>$USER_HOME$/.gradle/caches/transforms-3/2689eff9a691c136a1ad2c1b2d7cfded/transformed/jetified-savedstate-1.2.0-api.jar</arg>
-                <arg>$USER_HOME$/.gradle/caches/transforms-3/bbb7bcc2955a149c1aa229d7f94f73df/transformed/jetified-koin-android-2.2.3-api.jar</arg>
-                <arg>$USER_HOME$/.gradle/caches/transforms-3/e69d0d65411c9c19875365606aa3b39a/transformed/jetified-lifecycle-runtime-ktx-2.2.0-api.jar</arg>
-                <arg>$USER_HOME$/.gradle/caches/transforms-3/99908b9ac2a379438ff676c62e03f17e/transformed/jetified-lifecycle-viewmodel-ktx-2.2.0-api.jar</arg>
-                <arg>$USER_HOME$/.gradle/caches/transforms-3/4124412353b662ea1d1125ee1893dd19/transformed/jetified-kotlinx-coroutines-core-jvm-1.6.1.jar</arg>
-                <arg>$USER_HOME$/.gradle/caches/transforms-3/9b72f624d568eb3c1a332fcc9a6e2db5/transformed/jetified-kotlinx-coroutines-android-1.6.1.jar</arg>
-                <arg>$USER_HOME$/.gradle/caches/transforms-3/61de554e7b8ad7a3a20d925fb290d0f8/transformed/jetified-kotlin-stdlib-jdk8-1.8.10.jar</arg>
-                <arg>$USER_HOME$/.gradle/caches/transforms-3/f5deff86e52a3a82c7c9f7dc524dfdf3/transformed/jetified-koin-core-2.2.3.jar</arg>
                 <arg>$USER_HOME$/.gradle/caches/transforms-3/51fdb1733bdff4ab17fdf92df7e084e8/transformed/jetified-PhotoView-2.1.3-api.jar</arg>
                 <arg>$USER_HOME$/.gradle/caches/transforms-3/16139188a2c73fcf111acc08d044b8bd/transformed/dynamicanimation-1.0.0-api.jar</arg>
                 <arg>$USER_HOME$/.gradle/caches/transforms-3/7c041443623999f365eedf6c61676703/transformed/jetified-facebook-places-4.42.0-api.jar</arg>
@@ -140,9 +128,10 @@
                 <arg>$USER_HOME$/.gradle/caches/transforms-3/6290b711c06e6343f76368d087b3a2e6/transformed/asynclayoutinflater-1.0.0-api.jar</arg>
                 <arg>$USER_HOME$/.gradle/caches/transforms-3/91821a1da6a150794b371fc24a546292/transformed/core-1.9.0-api.jar</arg>
                 <arg>$USER_HOME$/.gradle/caches/transforms-3/ef018972224826185df66c46490a9174/transformed/jetified-annotation-experimental-1.3.0-api.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/transforms-3/4124412353b662ea1d1125ee1893dd19/transformed/jetified-kotlinx-coroutines-core-jvm-1.6.1.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/transforms-3/9b72f624d568eb3c1a332fcc9a6e2db5/transformed/jetified-kotlinx-coroutines-android-1.6.1.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/transforms-3/61de554e7b8ad7a3a20d925fb290d0f8/transformed/jetified-kotlin-stdlib-jdk8-1.8.10.jar</arg>
                 <arg>$USER_HOME$/.gradle/caches/transforms-3/744bd4de8ed65f7a2af8a4ab7a70afac/transformed/jetified-kotlin-stdlib-jdk7-1.8.10.jar</arg>
-                <arg>$USER_HOME$/.gradle/caches/transforms-3/1584a5111368f7efee8733b2f35f84b3/transformed/jetified-collection-ktx-1.1.0.jar</arg>
-                <arg>$USER_HOME$/.gradle/caches/transforms-3/2f390d9404a1b9eaac0ece3efc4236bf/transformed/jetified-lifecycle-livedata-core-ktx-2.2.0-api.jar</arg>
                 <arg>$USER_HOME$/.gradle/caches/transforms-3/2389293d93c49ff6fb6a54a74fc33347/transformed/jetified-kotlin-stdlib-1.8.10.jar</arg>
                 <arg>$USER_HOME$/.gradle/caches/transforms-3/09c108b0150ae72de5b5ef5483d62909/transformed/jetified-actionitembadge-3.3.2-api.jar</arg>
                 <arg>$USER_HOME$/.gradle/caches/transforms-3/25af33bd5259a220c5ec80296ba10eb3/transformed/jetified-iconics-core-3.0.0-api.jar</arg>
@@ -176,7 +165,7 @@
                 <arg>$USER_HOME$/.gradle/caches/transforms-3/99c0c54b4ce7faf83872df6cb5a6890c/transformed/documentfile-1.0.0-api.jar</arg>
                 <arg>$USER_HOME$/.gradle/caches/transforms-3/d1f3c2557157f3152d7898ab0c260600/transformed/localbroadcastmanager-1.0.0-api.jar</arg>
                 <arg>$USER_HOME$/.gradle/caches/transforms-3/5bed73f0959c0e1a8927f13cf9dd6748/transformed/print-1.0.0-api.jar</arg>
-                <arg>$USER_HOME$/.gradle/caches/transforms-3/688c0a861365c72707fb1e51cf086d82/transformed/core-runtime-2.1.0-api.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/transforms-3/033b7db45415a842229ffd65f64be68e/transformed/core-runtime-2.0.0-api.jar</arg>
                 <arg>$USER_HOME$/.gradle/caches/modules-2/files-2.1/androidx.arch.core/core-common/2.1.0/b3152fc64428c9354344bd89848ecddc09b6f07e/core-common-2.1.0.jar</arg>
                 <arg>$USER_HOME$/.gradle/caches/transforms-3/4ef7c40a15c6c118f063f824c2336e56/transformed/interpolator-1.0.0-api.jar</arg>
                 <arg>$USER_HOME$/.gradle/caches/modules-2/files-2.1/androidx.annotation/annotation/1.3.0/21f49f5f9b85fc49de712539f79123119740595/annotation-1.3.0.jar</arg>
@@ -253,9 +242,7 @@
     <orderEntry type="library" scope="TEST" name="Gradle: org.jetbrains.kotlinx:kotlinx-coroutines-core-jvm:1.6.1" level="project" />
     <orderEntry type="library" scope="TEST" name="Gradle: org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.1" level="project" />
     <orderEntry type="library" scope="TEST" name="Gradle: org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.8.10" level="project" />
-    <orderEntry type="library" scope="TEST" name="Gradle: io.insert-koin:koin-core:2.2.3" level="project" />
     <orderEntry type="library" scope="TEST" name="Gradle: org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.8.10" level="project" />
-    <orderEntry type="library" scope="TEST" name="Gradle: androidx.collection:collection-ktx:1.1.0" level="project" />
     <orderEntry type="library" scope="TEST" name="Gradle: org.jetbrains.kotlin:kotlin-stdlib:1.8.10" level="project" />
     <orderEntry type="library" scope="TEST" name="Gradle: com.nineoldandroids:library:2.4.0" level="project" />
     <orderEntry type="library" scope="TEST" name="Gradle: junit:junit:4.12" level="project" />
@@ -302,8 +289,6 @@
     <orderEntry type="library" scope="TEST" name="Gradle: com.facebook.android:facebook-login:4.42.0@aar" level="project" />
     <orderEntry type="library" scope="TEST" name="Gradle: com.facebook.android:facebook-share:4.42.0@aar" level="project" />
     <orderEntry type="library" scope="TEST" name="Gradle: com.facebook.android:facebook-common:4.42.0@aar" level="project" />
-    <orderEntry type="library" scope="TEST" name="Gradle: io.insert-koin:koin-androidx-viewmodel:2.2.3@aar" level="project" />
-    <orderEntry type="library" scope="TEST" name="Gradle: io.insert-koin:koin-androidx-scope:2.2.3@aar" level="project" />
     <orderEntry type="library" scope="TEST" name="Gradle: androidx.appcompat:appcompat:1.6.0@aar" level="project" />
     <orderEntry type="library" scope="TEST" name="Gradle: androidx.viewpager2:viewpager2:1.0.0@aar" level="project" />
     <orderEntry type="library" scope="TEST" name="Gradle: androidx.recyclerview:recyclerview:1.2.1@aar" level="project" />
@@ -354,16 +339,10 @@
     <orderEntry type="library" scope="TEST" name="Gradle: com.google.android.gms:play-services-basement:18.1.0@aar" level="project" />
     <orderEntry type="library" scope="TEST" name="Gradle: androidx.legacy:legacy-support-v13:1.0.0@aar" level="project" />
     <orderEntry type="library" scope="TEST" name="Gradle: androidx.legacy:legacy-support-v4:1.0.0@aar" level="project" />
-    <orderEntry type="library" scope="TEST" name="Gradle: androidx.lifecycle:lifecycle-extensions:2.2.0@aar" level="project" />
-    <orderEntry type="library" scope="TEST" name="Gradle: androidx.fragment:fragment-ktx:1.2.5@aar" level="project" />
     <orderEntry type="library" scope="TEST" name="Gradle: androidx.fragment:fragment:1.3.6@aar" level="project" />
-    <orderEntry type="library" scope="TEST" name="Gradle: androidx.activity:activity-ktx:1.1.0@aar" level="project" />
     <orderEntry type="library" scope="TEST" name="Gradle: androidx.activity:activity:1.6.0@aar" level="project" />
     <orderEntry type="library" scope="TEST" name="Gradle: androidx.lifecycle:lifecycle-viewmodel-savedstate:2.5.1@aar" level="project" />
     <orderEntry type="library" scope="TEST" name="Gradle: androidx.savedstate:savedstate:1.2.0@aar" level="project" />
-    <orderEntry type="library" scope="TEST" name="Gradle: io.insert-koin:koin-android:2.2.3@aar" level="project" />
-    <orderEntry type="library" scope="TEST" name="Gradle: androidx.lifecycle:lifecycle-runtime-ktx:2.2.0@aar" level="project" />
-    <orderEntry type="library" scope="TEST" name="Gradle: androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0@aar" level="project" />
     <orderEntry type="library" scope="TEST" name="Gradle: com.github.chrisbanes:PhotoView:2.1.3@aar" level="project" />
     <orderEntry type="library" scope="TEST" name="Gradle: androidx.dynamicanimation:dynamicanimation:1.0.0@aar" level="project" />
     <orderEntry type="library" scope="TEST" name="Gradle: com.facebook.android:facebook-places:4.42.0@aar" level="project" />
@@ -391,7 +370,6 @@
     <orderEntry type="library" scope="TEST" name="Gradle: androidx.asynclayoutinflater:asynclayoutinflater:1.0.0@aar" level="project" />
     <orderEntry type="library" scope="TEST" name="Gradle: androidx.core:core:1.9.0@aar" level="project" />
     <orderEntry type="library" scope="TEST" name="Gradle: androidx.annotation:annotation-experimental:1.3.0@aar" level="project" />
-    <orderEntry type="library" scope="TEST" name="Gradle: androidx.lifecycle:lifecycle-livedata-core-ktx:2.2.0@aar" level="project" />
     <orderEntry type="library" scope="TEST" name="Gradle: com.mikepenz:actionitembadge:3.3.2@aar" level="project" />
     <orderEntry type="library" scope="TEST" name="Gradle: com.mikepenz:iconics-core:3.0.0@aar" level="project" />
     <orderEntry type="library" scope="TEST" name="Gradle: com.mikepenz:fontawesome-typeface:4.7.0.0@aar" level="project" />
@@ -414,7 +392,7 @@
     <orderEntry type="library" scope="TEST" name="Gradle: androidx.documentfile:documentfile:1.0.0@aar" level="project" />
     <orderEntry type="library" scope="TEST" name="Gradle: androidx.localbroadcastmanager:localbroadcastmanager:1.0.0@aar" level="project" />
     <orderEntry type="library" scope="TEST" name="Gradle: androidx.print:print:1.0.0@aar" level="project" />
-    <orderEntry type="library" scope="TEST" name="Gradle: androidx.arch.core:core-runtime:2.1.0@aar" level="project" />
+    <orderEntry type="library" scope="TEST" name="Gradle: androidx.arch.core:core-runtime:2.0.0@aar" level="project" />
     <orderEntry type="library" scope="TEST" name="Gradle: androidx.interpolator:interpolator:1.0.0@aar" level="project" />
     <orderEntry type="library" scope="TEST" name="Gradle: androidx.test.espresso:espresso-idling-resource:3.1.0@aar" level="project" />
   </component>

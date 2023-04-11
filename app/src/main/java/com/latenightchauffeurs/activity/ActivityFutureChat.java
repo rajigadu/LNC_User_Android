@@ -142,7 +142,8 @@ public class ActivityFutureChat extends AppCompatActivity {
         Utils.global.mapMain.put(ConstVariable.URL, Settings.URL_CHAT);
 
         if (Utils.isNetworkAvailable(mcontext)) {
-            JsonPost.getNetworkResponse(mcontext, null, Utils.global.mapMain, ConstVariable.ChatList);
+            JsonPost.getNetworkResponse(mcontext, null, Utils.global.mapMain,
+                    ConstVariable.ChatList, null);
         } else {
             Utils.showInternetErrorMessage(mcontext);
         }
@@ -172,7 +173,8 @@ public class ActivityFutureChat extends AppCompatActivity {
 
             if (Utils.isNetworkAvailable(ActivityFutureChat.this)) {
                 message.setText("");
-                JsonPost.getNetworkResponse(ActivityFutureChat.this, null, Utils.global.mapMain, ConstVariable.Chat);
+                JsonPost.getNetworkResponse(ActivityFutureChat.this, null,
+                        Utils.global.mapMain, ConstVariable.Chat, null);
             } else {
                 Utils.showInternetErrorMessage(ActivityFutureChat.this);
             }

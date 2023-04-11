@@ -91,7 +91,8 @@ public class FutureRideHistory extends Fragment {
         Utils.global.mapMain.put(ConstVariable.URL, com.latenightchauffeurs.Utils.Settings.URL_FUTURE_RIDE_HISTORY);
 
         if (Utils.isNetworkAvailable(mcontext)) {
-            JsonPost.getNetworkResponse(mcontext, null, Utils.global.mapMain, ConstVariable.FutureRideHistory);
+            JsonPost.getNetworkResponse(mcontext, null, Utils.global.mapMain,
+                    ConstVariable.FutureRideHistory, null);
         } else {
             Utils.showInternetErrorMessage(mcontext);
         }

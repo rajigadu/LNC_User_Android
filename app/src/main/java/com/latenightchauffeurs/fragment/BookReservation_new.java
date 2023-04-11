@@ -1117,7 +1117,8 @@ public class BookReservation_new extends Fragment implements View.OnClickListene
         Utils.global.mapMain.put(ConstVariable.URL, com.latenightchauffeurs.Utils.Settings.URL_DELETE_CARD);
 
         if (Utils.isNetworkAvailable(Utils.context)) {
-            JsonPost.getNetworkResponse(Utils.context, null, Utils.global.mapMain, ConstVariable.DeleteCard2);
+            JsonPost.getNetworkResponse(Utils.context, null, Utils.global.mapMain,
+                    ConstVariable.DeleteCard2, null);
         } else {
             Utils.showInternetErrorMessage(Utils.context);
         }

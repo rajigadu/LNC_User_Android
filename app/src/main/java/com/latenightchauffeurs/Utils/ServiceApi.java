@@ -12,6 +12,7 @@ import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Headers;
+import retrofit2.http.POST;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
 import retrofit2.http.QueryMap;
@@ -34,6 +35,9 @@ public interface ServiceApi {
 
     @GET("{login}")
     Call<ResponseBody> login(@Path("login") String postfix, @QueryMap HashMap<String, Object> params);
+
+    @POST("{login}")
+    Call<ResponseBody> dbhBookingReservation(@Path("login") String postfix, @QueryMap HashMap<String, Object> params);
 
     @Headers("Accept: " + "application/json")
     @GET("num-stops-addres-list.php")

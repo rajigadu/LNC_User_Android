@@ -48,6 +48,8 @@ public interface ConstVariable {
     int SocialSignUp = 9;
     int DropOffAddressList = 10;
     int BookReseration = 11;
+
+    int DbhBookReservation = 45;
     int AddDropAddress = 12;
     int UserLocationUpdate = 13;
     int DeviceTokenUpdate = 14;

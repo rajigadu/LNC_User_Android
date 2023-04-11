@@ -146,16 +146,15 @@ class AddNewCardFragment: Fragment() {
                 .setCancelable(false)
                 .setPositiveButton("Ok") { dialogInterface, i ->
                     dialogInterface?.dismiss()
-                    invokeDbhBookingRequest(map)
+                    OnlineRequest.dbhBookingRequest(requireContext(), map, object : FragmentCallBack {
+                        override fun onResult(param1: Any?, param2: Any?, param3: Any?) {
+
+                        }
+                    })
                 }
                 .create()
                 .show()
         }
-    }
-
-    private fun invokeDbhBookingRequest(map: HashMap<String, Any>) {
-        val URL = "https://lnc.latenightchauffeurs.com/lnc-administrator/android-test/dbh-booking-reservation.php"
-
     }
 
     private fun validated(): Boolean {
@@ -166,7 +165,7 @@ class AddNewCardFragment: Fragment() {
             return false
         }
         if (dateRide == null) {
-            Utils.toastTxt("Please select a Ride Datae", activity)
+            Utils.toastTxt("Please select a Ride Date", activity)
             return false
         }
         if (timeRide == null) {

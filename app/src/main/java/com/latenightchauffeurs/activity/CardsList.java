@@ -426,7 +426,8 @@ public class CardsList extends AppCompatActivity {
         Utils.global.mapMain.put(ConstVariable.URL, com.latenightchauffeurs.Utils.Settings.URL_CREDIT_CARDS_LIST1);
 
         if (Utils.isNetworkAvailable(mcontext)) {
-            JsonPost.getNetworkResponse(mcontext, null, Utils.global.mapMain, ConstVariable.CreditCardsList1);
+            JsonPost.getNetworkResponse(mcontext, null, Utils.global.mapMain,
+                    ConstVariable.CreditCardsList1, null);
         } else {
             Utils.showInternetErrorMessage(mcontext);
         }
@@ -610,7 +611,8 @@ public class CardsList extends AppCompatActivity {
         Utils.global.mapMain.put(ConstVariable.URL, com.latenightchauffeurs.Utils.Settings.URL_CC_ADD_CREDIT_CARD);
 
         if (Utils.isNetworkAvailable(Utils.context)) {
-            JsonPost.getNetworkResponse(Utils.context, null, Utils.global.mapMain, ConstVariable.AddCreditCard1);
+            JsonPost.getNetworkResponse(Utils.context, null,
+                    Utils.global.mapMain, ConstVariable.AddCreditCard1, null);
         } else {
             Utils.showInternetErrorMessage(Utils.context);
         }

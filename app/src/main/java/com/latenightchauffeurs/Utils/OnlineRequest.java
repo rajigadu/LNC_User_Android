@@ -4,12 +4,14 @@ import android.content.Context;
 import android.net.Uri;
 import android.util.Log;
 
+import com.latenightchauffeurs.FragmentCallBack;
 import com.latenightchauffeurs.model.SavePref;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Objects;
 
 /**
  * Created by narayana on 3/27/2018.
@@ -140,6 +142,21 @@ public class OnlineRequest {
 
         if (Utils.isNetworkAvailable(mcontext)) {
             JsonPost.getNetworkResponse(mcontext, null, Utils.global.mapMain, ConstVariable.SocialSignUp);
+        } else {
+            Utils.showInternetErrorMessage(mcontext);
+        }
+    }
+
+    public static void dbhBookingRequest(Context mcontext, HashMap<String, Object> map, FragmentCallBack callBack) {
+        Utils.global.mapMain();
+        Global.mapMain.put("json", Objects.requireNonNull(map.get("json")).toString());
+        Global.mapMain.put(ConstVariable.URL, Settings.URL_DBH_BOOKING_RESERVATION);
+
+        Log.e("dbhBookingRequest: ", Global.mapMain.toString());
+
+        if (Utils.isNetworkAvailable(mcontext)) {
+            JsonPost.getNetworkResponse(mcontext, null,
+                    Global.mapMain, ConstVariable.DbhBookReservation);
         } else {
             Utils.showInternetErrorMessage(mcontext);
         }

@@ -1,8 +1,8 @@
 <component name="libraryTable">
   <library name="Gradle: com.mikepenz:actionitembadge:3.3.2@aar">
     <CLASSES>
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/4e78f0b92de80a0d23e578c3d057573f/transformed/jetified-actionitembadge-3.3.2/res" />
       <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/4e78f0b92de80a0d23e578c3d057573f/transformed/jetified-actionitembadge-3.3.2/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/4e78f0b92de80a0d23e578c3d057573f/transformed/jetified-actionitembadge-3.3.2/res" />
       <root url="file://$USER_HOME$/.gradle/caches/transforms-3/4e78f0b92de80a0d23e578c3d057573f/transformed/jetified-actionitembadge-3.3.2/AndroidManifest.xml" />
     </CLASSES>
     <JAVADOC>

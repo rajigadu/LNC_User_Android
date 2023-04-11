@@ -661,7 +661,8 @@ public class Cards extends Fragment implements View.OnClickListener {
         Utils.global.mapMain.put(ConstVariable.URL, com.latenightchauffeurs.Utils.Settings.URL_CREDIT_CARDS_LIST1);
 
         if (Utils.isNetworkAvailable(Utils.context)) {
-            JsonPost.getNetworkResponse(Utils.context, null, Utils.global.mapMain, ConstVariable.CreditCardsList);
+            JsonPost.getNetworkResponse(Utils.context, null, Utils.global.mapMain,
+                    ConstVariable.CreditCardsList, null);
         } else {
             Utils.showInternetErrorMessage(Utils.context);
         }
@@ -680,7 +681,8 @@ public class Cards extends Fragment implements View.OnClickListener {
         Utils.global.mapMain.put(ConstVariable.URL, com.latenightchauffeurs.Utils.Settings.URL_CC_ADD_CREDIT_CARD);
 
         if (Utils.isNetworkAvailable(Utils.context)) {
-            JsonPost.getNetworkResponse(Utils.context, null, Utils.global.mapMain, ConstVariable.AddCreditCard);
+            JsonPost.getNetworkResponse(Utils.context, null, Utils.global.mapMain,
+                    ConstVariable.AddCreditCard, null);
         } else {
             Utils.showInternetErrorMessage(Utils.context);
         }
@@ -853,7 +855,8 @@ public class Cards extends Fragment implements View.OnClickListener {
         Utils.global.mapMain.put(ConstVariable.URL, com.latenightchauffeurs.Utils.Settings.URL_DELETE_CARD);
 
         if (Utils.isNetworkAvailable(Utils.context)) {
-            JsonPost.getNetworkResponse(Utils.context, null, Utils.global.mapMain, ConstVariable.DeleteCard);
+            JsonPost.getNetworkResponse(Utils.context, null, Utils.global.mapMain,
+                    ConstVariable.DeleteCard, null);
         } else {
             Utils.showInternetErrorMessage(Utils.context);
         }

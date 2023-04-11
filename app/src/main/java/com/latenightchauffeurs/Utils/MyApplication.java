@@ -2,14 +2,10 @@ package com.latenightchauffeurs.Utils;
 
 import android.app.Application;
 import android.content.Context;
-import androidx.annotation.NonNull;
-import androidx.multidex.MultiDex;
-
 import com.cardconnect.consumersdk.CCConsumer;
+import com.cardconnect.consumersdk.network.CCConsumerApi;
 
 import java.util.HashMap;
-
-import com.cardconnect.consumersdk.network.CCConsumerApi;
 
 /**
  * Created by narayana on 3/16/2018.

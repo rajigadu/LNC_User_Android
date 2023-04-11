@@ -98,7 +98,8 @@ public class DashBorad extends Fragment {
         Utils.global.mapMain.put(ConstVariable.URL, com.latenightchauffeurs.Utils.Settings.URL_CURRENT_RIDES);
 
         if (Utils.isNetworkAvailable(mcontext)) {
-            JsonPost.getNetworkResponse(mcontext, null, Utils.global.mapMain, ConstVariable.CurrentRides);
+            JsonPost.getNetworkResponse(mcontext, null, Utils.global.mapMain,
+                    ConstVariable.CurrentRides, null);
         } else {
             Utils.showInternetErrorMessage(mcontext);
         }
