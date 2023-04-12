@@ -1118,7 +1118,7 @@ public class BookReservation_new extends Fragment implements View.OnClickListene
 
         if (Utils.isNetworkAvailable(Utils.context)) {
             JsonPost.getNetworkResponse(Utils.context, null, Utils.global.mapMain,
-                    ConstVariable.DeleteCard2, null);
+                    ConstVariable.DeleteCard2);
         } else {
             Utils.showInternetErrorMessage(Utils.context);
         }

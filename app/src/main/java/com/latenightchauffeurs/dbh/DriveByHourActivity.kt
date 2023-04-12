@@ -19,7 +19,7 @@ class DriveByHourActivity: AppCompatActivity() {
         binding = ActivityDbhLayoutBinding.inflate(layoutInflater)
         setContentView(binding?.root)
 
-        val dataMap = intent?.extras?.getSerializable(ConstantUtil.DATA_MAP) as HashMap<String, Any>
+        val dataMap = intent?.extras?.getSerializable(ConstantUtil.DATA_MAP) as? HashMap<String, Any>
 
         if (savedInstanceState == null) {
             navigate(

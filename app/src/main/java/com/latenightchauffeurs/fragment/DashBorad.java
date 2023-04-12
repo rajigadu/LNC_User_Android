@@ -99,7 +99,7 @@ public class DashBorad extends Fragment {
 
         if (Utils.isNetworkAvailable(mcontext)) {
             JsonPost.getNetworkResponse(mcontext, null, Utils.global.mapMain,
-                    ConstVariable.CurrentRides, null);
+                    ConstVariable.CurrentRides);
         } else {
             Utils.showInternetErrorMessage(mcontext);
         }

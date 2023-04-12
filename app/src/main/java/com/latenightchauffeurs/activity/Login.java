@@ -283,7 +283,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener, Go
 
         if (Utils.isNetworkAvailable(Login.this)) {
             JsonPost.getNetworkResponse(Login.this, null, Utils.global.mapMain,
-                    ConstVariable.SocialStatus, null);
+                    ConstVariable.SocialStatus);
         } else {
             Utils.showInternetErrorMessage(Login.this);
         }

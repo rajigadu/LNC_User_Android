@@ -9,23 +9,27 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.latenightchauffeurs.FragmentCallBack
 import com.latenightchauffeurs.R
 import com.latenightchauffeurs.Utils.*
 import com.latenightchauffeurs.databinding.FragmentAddNewCardBinding
+import com.latenightchauffeurs.dbh.DbhUtils.showAlertDialog
+import com.latenightchauffeurs.dbh.viewmodel.DbhViewModel
 import com.latenightchauffeurs.fragment.BookReservation_new
 import com.latenightchauffeurs.model.ItemCardList
 import com.latenightchauffeurs.model.SavePref
+import okhttp3.MultipartBody
 import okhttp3.ResponseBody
-import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import java.nio.charset.Charset
 import java.text.SimpleDateFormat
 import java.util.*
+import kotlin.collections.HashMap
 
 /**
  * Create by Sirumalayil on 01-04-2023.
@@ -37,6 +41,7 @@ class AddNewCardFragment: Fragment() {
     private var cardListAdapter: CardListAdapter? = null
     private var selectedCard: ItemCardList? = null
     private var preferences: SavePref? = null
+    private var bookingViewModel: DbhViewModel? = null
 
 
     companion object {
@@ -58,6 +63,7 @@ class AddNewCardFragment: Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        bookingViewModel = ViewModelProvider(this)[DbhViewModel::class.java]
         preferences = SavePref()
         getCardDetails()
         onClickListeners()
@@ -120,24 +126,28 @@ class AddNewCardFragment: Fragment() {
         }
         val rideDate = BookReservation_new.convertDate("" + rideDateAndTime, "EEEE dd MMMM yyyy hh:mm a")
 
-        val json = JSONObject()
-        json.put("userid", preferences?.userId)
-        json.put("card_id", selectedCard?.token)
-        json.put("acctid", selectedCard?.acctid)
-        json.put("platitude", dataMap?.get("two"))
-        json.put("plongitude", dataMap?.get("three"))
-        json.put("pickup_address", dataMap?.get("one"))
-        json.put("pickup_city", "")
-        json.put("notes", dataMap?.get("notes"))
-        json.put("booking_type", "")
-        json.put("date", dateRide)
-        json.put("time", timeRide)
-        json.put("transmission", "automatic")
-        json.put("promo", dataMap?.get("promo"))
-        json.put("version", "yes")
+        val jsonMap = HashMap<String, String>()
+        jsonMap["userid"] = preferences?.userId ?: ""
+        jsonMap["card_id"] = selectedCard?.token ?: ""
+        jsonMap["acctid"] = selectedCard?.acctid ?: ""
+        jsonMap["platitude"] = dataMap?.get("two").toString()
+        jsonMap["plongitude"] = dataMap?.get("three").toString()
+        jsonMap["pickup_address"] = dataMap?.get("one").toString()
+        jsonMap["pickup_city"] = dataMap?.get("city_name").toString()
+        jsonMap["notes"] = dataMap?.get("notes").toString()
+        jsonMap["booking_type"] = "3"
+        jsonMap["date"] = dateRide
+        jsonMap["time"] = timeRide
+        jsonMap["transmission"] = "automatic"
+        jsonMap["promo"] = dataMap?.get("promo").toString()
+        jsonMap["version"] = "yes"
 
         val map = HashMap<String, Any>()
-        map["json"] = json
+        //map["json"] = jsonMap
+
+        val requestBody = MultipartBody.Builder().setType(MultipartBody.FORM)
+            .addFormDataPart("json", jsonMap.toString())
+            .build()
 
         activity?.let { activity ->
             MaterialAlertDialogBuilder(activity)
@@ -146,14 +156,26 @@ class AddNewCardFragment: Fragment() {
                 .setCancelable(false)
                 .setPositiveButton("Ok") { dialogInterface, i ->
                     dialogInterface?.dismiss()
-                    OnlineRequest.dbhBookingRequest(requireContext(), map, object : FragmentCallBack {
-                        override fun onResult(param1: Any?, param2: Any?, param3: Any?) {
-
-                        }
-                    })
+                    context?.let { ProgressCaller.showProgressDialog(it) }
+                    invokeDbhBookingReservation(requestBody)
                 }
                 .create()
                 .show()
+        }
+    }
+
+    private fun invokeDbhBookingReservation(bookingData: MultipartBody) {
+        bookingViewModel?.dbhBookingReservation(bookingData)?.observe(viewLifecycleOwner) {
+            Log.e("TAG", "Response SUCCESSFUL: $it")
+            showAlertDialog(
+                context = requireContext(),
+                message = it.data.firstOrNull()?.msg ?: "",
+                title = "Booking Response",
+                callback = object: FragmentCallBack {
+                    override fun onResult(param1: Any?, param2: Any?, param3: Any?) {}
+                }
+            )
+            ProgressCaller.hideProgressDialog()
         }
     }
 

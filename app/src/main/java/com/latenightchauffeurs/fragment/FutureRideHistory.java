@@ -92,7 +92,7 @@ public class FutureRideHistory extends Fragment {
 
         if (Utils.isNetworkAvailable(mcontext)) {
             JsonPost.getNetworkResponse(mcontext, null, Utils.global.mapMain,
-                    ConstVariable.FutureRideHistory, null);
+                    ConstVariable.FutureRideHistory);
         } else {
             Utils.showInternetErrorMessage(mcontext);
         }

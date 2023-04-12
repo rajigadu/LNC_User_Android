@@ -147,21 +147,6 @@ public class OnlineRequest {
         }
     }
 
-    public static void dbhBookingRequest(Context mcontext, HashMap<String, Object> map, FragmentCallBack callBack) {
-        Utils.global.mapMain();
-        Global.mapMain.put("json", Objects.requireNonNull(map.get("json")).toString());
-        Global.mapMain.put(ConstVariable.URL, Settings.URL_DBH_BOOKING_RESERVATION);
-
-        Log.e("dbhBookingRequest: ", Global.mapMain.toString());
-
-        if (Utils.isNetworkAvailable(mcontext)) {
-            JsonPost.getNetworkResponse(mcontext, null,
-                    Global.mapMain, ConstVariable.DbhBookReservation);
-        } else {
-            Utils.showInternetErrorMessage(mcontext);
-        }
-    }
-
     public static void bookingRequest(Context mcontext, HashMap<String, Object> map) {
         Date todayDate = Calendar.getInstance().getTime();
 

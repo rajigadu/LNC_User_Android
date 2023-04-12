@@ -662,7 +662,7 @@ public class Cards extends Fragment implements View.OnClickListener {
 
         if (Utils.isNetworkAvailable(Utils.context)) {
             JsonPost.getNetworkResponse(Utils.context, null, Utils.global.mapMain,
-                    ConstVariable.CreditCardsList, null);
+                    ConstVariable.CreditCardsList);
         } else {
             Utils.showInternetErrorMessage(Utils.context);
         }
@@ -682,7 +682,7 @@ public class Cards extends Fragment implements View.OnClickListener {
 
         if (Utils.isNetworkAvailable(Utils.context)) {
             JsonPost.getNetworkResponse(Utils.context, null, Utils.global.mapMain,
-                    ConstVariable.AddCreditCard, null);
+                    ConstVariable.AddCreditCard);
         } else {
             Utils.showInternetErrorMessage(Utils.context);
         }
@@ -856,7 +856,7 @@ public class Cards extends Fragment implements View.OnClickListener {
 
         if (Utils.isNetworkAvailable(Utils.context)) {
             JsonPost.getNetworkResponse(Utils.context, null, Utils.global.mapMain,
-                    ConstVariable.DeleteCard, null);
+                    ConstVariable.DeleteCard);
         } else {
             Utils.showInternetErrorMessage(Utils.context);
         }

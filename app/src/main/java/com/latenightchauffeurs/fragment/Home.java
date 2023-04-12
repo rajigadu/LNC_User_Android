@@ -437,7 +437,7 @@ public class Home extends Fragment implements OnMapReadyCallback, View.OnClickLi
 
         if (Utils.isNetworkAvailable(mcontext)) {
             JsonPost.getNetworkResponse(mcontext, null, Utils.global.mapMain,
-                    ConstVariable.DriverLocationUpdate, null);
+                    ConstVariable.DriverLocationUpdate);
         } else {
             Utils.showInternetErrorMessage(mcontext);
         }
@@ -457,7 +457,7 @@ public class Home extends Fragment implements OnMapReadyCallback, View.OnClickLi
 
         if (Utils.isNetworkAvailable(mcontext)) {
             JsonPost.getNetworkResponse(mcontext, null, Utils.global.mapMain,
-                    ConstVariable.RideAutoCancel, null);
+                    ConstVariable.RideAutoCancel);
         } else {
             Utils.showInternetErrorMessage(mcontext);
         }
@@ -1613,7 +1613,7 @@ public class Home extends Fragment implements OnMapReadyCallback, View.OnClickLi
         Utils.global.mapMain.put(ConstVariable.URL, com.latenightchauffeurs.Utils.Settings.URL_CURRENT_RIDE);
 
         if (Utils.isNetworkAvailable(mcontext)) {
-            JsonPost.getNetworkResponse(mcontext, null, Utils.global.mapMain, ConstVariable.CCRide, null);
+            JsonPost.getNetworkResponse(mcontext, null, Utils.global.mapMain, ConstVariable.CCRide);
         } else {
             Utils.showInternetErrorMessage(mcontext);
         }

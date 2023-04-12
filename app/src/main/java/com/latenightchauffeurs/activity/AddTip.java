@@ -281,7 +281,7 @@ public class AddTip extends AppCompatActivity implements View.OnClickListener {
 
         if (Utils.isNetworkAvailable(AddTip.this)) {
             JsonPost.getNetworkResponse(AddTip.this, null, Utils.global.mapMain,
-                    ConstVariable.UserRating2, null);
+                    ConstVariable.UserRating2);
         } else {
             Utils.showInternetErrorMessage(AddTip.this);
         }

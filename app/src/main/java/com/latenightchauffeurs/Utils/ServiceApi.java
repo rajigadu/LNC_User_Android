@@ -1,5 +1,6 @@
 package com.latenightchauffeurs.Utils;
 
+import com.latenightchauffeurs.dbh.model.response.DbhBookingResponse;
 import com.latenightchauffeurs.model.ChatPojo;
 import com.latenightchauffeurs.model.GApiKeyPojo;
 import com.latenightchauffeurs.model.StopsList;
@@ -8,10 +9,14 @@ import org.json.JSONObject;
 
 import java.util.HashMap;
 
+import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
+import retrofit2.http.Body;
+import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.Headers;
+import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
@@ -36,8 +41,8 @@ public interface ServiceApi {
     @GET("{login}")
     Call<ResponseBody> login(@Path("login") String postfix, @QueryMap HashMap<String, Object> params);
 
-    @POST("{login}")
-    Call<ResponseBody> dbhBookingReservation(@Path("login") String postfix, @QueryMap HashMap<String, Object> params);
+    @POST("dbh-booking-reservation.php")
+    Call<DbhBookingResponse> dbhBookingReservation(@Body RequestBody body);
 
     @Headers("Accept: " + "application/json")
     @GET("num-stops-addres-list.php")

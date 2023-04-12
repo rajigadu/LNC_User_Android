@@ -314,7 +314,7 @@ public class ActivityChat extends AppCompatActivity {
                     if (Utils.isNetworkAvailable(ActivityChat.this)) {
                         message.setText("");
                         JsonPost.getNetworkResponse(ActivityChat.this, null,
-                                Utils.global.mapMain, ConstVariable.Chat, null);
+                                Utils.global.mapMain, ConstVariable.Chat);
                     } else {
                         Utils.showInternetErrorMessage(ActivityChat.this);
                     }

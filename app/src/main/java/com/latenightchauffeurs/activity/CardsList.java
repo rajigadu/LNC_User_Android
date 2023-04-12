@@ -427,7 +427,7 @@ public class CardsList extends AppCompatActivity {
 
         if (Utils.isNetworkAvailable(mcontext)) {
             JsonPost.getNetworkResponse(mcontext, null, Utils.global.mapMain,
-                    ConstVariable.CreditCardsList1, null);
+                    ConstVariable.CreditCardsList1);
         } else {
             Utils.showInternetErrorMessage(mcontext);
         }
@@ -612,7 +612,7 @@ public class CardsList extends AppCompatActivity {
 
         if (Utils.isNetworkAvailable(Utils.context)) {
             JsonPost.getNetworkResponse(Utils.context, null,
-                    Utils.global.mapMain, ConstVariable.AddCreditCard1, null);
+                    Utils.global.mapMain, ConstVariable.AddCreditCard1);
         } else {
             Utils.showInternetErrorMessage(Utils.context);
         }

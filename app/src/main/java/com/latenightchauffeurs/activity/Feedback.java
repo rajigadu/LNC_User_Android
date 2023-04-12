@@ -177,7 +177,7 @@ public class Feedback extends AppCompatActivity implements View.OnClickListener 
 
         if (Utils.isNetworkAvailable(Feedback.this)) {
             JsonPost.getNetworkResponse(Feedback.this, null,
-                    Utils.global.mapMain, ConstVariable.UserRating1, null);
+                    Utils.global.mapMain, ConstVariable.UserRating1);
         } else {
             Utils.showInternetErrorMessage(Feedback.this);
         }
