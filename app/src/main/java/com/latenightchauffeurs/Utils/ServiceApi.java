@@ -13,11 +13,13 @@ import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.Headers;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
+import retrofit2.http.PartMap;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
 import retrofit2.http.QueryMap;
@@ -42,7 +44,7 @@ public interface ServiceApi {
     Call<ResponseBody> login(@Path("login") String postfix, @QueryMap HashMap<String, Object> params);
 
     @POST("dbh-booking-reservation.php")
-    Call<DbhBookingResponse> dbhBookingReservation(@Body RequestBody body);
+    Call<DbhBookingResponse> dbhBookingReservation(@Query("json") String json);
 
     @Headers("Accept: " + "application/json")
     @GET("num-stops-addres-list.php")

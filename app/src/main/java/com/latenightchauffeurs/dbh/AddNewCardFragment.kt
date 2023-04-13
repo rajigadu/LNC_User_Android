@@ -16,13 +16,17 @@ import com.latenightchauffeurs.FragmentCallBack
 import com.latenightchauffeurs.R
 import com.latenightchauffeurs.Utils.*
 import com.latenightchauffeurs.databinding.FragmentAddNewCardBinding
-import com.latenightchauffeurs.dbh.DbhUtils.showAlertDialog
+import com.latenightchauffeurs.dbh.model.response.DbhBookingResponse
+import com.latenightchauffeurs.dbh.utils.DbhUtils.ACTION_CANCEL
+import com.latenightchauffeurs.dbh.utils.DbhUtils.ACTION_OK
+import com.latenightchauffeurs.dbh.utils.DbhUtils.showAlertDialog
+import com.latenightchauffeurs.dbh.utils.Resource
 import com.latenightchauffeurs.dbh.viewmodel.DbhViewModel
 import com.latenightchauffeurs.fragment.BookReservation_new
 import com.latenightchauffeurs.model.ItemCardList
 import com.latenightchauffeurs.model.SavePref
-import okhttp3.MultipartBody
 import okhttp3.ResponseBody
+import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -111,16 +115,20 @@ class AddNewCardFragment: Fragment() {
                 Log.e("TAG","")
             } else {
                 activity?.let { activity ->
-                    MaterialAlertDialogBuilder(activity)
-                        .setTitle(getActivity()?.getString(R.string.app_name))
-                        .setMessage("Please select a date in future.")
-                        .setCancelable(false)
-                        .setPositiveButton("Ok") { dialogInterface, i ->
-                            dialogInterface?.dismiss()
-                            activity.supportFragmentManager.popBackStack()
+                    showAlertDialog(
+                        context = activity,
+                        message = "Please select a date in future.",
+                        title = "Booking Reservation",
+                        callback = object : FragmentCallBack {
+                            override fun onResult(param1: Any?, param2: Any?, param3: Any?) {
+                                when(param1) {
+                                    ACTION_OK -> {
+                                        activity.supportFragmentManager.popBackStack()
+                                    }
+                                }
+                            }
                         }
-                        .create()
-                        .show()
+                    )
                 }
             }
         }
@@ -142,40 +150,56 @@ class AddNewCardFragment: Fragment() {
         jsonMap["promo"] = dataMap?.get("promo").toString()
         jsonMap["version"] = "yes"
 
-        val map = HashMap<String, Any>()
-        //map["json"] = jsonMap
-
-        val requestBody = MultipartBody.Builder().setType(MultipartBody.FORM)
-            .addFormDataPart("json", jsonMap.toString())
-            .build()
+        val jsonObject = (jsonMap as Map<*, *>?)?.let { JSONObject(it) }
+        val json = jsonObject.toString()
 
         activity?.let { activity ->
-            MaterialAlertDialogBuilder(activity)
-                .setTitle(getActivity()?.getString(R.string.app_name))
-                .setMessage("Are you sure to book this ride for $rideDate ?")
-                .setCancelable(false)
-                .setPositiveButton("Ok") { dialogInterface, i ->
-                    dialogInterface?.dismiss()
-                    context?.let { ProgressCaller.showProgressDialog(it) }
-                    invokeDbhBookingReservation(requestBody)
+            showAlertDialog(
+                context = activity,
+                message = "Are you sure to book this ride for $rideDate ?",
+                title = "Booking Reservation",
+                callback = object : FragmentCallBack {
+                    override fun onResult(param1: Any?, param2: Any?, param3: Any?) {
+                        when(param1) {
+                            ACTION_OK -> {
+                                invokeDbhBookingReservation(json)
+                            }
+                        }
+                    }
                 }
-                .create()
-                .show()
+            )
         }
     }
 
-    private fun invokeDbhBookingReservation(bookingData: MultipartBody) {
-        bookingViewModel?.dbhBookingReservation(bookingData)?.observe(viewLifecycleOwner) {
-            Log.e("TAG", "Response SUCCESSFUL: $it")
-            showAlertDialog(
-                context = requireContext(),
-                message = it.data.firstOrNull()?.msg ?: "",
-                title = "Booking Response",
-                callback = object: FragmentCallBack {
-                    override fun onResult(param1: Any?, param2: Any?, param3: Any?) {}
+    private fun invokeDbhBookingReservation(bookingData: String) {
+        bookingViewModel?.dbhBookingReservation(bookingData)?.observe(viewLifecycleOwner) { result ->
+            Log.e("TAG", "Response SUCCESSFUL: $result")
+            when(result.status) {
+                Resource.Status.LOADING -> {context?.let { ProgressCaller.showProgressDialog(it) }}
+                Resource.Status.SUCCESS -> {
+                    val dbhResponse = result.data
+                    showAlertDialog(
+                        context = requireContext(),
+                        message = dbhResponse?.data?.firstOrNull()?.msg ?: "",
+                        title = "Booking Response",
+                        callback = object: FragmentCallBack {
+                            override fun onResult(param1: Any?, param2: Any?, param3: Any?) {}
+                        }
+                    )
+                    ProgressCaller.hideProgressDialog()
                 }
-            )
-            ProgressCaller.hideProgressDialog()
+                Resource.Status.ERROR -> {
+                    showAlertDialog(
+                        context = requireContext(),
+                        message = result.message ?: "",
+                        title = "Booking Response",
+                        callback = object: FragmentCallBack {
+                            override fun onResult(param1: Any?, param2: Any?, param3: Any?) {}
+                        }
+                    )
+                    ProgressCaller.hideProgressDialog()
+                }
+            }
         }
     }
 

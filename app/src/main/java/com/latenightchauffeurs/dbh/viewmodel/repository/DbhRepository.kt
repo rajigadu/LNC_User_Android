@@ -5,10 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import com.latenightchauffeurs.Utils.ServiceApi
 import com.latenightchauffeurs.Utils.ServiceGenerator
 import com.latenightchauffeurs.dbh.model.response.DbhBookingResponse
-import okhttp3.MediaType
-import okhttp3.MultipartBody
-import okhttp3.RequestBody
-import org.json.JSONObject
+import com.latenightchauffeurs.dbh.utils.Resource
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -20,27 +17,26 @@ class DbhRepository() {
 
     private val apiService: ServiceApi = ServiceGenerator.createService(ServiceApi::class.java)
 
-    fun makeBooking(bookingData: MultipartBody): LiveData<DbhBookingResponse> {
-        val data = MutableLiveData<DbhBookingResponse>()
-
-        //val json = JSONObject(bookingData).toString()
-        //val requestBody = RequestBody.create(MediaType.parse("application/json"), json)
+    fun makeBooking(bookingData: String): MutableLiveData<Resource<DbhBookingResponse>> {
+        val bookingResult = MutableLiveData<Resource<DbhBookingResponse>>()
 
         apiService.dbhBookingReservation(bookingData).enqueue(object : Callback<DbhBookingResponse> {
             override fun onResponse(
                 call: Call<DbhBookingResponse>,
                 response: Response<DbhBookingResponse>) {
                 if (response.isSuccessful) {
-                    data.value = response.body()
+                    bookingResult.postValue(Resource.success(response.body()!!))
                 } else {
                     // handle error
+                    bookingResult.postValue(Resource.error(response.message() ?: "An error occurred", null))
                 }
             }
             override fun onFailure(call: Call<DbhBookingResponse>, t: Throwable) {
                 // handle error
+                bookingResult.postValue(Resource.error(t.localizedMessage ?: "An error occurred", null))
             }
         })
 
-        return data
+        return bookingResult
     }
 }
