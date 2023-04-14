@@ -89,4 +89,27 @@ class DbhRepository {
 
         return addCardResult
     }
+
+    fun applyPromoCode(promoCode: String?): MutableLiveData<Resource<ResponseBody>> {
+        val promoCodeResult = MutableLiveData<Resource<ResponseBody>>()
+        promoCodeResult.postValue(Resource.loading(null))
+        apiService.applyPromoCode(promoCode).enqueue(object : Callback<ResponseBody> {
+            override fun onResponse(
+                call: Call<ResponseBody>,
+                response: Response<ResponseBody>) {
+                if (response.isSuccessful) {
+                    promoCodeResult.postValue(Resource.success(response.body()!!))
+                } else {
+                    // handle error
+                    promoCodeResult.postValue(Resource.error(response.message() ?: "An error occurred", null))
+                }
+            }
+            override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
+                // handle error
+                promoCodeResult.postValue(Resource.error(t.localizedMessage ?: "An error occurred", null))
+            }
+        })
+
+        return promoCodeResult
+    }
 }

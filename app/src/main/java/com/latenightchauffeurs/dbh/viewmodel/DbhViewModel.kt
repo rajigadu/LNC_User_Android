@@ -27,4 +27,8 @@ class DbhViewModel : ViewModel() {
     fun getCardDetails(userId: String?): MutableLiveData<Resource<ResponseBody>> {
         return bookingRepository.getCardDetails(userId)
     }
+
+    fun applyPromoCode(promoCode: String?): MutableLiveData<Resource<ResponseBody>> {
+        return bookingRepository.applyPromoCode(promoCode)
+    }
 }

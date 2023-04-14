@@ -647,6 +647,7 @@ public class BookReservation_new extends Fragment implements View.OnClickListene
         rv_locCard.setVisibility(View.GONE);
 
         aSwitch = v.findViewById(R.id.addcard_top);
+        aSwitch = v.findViewById(R.id.addcard_top);
         relativeLayoutCardContainer = v.findViewById(R.id.m_reative);
 
         relativeLayoutCardContainer.setVisibility(View.GONE);

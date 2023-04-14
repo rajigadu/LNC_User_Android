@@ -1,5 +1,6 @@
 package com.latenightchauffeurs.dbh
 
+import android.animation.LayoutTransition
 import android.annotation.SuppressLint
 import android.os.Bundle
 import android.text.Editable
@@ -10,9 +11,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
+import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.transition.AutoTransition
+import androidx.transition.TransitionManager
 import com.latenightchauffeurs.FragmentCallBack
 import com.latenightchauffeurs.Utils.*
 import com.latenightchauffeurs.databinding.FragmentAddNewCardBinding
@@ -32,13 +36,14 @@ import java.nio.charset.Charset
 import java.text.SimpleDateFormat
 import java.util.*
 
+
 /**
  * Create by Sirumalayil on 01-04-2023.
  */
-class AddNewCardFragment: Fragment() {
+class AddNewCardFragment : Fragment() {
 
     private var binding: FragmentAddNewCardBinding? = null
-    private var dataMap: HashMap<String,Any>? = null
+    private var dataMap: HashMap<String, Any>? = null
     private var cardListAdapter: CardListAdapter? = null
     private var selectedCard: ItemCardList? = null
     private var preferences: SavePref? = null
@@ -65,6 +70,7 @@ class AddNewCardFragment: Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         bookingViewModel = ViewModelProvider(this)[DbhViewModel::class.java]
+        binding?.newCardLayout?.layoutTransition?.enableTransitionType(LayoutTransition.CHANGING)
         preferences = SavePref()
         getCardDetails()
         onClickListeners()
@@ -106,8 +112,37 @@ class AddNewCardFragment: Fragment() {
                 if (len == 3) {
                     binding?.edtTextCardExpiry?.selectAll()
                 }
+                if (len == 5) {
+                    binding?.textInputLayoutCardExpiry?.error = null
+                    binding?.textInputLayoutCardExpiry?.clearFocus()
+                }
             }
             override fun afterTextChanged(s: Editable) {} })
+
+        binding?.edtTextPostal?.doOnTextChanged { text, start, before, count ->
+            if (TextUtils.isEmpty(text)) {
+                binding?.textInputLayoutPostal?.error = null
+                binding?.textInputLayoutPostal?.clearFocus()
+            }
+        }
+        binding?.edtTextCardcvv?.doOnTextChanged { text, start, before, count ->
+            if (TextUtils.isEmpty(text)) {
+                binding?.textInputLayoutCardCvv?.error = null
+                binding?.textInputLayoutCardCvv?.clearFocus()
+            }
+        }
+        binding?.edtTextCardNumber?.doOnTextChanged { text, start, before, count ->
+            if (TextUtils.isEmpty(text)) {
+                binding?.textInputLayoutCardNumber?.error = null
+                binding?.textInputLayoutCardNumber?.clearFocus()
+            }
+        }
+        binding?.edtTextCardHolder?.doOnTextChanged { text, start, before, count ->
+            if (TextUtils.isEmpty(text)) {
+                binding?.textInputLayoutCardHolder?.error = null
+                binding?.textInputLayoutCardHolder?.clearFocus()
+            }
+        }
     }
 
     private fun onClickListeners() {
@@ -118,8 +153,7 @@ class AddNewCardFragment: Fragment() {
         binding?.applyPromoCode?.setOnClickListener {
             val promoCode = binding?.extTextPromoCode?.text?.toString()?.trim()
             if (!TextUtils.isEmpty(promoCode)) {
-                dataMap!!["promo"] = promoCode.toString()
-                OnlineRequest.applyPromo(activity,dataMap)
+                applyPromoCode(promoCode)
                 Utils.hideSoftKeyboard(activity)
             } else {
                 Utils.toastTxt("Enter a valid Promo Code", activity)
@@ -132,12 +166,90 @@ class AddNewCardFragment: Fragment() {
         binding?.btnAddCard?.setOnClickListener {
             if (validatedCardFields()) addNewCard()
         }
+        binding?.switchNewCard?.setOnCheckedChangeListener { buttonView, isChecked ->
+            if (isChecked) {
+                TransitionManager.beginDelayedTransition(
+                    binding?.newCardLayout!!,
+                    AutoTransition()
+                )
+                binding?.newCardLayout?.isVisible = true
+            } else {
+                TransitionManager.beginDelayedTransition(
+                    binding?.newCardLayout!!,
+                    AutoTransition()
+                )
+                binding?.newCardLayout?.isVisible = false
+                clearFields()
+            }
+        }
+    }
+
+    private fun applyPromoCode(promoCode: String?) {
+        bookingViewModel?.applyPromoCode(promoCode)?.observe(viewLifecycleOwner) { uiModel ->
+            when(uiModel.status) {
+                Resource.Status.LOADING -> { activity?.let { ProgressCaller.showProgressDialog(it) }}
+                Resource.Status.SUCCESS -> {
+                    try {
+                        val response = uiModel.data as ResponseBody
+                        val responseBufferedSource = response.source()?.buffer()
+                        val responseString =
+                            responseBufferedSource?.readString(Charset.defaultCharset())
+                        val jsonObject = responseString?.let { JSONObject(it) }
+                        if (jsonObject?.getString("status") == "1") {
+                            val msg = jsonObject.getString("msg")
+                            (activity as? BaseActivity)?.showAlertMessageDialog(message = msg)
+                        }
+                        Log.e(TAG,"Success APPLY_PROMO_CODE: $responseString")
+                    }catch (e: Exception) {
+                        Log.e(TAG,"Exception APPLY_PROMO_CODE: ${e.localizedMessage}")
+                        (activity as? BaseActivity)?.showAlertMessageDialog(message = e.localizedMessage)
+                    }
+                    ProgressCaller.hideProgressDialog()
+                }
+                Resource.Status.ERROR -> {
+                    Log.e(TAG,"Error APPLY_PROMO_CODE: ${uiModel.message}")
+                    (activity as? BaseActivity)?.showAlertMessageDialog(message = uiModel.message)
+                    ProgressCaller.hideProgressDialog()
+                }
+            }
+        }
+    }
+
+    /**
+     * Clear EditTextInputLayout fields error
+     */
+    private fun clearFields() {
+        // Clear the text in all EditTexts
+        binding?.edtTextCardExpiry?.setText("")
+        binding?.edtTextCardHolder?.setText("")
+        binding?.edtTextCardNumber?.setText("")
+        binding?.edtTextCardcvv?.setText("")
+        binding?.edtTextPostal?.setText("")
+
+        // Clear the error messages for all TextInputLayouts
+        binding?.textInputLayoutCardNumber?.error = null
+        binding?.textInputLayoutCardNumber?.isErrorEnabled = false
+        binding?.textInputLayoutCardNumber?.errorIconDrawable = null
+        binding?.textInputLayoutCardExpiry?.error = null
+        binding?.textInputLayoutCardExpiry?.isErrorEnabled = false
+        binding?.textInputLayoutCardExpiry?.errorIconDrawable = null
+        binding?.textInputLayoutCardHolder?.error = null
+        binding?.textInputLayoutCardHolder?.isErrorEnabled = false
+        binding?.textInputLayoutCardHolder?.errorIconDrawable = null
+        binding?.textInputLayoutCardCvv?.error = null
+        binding?.textInputLayoutCardCvv?.isErrorEnabled = false
+        binding?.textInputLayoutCardCvv?.errorIconDrawable = null
+        binding?.textInputLayoutPostal?.error = null
+        binding?.textInputLayoutPostal?.isErrorEnabled = false
+        binding?.textInputLayoutPostal?.errorIconDrawable = null
     }
 
     /**
      * Here will add new Card API
+     * Once the validation are satisfied will call add new card Server API
      */
     private fun addNewCard() {
+        Utils.hideSoftKeyboard(activity)
         val cardHolderName = binding?.edtTextCardHolder?.text?.toString()?.trim()
         val cardNumber = binding?.edtTextCardNumber?.text?.toString()?.trim()
         val cardExpiry = binding?.edtTextCardExpiry?.text?.toString()?.trim()
@@ -149,7 +261,8 @@ class AddNewCardFragment: Fragment() {
             expiryMonth =
                 cardExpiry.split("/".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()[0]
             expiryYear =
-                "20" + cardExpiry.split("/".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()[1]
+                "20" + cardExpiry.split("/".toRegex()).dropLastWhile { it.isEmpty() }
+                    .toTypedArray()[1]
         }
         Log.e(TAG, "expMonth: $expiryMonth  expYear: $expiryYear")
 
@@ -170,16 +283,65 @@ class AddNewCardFragment: Fragment() {
         val postal1 = MultipartBody.Part.createFormData("postal", postalCode!!)
         newCardRequest.add(postal1)
 
-        bookingViewModel?.addNewCard(newCardRequest)?.observe(viewLifecycleOwner) {uiModel ->
-            when(uiModel.status) {
-                Resource.Status.LOADING -> { activity?.let { ProgressCaller.showProgressDialog(it) }}
+        bookingViewModel?.addNewCard(newCardRequest)?.observe(viewLifecycleOwner) { uiModel ->
+            when (uiModel.status) {
+                Resource.Status.LOADING -> {
+                    activity?.let { ProgressCaller.showProgressDialog(it) }
+                }
                 Resource.Status.SUCCESS -> {
-                    Log.e(TAG, "Success NEW CARD ADDED: ${uiModel.data}")
+
+                    try {
+                        val response = uiModel.data as ResponseBody
+                        val responseBufferedSource = response.source()?.buffer()
+                        val responseString =
+                            responseBufferedSource?.readString(Charset.defaultCharset())
+                        val jsonObject = responseString?.let { JSONObject(it) }
+
+                        setNewCardData(jsonObject)
+
+                        Log.e(TAG, "Success NEW CARD ADDED: $responseString")
+                    } catch (e: java.lang.Exception) {
+                        Log.e(TAG, "Exception NEW CARD ADDED: ${e.localizedMessage}")
+                    }
+
                     ProgressCaller.hideProgressDialog()
                 }
                 Resource.Status.ERROR -> {
                     Log.e(TAG, "Failure NEW CARD ADDED: ${uiModel.message}")
                     ProgressCaller.hideProgressDialog()
+                }
+            }
+        }
+    }
+
+    private fun setNewCardData(jsonObject: JSONObject?) {
+        if (jsonObject != null) {
+            when (jsonObject.getString("status")) {
+                "1" -> {
+                    val array = jsonObject.getJSONArray("data")
+                    if (array.length() > 0) {
+                        val jsonObject1 = array.getJSONObject(0)
+                        val msg = jsonObject1.getString("msg")
+                        (activity as? BaseActivity)?.showAlertMessageDialog(message = msg)
+                        clearFields()
+                        getCardDetails()
+                    }
+                }
+                else -> {
+                    val array = jsonObject.getJSONArray("data")
+                    if (array.length() > 0) {
+                        val jsonObject1 = array.getJSONObject(0)
+                        val msg = jsonObject1.getString("msg")
+                        if (msg.equals(
+                                "Service not allowed",
+                                ignoreCase = true
+                            ) || msg.equals("Bad card check digit", ignoreCase = true)
+                        ) {
+                            (activity as? BaseActivity)?.showAlertMessageDialog(message = msg)
+                        } else {
+                            (activity as? BaseActivity)?.showAlertMessageDialog(message = msg)
+                        }
+                    }
                 }
             }
         }
@@ -197,37 +359,48 @@ class AddNewCardFragment: Fragment() {
         val postalCode = binding?.edtTextPostal?.text?.toString()?.trim()
 
         val listOfFields = arrayListOf<CardDynamicFields>().apply {
-            add(CardDynamicFields(
-                binding?.edtTextCardHolder,
-                binding?.textInputLayoutCardHolder,
-                cardHolderName
-            ))
-            add(CardDynamicFields(
-                binding?.edtTextCardExpiry,
-                binding?.textInputLayoutCardExpiry,
-                cardExpiry
-            ))
-            add(CardDynamicFields(
-                binding?.edtTextCardNumber,
-                binding?.textInputLayoutCardNumber,
-                cardNumber
-            ))
-            add(CardDynamicFields(
-                binding?.edtTextCardcvv,
-                binding?.textInputLayoutCardCvv,
-                cardCvv
-            ))
-            add(CardDynamicFields(
-                binding?.edtTextPostal,
-                binding?.textInputLayoutPostal,
-                postalCode
-            ))
+            add(
+                CardDynamicFields(
+                    binding?.edtTextCardHolder,
+                    binding?.textInputLayoutCardHolder,
+                    cardHolderName
+                )
+            )
+            add(
+                CardDynamicFields(
+                    binding?.edtTextCardExpiry,
+                    binding?.textInputLayoutCardExpiry,
+                    cardExpiry
+                )
+            )
+            add(
+                CardDynamicFields(
+                    binding?.edtTextCardNumber,
+                    binding?.textInputLayoutCardNumber,
+                    cardNumber
+                )
+            )
+            add(
+                CardDynamicFields(
+                    binding?.edtTextCardcvv,
+                    binding?.textInputLayoutCardCvv,
+                    cardCvv
+                )
+            )
+            add(
+                CardDynamicFields(
+                    binding?.edtTextPostal,
+                    binding?.textInputLayoutPostal,
+                    postalCode
+                )
+            )
         }
 
         listOfFields.forEach { dynamicFeilds ->
             if (TextUtils.isEmpty(dynamicFeilds.value)) {
-                dynamicFeilds.inputLayout?.error = "${dynamicFeilds.inputLayout?.hint} should not be empty"
-            } else  {
+                dynamicFeilds.inputLayout?.error =
+                    "${dynamicFeilds.inputLayout?.hint} should not be empty"
+            } else {
                 dynamicFeilds.validated = true
             }
         }
@@ -245,6 +418,7 @@ class AddNewCardFragment: Fragment() {
      */
     @SuppressLint("SimpleDateFormat")
     private fun submitDetails() {
+        Utils.hideSoftKeyboard(activity)
         val dateRide = dataMap?.get("date_ride").toString()
         val timeRide = dataMap?.get("time_ride").toString()
         val dateCurrent = Calendar.getInstance().time
@@ -258,14 +432,14 @@ class AddNewCardFragment: Fragment() {
 
         if (rideDateAndTime != null) {
             if (rideDateAndTime >= currentDateLong!!) {
-                Log.e(TAG,"")
+                Log.e(TAG, "")
             } else {
                 (activity as? BaseActivity)?.showAlertMessageDialog(
                     message = "Please select a date in future.",
                     title = "Booking Reservation",
                     callBack = object : FragmentCallBack {
                         override fun onResult(param1: Any?, param2: Any?, param3: Any?) {
-                            when(param1) {
+                            when (param1) {
                                 ACTION_OK -> {
                                     activity?.supportFragmentManager?.popBackStack()
                                 }
@@ -275,7 +449,8 @@ class AddNewCardFragment: Fragment() {
                 )
             }
         }
-        val rideDate = BookReservation_new.convertDate("" + rideDateAndTime, "EEEE dd MMMM yyyy hh:mm a")
+        val rideDate =
+            BookReservation_new.convertDate("" + rideDateAndTime, "EEEE dd MMMM yyyy hh:mm a")
 
         val jsonMap = HashMap<String, String>()
         jsonMap["userid"] = preferences?.userId ?: ""
@@ -302,7 +477,7 @@ class AddNewCardFragment: Fragment() {
                 title = "Booking Reservation",
                 callBack = object : FragmentCallBack {
                     override fun onResult(param1: Any?, param2: Any?, param3: Any?) {
-                        when(param1) {
+                        when (param1) {
                             ACTION_OK -> {
                                 invokeDbhBookingReservation(json)
                                 Log.e(TAG, "Booking REQUEST: $json")
@@ -319,35 +494,38 @@ class AddNewCardFragment: Fragment() {
      * and handling response
      */
     private fun invokeDbhBookingReservation(bookingData: String) {
-        bookingViewModel?.dbhBookingReservation(bookingData)?.observe(viewLifecycleOwner) { result ->
-            Log.e(TAG, "Booking RESPONSE: $result")
-            when(result.status) {
-                Resource.Status.LOADING -> { context?.let { ProgressCaller.showProgressDialog(it) }}
-                Resource.Status.SUCCESS -> {
-                    val dbhResponse = result.data
-                    (activity as? BaseActivity)?.showAlertMessageDialog(
-                        message = dbhResponse?.data?.firstOrNull()?.msg ?: "",
-                        title = "Booking Response",
-                        negativeButton = false,
-                        callBack = object: FragmentCallBack {
-                            override fun onResult(param1: Any?, param2: Any?, param3: Any?) {}
-                        }
-                    )
-                    ProgressCaller.hideProgressDialog()
-                }
-                Resource.Status.ERROR -> {
-                    (activity as? BaseActivity)?.showAlertMessageDialog(
-                        message = result.message ?: "",
-                        title = "Booking Response",
-                        negativeButton = false,
-                        callBack = object: FragmentCallBack {
-                            override fun onResult(param1: Any?, param2: Any?, param3: Any?) {}
-                        }
-                    )
-                    ProgressCaller.hideProgressDialog()
+        bookingViewModel?.dbhBookingReservation(bookingData)
+            ?.observe(viewLifecycleOwner) { result ->
+                Log.e(TAG, "Booking RESPONSE: $result")
+                when (result.status) {
+                    Resource.Status.LOADING -> {
+                        context?.let { ProgressCaller.showProgressDialog(it) }
+                    }
+                    Resource.Status.SUCCESS -> {
+                        val dbhResponse = result.data
+                        (activity as? BaseActivity)?.showAlertMessageDialog(
+                            message = dbhResponse?.data?.firstOrNull()?.msg ?: "",
+                            title = "Booking Response",
+                            negativeButton = false,
+                            callBack = object : FragmentCallBack {
+                                override fun onResult(param1: Any?, param2: Any?, param3: Any?) {}
+                            }
+                        )
+                        ProgressCaller.hideProgressDialog()
+                    }
+                    Resource.Status.ERROR -> {
+                        (activity as? BaseActivity)?.showAlertMessageDialog(
+                            message = result.message ?: "",
+                            title = "Booking Response",
+                            negativeButton = false,
+                            callBack = object : FragmentCallBack {
+                                override fun onResult(param1: Any?, param2: Any?, param3: Any?) {}
+                            }
+                        )
+                        ProgressCaller.hideProgressDialog()
+                    }
                 }
             }
-        }
     }
 
     private fun validated(): Boolean {
@@ -392,22 +570,26 @@ class AddNewCardFragment: Fragment() {
     private fun getCardDetails() {
         preferences?.SavePref(activity)
 
-        bookingViewModel?.getCardDetails(preferences?.userId)?.observe(viewLifecycleOwner) { uiModel ->
-            when(uiModel.status) {
-                Resource.Status.LOADING -> { activity?.let { ProgressCaller.showProgressDialog(it) }}
-                Resource.Status.SUCCESS -> {
-                    val response = uiModel.data as ResponseBody
-                    val responseBufferedSource = response.source()?.buffer()
-                    val responseString = responseBufferedSource?.readString(Charset.defaultCharset())
-                    val cardList = ParsingHelper().getCardList(responseString)
-                    initializeCardListAdapter(cardList)
-                    ProgressCaller.hideProgressDialog()
-                }
-                Resource.Status.ERROR -> {
-                    Utils.toastTxt(uiModel.message, activity)
-                    ProgressCaller.hideProgressDialog()
+        bookingViewModel?.getCardDetails(preferences?.userId)
+            ?.observe(viewLifecycleOwner) { uiModel ->
+                when (uiModel.status) {
+                    Resource.Status.LOADING -> {
+                        activity?.let { ProgressCaller.showProgressDialog(it) }
+                    }
+                    Resource.Status.SUCCESS -> {
+                        val response = uiModel.data as ResponseBody
+                        val responseBufferedSource = response.source()?.buffer()
+                        val responseString =
+                            responseBufferedSource?.readString(Charset.defaultCharset())
+                        val cardList = ParsingHelper().getCardList(responseString)
+                        initializeCardListAdapter(cardList)
+                        ProgressCaller.hideProgressDialog()
+                    }
+                    Resource.Status.ERROR -> {
+                        Utils.toastTxt(uiModel.message, activity)
+                        ProgressCaller.hideProgressDialog()
+                    }
                 }
             }
-        }
     }
 }
