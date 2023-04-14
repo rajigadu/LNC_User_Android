@@ -50,6 +50,9 @@
     <string name="book_my_chauffeur">Book My Chauffeur</string>
     <string name="add_new_card">Add New Card</string>
     <string name="promo_code">Promo Code</string>
+    <string name="cancel">Cancel</string>
+    <string name="ok">Ok</string>
+    <string name="retry">Retry</string>
 
 
     <array name="indicator_colors">

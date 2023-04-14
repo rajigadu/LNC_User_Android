@@ -664,7 +664,7 @@
                     <Button
                         android:id="@+id/submit_card"
                         android:layout_width="match_parent"
-                        android:layout_height="35dp"
+                        android:layout_height="wrap_content"
                         android:layout_weight="3"
                         android:singleLine="true"
                         android:text="Add Card"
@@ -739,12 +739,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_above="@+id/ll_promo"
-        android:padding="@dimen/margin_15"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
+        android:padding="@dimen/padding_12dp"
+        android:layout_marginHorizontal="@dimen/margin_15"
         android:text="Price Quote"
         android:textColor="@color/white_full"
-        android:textSize="@dimen/text_mediumsize"
+        android:textSize="@dimen/text_14sp"
         android:textAllCaps="false"/>
 
     <LinearLayout
@@ -772,10 +771,11 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:padding="@dimen/margin_15"
+            android:padding="@dimen/padding_12dp"
             android:text="Book My Chauffeur"
+            android:layout_marginHorizontal="@dimen/margin_15"
             android:textColor="@color/white_full"
-            android:textSize="@dimen/text_mediumsize"
+            android:textSize="@dimen/text_14sp"
             android:visibility="gone"
             android:textAllCaps="false"/>
 
@@ -785,12 +785,11 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:padding="@dimen/margin_15"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
+            android:padding="@dimen/padding_12dp"
+            android:layout_marginHorizontal="@dimen/margin_15"
             android:text="Book My Chauffeur"
             android:textColor="@color/white_full"
-            android:textSize="@dimen/text_mediumsize"
+            android:textSize="@dimen/text_14sp"
             android:textAllCaps="false"/>
     </LinearLayout>
 

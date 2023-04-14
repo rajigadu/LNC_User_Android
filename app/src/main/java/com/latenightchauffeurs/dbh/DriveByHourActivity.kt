@@ -6,11 +6,14 @@ import com.latenightchauffeurs.Utils.ConstantUtil
 import com.latenightchauffeurs.databinding.ActivityDbhLayoutBinding
 import com.latenightchauffeurs.extension.navigate
 import com.latenightchauffeurs.dbh.DriverByTheHourFragment
+import com.latenightchauffeurs.dbh.base.BaseActivity
 
 /**
  * Create by Sirumalayil on 01-04-2023.
  */
-class DriveByHourActivity: AppCompatActivity() {
+
+const val TAG = "DBH Booking Reservation"
+class DriveByHourActivity: BaseActivity() {
 
     private var binding: ActivityDbhLayoutBinding? = null
 

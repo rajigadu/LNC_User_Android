@@ -26,7 +26,7 @@ android {
     compileSdkVersion 33
     defaultConfig {
         applicationId "com.latenightchauffeurs"
-        minSdkVersion 19
+        minSdkVersion 21
         targetSdkVersion 33
         versionCode 43
         versionName "0.0.0041"
