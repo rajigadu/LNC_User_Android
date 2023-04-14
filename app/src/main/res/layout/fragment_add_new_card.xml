@@ -232,6 +232,7 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:background="@null"
+                android:inputType="textCapWords"
                 android:paddingHorizontal="12dp"
                 android:hint="Apply promo code here"
                 app:layout_constraintBottom_toBottomOf="parent"

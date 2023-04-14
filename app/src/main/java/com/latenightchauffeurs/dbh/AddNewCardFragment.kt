@@ -157,7 +157,6 @@ class AddNewCardFragment : Fragment() {
                 Utils.hideSoftKeyboard(activity)
             } else {
                 Utils.toastTxt("Enter a valid Promo Code", activity)
-                ProgressCaller.hideProgressDialog()
             }
         }
         binding?.btnBookMtChauffeur?.setOnClickListener {
@@ -436,7 +435,6 @@ class AddNewCardFragment : Fragment() {
             } else {
                 (activity as? BaseActivity)?.showAlertMessageDialog(
                     message = "Please select a date in future.",
-                    title = "Booking Reservation",
                     callBack = object : FragmentCallBack {
                         override fun onResult(param1: Any?, param2: Any?, param3: Any?) {
                             when (param1) {
@@ -474,7 +472,6 @@ class AddNewCardFragment : Fragment() {
         activity?.let { activity ->
             (activity as? BaseActivity)?.showAlertMessageDialog(
                 message = "Are you sure to book this ride for $rideDate ?",
-                title = "Booking Reservation",
                 callBack = object : FragmentCallBack {
                     override fun onResult(param1: Any?, param2: Any?, param3: Any?) {
                         when (param1) {
@@ -508,7 +505,13 @@ class AddNewCardFragment : Fragment() {
                             title = "Booking Response",
                             negativeButton = false,
                             callBack = object : FragmentCallBack {
-                                override fun onResult(param1: Any?, param2: Any?, param3: Any?) {}
+                                override fun onResult(param1: Any?, param2: Any?, param3: Any?) {
+                                    when(param1) {
+                                        ACTION_OK -> {
+                                            activity?.finish()
+                                        }
+                                    }
+                                }
                             }
                         )
                         ProgressCaller.hideProgressDialog()

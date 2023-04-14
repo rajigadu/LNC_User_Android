@@ -18,7 +18,7 @@ class AlertDialogMessageFragment : DialogFragment() {
     private var callBack: FragmentCallBack? = null
     private var showRetry: Boolean = false
     private var showNegativeBtn: Boolean = true
-    private var title: String? = "Error"
+    private var title: String? = "LateNightChauffeurs"
     private var message: String? = "Oops! Something went wrong, please try again later"
 
 
