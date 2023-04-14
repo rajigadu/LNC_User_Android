@@ -23,4 +23,8 @@ class DbhViewModel : ViewModel() {
     fun addNewCard(newCardRequest: ArrayList<MultipartBody.Part>): MutableLiveData<Resource<ResponseBody>> {
         return bookingRepository.addNewCard(newCardRequest)
     }
+
+    fun getCardDetails(userId: String?): MutableLiveData<Resource<ResponseBody>> {
+        return bookingRepository.getCardDetails(userId)
+    }
 }

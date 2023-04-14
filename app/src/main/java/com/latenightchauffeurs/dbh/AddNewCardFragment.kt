@@ -9,16 +9,15 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.EditText
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.google.android.material.textfield.TextInputLayout
 import com.latenightchauffeurs.FragmentCallBack
 import com.latenightchauffeurs.Utils.*
 import com.latenightchauffeurs.databinding.FragmentAddNewCardBinding
 import com.latenightchauffeurs.dbh.base.BaseActivity
+import com.latenightchauffeurs.dbh.model.response.CardDynamicFields
 import com.latenightchauffeurs.dbh.utils.AlertDialogMessageFragment.Companion.ACTION_OK
 import com.latenightchauffeurs.dbh.utils.ProgressCaller
 import com.latenightchauffeurs.dbh.utils.Resource
@@ -29,9 +28,6 @@ import com.latenightchauffeurs.model.SavePref
 import okhttp3.MultipartBody
 import okhttp3.ResponseBody
 import org.json.JSONObject
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 import java.nio.charset.Charset
 import java.text.SimpleDateFormat
 import java.util.*
@@ -156,13 +152,12 @@ class AddNewCardFragment: Fragment() {
                 "20" + cardExpiry.split("/".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()[1]
         }
         Log.e(TAG, "expMonth: $expiryMonth  expYear: $expiryYear")
-        val preferences = SavePref()
 
         /**
          * Generate Multipart body here
          */
         val newCardRequest = ArrayList<MultipartBody.Part>()
-        val uid = MultipartBody.Part.createFormData("userid", preferences.userId)
+        val uid = MultipartBody.Part.createFormData("userid", preferences?.userId!!)
         newCardRequest.add(uid)
         val cardName1 = MultipartBody.Part.createFormData("name", cardHolderName!!)
         newCardRequest.add(cardName1)
@@ -177,15 +172,22 @@ class AddNewCardFragment: Fragment() {
 
         bookingViewModel?.addNewCard(newCardRequest)?.observe(viewLifecycleOwner) {uiModel ->
             when(uiModel.status) {
-                Resource.Status.LOADING -> {}
-                Resource.Status.SUCCESS -> {}
-                Resource.Status.ERROR -> {}
+                Resource.Status.LOADING -> { activity?.let { ProgressCaller.showProgressDialog(it) }}
+                Resource.Status.SUCCESS -> {
+                    Log.e(TAG, "Success NEW CARD ADDED: ${uiModel.data}")
+                    ProgressCaller.hideProgressDialog()
+                }
+                Resource.Status.ERROR -> {
+                    Log.e(TAG, "Failure NEW CARD ADDED: ${uiModel.message}")
+                    ProgressCaller.hideProgressDialog()
+                }
             }
         }
     }
 
     /**
-     * Validating New card fields
+     * Validating New card fields,
+     * All Edit fields are validating here and it's success will [addNewCard]
      */
     private fun validatedCardFields(): Boolean {
         val cardHolderName = binding?.edtTextCardHolder?.text?.toString()?.trim()
@@ -237,13 +239,10 @@ class AddNewCardFragment: Fragment() {
         return true
     }
 
-    data class CardDynamicFields(
-        var editText: EditText? = null,
-        var inputLayout: TextInputLayout? = null,
-        var value: String?,
-        var validated: Boolean = false
-    )
-
+    /**
+     * Submit All Booking reservation data is here and it will validate,
+     * once validation satisfied will [invokeDbhBookingReservation]
+     */
     @SuppressLint("SimpleDateFormat")
     private fun submitDetails() {
         val dateRide = dataMap?.get("date_ride").toString()
@@ -315,6 +314,10 @@ class AddNewCardFragment: Fragment() {
         }
     }
 
+    /**
+     * Here will invoking DBH Booking reservation Server API
+     * and handling response
+     */
     private fun invokeDbhBookingReservation(bookingData: String) {
         bookingViewModel?.dbhBookingReservation(bookingData)?.observe(viewLifecycleOwner) { result ->
             Log.e(TAG, "Booking RESPONSE: $result")
@@ -387,28 +390,24 @@ class AddNewCardFragment: Fragment() {
      * Adapter for listing card items
      */
     private fun getCardDetails() {
-        activity?.let { ProgressCaller.showProgressDialog(it) }
         preferences?.SavePref(activity)
 
-        val apiInterface = APIClient.getClientVO().create(APIInterface::class.java)
-        val call = apiInterface.cardList(preferences?.userId)
-        call.enqueue(object : Callback<ResponseBody> {
-            override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
-                if (response.isSuccessful) {
-                    if (response.body() != null) {
-                        val responseBufferedSource = response.body()?.source()?.buffer()
-                        val responseString = responseBufferedSource?.readString(Charset.defaultCharset())
-                        val cardList = ParsingHelper().getCardList(responseString)
-                        initializeCardListAdapter(cardList)
-                    }
+        bookingViewModel?.getCardDetails(preferences?.userId)?.observe(viewLifecycleOwner) { uiModel ->
+            when(uiModel.status) {
+                Resource.Status.LOADING -> { activity?.let { ProgressCaller.showProgressDialog(it) }}
+                Resource.Status.SUCCESS -> {
+                    val response = uiModel.data as ResponseBody
+                    val responseBufferedSource = response.source()?.buffer()
+                    val responseString = responseBufferedSource?.readString(Charset.defaultCharset())
+                    val cardList = ParsingHelper().getCardList(responseString)
+                    initializeCardListAdapter(cardList)
+                    ProgressCaller.hideProgressDialog()
                 }
-                ProgressCaller.hideProgressDialog()
+                Resource.Status.ERROR -> {
+                    Utils.toastTxt(uiModel.message, activity)
+                    ProgressCaller.hideProgressDialog()
+                }
             }
-
-            override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
-                Utils.toastTxt(t.message, activity)
-                ProgressCaller.hideProgressDialog()
-            }
-        })
+        }
     }
 }

@@ -1186,9 +1186,6 @@ public class BookReservation_new extends Fragment implements View.OnClickListene
                         responseCode = response.body().string();
                         Log.e(TAG, "responseCode MSGXX " + responseCode);
 
-//                        {"data":[{"msg":"Card added successfully."}],"status":"1"}
-                        // new ShowMsg().createSnackbar(AddCardInformation.this, "" + responseCode);
-
                         try {
                             JSONObject jsonObject = new JSONObject(responseCode);
                             String status = jsonObject.getString("status");

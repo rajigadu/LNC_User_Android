@@ -66,4 +66,27 @@ class DbhRepository {
 
         return addCardResult
     }
+
+    fun getCardDetails(userId: String?): MutableLiveData<Resource<ResponseBody>> {
+        val addCardResult = MutableLiveData<Resource<ResponseBody>>()
+        addCardResult.postValue(Resource.loading(null))
+        apiInterface.cardList(userId).enqueue(object : Callback<ResponseBody> {
+            override fun onResponse(
+                call: Call<ResponseBody>,
+                response: Response<ResponseBody>) {
+                if (response.isSuccessful) {
+                    addCardResult.postValue(Resource.success(response.body()!!))
+                } else {
+                    // handle error
+                    addCardResult.postValue(Resource.error(response.message() ?: "An error occurred", null))
+                }
+            }
+            override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
+                // handle error
+                addCardResult.postValue(Resource.error(t.localizedMessage ?: "An error occurred", null))
+            }
+        })
+
+        return addCardResult
+    }
 }
