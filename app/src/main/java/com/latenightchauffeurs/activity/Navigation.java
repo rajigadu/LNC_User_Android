@@ -49,6 +49,7 @@ import com.latenightchauffeurs.Utils.ConstVariable;
 import com.latenightchauffeurs.Utils.JsonPost;
 import com.latenightchauffeurs.Utils.OnlineRequest;
 import com.latenightchauffeurs.Utils.Utils;
+import com.latenightchauffeurs.dbh.DbhRideInfoFragment;
 import com.latenightchauffeurs.fragment.BookReservation_new;
 import com.latenightchauffeurs.fragment.Cards;
 import com.latenightchauffeurs.fragment.FRides;
@@ -463,6 +464,10 @@ public class Navigation extends AppCompatActivity implements NavigationView.OnNa
             getFragment(5);
         }
 
+        else if (id == R.id.nav_dbh_bookings) {
+            getFragment(6);
+        }
+
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
 
@@ -525,6 +530,12 @@ public class Navigation extends AppCompatActivity implements NavigationView.OnNa
                 break;*/
             case 5:
                 logoutRequest();
+                break;
+            case 6:
+                rlBottomTabs.setVisibility(View.GONE);
+                title = getString(R.string.dbh_booking);
+                fragment = new DbhRideInfoFragment();
+                fragmenttransactions(fragment);
                 break;
             default:
                 break;

@@ -195,6 +195,7 @@ class AddNewCardFragment : Fragment() {
                             responseBufferedSource?.readString(Charset.defaultCharset())
                         val jsonObject = responseString?.let { JSONObject(it) }
                         if (jsonObject?.getString("status") == "1") {
+                            dataMap?.set("promo", promoCode.toString())
                             val msg = jsonObject.getString("msg")
                             (activity as? BaseActivity)?.showAlertMessageDialog(message = msg)
                         }

@@ -112,4 +112,51 @@ class DbhRepository {
 
         return promoCodeResult
     }
+
+    fun editDbhRide(editRideRequest: String?): MutableLiveData<Resource<ResponseBody>> {
+        val editRideResponse = MutableLiveData<Resource<ResponseBody>>()
+        editRideResponse.postValue(Resource.loading(null))
+        apiService.dbhEditRide(editRideRequest).enqueue(object : Callback<ResponseBody> {
+            override fun onResponse(
+                call: Call<ResponseBody>,
+                response: Response<ResponseBody>) {
+                if (response.isSuccessful) {
+                    editRideResponse.postValue(Resource.success(response.body()!!))
+                } else {
+                    // handle error
+                    editRideResponse.postValue(Resource.error(response.message() ?: "An error occurred", null))
+                }
+            }
+            override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
+                // handle error
+                editRideResponse.postValue(Resource.error(t.localizedMessage ?: "An error occurred", null))
+            }
+        })
+
+        return editRideResponse
+    }
+
+    fun dbhUpcomingRides(userId: String?): MutableLiveData<Resource<ResponseBody>> {
+        val dbhUpcomingRideResponse = MutableLiveData<Resource<ResponseBody>>()
+        dbhUpcomingRideResponse.postValue(Resource.loading(null))
+        apiService.dbhUpcomingRides(userId).enqueue(object : Callback<ResponseBody> {
+            override fun onResponse(
+                call: Call<ResponseBody>,
+                response: Response<ResponseBody>) {
+                if (response.isSuccessful) {
+                    dbhUpcomingRideResponse.postValue(Resource.success(response.body()!!))
+                } else {
+                    // handle error
+                    dbhUpcomingRideResponse.postValue(Resource.error(response.message() ?: "An error occurred", null))
+                }
+            }
+            override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
+                // handle error
+                dbhUpcomingRideResponse.postValue(Resource.error(t.localizedMessage ?: "An error occurred", null))
+            }
+        })
+
+        return dbhUpcomingRideResponse
+    }
+
 }

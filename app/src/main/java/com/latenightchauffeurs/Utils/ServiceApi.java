@@ -49,6 +49,12 @@ public interface ServiceApi {
     @GET("promo-check.php")
     Call<ResponseBody> applyPromoCode(@Query("promo")String promoCode);
 
+    @POST("dbh-edit-ride.php")
+    Call<ResponseBody> dbhEditRide(@Query("json") String json);
+
+    @GET("dbh-ride-info.php")
+    Call<ResponseBody> dbhUpcomingRides(@Query("userid") String userId);
+
     @Headers("Accept: " + "application/json")
     @GET("num-stops-addres-list.php")
     Call<StopsList> fetchStopsList(@Query("rideid") String rideId);
