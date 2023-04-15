@@ -6,6 +6,7 @@ import com.latenightchauffeurs.Utils.APIInterface
 import com.latenightchauffeurs.Utils.ServiceApi
 import com.latenightchauffeurs.Utils.ServiceGenerator
 import com.latenightchauffeurs.dbh.model.response.DbhBookingResponse
+import com.latenightchauffeurs.dbh.model.response.DbhUpcomingRides
 import com.latenightchauffeurs.dbh.utils.Resource
 import okhttp3.MultipartBody
 import okhttp3.ResponseBody
@@ -136,10 +137,34 @@ class DbhRepository {
         return editRideResponse
     }
 
-    fun dbhUpcomingRides(userId: String?): MutableLiveData<Resource<ResponseBody>> {
+    fun dbhUpcomingRides(userId: String?): MutableLiveData<Resource<DbhUpcomingRides>> {
+        val dbhUpcomingRideResponse = MutableLiveData<Resource<DbhUpcomingRides>>()
+        dbhUpcomingRideResponse.postValue(Resource.loading(null))
+        apiService.dbhUpcomingRides(userId).enqueue(object : Callback<DbhUpcomingRides> {
+            override fun onResponse(
+                call: Call<DbhUpcomingRides>,
+                response: Response<DbhUpcomingRides>) {
+                if (response.isSuccessful) {
+                    dbhUpcomingRideResponse.postValue(Resource.success(response.body()!!))
+                } else {
+                    // handle error
+                    dbhUpcomingRideResponse.postValue(Resource.error(response.message() ?: "An error occurred", null))
+                }
+            }
+            override fun onFailure(call: Call<DbhUpcomingRides>, t: Throwable) {
+                // handle error
+                dbhUpcomingRideResponse.postValue(Resource.error(t.localizedMessage ?: "An error occurred", null))
+            }
+        })
+
+        return dbhUpcomingRideResponse
+    }
+
+    //TODO API implementation in ServiceAPI class
+    fun dbhRidesHistory(userId: String?): MutableLiveData<Resource<ResponseBody>> {
         val dbhUpcomingRideResponse = MutableLiveData<Resource<ResponseBody>>()
         dbhUpcomingRideResponse.postValue(Resource.loading(null))
-        apiService.dbhUpcomingRides(userId).enqueue(object : Callback<ResponseBody> {
+        apiService.dbhRidesHistory(userId).enqueue(object : Callback<ResponseBody> {
             override fun onResponse(
                 call: Call<ResponseBody>,
                 response: Response<ResponseBody>) {

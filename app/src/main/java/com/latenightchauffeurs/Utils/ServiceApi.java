@@ -1,6 +1,7 @@
 package com.latenightchauffeurs.Utils;
 
 import com.latenightchauffeurs.dbh.model.response.DbhBookingResponse;
+import com.latenightchauffeurs.dbh.model.response.DbhUpcomingRides;
 import com.latenightchauffeurs.model.ChatPojo;
 import com.latenightchauffeurs.model.GApiKeyPojo;
 import com.latenightchauffeurs.model.StopsList;
@@ -53,7 +54,10 @@ public interface ServiceApi {
     Call<ResponseBody> dbhEditRide(@Query("json") String json);
 
     @GET("dbh-ride-info.php")
-    Call<ResponseBody> dbhUpcomingRides(@Query("userid") String userId);
+    Call<DbhUpcomingRides> dbhUpcomingRides(@Query("userid") String userId);
+
+    @GET("dbh-ride-info.php")
+    Call<ResponseBody> dbhRidesHistory(@Query("userid") String userId);
 
     @Headers("Accept: " + "application/json")
     @GET("num-stops-addres-list.php")

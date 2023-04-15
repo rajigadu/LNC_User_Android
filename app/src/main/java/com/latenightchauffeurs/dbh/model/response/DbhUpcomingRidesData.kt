@@ -40,5 +40,6 @@ data class DbhUpcomingRidesData(
     val status: String,
     val time: String,
     val tip_status: String,
-    val user_id: String
+    val user_id: String,
+    val distance: String
 )

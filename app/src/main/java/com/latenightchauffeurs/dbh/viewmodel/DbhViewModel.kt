@@ -3,6 +3,7 @@ package com.latenightchauffeurs.dbh.viewmodel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.latenightchauffeurs.dbh.model.response.DbhBookingResponse
+import com.latenightchauffeurs.dbh.model.response.DbhUpcomingRides
 import com.latenightchauffeurs.dbh.utils.Resource
 import com.latenightchauffeurs.dbh.viewmodel.repository.DbhRepository
 import okhttp3.MultipartBody
@@ -30,5 +31,17 @@ class DbhViewModel : ViewModel() {
 
     fun applyPromoCode(promoCode: String?): MutableLiveData<Resource<ResponseBody>> {
         return bookingRepository.applyPromoCode(promoCode)
+    }
+
+    fun upcomingDbhRides(userId: String?): MutableLiveData<Resource<DbhUpcomingRides>> {
+        return bookingRepository.dbhUpcomingRides(userId)
+    }
+
+    fun dbhRidesHistory(userid: String?): MutableLiveData<Resource<ResponseBody>> {
+        return bookingRepository.dbhRidesHistory(userid)
+    }
+
+    fun editDbhRide(json: String?): MutableLiveData<Resource<ResponseBody>> {
+        return bookingRepository.editDbhRide(json)
     }
 }

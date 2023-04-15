@@ -70,8 +70,9 @@ class AddNewCardFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         bookingViewModel = ViewModelProvider(this)[DbhViewModel::class.java]
-        binding?.newCardLayout?.layoutTransition?.enableTransitionType(LayoutTransition.CHANGING)
+        binding?.newCardLayout?.layoutTransition?.enableTransitionType(LayoutTransition.APPEARING)
         preferences = SavePref()
+        preferences?.SavePref(activity)
         getCardDetails()
         onClickListeners()
         doTextChangeListener()
@@ -572,8 +573,6 @@ class AddNewCardFragment : Fragment() {
      * Adapter for listing card items
      */
     private fun getCardDetails() {
-        preferences?.SavePref(activity)
-
         bookingViewModel?.getCardDetails(preferences?.userId)
             ?.observe(viewLifecycleOwner) { uiModel ->
                 when (uiModel.status) {

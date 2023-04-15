@@ -10,9 +10,7 @@
     android:clickable="true"
     android:padding="@dimen/margin_05">
 
-    <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/margin_05"
@@ -54,10 +52,9 @@
                 android:layout_alignParentRight="true"
                 android:layout_marginLeft="@dimen/margin_10"
                 android:layout_marginRight="@dimen/margin_05"
-                android:padding="@dimen/margin_10"
                 android:text="Stops"
                 android:textColor="@color/white_full"
-                android:textSize="@dimen/text_mediumsize"
+                android:textSize="@dimen/text_14sp"
                 android:visibility="visible" />
 
             <TextView
@@ -301,12 +298,12 @@
                 android:layout_below="@+id/title_cancelamount"
                 android:layout_centerHorizontal="true"
                 android:layout_gravity="left"
-                android:layout_marginLeft="10dp"
+                android:layout_marginStart="10dp"
                 android:layout_marginTop="@dimen/margin_10"
-                android:padding="@dimen/margin_10"
-                android:text="      Give Feedback      "
+                android:paddingHorizontal="24dp"
+                android:text="Give Feedback"
                 android:textColor="@color/white_full"
-                android:textSize="@dimen/text_mediumsize"
+                android:textSize="@dimen/text_14sp"
                 android:visibility="gone" />
 
 
@@ -320,10 +317,10 @@
                 android:layout_gravity="left"
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="@dimen/margin_10"
-                android:padding="@dimen/margin_10"
-                android:text="      Add Tip      "
+                android:text="Add Tip"
+                android:paddingHorizontal="24dp"
                 android:textColor="@color/white_full"
-                android:textSize="@dimen/text_mediumsize"
+                android:textSize="@dimen/text_14sp"
                 android:visibility="gone" />
 
 
@@ -338,10 +335,10 @@
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="@dimen/margin_05"
                 android:layout_marginBottom="10dp"
-                android:padding="@dimen/margin_10"
-                android:text="      Payment Summary      "
+                android:text="Payment Summary"
+                android:paddingHorizontal="24dp"
                 android:textColor="@color/white_full"
-                android:textSize="@dimen/text_mediumsize"
+                android:textSize="@dimen/text_14sp"
                 android:visibility="visible" />
 
         </RelativeLayout>

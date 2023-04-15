@@ -45,22 +45,32 @@ class DbhRideInfoFragment : Fragment() {
         binding?.dbhRideTabs?.newTab()?.setText("UpComing")?.let { binding?.dbhRideTabs?.addTab(it) }
         binding?.dbhRideTabs?.newTab()?.setText("History")?.let { binding?.dbhRideTabs?.addTab(it) }
 
+        binding?.dbhRideTabs?.getTabAt(0)?.select()
+        setTabPositions(binding?.dbhRideTabs?.selectedTabPosition)
+
+
         binding?.dbhRideTabs?.addOnTabSelectedListener(object : OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab?) {
-                when(tab?.position) {
-                    0 -> {
-                        binding?.dbhRideTabs?.getTabAt(0)
-                        (activity as? AppCompatActivity)?.navigate(
-                            DbhUpcomingRidesFragment()
-                        )
-                    }
-                    else -> {
-                        binding?.dbhRideTabs?.getTabAt(1)
-                    }
-                }
+                setTabPositions(tab?.position)
             }
-
             override fun onTabUnselected(tab: TabLayout.Tab?) {}
             override fun onTabReselected(tab: TabLayout.Tab?) {} })
+    }
+
+    private fun setTabPositions(selectedTabPosition: Int?) {
+        when(selectedTabPosition) {
+            0 -> {
+                binding?.dbhRideTabs?.getTabAt(0)
+                (activity as? AppCompatActivity)?.navigate(
+                    DbhUpcomingRidesFragment()
+                )
+            }
+            else -> {
+                binding?.dbhRideTabs?.getTabAt(1)
+                (activity as? AppCompatActivity)?.navigate(
+                    DbhRideHistoryFragment()
+                )
+            }
+        }
     }
 }
