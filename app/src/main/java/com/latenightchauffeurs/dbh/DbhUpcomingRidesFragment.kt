@@ -51,6 +51,11 @@ class DbhUpcomingRidesFragment : Fragment() {
         preferences = SavePref()
         preferences?.SavePref(activity)
         getUpcomingDbhRides()
+
+        binding?.refreshRides?.setOnRefreshListener {
+            binding?.refreshRides?.isRefreshing = true
+            getUpcomingDbhRides()
+        }
     }
 
     private fun getUpcomingDbhRides() {
@@ -58,6 +63,7 @@ class DbhUpcomingRidesFragment : Fragment() {
             when(result.status) {
                 Resource.Status.LOADING -> { activity?.let { ProgressCaller.showProgressDialog(it) }}
                 Resource.Status.SUCCESS -> {
+                    binding?.refreshRides?.isRefreshing = false
                     if (result.data?.status == "1") {
                         val upcomingRides = result?.data.data
                         initializeAdapter(upcomingRides)
@@ -69,6 +75,7 @@ class DbhUpcomingRidesFragment : Fragment() {
                         message = result.message
                     )
                     ProgressCaller.hideProgressDialog()
+                    binding?.refreshRides?.isRefreshing = false
                 }
             }
         }

@@ -121,25 +121,25 @@ class AddNewCardFragment : Fragment() {
             override fun afterTextChanged(s: Editable) {} })
 
         binding?.edtTextPostal?.doOnTextChanged { text, start, before, count ->
-            if (TextUtils.isEmpty(text)) {
+            if (!TextUtils.isEmpty(text)) {
                 binding?.textInputLayoutPostal?.error = null
                 binding?.textInputLayoutPostal?.clearFocus()
             }
         }
         binding?.edtTextCardcvv?.doOnTextChanged { text, start, before, count ->
-            if (TextUtils.isEmpty(text)) {
+            if (!TextUtils.isEmpty(text)) {
                 binding?.textInputLayoutCardCvv?.error = null
                 binding?.textInputLayoutCardCvv?.clearFocus()
             }
         }
         binding?.edtTextCardNumber?.doOnTextChanged { text, start, before, count ->
-            if (TextUtils.isEmpty(text)) {
+            if (!TextUtils.isEmpty(text)) {
                 binding?.textInputLayoutCardNumber?.error = null
                 binding?.textInputLayoutCardNumber?.clearFocus()
             }
         }
         binding?.edtTextCardHolder?.doOnTextChanged { text, start, before, count ->
-            if (TextUtils.isEmpty(text)) {
+            if (!TextUtils.isEmpty(text)) {
                 binding?.textInputLayoutCardHolder?.error = null
                 binding?.textInputLayoutCardHolder?.clearFocus()
             }
@@ -340,7 +340,8 @@ class AddNewCardFragment : Fragment() {
                         ) {
                             (activity as? BaseActivity)?.showAlertMessageDialog(message = msg)
                         } else {
-                            (activity as? BaseActivity)?.showAlertMessageDialog(message = msg)
+                            (activity as? BaseActivity)?.showAlertMessageDialog(
+                                message = "Please check you are provided Card details, $msg")
                         }
                     }
                 }
@@ -474,6 +475,7 @@ class AddNewCardFragment : Fragment() {
         activity?.let { activity ->
             (activity as? BaseActivity)?.showAlertMessageDialog(
                 message = "Are you sure to book this ride for $rideDate ?",
+                negativeButton = true,
                 callBack = object : FragmentCallBack {
                     override fun onResult(param1: Any?, param2: Any?, param3: Any?) {
                         when (param1) {

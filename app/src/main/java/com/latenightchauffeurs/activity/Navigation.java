@@ -593,11 +593,10 @@ public class Navigation extends AppCompatActivity implements NavigationView.OnNa
                         ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
                         ft.addToBackStack(backStateName);
                         ft.commit();
-                        getSupportActionBar().setTitle(title);
-
                         //android.app.Fragment fragment = getFragmentManager().findFragmentByTag(backStateName);
                         //Log.e("frag___123",fragment.getTag());
                     }
+                    getSupportActionBar().setTitle(title);
                 } catch (Exception e) {
                     Log.e("error123", e.getMessage());
                 }

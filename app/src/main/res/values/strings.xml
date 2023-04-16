@@ -54,6 +54,12 @@
     <string name="ok">Ok</string>
     <string name="retry">Retry</string>
     <string name="dbh_booking">DBH Ride Info</string>
+    <string name="view_details">View Details</string>
+    <string name="ride_status">Ride Status:</string>
+    <string name="rate">Rate:</string>
+    <string name="pick_up_location">Pick Up Location</string>
+    <string name="ride_date">Ride Date</string>
+    <string name="edit_ride_info">Edit Ride Info</string>
 
 
     <array name="indicator_colors">

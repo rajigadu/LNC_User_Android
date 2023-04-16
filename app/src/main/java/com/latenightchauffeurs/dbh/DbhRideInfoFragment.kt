@@ -8,8 +8,10 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayout.OnTabSelectedListener
+import com.latenightchauffeurs.R
 import com.latenightchauffeurs.databinding.FragmentDbhRideInfoLayoutBinding
 import com.latenightchauffeurs.extension.navigate
+import com.latenightchauffeurs.extension.replace
 
 /**
  * Create by Siru Malayil on 15-04-2023.
@@ -41,6 +43,10 @@ class DbhRideInfoFragment : Fragment() {
 
     }
 
+    override fun onResume() {
+        super.onResume()
+    }
+
     private fun setupTabs() {
         binding?.dbhRideTabs?.newTab()?.setText("UpComing")?.let { binding?.dbhRideTabs?.addTab(it) }
         binding?.dbhRideTabs?.newTab()?.setText("History")?.let { binding?.dbhRideTabs?.addTab(it) }
@@ -61,16 +67,19 @@ class DbhRideInfoFragment : Fragment() {
         when(selectedTabPosition) {
             0 -> {
                 binding?.dbhRideTabs?.getTabAt(0)
-                (activity as? AppCompatActivity)?.navigate(
-                    DbhUpcomingRidesFragment()
-                )
+                replaceFragment(DbhUpcomingRidesFragment())
             }
             else -> {
                 binding?.dbhRideTabs?.getTabAt(1)
-                (activity as? AppCompatActivity)?.navigate(
-                    DbhRideHistoryFragment()
-                )
+                replaceFragment(DbhRideHistoryFragment())
             }
         }
+    }
+
+    private fun replaceFragment(fragment: Fragment) {
+        val fragmentManager = childFragmentManager
+        val transaction = fragmentManager.beginTransaction()
+        transaction.replace(R.id.container, fragment)
+        transaction.commit()
     }
 }

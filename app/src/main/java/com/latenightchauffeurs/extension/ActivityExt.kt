@@ -78,3 +78,15 @@ fun AppCompatActivity.addWithoutAnim(
         if (addToBackStack) addToBackStack(backStackName)
     }
 }
+
+fun AppCompatActivity.replace(
+    fragment: Fragment,
+    @IdRes container: Int,
+    addToBackStack: Boolean = false,
+    backStackName: String = "",
+) {
+    supportFragmentManager.transact {
+        replace(container, fragment, backStackName)
+        if (addToBackStack) addToBackStack(backStackName)
+    }
+}

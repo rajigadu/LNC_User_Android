@@ -1,14 +1,18 @@
 package com.latenightchauffeurs.dbh.adapter
 
 import android.annotation.SuppressLint
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.latenightchauffeurs.FragmentCallBack
+import com.latenightchauffeurs.R
 import com.latenightchauffeurs.databinding.CrideRowitemBinding
+import com.latenightchauffeurs.databinding.LayoutUpcomingDbhRidesBinding
 import com.latenightchauffeurs.dbh.model.response.DbhUpcomingRidesData
 
 /**
@@ -30,36 +34,35 @@ class UpcomingDbhRidesAdapter(callback: FragmentCallBack? = null) : ListAdapter<
 
     }
 
-    inner class ViewHolder(private val binding: CrideRowitemBinding): RecyclerView.ViewHolder(binding.root) {
-        @SuppressLint("SetTextI18n")
+    inner class ViewHolder(private val binding: LayoutUpcomingDbhRidesBinding): RecyclerView.ViewHolder(binding.root) {
+        @SuppressLint("SetTextI18n", "ResourceAsColor")
         fun bindView(item: DbhUpcomingRidesData?) {
-            when(item?.booking_type) {
-                "1" -> {
-                    binding.btnEditRide.isVisible = false
-                    binding.ridestatus.isVisible = false
-                    binding.ridestatusTitle.isVisible = false
-                    binding.viewdetails.isVisible = false
-                }
-                else -> {
-                    binding.btnEditRide.isVisible = true
-                    binding.ridestatus.isVisible = true
-                    binding.ridestatusTitle.isVisible = true
-                    binding.viewdetails.isVisible = true
-                }
+            binding.valueRideDate.text = "${item?.otherdate} ${item?.time}"
+            binding.valuePickupLocation.text = item?.pickup_address
+            binding.valueRate.text = "$ 10.00 Per Hour"
+            if (item?.status == "0") {
+                binding.valueRideStatus.text = "Pending"
+                binding.valueRideStatus.setTextColor(ContextCompat.getColor(
+                    binding.root.context!!,
+                    R.color.red
+                ))
+            } else {
+                binding.valueRideStatus.text = "Accepted"
+                binding.valueRideStatus.setTextColor(ContextCompat.getColor(
+                    binding.root.context!!,
+                    R.color.green_color
+                ))
             }
 
-            binding.date.text = "Date: ${item?.otherdate}\nTime: ${item?.time}\n"
-            binding.distance.text = String.format(
-                "%.2f",
-                item?.distance?.let { java.lang.Double.valueOf(it) }) + " mi"
-            binding.
+            binding.btnViewDetails.isVisible = item?.booking_type != "1"
+            binding.btnEditRideInfo.isVisible = item?.booking_type == "1"
         }
 
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder =
         ViewHolder(
-            CrideRowitemBinding.inflate(
+            LayoutUpcomingDbhRidesBinding.inflate(
                 LayoutInflater.from(parent.context),parent, false
             )
         )

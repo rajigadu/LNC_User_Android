@@ -15,6 +15,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.RelativeLayout;
 
 import com.latenightchauffeurs.R;
@@ -31,7 +32,7 @@ public class Rides extends Fragment {
     public static Rides Instance;
     public static String TAG = Rides.class.getName();
     public static Context mcontext;
-    public RelativeLayout container;
+    public FrameLayout container;
     public static int id = 0;
 
     TabLayout tabLayout;
@@ -52,7 +53,7 @@ public class Rides extends Fragment {
     @Override
     public void onViewCreated(View v, @Nullable Bundle savedInstanceState) {
         tabLayout = (TabLayout) v.findViewById(R.id.tabs);
-        container = (RelativeLayout) v.findViewById(R.id.container);
+        container = v.findViewById(R.id.container);
         // viewPager = (ViewPager) findViewById(R.id.viewPager);
 
         //create tabs title
