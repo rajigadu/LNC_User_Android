@@ -45,19 +45,28 @@ public interface ServiceApi {
     Call<ResponseBody> login(@Path("login") String postfix, @QueryMap HashMap<String, Object> params);
 
     @POST("dbh-booking-reservation.php")
-    Call<DbhBookingResponse> dbhBookingReservation(@Query("json") String json);
+    Call<DbhBookingResponse>dbhBookingReservation(@Query("json") String json);
 
     @GET("promo-check.php")
-    Call<ResponseBody> applyPromoCode(@Query("promo")String promoCode);
+    Call<ResponseBody>applyPromoCode(@Query("promo")String promoCode);
 
     @POST("dbh-edit-ride.php")
-    Call<ResponseBody> dbhEditRide(@Query("json") String json);
+    Call<ResponseBody>dbhEditRide(@Query("json") String json);
 
     @GET("dbh-ride-info.php")
-    Call<DbhUpcomingRides> dbhUpcomingRides(@Query("userid") String userId);
+    Call<DbhUpcomingRides>dbhUpcomingRides(@Query("userid") String userId);
 
     @GET("dbh-ride-info.php")
-    Call<ResponseBody> dbhRidesHistory(@Query("userid") String userId);
+    Call<ResponseBody>dbhRidesHistory(@Query("userid") String userId);
+
+    @GET("dbh-promo-check.php")
+    Call<ResponseBody>dbhPromoCheck(@Query("userid") String userId);
+
+    @GET("dbh-cancel-future-ride.php")
+    Call<ResponseBody>cancelDbhRide(@Query("userid") String userId);
+
+    @GET("dbh-cancel-ride-amount.php")
+    Call<ResponseBody>cancelDbhRideAmount(@Query("userid") String userId);
 
     @Headers("Accept: " + "application/json")
     @GET("num-stops-addres-list.php")
