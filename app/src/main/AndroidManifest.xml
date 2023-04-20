@@ -78,11 +78,17 @@
 
         </activity>
 
+        <!--Dbh activities Start here-->
         <activity
             android:name=".dbh.DriveByHourActivity"
             android:configChanges="orientation"
             android:screenOrientation="portrait"/>
 
+        <activity
+            android:name=".dbh.activities.EditRideInfoActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait"/>
+        <!--Dbh activities Close here-->
 
         <activity
             android:name=".activity.Notifications"

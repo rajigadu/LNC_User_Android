@@ -1,19 +1,18 @@
-package com.latenightchauffeurs.dbh
+package com.latenightchauffeurs.dbh.activities
 
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
 import com.latenightchauffeurs.Utils.ConstantUtil
 import com.latenightchauffeurs.databinding.ActivityDbhLayoutBinding
-import com.latenightchauffeurs.extension.navigate
-import com.latenightchauffeurs.dbh.DriverByTheHourFragment
+import com.latenightchauffeurs.dbh.fragments.EditDbhRideInfo
 import com.latenightchauffeurs.dbh.base.BaseActivity
+import com.latenightchauffeurs.dbh.model.response.DbhRide
+import com.latenightchauffeurs.extension.navigate
 
 /**
- * Create by Sirumalayil on 01-04-2023.
+ * Create by Siru Malayil on 20-04-2023.
  */
 
-const val TAG = "DBH Booking Reservation"
-class DriveByHourActivity: BaseActivity() {
+class EditRideInfoActivity: BaseActivity() {
 
     private var binding: ActivityDbhLayoutBinding? = null
 
@@ -22,12 +21,13 @@ class DriveByHourActivity: BaseActivity() {
         binding = ActivityDbhLayoutBinding.inflate(layoutInflater)
         setContentView(binding?.root)
 
-        val dataMap = intent?.extras?.getSerializable(ConstantUtil.DATA_MAP) as? HashMap<String, Any>
+        binding?.toolbarDbh?.title = "Edit Ride Info"
+        val rideInfo = intent?.getParcelableExtra(ConstantUtil.RIDE_INFO) as? DbhRide
 
         if (savedInstanceState == null) {
             navigate(
-                fragment = DriverByTheHourFragment.newInstance(
-                    dataMap = dataMap
+                fragment = EditDbhRideInfo.newInstance(
+                    rideInfo = rideInfo
                 ),addToBackStack = false
             )
         }

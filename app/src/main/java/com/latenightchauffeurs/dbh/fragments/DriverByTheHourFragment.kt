@@ -1,4 +1,4 @@
-package com.latenightchauffeurs.dbh
+package com.latenightchauffeurs.dbh.fragments
 
 import android.annotation.SuppressLint
 import android.app.Activity

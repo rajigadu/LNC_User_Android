@@ -1,4 +1,4 @@
-package com.latenightchauffeurs.dbh
+package com.latenightchauffeurs.dbh.fragments
 
 import android.os.Bundle
 import android.view.LayoutInflater

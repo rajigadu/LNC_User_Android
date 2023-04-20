@@ -1,5 +1,6 @@
-package com.latenightchauffeurs.dbh
+package com.latenightchauffeurs.dbh.fragments
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,13 +9,18 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.latenightchauffeurs.FragmentCallBack
+import com.latenightchauffeurs.Utils.ConstantUtil.RIDE_INFO
+import com.latenightchauffeurs.Utils.Utils
 import com.latenightchauffeurs.databinding.FragmentRidesViewLayoutBinding
+import com.latenightchauffeurs.dbh.activities.EditRideInfoActivity
 import com.latenightchauffeurs.dbh.adapter.UpcomingDbhRidesAdapter
 import com.latenightchauffeurs.dbh.base.BaseActivity
+import com.latenightchauffeurs.dbh.model.response.DbhRide
 import com.latenightchauffeurs.dbh.model.response.DbhUpcomingRidesData
 import com.latenightchauffeurs.dbh.utils.ProgressCaller
 import com.latenightchauffeurs.dbh.utils.Resource
 import com.latenightchauffeurs.dbh.viewmodel.DbhViewModel
+import com.latenightchauffeurs.extension.replaceFragment
 import com.latenightchauffeurs.model.SavePref
 
 /**
@@ -29,7 +35,23 @@ class DbhUpcomingRidesFragment : Fragment() {
 
     private var upcomingDbhRodesAdapter = UpcomingDbhRidesAdapter(callback = object : FragmentCallBack {
         override fun onResult(param1: Any?, param2: Any?, param3: Any?) {
-
+            val rideInfo = param2 as? DbhRide
+            when(param1 as? String) {
+                "edit_ride" -> {
+                    //callEditRideDefferenceAPI() //TODO confirm that need to call four hours API
+                    startActivity(
+                        Intent(activity, EditRideInfoActivity::class.java).apply {
+                            putExtra(RIDE_INFO, rideInfo)
+                        }
+                    )
+                }
+                "view_details" -> {
+                    replaceFragment(
+                        fragment = DbhRideInfoViewDetailsFragment(),
+                        fragmentManager = childFragmentManager
+                    )
+                }
+            }
         }
     })
 
@@ -50,11 +72,15 @@ class DbhUpcomingRidesFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         preferences = SavePref()
         preferences?.SavePref(activity)
-        getUpcomingDbhRides()
+        if(Utils.isNetworkAvailable(activity)) {
+            getUpcomingDbhRides()
+        }
 
         binding?.refreshRides?.setOnRefreshListener {
             binding?.refreshRides?.isRefreshing = true
-            getUpcomingDbhRides()
+            if(Utils.isNetworkAvailable(activity)) {
+                getUpcomingDbhRides()
+            }
         }
     }
 
@@ -81,11 +107,11 @@ class DbhUpcomingRidesFragment : Fragment() {
         }
     }
 
-    private fun initializeAdapter(upcomingRides: List<DbhUpcomingRidesData>) {
+    private fun initializeAdapter(upcomingRides: DbhUpcomingRidesData) {
         binding?.recyclerviewRides?.apply {
             layoutManager = LinearLayoutManager(activity)
             adapter = upcomingDbhRodesAdapter
         }
-        upcomingDbhRodesAdapter.submitList(upcomingRides)
+        upcomingDbhRodesAdapter.submitList(mutableListOf(upcomingRides))
     }
 }

@@ -1,4 +1,4 @@
-package com.latenightchauffeurs.dbh
+package com.latenightchauffeurs.dbh.fragments
 
 import android.animation.LayoutTransition
 import android.annotation.SuppressLint
@@ -20,6 +20,7 @@ import androidx.transition.TransitionManager
 import com.latenightchauffeurs.FragmentCallBack
 import com.latenightchauffeurs.Utils.*
 import com.latenightchauffeurs.databinding.FragmentAddNewCardBinding
+import com.latenightchauffeurs.dbh.adapter.CardListAdapter
 import com.latenightchauffeurs.dbh.base.BaseActivity
 import com.latenightchauffeurs.dbh.model.response.CardDynamicFields
 import com.latenightchauffeurs.dbh.utils.AlertDialogMessageFragment.Companion.ACTION_OK
@@ -44,7 +45,6 @@ class AddNewCardFragment : Fragment() {
 
     private var binding: FragmentAddNewCardBinding? = null
     private var dataMap: HashMap<String, Any>? = null
-    private var cardListAdapter: CardListAdapter? = null
     private var selectedCard: ItemCardList? = null
     private var preferences: SavePref? = null
     private var bookingViewModel: DbhViewModel? = null
@@ -480,7 +480,9 @@ class AddNewCardFragment : Fragment() {
                     override fun onResult(param1: Any?, param2: Any?, param3: Any?) {
                         when (param1) {
                             ACTION_OK -> {
-                                invokeDbhBookingReservation(json)
+                                if(Utils.isNetworkAvailable(activity)) {
+                                    invokeDbhBookingReservation(json)
+                                }
                                 Log.e(TAG, "Booking REQUEST: $json")
                             }
                         }
@@ -558,7 +560,7 @@ class AddNewCardFragment : Fragment() {
      * @see CardListAdapter for card lists
      */
     private fun initializeCardListAdapter(cardList: ArrayList<ItemCardList>) {
-        cardListAdapter = CardListAdapter(object : FragmentCallBack {
+        val cardListAdapter = CardListAdapter(object : FragmentCallBack {
             override fun onResult(param1: Any?, param2: Any?, param3: Any?) {
                 selectedCard = param1 as? ItemCardList
             }
@@ -567,7 +569,7 @@ class AddNewCardFragment : Fragment() {
             layoutManager = LinearLayoutManager(activity)
             adapter = cardListAdapter
         }
-        cardListAdapter?.submitList(cardList)
+        cardListAdapter.submitList(cardList)
     }
 
     /**

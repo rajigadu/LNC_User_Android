@@ -47,7 +47,7 @@ public interface ServiceApi {
     @POST("dbh-booking-reservation.php")
     Call<DbhBookingResponse>dbhBookingReservation(@Query("json") String json);
 
-    @GET("promo-check.php")
+    @GET("dbh-promo-check.php")
     Call<ResponseBody>applyPromoCode(@Query("promo")String promoCode);
 
     @POST("dbh-edit-ride.php")

@@ -1,17 +1,14 @@
-package com.latenightchauffeurs.dbh
+package com.latenightchauffeurs.dbh.fragments
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayout.OnTabSelectedListener
-import com.latenightchauffeurs.R
 import com.latenightchauffeurs.databinding.FragmentDbhRideInfoLayoutBinding
-import com.latenightchauffeurs.extension.navigate
-import com.latenightchauffeurs.extension.replace
+import com.latenightchauffeurs.extension.replaceFragment
 
 /**
  * Create by Siru Malayil on 15-04-2023.
@@ -67,19 +64,12 @@ class DbhRideInfoFragment : Fragment() {
         when(selectedTabPosition) {
             0 -> {
                 binding?.dbhRideTabs?.getTabAt(0)
-                replaceFragment(DbhUpcomingRidesFragment())
+                replaceFragment(DbhUpcomingRidesFragment(), childFragmentManager)
             }
             else -> {
                 binding?.dbhRideTabs?.getTabAt(1)
-                replaceFragment(DbhRideHistoryFragment())
+                replaceFragment(DbhRideHistoryFragment(), childFragmentManager)
             }
         }
-    }
-
-    private fun replaceFragment(fragment: Fragment) {
-        val fragmentManager = childFragmentManager
-        val transaction = fragmentManager.beginTransaction()
-        transaction.replace(R.id.container, fragment)
-        transaction.commit()
     }
 }

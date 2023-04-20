@@ -1,4 +1,4 @@
-package com.latenightchauffeurs.dbh
+package com.latenightchauffeurs.dbh.adapter
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
@@ -14,7 +14,7 @@ import com.latenightchauffeurs.model.ItemCardList
  * Create by Sirumalayil on 01-04-2023.
  */
 class CardListAdapter(private var callback: FragmentCallBack? = null): ListAdapter<
-        ItemCardList,CardListAdapter.ViewHolder>(DiffCallBack()) {
+        ItemCardList, CardListAdapter.ViewHolder>(DiffCallBack()) {
 
     private var cardExpMonth = ""
     private var cardExpYear = ""

@@ -90,3 +90,9 @@ fun AppCompatActivity.replace(
         if (addToBackStack) addToBackStack(backStackName)
     }
 }
+
+fun replaceFragment(fragment: Fragment, fragmentManager: FragmentManager) {
+    val transaction = fragmentManager.beginTransaction()
+    transaction.replace(R.id.container, fragment)
+    transaction.commit()
+}

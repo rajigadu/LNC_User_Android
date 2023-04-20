@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg"
+    android:padding="10dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/black"
+        app:cardElevation="0dp"
+        app:cardCornerRadius="0dp"
+        app:cardBackgroundColor="@color/black_light"
+        app:contentPadding="@dimen/padding_12dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="8dp"
+            android:background="@color/white">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnChooseCard"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Choose Card"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableStart="@drawable/down"
+                android:drawablePadding="5dp"
+                android:text="Active Card Info"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                app:layout_constraintBottom_toBottomOf="@+id/btnChooseCard"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/btnChooseCard" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                android:layout_marginTop="8dp"
+                android:background="@color/color_darklight"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/btnChooseCard">
+
+                <TextView
+                    android:id="@+id/textView4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="Payment will be deducted after trip completion"
+                    android:textColor="@color/green_color"
+                    android:textSize="18sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/cardNumber"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="1245678***"
+                    android:textSize="18sp"
+                    android:textColor="@color/white"
+                    android:layout_marginTop="8dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView4" />
+
+                <TextView
+                    android:id="@+id/emonthtitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/transparent"
+                    android:clickable="false"
+                    android:focusableInTouchMode="false"
+                    android:padding="@dimen/padding_05"
+                    android:text="Expiry Month"
+                    android:textColor="@color/off_white"
+                    android:textSize="@dimen/text_mediumsize"
+                    android:layout_marginTop="16dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/cardNumber" />
+
+                <TextView
+                    android:id="@+id/labelExpiryYear"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/transparent"
+                    android:clickable="false"
+                    android:focusableInTouchMode="false"
+                    android:padding="@dimen/padding_05"
+                    android:text="Expiry Year"
+                    android:textColor="@color/off_white"
+                    android:textSize="@dimen/text_mediumsize"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/emonthtitle" />
+
+                <TextView
+                    android:id="@+id/cardExpiryYear"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/transparent"
+                    android:clickable="false"
+                    android:focusableInTouchMode="false"
+                    android:padding="@dimen/padding_05"
+                    android:text="23"
+                    android:textColor="@color/off_white"
+                    android:textSize="@dimen/text_mediumsize"
+                    app:layout_constraintEnd_toEndOf="@+id/labelExpiryYear"
+                    app:layout_constraintTop_toBottomOf="@+id/labelExpiryYear" />
+
+                <TextView
+                    android:id="@+id/cardExpiryMonth"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/transparent"
+                    android:clickable="false"
+                    android:focusableInTouchMode="false"
+                    android:padding="@dimen/padding_05"
+                    android:text="08"
+                    android:textColor="@color/off_white"
+                    android:textSize="@dimen/text_mediumsize"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/emonthtitle" />
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/btnPromoCodeView"
+                    android:layout_width="0dp"
+                    android:layout_height="46dp"
+                    app:cardElevation="0dp"
+                    app:cardCornerRadius="0dp"
+                    android:layout_marginTop="16dp"
+                    app:layout_constraintEnd_toEndOf="@+id/cardExpiryYear"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/cardExpiryMonth">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <androidx.appcompat.widget.AppCompatEditText
+                            android:id="@+id/extTextPromoCode"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:background="@null"
+                            android:hint="Apply promo code here"
+                            android:inputType="textCapWords"
+                            android:textAllCaps="true"
+                            android:paddingHorizontal="12dp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintWidth_percent="0.7" />
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:id="@+id/applyPromoCode"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:background="?selectableItemBackgroundBorderless"
+                            android:clickable="true"
+                            android:focusable="true"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@+id/extTextPromoCode">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:background="@color/black"
+                                android:gravity="center|center_vertical"
+                                android:text="@string/apply_promo"
+                                android:textColor="@color/white"
+                                android:textStyle="bold"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </com.google.android.material.card.MaterialCardView>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnUpdate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Update"
+        android:padding="12dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:layout_editor_absoluteX="16dp" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -49,7 +49,7 @@ import com.latenightchauffeurs.Utils.ConstVariable;
 import com.latenightchauffeurs.Utils.JsonPost;
 import com.latenightchauffeurs.Utils.OnlineRequest;
 import com.latenightchauffeurs.Utils.Utils;
-import com.latenightchauffeurs.dbh.DbhRideInfoFragment;
+import com.latenightchauffeurs.dbh.fragments.DbhRideInfoFragment;
 import com.latenightchauffeurs.fragment.BookReservation_new;
 import com.latenightchauffeurs.fragment.Cards;
 import com.latenightchauffeurs.fragment.FRides;

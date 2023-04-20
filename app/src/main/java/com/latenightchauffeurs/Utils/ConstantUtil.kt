@@ -7,4 +7,5 @@ object ConstantUtil {
 
 
     const val DATA_MAP = "data-map"
+    const val RIDE_INFO = "ride-info"
 }
