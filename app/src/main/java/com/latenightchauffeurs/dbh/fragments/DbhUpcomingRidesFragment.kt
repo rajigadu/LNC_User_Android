@@ -9,9 +9,11 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.latenightchauffeurs.FragmentCallBack
+import com.latenightchauffeurs.Utils.ConstantUtil.EDIT_RIDE_INFO
 import com.latenightchauffeurs.Utils.ConstantUtil.RIDE_INFO
 import com.latenightchauffeurs.Utils.Utils
 import com.latenightchauffeurs.databinding.FragmentRidesViewLayoutBinding
+import com.latenightchauffeurs.dbh.activities.DriveByHourActivity
 import com.latenightchauffeurs.dbh.activities.EditRideInfoActivity
 import com.latenightchauffeurs.dbh.adapter.UpcomingDbhRidesAdapter
 import com.latenightchauffeurs.dbh.base.BaseActivity
@@ -40,8 +42,9 @@ class DbhUpcomingRidesFragment : Fragment() {
                 "edit_ride" -> {
                     //callEditRideDefferenceAPI() //TODO confirm that need to call four hours API
                     startActivity(
-                        Intent(activity, EditRideInfoActivity::class.java).apply {
+                        Intent(activity, DriveByHourActivity::class.java).apply {
                             putExtra(RIDE_INFO, rideInfo)
+                            putExtra(EDIT_RIDE_INFO, true)
                         }
                     )
                 }

@@ -4,6 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.latenightchauffeurs.dbh.model.response.DbhBookingResponse
 import com.latenightchauffeurs.dbh.model.response.DbhUpcomingRides
+import com.latenightchauffeurs.dbh.model.response.DefaultResponseBody
 import com.latenightchauffeurs.dbh.utils.Resource
 import com.latenightchauffeurs.dbh.viewmodel.repository.DbhRepository
 import okhttp3.MultipartBody
@@ -41,7 +42,7 @@ class DbhViewModel : ViewModel() {
         return bookingRepository.dbhRidesHistory(userid)
     }
 
-    fun editDbhRide(json: String?): MutableLiveData<Resource<ResponseBody>> {
+    fun editDbhRide(json: String?): MutableLiveData<Resource<DefaultResponseBody>> {
         return bookingRepository.editDbhRide(json)
     }
 }

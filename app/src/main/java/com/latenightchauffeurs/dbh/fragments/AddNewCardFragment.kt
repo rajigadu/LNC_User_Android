@@ -10,6 +10,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
@@ -20,9 +21,11 @@ import androidx.transition.TransitionManager
 import com.latenightchauffeurs.FragmentCallBack
 import com.latenightchauffeurs.Utils.*
 import com.latenightchauffeurs.databinding.FragmentAddNewCardBinding
+import com.latenightchauffeurs.dbh.activities.TAG
 import com.latenightchauffeurs.dbh.adapter.CardListAdapter
 import com.latenightchauffeurs.dbh.base.BaseActivity
 import com.latenightchauffeurs.dbh.model.response.CardDynamicFields
+import com.latenightchauffeurs.dbh.model.response.DefaultResponseBody
 import com.latenightchauffeurs.dbh.utils.AlertDialogMessageFragment.Companion.ACTION_OK
 import com.latenightchauffeurs.dbh.utils.ProgressCaller
 import com.latenightchauffeurs.dbh.utils.Resource
@@ -48,11 +51,14 @@ class AddNewCardFragment : Fragment() {
     private var selectedCard: ItemCardList? = null
     private var preferences: SavePref? = null
     private var bookingViewModel: DbhViewModel? = null
+    private var isEditableRide: Boolean = false
 
 
     companion object {
-        fun newInstance(dataMap: HashMap<String, Any>? = null) = AddNewCardFragment().apply {
+        fun newInstance(dataMap: HashMap<String, Any>? = null,
+                        isEditableRide: Boolean = false) = AddNewCardFragment().apply {
             this.dataMap = dataMap
+            this.isEditableRide = isEditableRide
         }
     }
 
@@ -180,6 +186,35 @@ class AddNewCardFragment : Fragment() {
                 )
                 binding?.newCardLayout?.isVisible = false
                 clearFields()
+            }
+        }
+    }
+
+    private fun updateRideInfo(json: String) {
+        bookingViewModel?.editDbhRide(json)?.observe(viewLifecycleOwner) { resultData ->
+            when(resultData.status) {
+                Resource.Status.LOADING -> { activity?.let { ProgressCaller.showProgressDialog(it) }}
+                Resource.Status.SUCCESS -> {
+                    ProgressCaller.hideProgressDialog()
+                    val response = resultData.data
+                    val negativeButton = response?.status != "3"
+                    (activity as? BaseActivity)?.showAlertMessageDialog(
+                        negativeButton = negativeButton,
+                        message = response?.data?.firstOrNull()?.msg,
+                        callBack = object : FragmentCallBack {
+                            override fun onResult(param1: Any?, param2: Any?, param3: Any?) {
+                                when(param1) {
+                                    ACTION_OK -> {
+                                        activity?.finish()
+                                    }
+                                }
+                            }
+                        }
+                    )
+                }
+                Resource.Status.ERROR -> {
+                    ProgressCaller.hideProgressDialog()
+                }
             }
         }
     }
@@ -434,7 +469,53 @@ class AddNewCardFragment : Fragment() {
 
         if (rideDateAndTime != null) {
             if (rideDateAndTime >= currentDateLong!!) {
-                Log.e(TAG, "")
+                Log.e(TAG, "rideDateAndTime : $rideDateAndTime")
+                val rideDate =
+                    BookReservation_new.convertDate("" + rideDateAndTime, "EEEE dd MMMM yyyy hh:mm a")
+
+                val jsonMap = HashMap<String, String>()
+                jsonMap["userid"] = preferences?.userId ?: ""
+                jsonMap["card_id"] = selectedCard?.token ?: ""
+                jsonMap["acctid"] = selectedCard?.acctid ?: ""
+                jsonMap["platitude"] = dataMap?.get("two").toString()
+                jsonMap["plongitude"] = dataMap?.get("three").toString()
+                jsonMap["pickup_address"] = dataMap?.get("one").toString()
+                jsonMap["pickup_city"] = dataMap?.get("city_name").toString()
+                jsonMap["notes"] = dataMap?.get("notes").toString()
+                jsonMap["booking_type"] = "3"
+                jsonMap["date"] = dateRide
+                jsonMap["time"] = timeRide
+                jsonMap["transmission"] = "automatic"
+                jsonMap["promo"] = dataMap?.get("promo").toString()
+                jsonMap["version"] = "yes"
+
+                val jsonObject = (jsonMap as Map<*, *>?)?.let { JSONObject(it) }
+                val json = jsonObject.toString()
+
+                val message = if (isEditableRide) "Are you sure to update this edited details $rideDate"
+                else "Are you sure to book this ride for $rideDate ?"
+                activity?.let { activity ->
+                    (activity as? BaseActivity)?.showAlertMessageDialog(
+                        message = message,
+                        negativeButton = true,
+                        callBack = object : FragmentCallBack {
+                            override fun onResult(param1: Any?, param2: Any?, param3: Any?) {
+                                when (param1) {
+                                    ACTION_OK -> {
+                                        if(Utils.isNetworkAvailable(activity)) {
+                                            if (isEditableRide) {
+                                                updateRideInfo(json)
+                                            } else {
+                                                invokeDbhBookingReservation(json)
+                                            }
+                                        }
+                                        Log.e(TAG, "Booking REQUEST: $json")
+                                    }
+                                }
+                            }
+                        }
+                    )
+                }
             } else {
                 (activity as? BaseActivity)?.showAlertMessageDialog(
                     message = "Please select a date in future.",
@@ -450,46 +531,7 @@ class AddNewCardFragment : Fragment() {
                 )
             }
         }
-        val rideDate =
-            BookReservation_new.convertDate("" + rideDateAndTime, "EEEE dd MMMM yyyy hh:mm a")
 
-        val jsonMap = HashMap<String, String>()
-        jsonMap["userid"] = preferences?.userId ?: ""
-        jsonMap["card_id"] = selectedCard?.token ?: ""
-        jsonMap["acctid"] = selectedCard?.acctid ?: ""
-        jsonMap["platitude"] = dataMap?.get("two").toString()
-        jsonMap["plongitude"] = dataMap?.get("three").toString()
-        jsonMap["pickup_address"] = dataMap?.get("one").toString()
-        jsonMap["pickup_city"] = dataMap?.get("city_name").toString()
-        jsonMap["notes"] = dataMap?.get("notes").toString()
-        jsonMap["booking_type"] = "3"
-        jsonMap["date"] = dateRide
-        jsonMap["time"] = timeRide
-        jsonMap["transmission"] = "automatic"
-        jsonMap["promo"] = dataMap?.get("promo").toString()
-        jsonMap["version"] = "yes"
-
-        val jsonObject = (jsonMap as Map<*, *>?)?.let { JSONObject(it) }
-        val json = jsonObject.toString()
-
-        activity?.let { activity ->
-            (activity as? BaseActivity)?.showAlertMessageDialog(
-                message = "Are you sure to book this ride for $rideDate ?",
-                negativeButton = true,
-                callBack = object : FragmentCallBack {
-                    override fun onResult(param1: Any?, param2: Any?, param3: Any?) {
-                        when (param1) {
-                            ACTION_OK -> {
-                                if(Utils.isNetworkAvailable(activity)) {
-                                    invokeDbhBookingReservation(json)
-                                }
-                                Log.e(TAG, "Booking REQUEST: $json")
-                            }
-                        }
-                    }
-                }
-            )
-        }
     }
 
     /**

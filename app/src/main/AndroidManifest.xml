@@ -80,7 +80,7 @@
 
         <!--Dbh activities Start here-->
         <activity
-            android:name=".dbh.DriveByHourActivity"
+            android:name=".dbh.activities.DriveByHourActivity"
             android:configChanges="orientation"
             android:screenOrientation="portrait"/>
 

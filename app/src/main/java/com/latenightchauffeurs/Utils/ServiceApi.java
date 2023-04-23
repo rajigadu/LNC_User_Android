@@ -2,6 +2,7 @@ package com.latenightchauffeurs.Utils;
 
 import com.latenightchauffeurs.dbh.model.response.DbhBookingResponse;
 import com.latenightchauffeurs.dbh.model.response.DbhUpcomingRides;
+import com.latenightchauffeurs.dbh.model.response.DefaultResponseBody;
 import com.latenightchauffeurs.model.ChatPojo;
 import com.latenightchauffeurs.model.GApiKeyPojo;
 import com.latenightchauffeurs.model.StopsList;
@@ -51,7 +52,7 @@ public interface ServiceApi {
     Call<ResponseBody>applyPromoCode(@Query("promo")String promoCode);
 
     @POST("dbh-edit-ride.php")
-    Call<ResponseBody>dbhEditRide(@Query("json") String json);
+    Call<DefaultResponseBody>dbhEditRide(@Query("json") String json);
 
     @GET("dbh-ride-info.php")
     Call<DbhUpcomingRides>dbhUpcomingRides(@Query("userid") String userId);

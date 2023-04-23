@@ -7,6 +7,7 @@ import com.latenightchauffeurs.Utils.ServiceApi
 import com.latenightchauffeurs.Utils.ServiceGenerator
 import com.latenightchauffeurs.dbh.model.response.DbhBookingResponse
 import com.latenightchauffeurs.dbh.model.response.DbhUpcomingRides
+import com.latenightchauffeurs.dbh.model.response.DefaultResponseBody
 import com.latenightchauffeurs.dbh.utils.Resource
 import okhttp3.MultipartBody
 import okhttp3.ResponseBody
@@ -114,13 +115,13 @@ class DbhRepository {
         return promoCodeResult
     }
 
-    fun editDbhRide(editRideRequest: String?): MutableLiveData<Resource<ResponseBody>> {
-        val editRideResponse = MutableLiveData<Resource<ResponseBody>>()
+    fun editDbhRide(editRideRequest: String?): MutableLiveData<Resource<DefaultResponseBody>> {
+        val editRideResponse = MutableLiveData<Resource<DefaultResponseBody>>()
         editRideResponse.postValue(Resource.loading(null))
-        apiService.dbhEditRide(editRideRequest).enqueue(object : Callback<ResponseBody> {
+        apiService.dbhEditRide(editRideRequest).enqueue(object : Callback<DefaultResponseBody> {
             override fun onResponse(
-                call: Call<ResponseBody>,
-                response: Response<ResponseBody>) {
+                call: Call<DefaultResponseBody>,
+                response: Response<DefaultResponseBody>) {
                 if (response.isSuccessful) {
                     editRideResponse.postValue(Resource.success(response.body()!!))
                 } else {
@@ -128,7 +129,7 @@ class DbhRepository {
                     editRideResponse.postValue(Resource.error(response.message() ?: "An error occurred", null))
                 }
             }
-            override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
+            override fun onFailure(call: Call<DefaultResponseBody>, t: Throwable) {
                 // handle error
                 editRideResponse.postValue(Resource.error(t.localizedMessage ?: "An error occurred", null))
             }

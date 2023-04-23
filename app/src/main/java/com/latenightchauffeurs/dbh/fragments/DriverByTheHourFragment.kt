@@ -22,9 +22,11 @@ import com.google.android.material.timepicker.TimeFormat
 import com.latenightchauffeurs.R
 import com.latenightchauffeurs.databinding.DriverByTheHourLayoutBinding
 import com.latenightchauffeurs.dbh.base.BaseActivity
+import com.latenightchauffeurs.dbh.model.response.DbhRide
 import com.latenightchauffeurs.extension.navigate
 import java.text.SimpleDateFormat
 import java.util.*
+import kotlin.collections.HashMap
 
 /**
  * Create by Sirumalayil on 01-04-2023.
@@ -32,8 +34,13 @@ import java.util.*
 class DriverByTheHourFragment: Fragment() {
 
     companion object {
-        fun newInstance(dataMap: HashMap<String, Any>?) = DriverByTheHourFragment().apply {
+        fun newInstance(dataMap: HashMap<String, Any>?,
+                        isEditableRide: Boolean = false,
+                        rideInfo: DbhRide? = null
+        ) = DriverByTheHourFragment().apply {
             this.dataMap = dataMap
+            this.isEditableRide = isEditableRide
+            this.rideInfo = rideInfo
         }
     }
 
@@ -41,6 +48,8 @@ class DriverByTheHourFragment: Fragment() {
     private var dataMap: HashMap<String, Any>? = null
     private var lastClickTime: Long = 0
     private var fields = arrayListOf<Place.Field>()
+    private var isEditableRide: Boolean = false
+    private var rideInfo: DbhRide? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -55,10 +64,20 @@ class DriverByTheHourFragment: Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        if (isEditableRide) {
+            setRideInfo()
+        }
         onClickListeners()
         setViewData()
         initializeAutoCompleteFragment()
 
+    }
+
+    private fun setRideInfo() {
+        binding?.edtTextNotes?.setText(rideInfo?.notes)
+        binding?.textDate?.setText(rideInfo?.otherdate)
+        binding?.textTime?.setText(rideInfo?.time)
+        binding?.textPickupPlace?.setText(rideInfo?.pickup_address)
     }
 
     private fun initializeAutoCompleteFragment() {
@@ -185,11 +204,21 @@ class DriverByTheHourFragment: Fragment() {
     }
 
     private fun bookMyChauffeur() {
+        if (isEditableRide) {
+            dataMap = HashMap()
+            dataMap?.set("one",rideInfo?.pickup_address ?: "")
+            dataMap?.set("two",rideInfo?.pickup_lat ?: "")
+            dataMap?.set("three",rideInfo?.pickup_long ?: "")
+            dataMap?.set("city_name",rideInfo?.city_pickup ?: "")
+        }
         dataMap?.set("date_ride", binding?.textDate?.text?.trim().toString())
         dataMap?.set("time_ride", binding?.textTime?.text?.trim().toString())
         dataMap?.set("notes", binding?.edtTextNotes?.text?.trim().toString())
         (activity as? AppCompatActivity)?.navigate(
-            fragment = AddNewCardFragment.newInstance(dataMap)
+            fragment = AddNewCardFragment.newInstance(
+                dataMap = dataMap,
+                isEditableRide = isEditableRide
+            )
         )
     }
 
