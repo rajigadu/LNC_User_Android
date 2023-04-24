@@ -45,28 +45,26 @@ public interface ServiceApi {
     @GET("{login}")
     Call<ResponseBody> login(@Path("login") String postfix, @QueryMap HashMap<String, Object> params);
 
-    @POST("dbh-booking-reservation.php")
+    @POST(Settings.URL_DBH_BOOKING_RESERVATION)
     Call<DbhBookingResponse>dbhBookingReservation(@Query("json") String json);
 
-    @GET("dbh-promo-check.php")
-    Call<ResponseBody>applyPromoCode(@Query("promo")String promoCode);
-
-    @POST("dbh-edit-ride.php")
+    @POST(Settings.URL_DBH_EDIT_RIDE)
     Call<DefaultResponseBody>dbhEditRide(@Query("json") String json);
 
-    @GET("dbh-ride-info.php")
+    @GET(Settings.URL_DBH_RIDE_INFO)
     Call<DbhUpcomingRides>dbhUpcomingRides(@Query("userid") String userId);
 
-    @GET("dbh-ride-info.php")
+
+    @GET("")//TODO API need to implement
     Call<ResponseBody>dbhRidesHistory(@Query("userid") String userId);
 
-    @GET("dbh-promo-check.php")
-    Call<ResponseBody>dbhPromoCheck(@Query("userid") String userId);
+    @GET(Settings.URL_DBH_PROMO_CHECK)
+    Call<ResponseBody>dbhPromoCheck(@Query("promo") String userId);
 
-    @GET("dbh-cancel-future-ride.php")
+    @GET(Settings.URL_DBH_CANCEL_FUTURE_RIDE)
     Call<DefaultResponseBody>cancelDbhRide(@Query("userid") String userId);
 
-    @GET("dbh-cancel-ride-amount.php")
+    @GET(Settings.URL_DBH_CANCEL_RIDE_AMOUNT)
     Call<DefaultResponseBody>cancelDbhRideAmount(@Query("userid") String userId);
 
     @Headers("Accept: " + "application/json")

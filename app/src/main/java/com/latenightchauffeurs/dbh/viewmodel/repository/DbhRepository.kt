@@ -95,7 +95,7 @@ class DbhRepository {
     fun applyPromoCode(promoCode: String?): MutableLiveData<Resource<ResponseBody>> {
         val promoCodeResult = MutableLiveData<Resource<ResponseBody>>()
         promoCodeResult.postValue(Resource.loading(null))
-        apiService.applyPromoCode(promoCode).enqueue(object : Callback<ResponseBody> {
+        apiService.dbhPromoCheck(promoCode).enqueue(object : Callback<ResponseBody> {
             override fun onResponse(
                 call: Call<ResponseBody>,
                 response: Response<ResponseBody>) {
