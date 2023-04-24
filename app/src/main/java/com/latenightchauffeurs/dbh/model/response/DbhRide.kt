@@ -48,5 +48,7 @@ data class DbhRide(
     val time: String? = null,
     val tip_status: String? = null,
     val user_id: String? = null,
-    val distance: String? = null
+    val distance: String? = null,
+    var future_edit_ride_status: String? = null,
+    var future_edit_ride_id: String? = null
 ): Parcelable
