@@ -45,4 +45,12 @@ class DbhViewModel : ViewModel() {
     fun editDbhRide(json: String?): MutableLiveData<Resource<DefaultResponseBody>> {
         return bookingRepository.editDbhRide(json)
     }
+
+    fun cancelDbhRideAmount(json: String?): MutableLiveData<Resource<DefaultResponseBody>> {
+        return bookingRepository.cancelDbhRideAmount(json)
+    }
+
+    fun cancelDbhRide(json: String?): MutableLiveData<Resource<DefaultResponseBody>> {
+        return bookingRepository.cancelDbhRide(json)
+    }
 }

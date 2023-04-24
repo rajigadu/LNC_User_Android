@@ -64,10 +64,10 @@ public interface ServiceApi {
     Call<ResponseBody>dbhPromoCheck(@Query("userid") String userId);
 
     @GET("dbh-cancel-future-ride.php")
-    Call<ResponseBody>cancelDbhRide(@Query("userid") String userId);
+    Call<DefaultResponseBody>cancelDbhRide(@Query("userid") String userId);
 
     @GET("dbh-cancel-ride-amount.php")
-    Call<ResponseBody>cancelDbhRideAmount(@Query("userid") String userId);
+    Call<DefaultResponseBody>cancelDbhRideAmount(@Query("userid") String userId);
 
     @Headers("Accept: " + "application/json")
     @GET("num-stops-addres-list.php")
