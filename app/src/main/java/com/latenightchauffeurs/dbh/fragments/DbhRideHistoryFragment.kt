@@ -6,9 +6,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.latenightchauffeurs.FragmentCallBack
+import com.latenightchauffeurs.R
 import com.latenightchauffeurs.databinding.FragmentRidesViewLayoutBinding
 import com.latenightchauffeurs.dbh.adapter.HistoryDbhRidesAdapter
+import com.latenightchauffeurs.dbh.base.BaseActivity
 import com.latenightchauffeurs.dbh.model.response.RideHistory
 import com.latenightchauffeurs.dbh.utils.ProgressCaller
 import com.latenightchauffeurs.dbh.utils.Resource
@@ -46,6 +49,7 @@ class DbhRideHistoryFragment : Fragment() {
             binding?.refreshRides?.isRefreshing = true
             getDbhRidesHistory()
         }
+        getDbhRidesHistory()
     }
 
     private fun getDbhRidesHistory() {
@@ -56,12 +60,16 @@ class DbhRideHistoryFragment : Fragment() {
                     val rideHistory = result.data?.data?.ride
                     if (result.data?.status == "1") {
                         initializeRideHistoryAdapter(rideHistory)
-                    }
+                    } else (activity as? BaseActivity)?.showAlertMessageDialog(
+                        message = result.data?.message ?: getString(R.string.something_went_wrong)
+                    )
                     ProgressCaller.hideProgressDialog()
                     binding?.refreshRides?.isRefreshing = false
                 }
                 Resource.Status.ERROR -> {
-
+                    (activity as? BaseActivity)?.showAlertMessageDialog(
+                        message = result.data?.message ?: getString(R.string.something_went_wrong)
+                    )
                     ProgressCaller.hideProgressDialog()
                     binding?.refreshRides?.isRefreshing = false
                 }
@@ -78,6 +86,7 @@ class DbhRideHistoryFragment : Fragment() {
             }
         )
         binding?.recyclerviewRides?.apply {
+            layoutManager = LinearLayoutManager(activity)
             adapter = rideHistoryAdapter
         }
         rideHistoryAdapter.submitList(rideHistory)

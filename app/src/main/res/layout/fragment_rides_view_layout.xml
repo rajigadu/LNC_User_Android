@@ -19,6 +19,7 @@
             android:id="@+id/recyclerview_rides"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             tools:listitem="@layout/layout_upcoming_dbh_rides" />
 
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>

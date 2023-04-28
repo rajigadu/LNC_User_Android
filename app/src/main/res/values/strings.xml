@@ -60,6 +60,7 @@
     <string name="pick_up_location">Pick Up Location</string>
     <string name="ride_date">Ride Date</string>
     <string name="edit_ride_info">Edit Ride Info</string>
+    <string name="something_went_wrong">Oops!, Something went wrong, Please try again later</string>
 
 
     <array name="indicator_colors">
