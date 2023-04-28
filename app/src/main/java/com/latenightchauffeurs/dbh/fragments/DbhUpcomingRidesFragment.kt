@@ -41,18 +41,19 @@ class DbhUpcomingRidesFragment : Fragment() {
                 val rideInfo = param2 as? DbhRide
                 when (param1 as? String) {
                     "edit_ride" -> {
-                        //callEditRideDefferenceAPI() //TODO confirm that need to call four hours API
                         startActivity(
                             Intent(activity, DriveByHourActivity::class.java).apply {
                                 putExtra(RIDE_INFO, rideInfo)
-                                putExtra(EDIT_RIDE_INFO, true)
+                                putExtra(EDIT_RIDE_INFO, "edit")
                             }
                         )
                     }
                     "view_details" -> {
-                        replaceFragment(
-                            fragment = DbhRideInfoViewDetailsFragment(),
-                            fragmentManager = childFragmentManager
+                        startActivity(
+                            Intent(activity, DriveByHourActivity::class.java).apply {
+                                putExtra(RIDE_INFO, rideInfo)
+                                putExtra(EDIT_RIDE_INFO, "view")
+                            }
                         )
                     }
                 }

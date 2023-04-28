@@ -6,6 +6,7 @@ import com.latenightchauffeurs.databinding.ActivityDbhLayoutBinding
 import com.latenightchauffeurs.extension.navigate
 import com.latenightchauffeurs.dbh.fragments.DriverByTheHourFragment
 import com.latenightchauffeurs.dbh.base.BaseActivity
+import com.latenightchauffeurs.dbh.fragments.DbhRideInfoViewDetailsFragment
 import com.latenightchauffeurs.dbh.model.response.DbhRide
 
 /**
@@ -25,16 +26,36 @@ class DriveByHourActivity: BaseActivity() {
         binding?.toolbarDbh?.title = "Driver By The Hour"
         val dataMap = intent?.extras?.getSerializable(ConstantUtil.DATA_MAP) as? HashMap<String, Any>
         val rideInfo = intent?.getParcelableExtra(ConstantUtil.RIDE_INFO) as? DbhRide
-        val isEditableRide = intent?.getBooleanExtra(ConstantUtil.EDIT_RIDE_INFO, false) as Boolean
+        val viewOrEdit = intent?.getStringExtra(ConstantUtil.EDIT_RIDE_INFO)
 
         if (savedInstanceState == null) {
-            navigate(
-                fragment = DriverByTheHourFragment.newInstance(
-                    dataMap = dataMap,
-                    isEditableRide = isEditableRide,
-                    rideInfo = rideInfo
-                ),addToBackStack = false
-            )
+            when (viewOrEdit) {
+                "edit" -> {
+                    navigate(
+                        fragment = DriverByTheHourFragment.newInstance(
+                            dataMap = dataMap,
+                            isEditableRide = true,
+                            rideInfo = rideInfo
+                        ),addToBackStack = false
+                    )
+                }
+                "view" -> {
+                    navigate(
+                        fragment = DbhRideInfoViewDetailsFragment.newInstance(
+                            rideInfo = rideInfo
+                        ),addToBackStack = false
+                    )
+                }
+                else -> {
+                    navigate(
+                        fragment = DriverByTheHourFragment.newInstance(
+                            dataMap = dataMap,
+                            isEditableRide = false,
+                            rideInfo = rideInfo
+                        ),addToBackStack = false
+                    )
+                }
+            }
         }
 
         binding?.toolbarDbh?.setNavigationOnClickListener {

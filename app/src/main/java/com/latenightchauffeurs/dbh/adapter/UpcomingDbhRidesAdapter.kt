@@ -67,7 +67,7 @@ class UpcomingDbhRidesAdapter(val callback: FragmentCallBack? = null) :
             }
             binding.btnViewDetails.isVisible =
                 ride.future_edit_ride_status == "1"
-            binding.btnEditRideInfo.isVisible = ride.booking_type != "1"
+            binding.btnEditRideInfo.isVisible = ride.future_edit_ride_status != "1"
         }
     }
 
