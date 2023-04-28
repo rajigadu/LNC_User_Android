@@ -33,13 +33,13 @@
             android:id="@+id/title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/logo"
-            android:layout_marginTop="@dimen/margin_10"
-            android:textSize="@dimen/text_largesize"
+            android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
             android:padding="@dimen/padding_10"
+            android:text="CANCEL RIDE"
             android:textColor="@color/colorPrimary"
-            android:text="CANCEL RIDE"/>
+            android:textSize="@dimen/text_largesize" />
 
         <TextView
             android:id="@+id/reason"
@@ -79,6 +79,7 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:weightSum="2"
+        android:paddingHorizontal="16dp"
         android:layout_alignParentBottom="true">
 
         <Button
@@ -89,6 +90,7 @@
             android:textColor="@color/white_full"
             android:layout_marginTop="@dimen/margin_20"
             android:padding="@dimen/padding_10"
+            android:layout_marginEnd="8dp"
             android:layout_centerHorizontal="true"
             style="@style/MaterialAnimations.Buttonblack"
             android:layout_below="@+id/message"
@@ -104,6 +106,7 @@
             android:textColor="@color/white_full"
             android:layout_marginTop="@dimen/margin_20"
             android:padding="@dimen/padding_10"
+            android:layout_marginStart="8dp"
             android:layout_centerHorizontal="true"
             style="@style/MaterialAnimations.Buttonblack"
             android:layout_below="@+id/message"

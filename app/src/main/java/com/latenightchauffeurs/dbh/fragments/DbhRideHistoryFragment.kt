@@ -16,6 +16,7 @@ import com.latenightchauffeurs.dbh.model.response.RideHistory
 import com.latenightchauffeurs.dbh.utils.ProgressCaller
 import com.latenightchauffeurs.dbh.utils.Resource
 import com.latenightchauffeurs.dbh.viewmodel.DbhViewModel
+import com.latenightchauffeurs.extension.replaceFragment
 import com.latenightchauffeurs.model.SavePref
 
 /**
@@ -87,7 +88,17 @@ class DbhRideHistoryFragment : Fragment() {
         val rideHistoryAdapter = HistoryDbhRidesAdapter(
             callback = object : FragmentCallBack {
                 override fun onResult(param1: Any?, param2: Any?, param3: Any?) {
-
+                    when(param1) {
+                        "add-tip" -> {
+                            replaceFragment(DbhAddTipFragment(), childFragmentManager)
+                        }
+                        "feedback" -> {
+                            replaceFragment(DbhRideFeedbackFragment(), childFragmentManager)
+                        }
+                        "payment-summary" -> {
+                            replaceFragment(DbhPaymentSummaryFragment(), childFragmentManager)
+                        }
+                    }
                 }
             }
         )

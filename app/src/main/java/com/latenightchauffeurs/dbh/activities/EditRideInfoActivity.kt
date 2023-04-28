@@ -3,7 +3,7 @@ package com.latenightchauffeurs.dbh.activities
 import android.os.Bundle
 import com.latenightchauffeurs.Utils.ConstantUtil
 import com.latenightchauffeurs.databinding.ActivityDbhLayoutBinding
-import com.latenightchauffeurs.dbh.fragments.EditDbhRideInfo
+import com.latenightchauffeurs.dbh.fragments.DbhRideFeedbackFragment
 import com.latenightchauffeurs.dbh.base.BaseActivity
 import com.latenightchauffeurs.dbh.model.response.DbhRide
 import com.latenightchauffeurs.extension.navigate
@@ -26,7 +26,7 @@ class EditRideInfoActivity: BaseActivity() {
 
         if (savedInstanceState == null) {
             navigate(
-                fragment = EditDbhRideInfo.newInstance(
+                fragment = DbhRideFeedbackFragment.newInstance(
                     rideInfo = rideInfo
                 ),addToBackStack = false
             )

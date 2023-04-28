@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimaryDark"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/nestedScrollView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/btnSubmit"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="12dp">
+
+            <com.latenightchauffeurs.Utils.CircularImageView
+                android:id="@+id/driverimage"
+                android:layout_width="102dp"
+                android:layout_height="102dp"
+                android:layout_gravity="center_horizontal"
+                android:src="@drawable/appicon"
+                app:civ_border_color="#FF000000"
+                app:civ_border_width="1dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <TextView
+                android:id="@+id/dname"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="16dp"
+                android:textColor="@color/white_full"
+                android:textSize="@dimen/text_mediumsize"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="@+id/driverimage"
+                app:layout_constraintStart_toStartOf="@+id/driverimage"
+                app:layout_constraintTop_toBottomOf="@+id/driverimage"
+                tools:text="Arjun Abalan" />
+
+            <RatingBar
+                android:id="@+id/rating"
+                style="?android:attr/rating"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="16dp"
+                android:clickable="false"
+                android:numStars="5"
+                android:rating="0"
+                android:stepSize="1"
+                app:layout_constraintEnd_toEndOf="@+id/driverimage"
+                app:layout_constraintStart_toStartOf="@+id/driverimage"
+                app:layout_constraintTop_toBottomOf="@+id/dname" />
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/edtTextNotes"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/rectangle_edittext_bg"
+                android:gravity="start"
+                android:hint="@string/about_driver"
+                android:inputType="text|textCapSentences|textMultiLine"
+                android:maxLength="250"
+                android:maxLines="10"
+                android:minLines="5"
+                android:layout_marginTop="16dp"
+                android:paddingHorizontal="8dp"
+                android:paddingVertical="12dp"
+                app:layout_constraintTop_toBottomOf="@+id/rating" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnSubmit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:padding="12dp"
+        android:textAllCaps="false"
+        android:text="@string/submit_feedback"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

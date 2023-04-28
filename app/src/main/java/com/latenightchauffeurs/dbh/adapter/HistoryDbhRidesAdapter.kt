@@ -39,6 +39,16 @@ class HistoryDbhRidesAdapter(val callback: FragmentCallBack? = null) :
             binding.bookingDate.text = "${rideHistory?.date} ${rideHistory?.time}"
             binding.paymentDate.text = "${rideHistory?.date} ${rideHistory?.time}"
             binding.pickupLocation.text = " : ${rideHistory?.pickup_address}"
+
+            binding.btnAddTip.setOnClickListener {
+                callback?.onResult("add-tip")
+            }
+            binding.btnFeedBack.setOnClickListener {
+                callback?.onResult("feedback")
+            }
+            binding.btnPaymentSummary.setOnClickListener {
+                callback?.onResult("payment-summary")
+            }
         }
     }
 
