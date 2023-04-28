@@ -550,8 +550,6 @@ class AddNewCardFragment : Fragment() {
                         val dbhResponse = result.data
                         (activity as? BaseActivity)?.showAlertMessageDialog(
                             message = dbhResponse?.data?.firstOrNull()?.msg ?: "",
-                            title = "Booking Response",
-                            negativeButton = false,
                             callBack = object : FragmentCallBack {
                                 override fun onResult(param1: Any?, param2: Any?, param3: Any?) {
                                     when(param1) {
@@ -567,8 +565,6 @@ class AddNewCardFragment : Fragment() {
                     Resource.Status.ERROR -> {
                         (activity as? BaseActivity)?.showAlertMessageDialog(
                             message = result.message ?: "",
-                            title = "Booking Response",
-                            negativeButton = false,
                             callBack = object : FragmentCallBack {
                                 override fun onResult(param1: Any?, param2: Any?, param3: Any?) {}
                             }

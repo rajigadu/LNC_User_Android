@@ -80,8 +80,8 @@ class DbhUpcomingRidesFragment : Fragment() {
         }
 
         binding?.refreshRides?.setOnRefreshListener {
-            binding?.refreshRides?.isRefreshing = true
             if (Utils.isNetworkAvailable(activity)) {
+                binding?.refreshRides?.isRefreshing = true
                 getUpcomingDbhRides()
             }
         }

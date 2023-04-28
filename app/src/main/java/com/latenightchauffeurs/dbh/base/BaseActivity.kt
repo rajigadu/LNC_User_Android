@@ -23,8 +23,7 @@ abstract class BaseActivity: AppCompatActivity() {
 
     fun showAlertMessageDialog(
         message: String?,
-        negativeButton: Boolean = true,
-        title: String? = null,
+        negativeButton: Boolean = false,
         showRetry: Boolean = false,
         callBack: FragmentCallBack? = null
     ) {
@@ -32,7 +31,6 @@ abstract class BaseActivity: AppCompatActivity() {
             message = message,
             showRetry = showRetry,
             showNegativeBtn = negativeButton,
-            title = title,
             callBack = callBack
         )
         msgFragment.show(supportFragmentManager, "msg")

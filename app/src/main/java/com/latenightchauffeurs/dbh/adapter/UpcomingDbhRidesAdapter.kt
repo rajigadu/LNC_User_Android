@@ -41,7 +41,7 @@ class UpcomingDbhRidesAdapter(val callback: FragmentCallBack? = null) :
             binding.valueRideDate.text = "${ride.otherdate}" +
                     " ${ride.time}"
             binding.valuePickupLocation.text = ride.pickup_address
-            binding.valueRate.text = "$ 10.00 Per Hour"
+            binding.valueRate.text = "$${ride.hourly_rate} Per Hour"
             if (ride.future_accept == "0") {
                 binding.valueRideStatus.text = "Pending"
                 binding.valueRideStatus.setTextColor(

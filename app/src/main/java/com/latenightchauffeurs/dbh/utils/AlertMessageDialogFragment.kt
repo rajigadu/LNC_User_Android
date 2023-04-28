@@ -30,7 +30,6 @@ class AlertDialogMessageFragment : DialogFragment() {
         fun newInstance(
             showNegativeBtn: Boolean = false,
             showRetry: Boolean = false,
-            title: String? = null,
             message: String? = null,
             callBack: FragmentCallBack? = null
         ) = AlertDialogMessageFragment().apply {
