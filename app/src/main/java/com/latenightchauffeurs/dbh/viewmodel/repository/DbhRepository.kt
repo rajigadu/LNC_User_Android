@@ -6,6 +6,7 @@ import com.latenightchauffeurs.Utils.APIInterface
 import com.latenightchauffeurs.Utils.ServiceApi
 import com.latenightchauffeurs.Utils.ServiceGenerator
 import com.latenightchauffeurs.dbh.model.response.DbhBookingResponse
+import com.latenightchauffeurs.dbh.model.response.DbhRideHistory
 import com.latenightchauffeurs.dbh.model.response.DbhUpcomingRides
 import com.latenightchauffeurs.dbh.model.response.DefaultResponseBody
 import com.latenightchauffeurs.dbh.utils.Resource
@@ -162,13 +163,13 @@ class DbhRepository {
     }
 
     //TODO API implementation in ServiceAPI class
-    fun dbhRidesHistory(userId: String?): MutableLiveData<Resource<ResponseBody>> {
-        val dbhUpcomingRideResponse = MutableLiveData<Resource<ResponseBody>>()
+    fun dbhRidesHistory(userId: String?): MutableLiveData<Resource<DbhRideHistory>> {
+        val dbhUpcomingRideResponse = MutableLiveData<Resource<DbhRideHistory>>()
         dbhUpcomingRideResponse.postValue(Resource.loading(null))
-        apiService.dbhRidesHistory(userId).enqueue(object : Callback<ResponseBody> {
+        apiService.dbhRidesHistory(userId).enqueue(object : Callback<DbhRideHistory> {
             override fun onResponse(
-                call: Call<ResponseBody>,
-                response: Response<ResponseBody>) {
+                call: Call<DbhRideHistory>,
+                response: Response<DbhRideHistory>) {
                 if (response.isSuccessful) {
                     dbhUpcomingRideResponse.postValue(Resource.success(response.body()!!))
                 } else {
@@ -176,7 +177,7 @@ class DbhRepository {
                     dbhUpcomingRideResponse.postValue(Resource.error(response.message() ?: "An error occurred", null))
                 }
             }
-            override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
+            override fun onFailure(call: Call<DbhRideHistory>, t: Throwable) {
                 // handle error
                 dbhUpcomingRideResponse.postValue(Resource.error(t.localizedMessage ?: "An error occurred", null))
             }

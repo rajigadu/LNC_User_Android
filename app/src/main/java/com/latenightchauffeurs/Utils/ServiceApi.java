@@ -1,6 +1,7 @@
 package com.latenightchauffeurs.Utils;
 
 import com.latenightchauffeurs.dbh.model.response.DbhBookingResponse;
+import com.latenightchauffeurs.dbh.model.response.DbhRideHistory;
 import com.latenightchauffeurs.dbh.model.response.DbhUpcomingRides;
 import com.latenightchauffeurs.dbh.model.response.DefaultResponseBody;
 import com.latenightchauffeurs.model.ChatPojo;
@@ -56,7 +57,7 @@ public interface ServiceApi {
 
 
     @GET(Settings.URL_DBH_RIDE_HISTORY)
-    Call<ResponseBody>dbhRidesHistory(@Query("userid") String userId);
+    Call<DbhRideHistory>dbhRidesHistory(@Query("userid") String userId);
 
     @GET(Settings.URL_DBH_PROMO_CHECK)
     Call<ResponseBody>dbhPromoCheck(@Query("promo") String userId);

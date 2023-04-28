@@ -6,7 +6,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.latenightchauffeurs.FragmentCallBack
 import com.latenightchauffeurs.databinding.FragmentRidesViewLayoutBinding
+import com.latenightchauffeurs.dbh.adapter.HistoryDbhRidesAdapter
+import com.latenightchauffeurs.dbh.model.response.RideHistory
 import com.latenightchauffeurs.dbh.utils.ProgressCaller
 import com.latenightchauffeurs.dbh.utils.Resource
 import com.latenightchauffeurs.dbh.viewmodel.DbhViewModel
@@ -38,21 +41,45 @@ class DbhRideHistoryFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         preferences = SavePref()
         preferences?.SavePref(activity)
-        //getDbhRidesHistory()
+
+        binding?.refreshRides?.setOnRefreshListener {
+            binding?.refreshRides?.isRefreshing = true
+            getDbhRidesHistory()
+        }
     }
 
     private fun getDbhRidesHistory() {
-
         bookingViewModel?.dbhRidesHistory(preferences?.userId)?.observe(viewLifecycleOwner) { result ->
             when(result.status) {
                 Resource.Status.LOADING -> { activity ?.let { ProgressCaller.showProgressDialog(it) }}
                 Resource.Status.SUCCESS -> {
-
+                    val rideHistory = result.data?.data?.ride
+                    if (result.data?.status == "1") {
+                        initializeRideHistoryAdapter(rideHistory)
+                    }
+                    ProgressCaller.hideProgressDialog()
+                    binding?.refreshRides?.isRefreshing = false
                 }
                 Resource.Status.ERROR -> {
 
+                    ProgressCaller.hideProgressDialog()
+                    binding?.refreshRides?.isRefreshing = false
                 }
             }
         }
+    }
+
+    private fun initializeRideHistoryAdapter(rideHistory: List<RideHistory>?) {
+        val rideHistoryAdapter = HistoryDbhRidesAdapter(
+            callback = object : FragmentCallBack {
+                override fun onResult(param1: Any?, param2: Any?, param3: Any?) {
+
+                }
+            }
+        )
+        binding?.recyclerviewRides?.apply {
+            adapter = rideHistoryAdapter
+        }
+        rideHistoryAdapter.submitList(rideHistory)
     }
 }
