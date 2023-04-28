@@ -49,6 +49,7 @@ import com.latenightchauffeurs.Utils.ConstVariable;
 import com.latenightchauffeurs.Utils.JsonPost;
 import com.latenightchauffeurs.Utils.OnlineRequest;
 import com.latenightchauffeurs.Utils.Utils;
+import com.latenightchauffeurs.dbh.base.BaseActivity;
 import com.latenightchauffeurs.dbh.fragments.DbhRideInfoFragment;
 import com.latenightchauffeurs.fragment.BookReservation_new;
 import com.latenightchauffeurs.fragment.Cards;
@@ -72,7 +73,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
-public class Navigation extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, Serializable,
+public class Navigation extends BaseActivity implements NavigationView.OnNavigationItemSelectedListener, Serializable,
         Home.OnFragmentInteractionListenerHome, Home.SendData, BookReservation_new.OnFragmentInteractionListenerBooking {
 
 

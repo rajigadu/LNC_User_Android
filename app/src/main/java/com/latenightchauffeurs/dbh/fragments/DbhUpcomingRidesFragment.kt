@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.latenightchauffeurs.FragmentCallBack
+import com.latenightchauffeurs.R
 import com.latenightchauffeurs.Utils.ConstantUtil.EDIT_RIDE_INFO
 import com.latenightchauffeurs.Utils.ConstantUtil.RIDE_INFO
 import com.latenightchauffeurs.Utils.Utils
@@ -94,12 +95,20 @@ class DbhUpcomingRidesFragment : Fragment() {
                         activity?.let { ProgressCaller.showProgressDialog(it) }
                     }
                     Resource.Status.SUCCESS -> {
-                        binding?.refreshRides?.isRefreshing = false
+                        val upcomingRides = result?.data?.data
                         if (result.data?.status == "1") {
-                            val upcomingRides = result?.data.data
-                            initializeAdapter(upcomingRides)
-                        }
+                            if (result.data.data.ride.isNotEmpty()) {
+                                initializeAdapter(upcomingRides)
+                            } else {
+                                (activity as? BaseActivity)?.showAlertMessageDialog(
+                                    message = "Currently there no more upcoming rides"
+                                )
+                            }
+                        } else (activity as? BaseActivity)?.showAlertMessageDialog(
+                            message = result.data?.message ?: getString(R.string.something_went_wrong)
+                        )
                         ProgressCaller.hideProgressDialog()
+                        binding?.refreshRides?.isRefreshing = false
                     }
                     Resource.Status.ERROR -> {
                         (activity as? BaseActivity)?.showAlertMessageDialog(
@@ -112,8 +121,8 @@ class DbhUpcomingRidesFragment : Fragment() {
             }
     }
 
-    private fun initializeAdapter(upcomingRides: DbhUpcomingRidesData) {
-        upcomingRides.ride.forEach { rides ->
+    private fun initializeAdapter(upcomingRides: DbhUpcomingRidesData?) {
+        upcomingRides?.ride?.forEach { rides ->
             upcomingRides.future_edit_ride_status.forEach { futureEditRideStatus ->
                 if (rides.id == futureEditRideStatus.id) {
                     rides.future_edit_ride_status = futureEditRideStatus.future_edit_ride_status
@@ -125,6 +134,6 @@ class DbhUpcomingRidesFragment : Fragment() {
             layoutManager = LinearLayoutManager(activity)
             adapter = upcomingDbhRodesAdapter
         }
-        upcomingDbhRodesAdapter.submitList(upcomingRides.ride)
+        upcomingDbhRodesAdapter.submitList(upcomingRides?.ride)
     }
 }

@@ -57,7 +57,9 @@ class DbhRideInfoFragment : Fragment() {
                 setTabPositions(tab?.position)
             }
             override fun onTabUnselected(tab: TabLayout.Tab?) {}
-            override fun onTabReselected(tab: TabLayout.Tab?) {} })
+            override fun onTabReselected(tab: TabLayout.Tab?) {
+                setTabPositions(tab?.position)
+            } })
     }
 
     private fun setTabPositions(selectedTabPosition: Int?) {

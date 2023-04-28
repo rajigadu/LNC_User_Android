@@ -1,12 +1,10 @@
 package com.latenightchauffeurs.dbh.utils
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import android.view.WindowManager
+import android.view.*
 import androidx.core.view.isVisible
 import androidx.fragment.app.DialogFragment
+import androidx.fragment.app.FragmentManager
 import com.latenightchauffeurs.FragmentCallBack
 import com.latenightchauffeurs.databinding.FragmentDialogViewBinding
 
@@ -43,16 +41,24 @@ class AlertDialogMessageFragment : DialogFragment() {
         }
     }
 
+    override fun show(manager: FragmentManager, tag: String?) {
+        val ft = manager.beginTransaction()
+        ft.add(this, tag)
+        ft.commitAllowingStateLoss()
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         dialog?.apply {
-            isCancelable = false
+            requestWindowFeature(Window.FEATURE_NO_TITLE)
+            setCancelable(true)
             setStyle(STYLE_NO_FRAME, android.R.style.Theme)
             window?.setBackgroundDrawableResource(android.R.color.transparent)
         }
+        isCancelable = false
         binding = FragmentDialogViewBinding.inflate(inflater, container, false)
         return binding?.root
     }
@@ -84,5 +90,15 @@ class AlertDialogMessageFragment : DialogFragment() {
             callBack?.onResult(ACTION_RETRY)
             dismissAllowingStateLoss()
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        val params: WindowManager.LayoutParams? = dialog?.window?.attributes
+        params?.apply {
+            width = WindowManager.LayoutParams.MATCH_PARENT
+            height = WindowManager.LayoutParams.WRAP_CONTENT
+        }
+        dialog?.window?.attributes = params as WindowManager.LayoutParams
     }
 }

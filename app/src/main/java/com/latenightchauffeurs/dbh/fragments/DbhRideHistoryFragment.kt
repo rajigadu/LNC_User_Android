@@ -59,7 +59,13 @@ class DbhRideHistoryFragment : Fragment() {
                 Resource.Status.SUCCESS -> {
                     val rideHistory = result.data?.data?.ride
                     if (result.data?.status == "1") {
-                        initializeRideHistoryAdapter(rideHistory)
+                        if (result.data.data.ride.isNotEmpty()) {
+                            initializeRideHistoryAdapter(rideHistory)
+                        } else {
+                            (activity as? BaseActivity)?.showAlertMessageDialog(
+                                message = "There is no more ride history!"
+                            )
+                        }
                     } else (activity as? BaseActivity)?.showAlertMessageDialog(
                         message = result.data?.message ?: getString(R.string.something_went_wrong)
                     )
