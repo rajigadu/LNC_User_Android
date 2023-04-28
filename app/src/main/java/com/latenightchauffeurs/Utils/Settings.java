@@ -78,6 +78,7 @@ public class Settings extends Application {
     public static final String URL_DBH_CANCEL_FUTURE_RIDE = "dbh-cancel-future-ride.php";
     public static final String URL_DBH_CANCEL_RIDE_AMOUNT = "dbh-cancel-ride-amount.php";
     public static final String URL_DBH_RIDE_INFO = "dbh-ride-info.php";
+    public static final String URL_DBH_RIDE_HISTORY= "dbh-user-ride-history.php";
 
     public static String NETWORK_STATUS = "Online";
     public static String NETWORK_TYPE = "";

@@ -55,7 +55,7 @@ public interface ServiceApi {
     Call<DbhUpcomingRides>dbhUpcomingRides(@Query("userid") String userId);
 
 
-    @GET("")//TODO API need to implement
+    @GET(Settings.URL_DBH_RIDE_HISTORY)
     Call<ResponseBody>dbhRidesHistory(@Query("userid") String userId);
 
     @GET(Settings.URL_DBH_PROMO_CHECK)
