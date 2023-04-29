@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.latenightchauffeurs.FragmentCallBack
@@ -55,6 +56,8 @@ class DbhRideInfoViewDetailsFragment : Fragment() {
         binding?.driverName?.text = ""
         binding?.driverNumber?.text = ""
         binding?.rideStatus?.text = status
+
+        binding?.layoutDriverDetails?.isVisible = rideInfo?.status == "1"
     }
 
     private fun onClickListeners() {
@@ -82,6 +85,9 @@ class DbhRideInfoViewDetailsFragment : Fragment() {
             when (result.status) {
                 Resource.Status.LOADING -> { activity?.let { ProgressCaller.showProgressDialog(it) }}
                 Resource.Status.SUCCESS -> {
+                    (activity as? BaseActivity)?.showAlertMessageDialog(
+                        message = result.message ?: result?.data?.data?.firstOrNull()?.msg
+                    )
                     ProgressCaller.hideProgressDialog()
                 }
                 Resource.Status.ERROR -> {

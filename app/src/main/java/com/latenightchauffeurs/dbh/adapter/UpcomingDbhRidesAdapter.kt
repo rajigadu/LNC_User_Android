@@ -65,9 +65,9 @@ class UpcomingDbhRidesAdapter(val callback: FragmentCallBack? = null) :
             binding.btnViewDetails.setOnClickListener {
                 callback?.onResult("view_details", ride)
             }
-            binding.btnViewDetails.isVisible =
+            binding.btnEditRideInfo.isVisible =
                 ride.future_edit_ride_status == "1"
-            binding.btnEditRideInfo.isVisible = ride.future_edit_ride_status != "1"
+            binding.btnViewDetails.isVisible = ride.future_edit_ride_status == "0"
         }
     }
 

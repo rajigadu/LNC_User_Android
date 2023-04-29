@@ -18,7 +18,7 @@
                                 <PersistentState>
                                   <option name="values">
                                     <map>
-                                      <entry key="url" value="file:/$USER_HOME$/AppData/Local/Android/Sdk/icons/material/materialiconsround/keyboard_arrow_right/round_keyboard_arrow_right_24.xml" />
+                                      <entry key="url" value="file:/$USER_HOME$/AppData/Local/Android/Sdk/icons/material/materialiconsround/keyboard_arrow_left/round_keyboard_arrow_left_24.xml" />
                                     </map>
                                   </option>
                                 </PersistentState>
@@ -28,7 +28,7 @@
                         </option>
                         <option name="values">
                           <map>
-                            <entry key="outputName" value="round_keyboard_arrow_right_24" />
+                            <entry key="outputName" value="round_keyboard_arrow_left_24" />
                             <entry key="sourceFile" value="C:\Users\356400214\Downloads\LNC_User_Android\LNC_User_Android" />
                           </map>
                         </option>

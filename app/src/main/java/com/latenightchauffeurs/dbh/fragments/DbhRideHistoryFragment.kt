@@ -1,5 +1,6 @@
 package com.latenightchauffeurs.dbh.fragments
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,13 +11,15 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.latenightchauffeurs.FragmentCallBack
 import com.latenightchauffeurs.R
 import com.latenightchauffeurs.databinding.FragmentRidesViewLayoutBinding
+import com.latenightchauffeurs.dbh.activities.DbhPaymentSummary
+import com.latenightchauffeurs.dbh.activities.DbhRideAddTip
+import com.latenightchauffeurs.dbh.activities.DbhRideFeedback
 import com.latenightchauffeurs.dbh.adapter.HistoryDbhRidesAdapter
 import com.latenightchauffeurs.dbh.base.BaseActivity
 import com.latenightchauffeurs.dbh.model.response.RideHistory
 import com.latenightchauffeurs.dbh.utils.ProgressCaller
 import com.latenightchauffeurs.dbh.utils.Resource
 import com.latenightchauffeurs.dbh.viewmodel.DbhViewModel
-import com.latenightchauffeurs.extension.replaceFragment
 import com.latenightchauffeurs.model.SavePref
 
 /**
@@ -90,13 +93,19 @@ class DbhRideHistoryFragment : Fragment() {
                 override fun onResult(param1: Any?, param2: Any?, param3: Any?) {
                     when(param1) {
                         "add-tip" -> {
-                            replaceFragment(DbhAddTipFragment(), childFragmentManager)
+                            startActivity(
+                                Intent(requireActivity(), DbhRideAddTip::class.java).apply {  }
+                            )
                         }
                         "feedback" -> {
-                            replaceFragment(DbhRideFeedbackFragment(), childFragmentManager)
+                            startActivity(
+                                Intent(requireActivity(), DbhRideFeedback::class.java).apply {  }
+                            )
                         }
                         "payment-summary" -> {
-                            replaceFragment(DbhPaymentSummaryFragment(), childFragmentManager)
+                            startActivity(
+                                Intent(requireActivity(), DbhPaymentSummary::class.java).apply {  }
+                            )
                         }
                     }
                 }
