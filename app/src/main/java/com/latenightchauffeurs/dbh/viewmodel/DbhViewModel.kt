@@ -2,14 +2,12 @@ package com.latenightchauffeurs.dbh.viewmodel
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.latenightchauffeurs.dbh.model.response.DbhBookingResponse
-import com.latenightchauffeurs.dbh.model.response.DbhRideHistory
-import com.latenightchauffeurs.dbh.model.response.DbhUpcomingRides
-import com.latenightchauffeurs.dbh.model.response.DefaultResponseBody
+import com.latenightchauffeurs.dbh.model.response.*
 import com.latenightchauffeurs.dbh.utils.Resource
 import com.latenightchauffeurs.dbh.viewmodel.repository.DbhRepository
 import okhttp3.MultipartBody
 import okhttp3.ResponseBody
+import org.json.JSONObject
 import java.util.ArrayList
 
 /**
@@ -53,5 +51,12 @@ class DbhViewModel : ViewModel() {
 
     fun cancelDbhRide(userId: String, rideId: String, cancelTime: String): MutableLiveData<Resource<DefaultResponseBody>> {
         return bookingRepository.cancelDbhRide(userId, rideId, cancelTime)
+    }
+    fun dbhRideFeedback(json: JSONObject): MutableLiveData<Resource<DefaultResponseBody>> {
+        return bookingRepository.dbhRideFeedback(json)
+    }
+
+    fun dbhDriverDetails(driverId: String): MutableLiveData<Resource<DbhDriver>> {
+        return bookingRepository.getDbhDriverDetails(driverId)
     }
 }

@@ -1,5 +1,6 @@
 package com.latenightchauffeurs.dbh.fragments
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,6 +11,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.latenightchauffeurs.FragmentCallBack
 import com.latenightchauffeurs.databinding.FragmentDbhRideDetailsBinding
 import com.latenightchauffeurs.dbh.base.BaseActivity
+import com.latenightchauffeurs.dbh.model.response.DbhDriverData
 import com.latenightchauffeurs.dbh.model.response.DbhRide
 import com.latenightchauffeurs.dbh.utils.AlertDialogMessageFragment.Companion.ACTION_OK
 import com.latenightchauffeurs.dbh.utils.ConstantUtils
@@ -52,12 +54,37 @@ class DbhRideInfoViewDetailsFragment : Fragment() {
     }
 
     private fun setDViewDetails() {
+        getDriverDetails()
         val status = if (rideInfo?.future_accept == "0") "Pending" else "Accepted"
         binding?.driverName?.text = ""
         binding?.driverNumber?.text = ""
         binding?.rideStatus?.text = status
 
         binding?.layoutDriverDetails?.isVisible = rideInfo?.status == "1"
+    }
+
+    private fun getDriverDetails() {
+        dbhViewModel?.dbhDriverDetails(rideInfo?.driver_id_for_future_ride ?: "")
+            ?.observe(viewLifecycleOwner) { result ->
+                when(result.status) {
+                    Resource.Status.LOADING -> { activity?.let { ProgressCaller.showProgressDialog(it) }}
+                    Resource.Status.SUCCESS -> {
+                        if (result.data?.status == "1") {
+                            updateDriverDetails(result.data.data)
+                        }
+                        ProgressCaller.hideProgressDialog()
+                    }
+                    Resource.Status.ERROR -> {
+                        ProgressCaller.hideProgressDialog()
+                    }
+                }
+            }
+    }
+
+    @SuppressLint("SetTextI18n")
+    private fun updateDriverDetails(driver: DbhDriverData?) {
+        binding?.driverName?.text = "${driver?.first_name} ${driver?.last_name}"
+        binding?.driverNumber?.text = driver?.mobile
     }
 
     private fun onClickListeners() {
@@ -69,7 +96,7 @@ class DbhRideInfoViewDetailsFragment : Fragment() {
                     override fun onResult(param1: Any?, param2: Any?, param3: Any?) {
                         when (param1) {
                             ACTION_OK -> {
-                                cancelThisRide()
+                                cancelDbhRideAmount()
                             }
                         }
                     }
@@ -77,7 +104,7 @@ class DbhRideInfoViewDetailsFragment : Fragment() {
         }
     }
 
-    private fun cancelThisRide() {
+    private fun cancelDbhRideAmount() {
         dbhViewModel?.cancelDbhRideAmount(
             rideId = rideInfo?.id ?: "",
             cancelTime = ConstantUtils.getCurrentDateAndTime() ?: ""
@@ -86,7 +113,17 @@ class DbhRideInfoViewDetailsFragment : Fragment() {
                 Resource.Status.LOADING -> { activity?.let { ProgressCaller.showProgressDialog(it) }}
                 Resource.Status.SUCCESS -> {
                     (activity as? BaseActivity)?.showAlertMessageDialog(
-                        message = result.message ?: result?.data?.data?.firstOrNull()?.msg
+                        message = result.message ?: result?.data?.data?.firstOrNull()?.msg,
+                        negativeButton = true,
+                        callBack = object : FragmentCallBack {
+                            override fun onResult(param1: Any?, param2: Any?, param3: Any?) {
+                                when(param1) {
+                                    ACTION_OK -> {
+                                        cancelDbhRide()
+                                    }
+                                }
+                            }
+                        }
                     )
                     ProgressCaller.hideProgressDialog()
                 }
@@ -95,5 +132,9 @@ class DbhRideInfoViewDetailsFragment : Fragment() {
                 }
             }
         }
+    }
+
+    private fun cancelDbhRide() {
+
     }
 }

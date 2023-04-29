@@ -5,13 +5,11 @@ import com.latenightchauffeurs.Utils.APIClient
 import com.latenightchauffeurs.Utils.APIInterface
 import com.latenightchauffeurs.Utils.ServiceApi
 import com.latenightchauffeurs.Utils.ServiceGenerator
-import com.latenightchauffeurs.dbh.model.response.DbhBookingResponse
-import com.latenightchauffeurs.dbh.model.response.DbhRideHistory
-import com.latenightchauffeurs.dbh.model.response.DbhUpcomingRides
-import com.latenightchauffeurs.dbh.model.response.DefaultResponseBody
+import com.latenightchauffeurs.dbh.model.response.*
 import com.latenightchauffeurs.dbh.utils.Resource
 import okhttp3.MultipartBody
 import okhttp3.ResponseBody
+import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -224,6 +222,58 @@ class DbhRepository {
                 }
             }
             override fun onFailure(call: Call<DefaultResponseBody>, t: Throwable) {
+                // handle error
+                cancelRideResponse.postValue(Resource.error(t.localizedMessage ?: "An error occurred", null))
+            }
+        })
+
+        return cancelRideResponse
+    }
+
+    fun dbhRideFeedback(json: JSONObject): MutableLiveData<Resource<DefaultResponseBody>> {
+        val cancelRideResponse = MutableLiveData<Resource<DefaultResponseBody>>()
+        cancelRideResponse.postValue(Resource.loading(null))
+        apiService.dbhRideFeedback(
+            json.getString("userid"),
+            json.getString("driverid"),
+            json.getString("rideid"),
+            json.getString("msg"),
+            json.getString("rating")
+        ).enqueue(object : Callback<DefaultResponseBody> {
+            override fun onResponse(
+                call: Call<DefaultResponseBody>,
+                response: Response<DefaultResponseBody>) {
+                if (response.isSuccessful) {
+                    cancelRideResponse.postValue(Resource.success(response.body()!!))
+                } else {
+                    // handle error
+                    cancelRideResponse.postValue(Resource.error(response.message() ?: "An error occurred", null))
+                }
+            }
+            override fun onFailure(call: Call<DefaultResponseBody>, t: Throwable) {
+                // handle error
+                cancelRideResponse.postValue(Resource.error(t.localizedMessage ?: "An error occurred", null))
+            }
+        })
+
+        return cancelRideResponse
+    }
+
+    fun getDbhDriverDetails(driverId: String): MutableLiveData<Resource<DbhDriver>> {
+        val cancelRideResponse = MutableLiveData<Resource<DbhDriver>>()
+        cancelRideResponse.postValue(Resource.loading(null))
+        apiService.getDbhDriverDetails(driverId).enqueue(object : Callback<DbhDriver> {
+            override fun onResponse(
+                call: Call<DbhDriver>,
+                response: Response<DbhDriver>) {
+                if (response.isSuccessful) {
+                    cancelRideResponse.postValue(Resource.success(response.body()!!))
+                } else {
+                    // handle error
+                    cancelRideResponse.postValue(Resource.error(response.message() ?: "An error occurred", null))
+                }
+            }
+            override fun onFailure(call: Call<DbhDriver>, t: Throwable) {
                 // handle error
                 cancelRideResponse.postValue(Resource.error(t.localizedMessage ?: "An error occurred", null))
             }

@@ -1,6 +1,7 @@
 package com.latenightchauffeurs.Utils;
 
 import com.latenightchauffeurs.dbh.model.response.DbhBookingResponse;
+import com.latenightchauffeurs.dbh.model.response.DbhDriver;
 import com.latenightchauffeurs.dbh.model.response.DbhRideHistory;
 import com.latenightchauffeurs.dbh.model.response.DbhUpcomingRides;
 import com.latenightchauffeurs.dbh.model.response.DefaultResponseBody;
@@ -67,6 +68,20 @@ public interface ServiceApi {
             @Query("userid") String userId,
             @Query("ride_id") String rideId,
             @Query("cancel_time") String cancelTime
+    );
+
+    @GET(Settings.URL_DBH_RIDE_FEEDBACK)
+    Call<DefaultResponseBody>dbhRideFeedback(
+            @Query("userid") String userId,
+            @Query("rideid") String rideId,
+            @Query("driverid") String driverId,
+            @Query("msg") String message,
+            @Query("rating") String rating
+    );
+
+    @GET(Settings.URL_DBH_DRIVER_DETAILS)
+    Call<DbhDriver>getDbhDriverDetails(
+            @Query("driverid") String driverId
     );
 
     @GET(Settings.URL_DBH_CANCEL_RIDE_AMOUNT)
