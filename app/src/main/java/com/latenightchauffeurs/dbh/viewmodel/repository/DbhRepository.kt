@@ -207,7 +207,7 @@ class DbhRepository {
         return dbhUpcomingRideResponse
     }
 
-    fun cancelDbhRide(userId: String, rideId: String, cancelTime: String): MutableLiveData<Resource<DefaultResponseBody>> {
+    fun cancelDbhRide(userId: String?, rideId: String?, cancelTime: String): MutableLiveData<Resource<DefaultResponseBody>> {
         val cancelRideResponse = MutableLiveData<Resource<DefaultResponseBody>>()
         cancelRideResponse.postValue(Resource.loading(null))
         apiService.cancelDbhRide(userId, rideId, cancelTime).enqueue(object : Callback<DefaultResponseBody> {

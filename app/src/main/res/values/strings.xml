@@ -82,6 +82,8 @@
     <string name="unplanned_stops">Unplanned Stops</string>
     <string name="palnned_stops">Planned Stops</string>
     <string name="total_fare">Total Fare</string>
+    <string name="enter_your_message">Enter your message</string>
+    <string name="reason_for_cancelled_ride">Reason for Cancelled Ride :</string>
 
 
     <array name="indicator_colors">
