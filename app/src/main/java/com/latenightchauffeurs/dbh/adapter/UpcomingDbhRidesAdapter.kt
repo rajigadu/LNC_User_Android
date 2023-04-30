@@ -12,7 +12,6 @@ import com.latenightchauffeurs.FragmentCallBack
 import com.latenightchauffeurs.R
 import com.latenightchauffeurs.databinding.LayoutUpcomingDbhRidesBinding
 import com.latenightchauffeurs.dbh.model.response.DbhRide
-import com.latenightchauffeurs.dbh.model.response.DbhUpcomingRidesData
 
 /**
  * Create by Siru Malayil on 15-04-2023.
@@ -66,8 +65,11 @@ class UpcomingDbhRidesAdapter(val callback: FragmentCallBack? = null) :
                 callback?.onResult("view_details", ride)
             }
             binding.btnEditRideInfo.isVisible =
-                ride.future_edit_ride_status == "1"
-            binding.btnViewDetails.isVisible = ride.future_edit_ride_status == "0"
+                ride.future_edit_ride_status == "1" && ride.status == "0"
+            binding.btnViewDetails.isVisible =
+                ride.future_edit_ride_status == "1" && ride.status == "1" ||
+                        ride.future_edit_ride_status == "0" && ride.status == "0"
+
         }
     }
 

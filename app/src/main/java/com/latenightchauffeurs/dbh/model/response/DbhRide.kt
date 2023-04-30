@@ -1,7 +1,7 @@
 package com.latenightchauffeurs.dbh.model.response
 
 import android.os.Parcelable
-import kotlinx.android.parcel.Parcelize
+import kotlinx.parcelize.Parcelize
 
 /**
  * Create by Siru Malayil on 20-04-2023.

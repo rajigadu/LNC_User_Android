@@ -3,29 +3,28 @@ package com.latenightchauffeurs.dbh.activities
 import android.os.Bundle
 import android.text.TextUtils
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.doOnTextChanged
 import androidx.lifecycle.ViewModelProvider
+import com.latenightchauffeurs.FragmentCallBack
+import com.latenightchauffeurs.Utils.ConstantUtil.RIDE_HISTORY
 import com.latenightchauffeurs.databinding.FragmentDbhFeedbackBinding
-import com.latenightchauffeurs.dbh.model.response.DbhRide
+import com.latenightchauffeurs.dbh.base.BaseActivity
+import com.latenightchauffeurs.dbh.model.response.RideHistory
+import com.latenightchauffeurs.dbh.utils.ProgressCaller
+import com.latenightchauffeurs.dbh.utils.Resource
 import com.latenightchauffeurs.dbh.viewmodel.DbhViewModel
 import org.json.JSONObject
 
 /**
  * Create by Siru Malayil on 20-04-2023.
  */
-class DbhRideFeedback : AppCompatActivity() {
+class DbhRideFeedback : BaseActivity() {
 
     private var binding: FragmentDbhFeedbackBinding? = null
-    private var rideInfo: DbhRide? = null
+    private var rideHistory: RideHistory? = null
     private var startRating: String? = null
     private var dbhViewModel: DbhViewModel? = null
 
-    companion object {
-        fun newInstance(rideInfo: DbhRide? = null) = DbhRideFeedback().apply {
-            this.rideInfo = rideInfo
-        }
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         binding = FragmentDbhFeedbackBinding.inflate(layoutInflater)
@@ -33,6 +32,7 @@ class DbhRideFeedback : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         dbhViewModel = ViewModelProvider(this)[DbhViewModel::class.java]
+        rideHistory = intent?.extras?.getParcelable(RIDE_HISTORY) as? RideHistory
 
         binding?.toolbarFeedback?.setNavigationOnClickListener {
             finish()
@@ -67,14 +67,32 @@ class DbhRideFeedback : AppCompatActivity() {
 
     private fun submitFeedback() {
         val json = JSONObject()
-        json.put("userid", rideInfo?.user_id)
-        json.put("driverid", rideInfo?.driver_id_for_future_ride)
-        json.put("rideid", rideInfo?.id)
+        json.put("userid", rideHistory?.user_id)
+        json.put("driverid", rideHistory?.driver_id_for_future_ride)
+        json.put("rideid", rideHistory?.id)
         json.put("msg", binding?.edtTextNotes?.text?.toString()?.trim())
         json.put("rating", startRating)
 
         dbhViewModel?.dbhRideFeedback(json)?.observe(this) { result ->
-
+            when(result.status) {
+                Resource.Status.LOADING -> { ProgressCaller.showProgressDialog(this)}
+                Resource.Status.SUCCESS -> {
+                    showAlertMessageDialog(
+                        message = result.data?.data?.firstOrNull()?.msg,
+                        callBack = object : FragmentCallBack {
+                            override fun onResult(param1: Any?, param2: Any?, param3: Any?) {
+                                finish()
+                            }
+                        }
+                    )
+                    ProgressCaller.hideProgressDialog()
+                }
+                Resource.Status.ERROR -> {
+                    showAlertMessageDialog(
+                        message = result.data?.data?.firstOrNull()?.msg)
+                    ProgressCaller.hideProgressDialog()
+                }
+            }
         }
     }
 

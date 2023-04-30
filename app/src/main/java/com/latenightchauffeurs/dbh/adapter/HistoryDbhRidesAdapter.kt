@@ -8,8 +8,6 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.latenightchauffeurs.FragmentCallBack
 import com.latenightchauffeurs.databinding.DbhRideHistoryViewBinding
-import com.latenightchauffeurs.dbh.model.response.DbhRideHistoryData
-import com.latenightchauffeurs.dbh.model.response.DbhUpcomingRidesData
 import com.latenightchauffeurs.dbh.model.response.RideHistory
 
 /**

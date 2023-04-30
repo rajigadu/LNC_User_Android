@@ -2,6 +2,7 @@ package com.latenightchauffeurs.dbh.fragments
 
 import android.content.Intent
 import android.os.Bundle
+import android.os.Parcelable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,6 +11,8 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.latenightchauffeurs.FragmentCallBack
 import com.latenightchauffeurs.R
+import com.latenightchauffeurs.Utils.ConstantUtil.RIDE_HISTORY
+import com.latenightchauffeurs.Utils.ConstantUtil.RIDE_INFO
 import com.latenightchauffeurs.databinding.FragmentRidesViewLayoutBinding
 import com.latenightchauffeurs.dbh.activities.DbhPaymentSummary
 import com.latenightchauffeurs.dbh.activities.DbhRideAddTip
@@ -94,17 +97,19 @@ class DbhRideHistoryFragment : Fragment() {
                     when(param1) {
                         "add-tip" -> {
                             startActivity(
-                                Intent(requireActivity(), DbhRideAddTip::class.java).apply {  }
+                                Intent(activity, DbhRideAddTip::class.java).apply {  }
                             )
                         }
                         "feedback" -> {
                             startActivity(
-                                Intent(requireActivity(), DbhRideFeedback::class.java).apply {  }
+                                Intent(activity, DbhRideFeedback::class.java).apply {
+                                    putExtra(RIDE_HISTORY, rideHistory as Parcelable)
+                                }
                             )
                         }
                         "payment-summary" -> {
                             startActivity(
-                                Intent(requireActivity(), DbhPaymentSummary::class.java).apply {  }
+                                Intent(activity, DbhPaymentSummary::class.java).apply {  }
                             )
                         }
                     }

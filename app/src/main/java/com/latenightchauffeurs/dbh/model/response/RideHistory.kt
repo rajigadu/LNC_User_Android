@@ -1,5 +1,9 @@
 package com.latenightchauffeurs.dbh.model.response
 
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
+
+@Parcelize
 data class RideHistory(
     val acctid: String,
     val admin_charge: String,
@@ -42,4 +46,4 @@ data class RideHistory(
     val time: String,
     val tip_status: String,
     val user_id: String
-)
+): Parcelable
