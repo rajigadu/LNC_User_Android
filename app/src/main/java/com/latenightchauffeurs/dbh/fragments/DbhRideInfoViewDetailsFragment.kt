@@ -1,10 +1,16 @@
 package com.latenightchauffeurs.dbh.fragments
 
+import android.Manifest
 import android.annotation.SuppressLint
+import android.content.Intent
+import android.content.pm.PackageManager
+import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -29,10 +35,12 @@ class DbhRideInfoViewDetailsFragment : Fragment() {
     private var rideInfo: DbhRide? = null
     private var dbhViewModel: DbhViewModel? = null
     private var preferences: SavePref? = null
+    private var callBack: FragmentCallBack? = null
 
     companion object {
-        fun newInstance(rideInfo: DbhRide? = null) = DbhRideInfoViewDetailsFragment().apply {
+        fun newInstance(rideInfo: DbhRide? = null,callBack: FragmentCallBack? = null) = DbhRideInfoViewDetailsFragment().apply {
             this.rideInfo = rideInfo
+            this.callBack = callBack
         }
     }
 
@@ -103,7 +111,54 @@ class DbhRideInfoViewDetailsFragment : Fragment() {
                     }
                 })
         }
+
+        binding?.call?.setOnClickListener {
+            (activity as? BaseActivity)?.showAlertMessageDialog(
+                message = "Are you sure want to call ?",
+                callBack = object : FragmentCallBack {
+                    override fun onResult(param1: Any?, param2: Any?, param3: Any?) {
+                        when(param1) {
+                            ACTION_OK -> {
+                                //callPermission(rideInfo?)
+                            }
+                        }
+                    }
+                }
+            )
+        }
     }
+    /**
+     * Phone Call permission will request here, once request accepted
+     * will invoke dialer dashboard
+     */
+    private fun callPermission(number: String) {
+        activity?.let { activity ->
+            if (ContextCompat.checkSelfPermission(
+                    activity,
+                    Manifest.permission.CALL_PHONE
+                ) == PackageManager.PERMISSION_GRANTED
+            ) {
+                getCall(number)
+            } else {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    requestPermissions(
+                        arrayOf(Manifest.permission.CALL_PHONE),
+                        100
+                    )
+                }
+            }
+        }
+    }
+
+    private fun getCall(number: String) {
+        if (number.trim { it <= ' ' }.isNotEmpty()) startActivity(
+            Intent(
+                Intent.ACTION_DIAL,
+                Uri.fromParts("tel", number, null)
+            )
+        )
+    }
+
 
     private fun cancelDbhRideAmount() {
         dbhViewModel?.cancelDbhRideAmount(

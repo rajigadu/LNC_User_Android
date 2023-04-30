@@ -110,7 +110,9 @@ class DbhRideHistoryFragment : Fragment() {
                         }
                         "payment-summary" -> {
                             startActivity(
-                                Intent(activity, DbhPaymentSummary::class.java).apply {  }
+                                Intent(activity, DbhPaymentSummary::class.java).apply {
+                                    putExtra(RIDE_HISTORY, rideHistory)
+                                }
                             )
                         }
                     }

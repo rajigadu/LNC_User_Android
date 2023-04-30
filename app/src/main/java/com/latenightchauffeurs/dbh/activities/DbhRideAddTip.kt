@@ -41,6 +41,11 @@ class DbhRideAddTip : BaseActivity() {
         dbhViewModel = ViewModelProvider(this)[DbhViewModel::class.java]
         rideHistory = intent?.extras?.getParcelable(ConstantUtil.RIDE_HISTORY) as? RideHistory
 
+        onClickListeners()
+
+    }
+
+    private fun onClickListeners() {
         binding?.radioGroup?.setOnCheckedChangeListener { radioGroup, checkedId ->
             when (checkedId) {
                 R.id.tip_15 -> {

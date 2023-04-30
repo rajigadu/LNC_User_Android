@@ -7,8 +7,10 @@ import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.latenightchauffeurs.Utils.ConstantUtil
 import com.latenightchauffeurs.databinding.FragmentDbhFeedbackBinding
 import com.latenightchauffeurs.databinding.FragmentDbhPaymentSummaryBinding
+import com.latenightchauffeurs.dbh.model.response.RideHistory
 import com.latenightchauffeurs.dbh.viewmodel.DbhViewModel
 
 /**
@@ -18,6 +20,7 @@ class DbhPaymentSummary: AppCompatActivity() {
 
     private var binding: FragmentDbhPaymentSummaryBinding? = null
     private var dbhViewModel: DbhViewModel? = null
+    private var rideHistory: RideHistory? = null
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -26,6 +29,7 @@ class DbhPaymentSummary: AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         dbhViewModel = ViewModelProvider(this)[DbhViewModel::class.java]
+        rideHistory = intent?.extras?.getParcelable(ConstantUtil.RIDE_HISTORY) as? RideHistory
 
         binding?.toolbarPaymentSummary?.setNavigationOnClickListener {
             finish()

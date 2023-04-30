@@ -74,17 +74,21 @@ class DbhUpcomingRidesFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        preferences = SavePref()
-        preferences?.SavePref(activity)
-        if (Utils.isNetworkAvailable(activity)) {
-            getUpcomingDbhRides()
-        }
 
         binding?.refreshRides?.setOnRefreshListener {
             if (Utils.isNetworkAvailable(activity)) {
                 binding?.refreshRides?.isRefreshing = true
                 getUpcomingDbhRides()
             }
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        preferences = SavePref()
+        preferences?.SavePref(activity)
+        if (Utils.isNetworkAvailable(activity)) {
+            getUpcomingDbhRides()
         }
     }
 
