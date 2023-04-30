@@ -38,6 +38,7 @@ class DbhRideInfoViewDetailsFragment : Fragment() {
     private var dbhViewModel: DbhViewModel? = null
     private var preferences: SavePref? = null
     private var callBack: FragmentCallBack? = null
+    private var dbhDriverData: DbhDriverData? = null
 
     companion object {
         fun newInstance(rideInfo: DbhRide? = null,callBack: FragmentCallBack? = null) = DbhRideInfoViewDetailsFragment().apply {
@@ -81,6 +82,7 @@ class DbhRideInfoViewDetailsFragment : Fragment() {
                     Resource.Status.LOADING -> { activity?.let { ProgressCaller.showProgressDialog(it) }}
                     Resource.Status.SUCCESS -> {
                         if (result.data?.status == "1") {
+                            dbhDriverData = result.data.data
                             updateDriverDetails(result.data.data)
                         }
                         ProgressCaller.hideProgressDialog()
@@ -121,7 +123,7 @@ class DbhRideInfoViewDetailsFragment : Fragment() {
                     override fun onResult(param1: Any?, param2: Any?, param3: Any?) {
                         when(param1) {
                             ACTION_OK -> {
-                                //callPermission(rideInfo?)
+                                callPermission(dbhDriverData?.mobile)
                             }
                         }
                     }
@@ -144,7 +146,7 @@ class DbhRideInfoViewDetailsFragment : Fragment() {
      * Phone Call permission will request here, once request accepted
      * will invoke dialer dashboard
      */
-    private fun callPermission(number: String) {
+    private fun callPermission(number: String?) {
         activity?.let { activity ->
             if (ContextCompat.checkSelfPermission(
                     activity,
@@ -163,8 +165,8 @@ class DbhRideInfoViewDetailsFragment : Fragment() {
         }
     }
 
-    private fun getCall(number: String) {
-        if (number.trim { it <= ' ' }.isNotEmpty()) startActivity(
+    private fun getCall(number: String?) {
+        if (number?.trim { it <= ' ' }?.isNotEmpty() == true) startActivity(
             Intent(
                 Intent.ACTION_DIAL,
                 Uri.fromParts("tel", number, null)
