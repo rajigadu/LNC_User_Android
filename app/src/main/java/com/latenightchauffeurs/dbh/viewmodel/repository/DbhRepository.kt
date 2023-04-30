@@ -284,4 +284,27 @@ class DbhRepository {
         return cancelRideResponse
     }
 
+    fun dbhPaymentDetails(userId: String?, rideId: String?): MutableLiveData<Resource<DbhPaymentDetails>> {
+        val cancelRideResponse = MutableLiveData<Resource<DbhPaymentDetails>>()
+        cancelRideResponse.postValue(Resource.loading(null))
+        apiService.dbhPaymentDetails(userId,rideId).enqueue(object : Callback<DbhPaymentDetails> {
+            override fun onResponse(
+                call: Call<DbhPaymentDetails>,
+                response: Response<DbhPaymentDetails>) {
+                if (response.isSuccessful) {
+                    cancelRideResponse.postValue(Resource.success(response.body()!!))
+                } else {
+                    // handle error
+                    cancelRideResponse.postValue(Resource.error(response.message() ?: "An error occurred", null))
+                }
+            }
+            override fun onFailure(call: Call<DbhPaymentDetails>, t: Throwable) {
+                // handle error
+                cancelRideResponse.postValue(Resource.error(t.localizedMessage ?: "An error occurred", null))
+            }
+        })
+
+        return cancelRideResponse
+    }
+
 }

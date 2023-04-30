@@ -59,4 +59,8 @@ class DbhViewModel : ViewModel() {
     fun dbhDriverDetails(driverId: String): MutableLiveData<Resource<DbhDriver>> {
         return bookingRepository.getDbhDriverDetails(driverId)
     }
+
+    fun dbhPaymentDetails(userId: String?, rideId: String?): MutableLiveData<Resource<DbhPaymentDetails>> {
+        return bookingRepository.dbhPaymentDetails(userId, rideId)
+    }
 }

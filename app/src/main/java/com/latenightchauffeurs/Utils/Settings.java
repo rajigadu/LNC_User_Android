@@ -83,6 +83,7 @@ public class Settings extends Application {
     public static final String URL_DBH_PAYMENT_SUMMARY = "dbh-payment-details.php";
     public static final String URL_DBH_RIDE_FEEDBACK = "dbh-driver-rating.php";
     public static final String URL_DBH_DRIVER_DETAILS = "dbh-get-driver-detail.php";
+    public static final String URL_DBH_PAYMENT_DETAILS = "dbh-payment-detail.php";
 
     public static String NETWORK_STATUS = "Online";
     public static String NETWORK_TYPE = "";

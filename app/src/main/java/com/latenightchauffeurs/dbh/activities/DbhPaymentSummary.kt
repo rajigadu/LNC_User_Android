@@ -11,6 +11,8 @@ import com.latenightchauffeurs.Utils.ConstantUtil
 import com.latenightchauffeurs.databinding.FragmentDbhFeedbackBinding
 import com.latenightchauffeurs.databinding.FragmentDbhPaymentSummaryBinding
 import com.latenightchauffeurs.dbh.model.response.RideHistory
+import com.latenightchauffeurs.dbh.utils.ProgressCaller
+import com.latenightchauffeurs.dbh.utils.Resource
 import com.latenightchauffeurs.dbh.viewmodel.DbhViewModel
 
 /**
@@ -35,5 +37,22 @@ class DbhPaymentSummary: AppCompatActivity() {
             finish()
         }
 
+    }
+
+    private fun paymentSummaryDetails() {
+        dbhViewModel?.dbhPaymentDetails(
+            userId = rideHistory?.user_id,
+            rideId = rideHistory?.id
+        )?.observe(this) { result ->
+            when(result.status) {
+                Resource.Status.LOADING -> { ProgressCaller.showProgressDialog(this)}
+                Resource.Status.SUCCESS -> {
+                    ProgressCaller.hideProgressDialog()
+                }
+                Resource.Status.ERROR -> {
+                    ProgressCaller.hideProgressDialog()
+                }
+            }
+        }
     }
 }

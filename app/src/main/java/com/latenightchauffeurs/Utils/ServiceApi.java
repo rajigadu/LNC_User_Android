@@ -4,6 +4,7 @@ import androidx.annotation.Nullable;
 
 import com.latenightchauffeurs.dbh.model.response.DbhBookingResponse;
 import com.latenightchauffeurs.dbh.model.response.DbhDriver;
+import com.latenightchauffeurs.dbh.model.response.DbhPaymentDetails;
 import com.latenightchauffeurs.dbh.model.response.DbhRideHistory;
 import com.latenightchauffeurs.dbh.model.response.DbhUpcomingRides;
 import com.latenightchauffeurs.dbh.model.response.DefaultResponseBody;
@@ -91,6 +92,12 @@ public interface ServiceApi {
     @GET(Settings.URL_DBH_CANCEL_RIDE_AMOUNT)
     Call<DefaultResponseBody>cancelDbhRideAmount(
             @Query("cancel_time") String cancelTime,
+            @Query("ride_id") String rideId
+    );
+
+    @GET(Settings.URL_DBH_PAYMENT_DETAILS)
+    Call<DbhPaymentDetails>dbhPaymentDetails(
+            @Query("userid") String userId,
             @Query("ride_id") String rideId
     );
 
