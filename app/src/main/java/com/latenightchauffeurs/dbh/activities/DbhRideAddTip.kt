@@ -1,23 +1,36 @@
 package com.latenightchauffeurs.dbh.activities
 
 import android.os.Bundle
+import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
+import com.latenightchauffeurs.FragmentCallBack
+import com.latenightchauffeurs.R
+import com.latenightchauffeurs.Utils.ConstantUtil
 import com.latenightchauffeurs.Utils.Utils
 import com.latenightchauffeurs.databinding.FragmentDbhFeedbackBinding
 import com.latenightchauffeurs.databinding.FragmentTipLayoutBinding
+import com.latenightchauffeurs.dbh.base.BaseActivity
+import com.latenightchauffeurs.dbh.model.response.RideHistory
+import com.latenightchauffeurs.dbh.utils.ProgressCaller
+import com.latenightchauffeurs.dbh.utils.Resource
+import com.latenightchauffeurs.dbh.viewmodel.DbhViewModel
 import org.json.JSONObject
 
 /**
  * Create by Siru Malayil on 28-04-2023.
  */
-class DbhRideAddTip : AppCompatActivity() {
+class DbhRideAddTip : BaseActivity() {
 
     private var binding: FragmentTipLayoutBinding? = null
     private var tipPercentage: String? = null
+    private var rideHistory: RideHistory? = null
+    private var dbhViewModel: DbhViewModel? = null
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -25,8 +38,20 @@ class DbhRideAddTip : AppCompatActivity() {
         setContentView(binding?.root)
         super.onCreate(savedInstanceState)
 
+        dbhViewModel = ViewModelProvider(this)[DbhViewModel::class.java]
+        rideHistory = intent?.extras?.getParcelable(ConstantUtil.RIDE_HISTORY) as? RideHistory
+
         binding?.radioGroup?.setOnCheckedChangeListener { radioGroup, checkedId ->
             when (checkedId) {
+                R.id.tip_15 -> {
+                    tipPercentage = "15"
+                }
+                R.id.tip_20 -> {
+                    tipPercentage = "20"
+                }
+                R.id.tip_25 -> {
+                    tipPercentage = "25"
+                }
             }
         }
         binding?.toolbarAddTip?.setNavigationOnClickListener {
@@ -39,6 +64,14 @@ class DbhRideAddTip : AppCompatActivity() {
 
         binding?.btnClear?.setOnClickListener {
             binding?.radioGroup?.clearCheck()
+            tipPercentage = ""
+        }
+
+        binding?.edtTipAmount?.doOnTextChanged { text, start, before, count ->
+            if (TextUtils.isEmpty(text)) {
+                binding?.radioGroup?.clearCheck()
+                tipPercentage = ""
+            }
         }
     }
 
@@ -52,11 +85,35 @@ class DbhRideAddTip : AppCompatActivity() {
     }
 
     private fun submitTipDetails() {
-        /*val json = JSONObject()
-        json.put("userid", rideInfo?.user_id)
-        json.put("driverid", rideInfo?.driver_id_for_future_ride)
-        json.put("rideid", rideInfo?.id)
-        json.put("msg", binding?.edtTextNotes?.text?.toString()?.trim())
-        json.put("rating", startRating)*/
+        val json = JSONObject()
+        json.put("userid", rideHistory?.user_id)
+        json.put("driverid", rideHistory?.driver_id_for_future_ride)
+        json.put("rideid", rideHistory?.id)
+        json.put("tip", binding?.edtTipAmount?.text?.toString()?.trim())
+        json.put("percentage", tipPercentage)
+        json.put("rating", "")
+        json.put("msg", "")
+
+        dbhViewModel?.dbhRideFeedback(json)?.observe(this) { result ->
+            when(result.status) {
+                Resource.Status.LOADING -> { ProgressCaller.showProgressDialog(this)}
+                Resource.Status.SUCCESS -> {
+                    showAlertMessageDialog(
+                        message = result.data?.data?.firstOrNull()?.msg,
+                        callBack = object : FragmentCallBack {
+                            override fun onResult(param1: Any?, param2: Any?, param3: Any?) {
+                                finish()
+                            }
+                        }
+                    )
+                    ProgressCaller.hideProgressDialog()
+                }
+                Resource.Status.ERROR -> {
+                    showAlertMessageDialog(
+                        message = result.data?.data?.firstOrNull()?.msg)
+                    ProgressCaller.hideProgressDialog()
+                }
+            }
+        }
     }
 }

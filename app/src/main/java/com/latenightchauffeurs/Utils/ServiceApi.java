@@ -1,5 +1,7 @@
 package com.latenightchauffeurs.Utils;
 
+import androidx.annotation.Nullable;
+
 import com.latenightchauffeurs.dbh.model.response.DbhBookingResponse;
 import com.latenightchauffeurs.dbh.model.response.DbhDriver;
 import com.latenightchauffeurs.dbh.model.response.DbhRideHistory;
@@ -76,7 +78,9 @@ public interface ServiceApi {
             @Query("rideid") String rideId,
             @Query("driverid") String driverId,
             @Query("msg") String message,
-            @Query("rating") String rating
+            @Query("rating") String rating,
+            @Query("tip") String tip,
+            @Query("percentage") String percentage
     );
 
     @GET(Settings.URL_DBH_DRIVER_DETAILS)

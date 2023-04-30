@@ -90,10 +90,11 @@ class DbhRideHistoryFragment : Fragment() {
         }
     }
 
-    private fun initializeRideHistoryAdapter(rideHistory: List<RideHistory>?) {
+    private fun initializeRideHistoryAdapter(rideHistoryList: List<RideHistory>?) {
         val rideHistoryAdapter = HistoryDbhRidesAdapter(
             callback = object : FragmentCallBack {
                 override fun onResult(param1: Any?, param2: Any?, param3: Any?) {
+                    val rideHistory = param2 as RideHistory
                     when(param1) {
                         "add-tip" -> {
                             startActivity(
@@ -103,7 +104,7 @@ class DbhRideHistoryFragment : Fragment() {
                         "feedback" -> {
                             startActivity(
                                 Intent(activity, DbhRideFeedback::class.java).apply {
-                                    putExtra(RIDE_HISTORY, rideHistory as Parcelable)
+                                    putExtra(RIDE_HISTORY, rideHistory)
                                 }
                             )
                         }
@@ -120,6 +121,6 @@ class DbhRideHistoryFragment : Fragment() {
             layoutManager = LinearLayoutManager(activity)
             adapter = rideHistoryAdapter
         }
-        rideHistoryAdapter.submitList(rideHistory)
+        rideHistoryAdapter.submitList(rideHistoryList)
     }
 }

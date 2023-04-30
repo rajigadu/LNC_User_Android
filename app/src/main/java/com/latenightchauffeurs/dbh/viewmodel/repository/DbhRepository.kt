@@ -238,7 +238,9 @@ class DbhRepository {
             json.getString("driverid"),
             json.getString("rideid"),
             json.getString("msg"),
-            json.getString("rating")
+            json.getString("rating"),
+            json.getString("tip"),
+            json.getString("percentage")
         ).enqueue(object : Callback<DefaultResponseBody> {
             override fun onResponse(
                 call: Call<DefaultResponseBody>,

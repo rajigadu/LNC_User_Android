@@ -39,13 +39,13 @@ class HistoryDbhRidesAdapter(val callback: FragmentCallBack? = null) :
             binding.pickupLocation.text = " : ${rideHistory?.pickup_address}"
 
             binding.btnAddTip.setOnClickListener {
-                callback?.onResult("add-tip")
+                callback?.onResult("add-tip", rideHistory)
             }
             binding.btnFeedBack.setOnClickListener {
-                callback?.onResult("feedback")
+                callback?.onResult("feedback", rideHistory)
             }
             binding.btnPaymentSummary.setOnClickListener {
-                callback?.onResult("payment-summary")
+                callback?.onResult("payment-summary", rideHistory)
             }
         }
     }

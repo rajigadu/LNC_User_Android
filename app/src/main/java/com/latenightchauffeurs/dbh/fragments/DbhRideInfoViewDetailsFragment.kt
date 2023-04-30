@@ -59,6 +59,7 @@ class DbhRideInfoViewDetailsFragment : Fragment() {
         binding?.driverName?.text = ""
         binding?.driverNumber?.text = ""
         binding?.rideStatus?.text = status
+        binding?.date?.text = rideInfo?.ride_start_time
 
         binding?.layoutDriverDetails?.isVisible = rideInfo?.status == "1"
     }
@@ -112,12 +113,18 @@ class DbhRideInfoViewDetailsFragment : Fragment() {
             when (result.status) {
                 Resource.Status.LOADING -> { activity?.let { ProgressCaller.showProgressDialog(it) }}
                 Resource.Status.SUCCESS -> {
+
+                    val message = if (result.data?.status == "1") {
+                        "will be charged for Ride Cancellation. \n Are you sure want you to cancel this ride ?"
+                    } else {
+                        result?.data?.data?.firstOrNull()?.msg ?: "You can cancel this ride without any charges"
+                    }
                     (activity as? BaseActivity)?.showAlertMessageDialog(
-                        message = result.message ?: result?.data?.data?.firstOrNull()?.msg,
+                        message = message,
                         negativeButton = true,
                         callBack = object : FragmentCallBack {
                             override fun onResult(param1: Any?, param2: Any?, param3: Any?) {
-                                when(param1) {
+                                when (param1) {
                                     ACTION_OK -> {
                                         cancelDbhRide()
                                     }
@@ -135,6 +142,28 @@ class DbhRideInfoViewDetailsFragment : Fragment() {
     }
 
     private fun cancelDbhRide() {
-
+        dbhViewModel?.cancelDbhRide(
+            userId = preferences?.userId ?: "",
+            rideId = rideInfo?.id ?: "",
+            cancelTime = ConstantUtils.getCurrentDateAndTime() ?: ""
+        )?.observe(viewLifecycleOwner) { result ->
+            when(result.status) {
+                Resource.Status.LOADING -> { activity?.let { ProgressCaller.showProgressDialog(it) }}
+                Resource.Status.SUCCESS -> {
+                    (activity as? BaseActivity)?.showAlertMessageDialog(
+                        message = result.data?.data?.firstOrNull()?.msg,
+                        callBack = object : FragmentCallBack {
+                            override fun onResult(param1: Any?, param2: Any?, param3: Any?) {
+                                activity?.finish()
+                            }
+                        }
+                    )
+                    ProgressCaller.hideProgressDialog()
+                }
+                Resource.Status.ERROR -> {
+                    ProgressCaller.hideProgressDialog()
+                }
+            }
+        }
     }
 }

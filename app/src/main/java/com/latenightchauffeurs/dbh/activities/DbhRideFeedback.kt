@@ -72,6 +72,8 @@ class DbhRideFeedback : BaseActivity() {
         json.put("rideid", rideHistory?.id)
         json.put("msg", binding?.edtTextNotes?.text?.toString()?.trim())
         json.put("rating", startRating)
+        json.put("tip", "")
+        json.put("percentage", "")
 
         dbhViewModel?.dbhRideFeedback(json)?.observe(this) { result ->
             when(result.status) {

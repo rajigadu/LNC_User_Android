@@ -75,6 +75,13 @@
     <string name="tip_amount">Tip Amount</string>
     <string name="or">OR</string>
     <string name="add_tip">Add Tip</string>
+    <string name="transaction_id">Transaction ID</string>
+    <string name="view_coloumn">:</string>
+    <string name="base_price">Base Price</string>
+    <string name="wait_time">Wait Time</string>
+    <string name="unplanned_stops">Unplanned Stops</string>
+    <string name="palnned_stops">Planned Stops</string>
+    <string name="total_fare">Total Fare</string>
 
 
     <array name="indicator_colors">
