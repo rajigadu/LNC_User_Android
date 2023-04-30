@@ -24,6 +24,7 @@ import com.latenightchauffeurs.databinding.DriverByTheHourLayoutBinding
 import com.latenightchauffeurs.dbh.base.BaseActivity
 import com.latenightchauffeurs.dbh.model.response.DbhRide
 import com.latenightchauffeurs.extension.navigate
+import com.latenightchauffeurs.model.SavePref
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.HashMap
@@ -50,6 +51,7 @@ class DriverByTheHourFragment: Fragment() {
     private var fields = arrayListOf<Place.Field>()
     private var isEditableRide: Boolean = false
     private var rideInfo: DbhRide? = null
+    private var preferences: SavePref? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -63,6 +65,9 @@ class DriverByTheHourFragment: Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        preferences = SavePref()
+        preferences?.SavePref(activity)
 
         if (isEditableRide) {
             setRideInfo()
@@ -104,6 +109,7 @@ class DriverByTheHourFragment: Fragment() {
         if (dataMap != null && dataMap?.get("one") != null) {
             binding?.textPickupPlace?.setText(dataMap?.get("one")?.toString() ?: "")
         }
+        binding?.ratePerHour?.text = preferences?.dbhRideCost
     }
 
     @SuppressLint("ClickableViewAccessibility")

@@ -847,4 +847,12 @@ public class SavePref {
         return name;
     }
 
+    public void setDhRideCostPerHour(String dbhRideCost) {
+        editor.putString("dbh-ride-cost-per-hour", dbhRideCost);
+        editor.apply();
+    }
+
+    public String getDbhRideCost() {
+        return preferences.getString("dbh-ride-cost-per-hour", "");
+    }
 }
