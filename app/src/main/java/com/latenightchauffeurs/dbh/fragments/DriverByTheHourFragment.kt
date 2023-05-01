@@ -105,17 +105,18 @@ class DriverByTheHourFragment: Fragment() {
         )
     }
 
+    @SuppressLint("SetTextI18n")
     private fun setViewData() {
         if (dataMap != null && dataMap?.get("one") != null) {
             binding?.textPickupPlace?.setText(dataMap?.get("one")?.toString() ?: "")
         }
-        binding?.ratePerHour?.text = preferences?.dbhRideCost
+        binding?.ratePerHour?.text = "Rate: $ ${preferences?.dbhRideCost}.00 Per Hour"
     }
 
     @SuppressLint("ClickableViewAccessibility")
     private fun onClickListeners() {
 
-        binding?.textPickupPlace?.setOnTouchListener { view, motionEvent ->
+        binding?.textPickupPlace?.setOnTouchListener { _, motionEvent ->
             if (motionEvent.action == MotionEvent.ACTION_DOWN) {
                 if (SystemClock.elapsedRealtime() - lastClickTime < 1000) {
                     return@setOnTouchListener false
@@ -129,7 +130,7 @@ class DriverByTheHourFragment: Fragment() {
             return@setOnTouchListener false
         }
 
-        binding?.textDate?.setOnTouchListener { view, motionEvent ->
+        binding?.textDate?.setOnTouchListener { _, motionEvent ->
             when(motionEvent.action) {
                 MotionEvent.ACTION_UP -> {
                     if (SystemClock.elapsedRealtime() - lastClickTime < 1000){
@@ -143,7 +144,7 @@ class DriverByTheHourFragment: Fragment() {
             }
         }
 
-        binding?.textTime?.setOnTouchListener { view, motionEvent ->
+        binding?.textTime?.setOnTouchListener { _, motionEvent ->
             when(motionEvent.action) {
                 MotionEvent.ACTION_UP -> {
                     if (SystemClock.elapsedRealtime() - lastClickTime < 1000){
@@ -173,9 +174,13 @@ class DriverByTheHourFragment: Fragment() {
                     place.address?.let { dataMap?.set("one", it) }
                     val geocoder = Geocoder(requireContext(), Locale.getDefault())
                     //TODO geocoder.getFromLocation is deprecated, need to set geocoder.getFromLocationAsync minSDK v26
-                    val addresses = geocoder.getFromLocation(
-                        place.latLng.latitude, place.latLng.longitude, 1
-                    )
+                    val addresses = place.latLng?.let {
+                        place.latLng?.let { it1 ->
+                            geocoder.getFromLocation(
+                                it.latitude, it1.longitude, 1
+                            )
+                        }
+                    }
                     if (addresses != null) {
                         dataMap?.set("city_name", addresses.firstOrNull()?.locality.toString())
                     } else {
@@ -264,7 +269,7 @@ class DriverByTheHourFragment: Fragment() {
             // Check if the selected time is in the future
             if (calendar.timeInMillis > System.currentTimeMillis()) {
                 // Do something with the selected time
-                val selectedTime = "${selectedHour}:${selectedMinute}"
+               // val selectedTime = "${selectedHour}:${selectedMinute}"
                 binding?.textTime?.setText(timeString)
             } else {
                 Toast.makeText(activity, "Please select a future time", Toast.LENGTH_SHORT).show()

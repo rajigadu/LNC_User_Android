@@ -672,12 +672,6 @@ public class JsonPost implements ConstVariable {
                                 result = JsonHelper.getResults(result.toString(), context, mode);
                                 // Log.e(TAG+"193", "response bool===="+result.toString());
                                 if (result.equalsIgnoreCase(SUCCESS)) {
-                                    SavePref preferences = new SavePref();
-                                    preferences.SavePref(mContext);
-                                    JSONObject json = new JSONObject((result));
-                                    String dbhRideCost = json.getString("dbh_ride_cost_per_hour");
-                                    preferences.setDhRideCostPerHour(dbhRideCost);
-
                                     HashMap<String, Object> dmap = new HashMap<>();
                                     for (Map.Entry<String, Object> entry : Utils.global.crideslist.get(0).entrySet()) {
                                         String key = entry.getKey();

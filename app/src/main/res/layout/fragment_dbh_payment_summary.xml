@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/black_butt"
+    android:background="@color/white"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <com.google.android.material.appbar.MaterialToolbar
@@ -60,6 +60,7 @@
                     android:textSize="16sp" />
 
                 <TextView
+                    android:id="@+id/transaction_id"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -98,6 +99,7 @@
                     android:textSize="16sp" />
 
                 <TextView
+                    android:id="@+id/base_price"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -135,6 +137,7 @@
                     android:textSize="16sp" />
 
                 <TextView
+                    android:id="@+id/promo_code"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -172,6 +175,7 @@
                     android:textSize="16sp" />
 
                 <TextView
+                    android:id="@+id/wait_time"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -209,6 +213,7 @@
                     android:textSize="16sp" />
 
                 <TextView
+                    android:id="@+id/unplanned_stops"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -246,6 +251,7 @@
                     android:textSize="16sp" />
 
                 <TextView
+                    android:id="@+id/planned_stops"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -257,6 +263,7 @@
             </androidx.appcompat.widget.LinearLayoutCompat>
 
             <androidx.appcompat.widget.LinearLayoutCompat
+                android:id="@+id/linearLayoutCompat7"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
@@ -275,13 +282,14 @@
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="@string/view_coloumn"
                     android:layout_weight="0.5"
                     android:gravity="center"
+                    android:text="@string/view_coloumn"
                     android:textColor="@color/red_light"
                     android:textSize="16sp" />
 
                 <TextView
+                    android:id="@+id/total_fare"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -291,6 +299,18 @@
                     tools:text="$0" />
 
             </androidx.appcompat.widget.LinearLayoutCompat>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnOk"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/ok"
+                android:paddingVertical="12dp"
+                android:layout_margin="32dp"
+                android:textAllCaps="false"
+                app:layout_constraintEnd_toEndOf="@+id/linearLayoutCompat5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/linearLayoutCompat7" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>

@@ -235,8 +235,8 @@ class DbhRepository {
         cancelRideResponse.postValue(Resource.loading(null))
         apiService.dbhRideFeedback(
             json.getString("userid"),
-            json.getString("driverid"),
             json.getString("rideid"),
+            json.getString("driverid"),
             json.getString("msg"),
             json.getString("rating"),
             json.getString("tip"),

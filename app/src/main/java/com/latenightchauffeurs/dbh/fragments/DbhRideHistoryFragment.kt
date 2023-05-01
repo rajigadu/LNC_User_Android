@@ -59,6 +59,9 @@ class DbhRideHistoryFragment : Fragment() {
         getDbhRidesHistory()
     }
 
+    /**
+     * Here DBH Rie History details will fetch from server
+     */
     private fun getDbhRidesHistory() {
         bookingViewModel?.dbhRidesHistory(preferences?.userId)?.observe(viewLifecycleOwner) { result ->
             when(result.status) {
@@ -90,6 +93,12 @@ class DbhRideHistoryFragment : Fragment() {
         }
     }
 
+    /**
+     * Handling Ride History Adapter view Callbacks here
+     * @see DbhRideAddTip Here user can Add Tips to the driver
+     * @see DbhPaymentSummary will show the payment details
+     * @see DbhRideFeedback for submit feedback
+     */
     private fun initializeRideHistoryAdapter(rideHistoryList: List<RideHistory>?) {
         val rideHistoryAdapter = HistoryDbhRidesAdapter(
             callback = object : FragmentCallBack {
@@ -98,7 +107,9 @@ class DbhRideHistoryFragment : Fragment() {
                     when(param1) {
                         "add-tip" -> {
                             startActivity(
-                                Intent(activity, DbhRideAddTip::class.java).apply {  }
+                                Intent(activity, DbhRideAddTip::class.java).apply {
+                                    putExtra(RIDE_HISTORY, rideHistory)
+                                }
                             )
                         }
                         "feedback" -> {

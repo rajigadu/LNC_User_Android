@@ -3,6 +3,8 @@ package com.latenightchauffeurs.Utils;
 import android.content.Context;
 import android.text.format.DateUtils;
 
+import com.latenightchauffeurs.model.SavePref;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -40,6 +42,10 @@ public class JsonHelper implements ConstVariable {
                 e.printStackTrace();
             }
 
+            SavePref preferences = new SavePref();
+            preferences.SavePref(context);
+            preferences.setDhRideCostPerHour(jsonObject.getString("dbh_ride_cost_per_hour"));
+
            /* int key = 0;
              key = jsonObject.getInt(Response_Code);
             key=1;
@@ -63,8 +69,8 @@ public class JsonHelper implements ConstVariable {
                 case 0:
                     //response = jsonObject.optString(Response_Text);
                     response = FAILURE;
-                    jsonArray = jsonObject.optJSONArray(DATA);
 
+                    jsonArray = jsonObject.optJSONArray(DATA);
                     Utils.global.mapMain = Utils.GetJsonDataIntoMap(context, jsonArray, "");
 
                     break;
