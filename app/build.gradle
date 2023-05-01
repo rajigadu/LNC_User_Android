@@ -29,8 +29,8 @@ android {
         applicationId "com.latenightchauffeurs"
         minSdkVersion 21
         targetSdkVersion 33
-        versionCode 43
-        versionName "0.0.0041"
+        versionCode 44
+        versionName "0.0.0042"
         testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
         multiDexEnabled true
     }
