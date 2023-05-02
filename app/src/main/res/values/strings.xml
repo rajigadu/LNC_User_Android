@@ -63,7 +63,7 @@
     <string name="something_went_wrong">Oops!, Something went wrong, Please try again later</string>
     <string name="cancel_ride">Cancel Ride</string>
     <string name="driver_details">Driver Details : </string>
-    <string name="distance">Distance : </string>
+    <string name="distance">Distance</string>
     <string name="date">Date : </string>
     <string name="submit_feedback">Submit Feedback</string>
     <string name="about_driver">About Driver</string>
@@ -84,6 +84,13 @@
     <string name="total_fare">Total Fare</string>
     <string name="enter_your_message">Enter your message</string>
     <string name="reason_for_cancelled_ride">Reason for Cancelled Ride :</string>
+    <string name="payment_date">Payment Date</string>
+    <string name="drop_location">Drop Location</string>
+    <string name="booking_date">Booking Date</string>
+    <string name="column">:</string>
+    <string name="ride_total_cost">Ride Total Cost</string>
+    <string name="give_feedback">Give Feedback</string>
+    <string name="payment_summary">Payment Summary</string>
 
 
     <array name="indicator_colors">
