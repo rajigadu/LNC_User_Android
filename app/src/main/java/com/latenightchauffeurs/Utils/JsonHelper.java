@@ -44,7 +44,9 @@ public class JsonHelper implements ConstVariable {
 
             SavePref preferences = new SavePref();
             preferences.SavePref(context);
-            preferences.setDhRideCostPerHour(jsonObject.getString("dbh_ride_cost_per_hour"));
+            if (jsonObject.has("dbh_ride_cost_per_hour")) {
+                preferences.setDhRideCostPerHour(jsonObject.getString("dbh_ride_cost_per_hour"));
+            }
 
            /* int key = 0;
              key = jsonObject.getInt(Response_Code);
