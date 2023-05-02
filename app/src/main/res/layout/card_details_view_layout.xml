@@ -38,27 +38,29 @@
                 android:id="@+id/cardNumber"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
                 android:textColor="@color/black"
                 android:textSize="16sp"
+                android:layout_marginEnd="16dp"
                 app:layout_constraintBottom_toBottomOf="@+id/btnCardSelected"
+                app:layout_constraintEnd_toStartOf="@+id/cardExpiry"
                 app:layout_constraintStart_toEndOf="@+id/btnCardSelected"
                 app:layout_constraintTop_toTopOf="@+id/btnCardSelected"
                 tools:text="VISA 1234 5678 9901" />
 
             <TextView
                 android:id="@+id/cardExpiry"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
                 android:textColor="@color/black"
                 android:textSize="16sp"
+                android:layout_marginEnd="8dp"
                 app:layout_constraintBottom_toBottomOf="@+id/cardNumber"
-                app:layout_constraintStart_toEndOf="@+id/cardNumber"
+                app:layout_constraintEnd_toStartOf="@+id/appCompatImageView"
                 app:layout_constraintTop_toTopOf="@+id/cardNumber"
                 tools:text="03/26" />
 
             <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/appCompatImageView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:layout_constraintBottom_toBottomOf="parent"
