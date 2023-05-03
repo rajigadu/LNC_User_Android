@@ -35,8 +35,13 @@ class HistoryDbhRidesAdapter(val callback: FragmentCallBack? = null) :
         @SuppressLint("SetTextI18n", "ResourceAsColor")
         fun bindView(rideHistory: RideHistory?) {
             binding.bookingDate.text = "${rideHistory?.date} ${rideHistory?.time}"
-            binding.paymentDate.text = "${rideHistory?.date} ${rideHistory?.time}"
-            binding.pickupLocation.text = " : ${rideHistory?.pickup_address}"
+            binding.paymentDate.text = rideHistory?.payment_date
+            binding.pickupLocation.text = rideHistory?.pickup_address
+            binding.tipAmount.text = "$${rideHistory?.tip_ammount ?: "0.00"}"
+            binding.rideCost.text = "$${rideHistory?.ride_amt ?: "0.00"}"
+            binding.promoCode.text = "$${rideHistory?.promo_amt ?: "0.00"}"
+            binding.transactionId.text = rideHistory?.transaction_id
+            binding.distance.text = "Miles"
 
             binding.btnAddTip.setOnClickListener {
                 callback?.onResult("add-tip", rideHistory)
