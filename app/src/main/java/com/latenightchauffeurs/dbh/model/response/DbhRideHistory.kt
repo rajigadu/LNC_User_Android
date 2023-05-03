@@ -5,7 +5,7 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class DbhRideHistory(
-    val data: DbhRideHistoryData,
+    val data: List<DbhRideHistoryData>?,
     val message: String,
     val status: String
 ): Parcelable

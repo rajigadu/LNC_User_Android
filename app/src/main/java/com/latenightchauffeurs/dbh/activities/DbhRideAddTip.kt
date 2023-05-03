@@ -2,21 +2,15 @@ package com.latenightchauffeurs.dbh.activities
 
 import android.os.Bundle
 import android.text.TextUtils
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.doOnTextChanged
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.latenightchauffeurs.FragmentCallBack
 import com.latenightchauffeurs.R
 import com.latenightchauffeurs.Utils.ConstantUtil
 import com.latenightchauffeurs.Utils.Utils
-import com.latenightchauffeurs.databinding.FragmentDbhFeedbackBinding
 import com.latenightchauffeurs.databinding.FragmentTipLayoutBinding
 import com.latenightchauffeurs.dbh.base.BaseActivity
-import com.latenightchauffeurs.dbh.model.response.RideHistory
+import com.latenightchauffeurs.dbh.model.response.DbhRideHistoryData
 import com.latenightchauffeurs.dbh.utils.ProgressCaller
 import com.latenightchauffeurs.dbh.utils.Resource
 import com.latenightchauffeurs.dbh.viewmodel.DbhViewModel
@@ -29,7 +23,7 @@ class DbhRideAddTip : BaseActivity() {
 
     private var binding: FragmentTipLayoutBinding? = null
     private var tipPercentage: String? = null
-    private var rideHistory: RideHistory? = null
+    private var rideHistory: DbhRideHistoryData? = null
     private var dbhViewModel: DbhViewModel? = null
 
 
@@ -39,7 +33,7 @@ class DbhRideAddTip : BaseActivity() {
         super.onCreate(savedInstanceState)
 
         dbhViewModel = ViewModelProvider(this)[DbhViewModel::class.java]
-        rideHistory = intent?.extras?.getParcelable(ConstantUtil.RIDE_HISTORY) as? RideHistory
+        rideHistory = intent?.extras?.getParcelable(ConstantUtil.RIDE_HISTORY) as? DbhRideHistoryData
 
         onClickListeners()
 

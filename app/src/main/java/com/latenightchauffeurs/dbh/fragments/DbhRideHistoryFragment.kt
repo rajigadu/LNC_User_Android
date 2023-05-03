@@ -2,7 +2,6 @@ package com.latenightchauffeurs.dbh.fragments
 
 import android.content.Intent
 import android.os.Bundle
-import android.os.Parcelable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,14 +11,13 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.latenightchauffeurs.FragmentCallBack
 import com.latenightchauffeurs.R
 import com.latenightchauffeurs.Utils.ConstantUtil.RIDE_HISTORY
-import com.latenightchauffeurs.Utils.ConstantUtil.RIDE_INFO
 import com.latenightchauffeurs.databinding.FragmentRidesViewLayoutBinding
 import com.latenightchauffeurs.dbh.activities.DbhPaymentSummary
 import com.latenightchauffeurs.dbh.activities.DbhRideAddTip
 import com.latenightchauffeurs.dbh.activities.DbhRideFeedback
 import com.latenightchauffeurs.dbh.adapter.HistoryDbhRidesAdapter
 import com.latenightchauffeurs.dbh.base.BaseActivity
-import com.latenightchauffeurs.dbh.model.response.RideHistory
+import com.latenightchauffeurs.dbh.model.response.DbhRideHistoryData
 import com.latenightchauffeurs.dbh.utils.ProgressCaller
 import com.latenightchauffeurs.dbh.utils.Resource
 import com.latenightchauffeurs.dbh.viewmodel.DbhViewModel
@@ -67,9 +65,9 @@ class DbhRideHistoryFragment : Fragment() {
             when(result.status) {
                 Resource.Status.LOADING -> { activity ?.let { ProgressCaller.showProgressDialog(it) }}
                 Resource.Status.SUCCESS -> {
-                    val rideHistory = result.data?.data?.ride
+                    val rideHistory = result.data?.data
                     if (result.data?.status == "1") {
-                        if (result.data.data.ride.isNotEmpty()) {
+                        if (result.data.data?.isNotEmpty() == true) {
                             initializeRideHistoryAdapter(rideHistory)
                         } else {
                             (activity as? BaseActivity)?.showAlertMessageDialog(
@@ -99,11 +97,11 @@ class DbhRideHistoryFragment : Fragment() {
      * @see DbhPaymentSummary will show the payment details
      * @see DbhRideFeedback for submit feedback
      */
-    private fun initializeRideHistoryAdapter(rideHistoryList: List<RideHistory>?) {
+    private fun initializeRideHistoryAdapter(rideHistoryList: List<DbhRideHistoryData>?) {
         val rideHistoryAdapter = HistoryDbhRidesAdapter(
             callback = object : FragmentCallBack {
                 override fun onResult(param1: Any?, param2: Any?, param3: Any?) {
-                    val rideHistory = param2 as RideHistory
+                    val rideHistory = param2 as DbhRideHistoryData
                     when(param1) {
                         "add-tip" -> {
                             startActivity(

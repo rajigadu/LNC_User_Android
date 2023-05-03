@@ -8,24 +8,24 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.latenightchauffeurs.FragmentCallBack
 import com.latenightchauffeurs.databinding.DbhRideHistoryViewBinding
-import com.latenightchauffeurs.dbh.model.response.RideHistory
+import com.latenightchauffeurs.dbh.model.response.DbhRideHistoryData
 
 /**
  * Create by Siru Malayil on 20-04-2023.
  */
 class HistoryDbhRidesAdapter(val callback: FragmentCallBack? = null) :
-    ListAdapter<RideHistory, HistoryDbhRidesAdapter.ViewHolder>(DiffCallBack()) {
+    ListAdapter<DbhRideHistoryData, HistoryDbhRidesAdapter.ViewHolder>(DiffCallBack()) {
 
 
-    class DiffCallBack : DiffUtil.ItemCallback<RideHistory>() {
+    class DiffCallBack : DiffUtil.ItemCallback<DbhRideHistoryData>() {
         override fun areItemsTheSame(
-            oldItem: RideHistory,
-            newItem: RideHistory
+            oldItem: DbhRideHistoryData,
+            newItem: DbhRideHistoryData
         ): Boolean = oldItem == newItem
 
         override fun areContentsTheSame(
-            oldItem: RideHistory,
-            newItem: RideHistory
+            oldItem: DbhRideHistoryData,
+            newItem: DbhRideHistoryData
         ): Boolean = oldItem == newItem
 
     }
@@ -33,7 +33,7 @@ class HistoryDbhRidesAdapter(val callback: FragmentCallBack? = null) :
     inner class ViewHolder(private val binding: DbhRideHistoryViewBinding) :
         RecyclerView.ViewHolder(binding.root) {
         @SuppressLint("SetTextI18n", "ResourceAsColor")
-        fun bindView(rideHistory: RideHistory?) {
+        fun bindView(rideHistory: DbhRideHistoryData?) {
             binding.bookingDate.text = "${rideHistory?.date} ${rideHistory?.time}"
             binding.paymentDate.text = rideHistory?.payment_date
             binding.pickupLocation.text = rideHistory?.pickup_address

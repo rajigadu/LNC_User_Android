@@ -2,17 +2,12 @@ package com.latenightchauffeurs.dbh.activities
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.latenightchauffeurs.Utils.ConstantUtil
-import com.latenightchauffeurs.databinding.FragmentDbhFeedbackBinding
 import com.latenightchauffeurs.databinding.FragmentDbhPaymentSummaryBinding
 import com.latenightchauffeurs.dbh.model.response.DbhPaymentDetails
-import com.latenightchauffeurs.dbh.model.response.RideHistory
+import com.latenightchauffeurs.dbh.model.response.DbhRideHistoryData
 import com.latenightchauffeurs.dbh.utils.ProgressCaller
 import com.latenightchauffeurs.dbh.utils.Resource
 import com.latenightchauffeurs.dbh.viewmodel.DbhViewModel
@@ -24,7 +19,7 @@ class DbhPaymentSummary: AppCompatActivity() {
 
     private var binding: FragmentDbhPaymentSummaryBinding? = null
     private var dbhViewModel: DbhViewModel? = null
-    private var rideHistory: RideHistory? = null
+    private var rideHistory: DbhRideHistoryData? = null
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -33,7 +28,7 @@ class DbhPaymentSummary: AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         dbhViewModel = ViewModelProvider(this)[DbhViewModel::class.java]
-        rideHistory = intent?.extras?.getParcelable(ConstantUtil.RIDE_HISTORY) as? RideHistory
+        rideHistory = intent?.extras?.getParcelable(ConstantUtil.RIDE_HISTORY) as? DbhRideHistoryData
 
         paymentSummaryDetails()
 
