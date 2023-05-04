@@ -489,6 +489,9 @@ class AddNewCardFragment : Fragment() {
                 jsonMap["promo"] = dataMap?.get("promo").toString()
                 jsonMap["version"] = "yes"
 
+                if (isEditableRide)
+                    jsonMap["booking_id"] = dataMap?.get("booking_id").toString()
+
                 val jsonObject = (jsonMap as Map<*, *>?)?.let { JSONObject(it) }
                 val json = jsonObject.toString()
 

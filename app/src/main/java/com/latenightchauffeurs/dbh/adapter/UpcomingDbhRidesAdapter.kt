@@ -12,6 +12,8 @@ import com.latenightchauffeurs.FragmentCallBack
 import com.latenightchauffeurs.R
 import com.latenightchauffeurs.databinding.LayoutUpcomingDbhRidesBinding
 import com.latenightchauffeurs.dbh.model.response.DbhRide
+import com.latenightchauffeurs.dbh.utils.ConstantUtils
+import com.latenightchauffeurs.dbh.utils.ConstantUtils.capitalizeWords
 
 /**
  * Create by Siru Malayil on 15-04-2023.
@@ -41,23 +43,34 @@ class UpcomingDbhRidesAdapter(val callback: FragmentCallBack? = null) :
                     " ${ride.time}"
             binding.valuePickupLocation.text = ride.pickup_address
             binding.valueRate.text = "$${ride.hourly_rate} Per Hour"
-            if (ride.future_accept == "0") {
-                binding.valueRideStatus.text = "Pending"
-                binding.valueRideStatus.setTextColor(
-                    ContextCompat.getColor(
-                        binding.root.context,
-                        R.color.red
-                    )
-                )
-            } else {
-                binding.valueRideStatus.text = "Accepted"
-                binding.valueRideStatus.setTextColor(
-                    ContextCompat.getColor(
-                        binding.root.context,
-                        R.color.green_color
-                    )
-                )
-            }
+            binding.valueRideStatus.text = ConstantUtils.getRideStatus(ride)
+                .replace("_", " ")
+                .capitalizeWords()
+            binding.valueRideStatus.setTextColor(
+                ConstantUtils.rideStatusTextColor(ride, binding.root.context))
+
+//            if (ride.future_accept == "0") {
+//                binding.valueRideStatus.text = "Pending"
+//                binding.valueRideStatus.setTextColor(
+//                    ConstantUtils.rideStatusTextColor(ride, binding.root.context))
+//            } else if (ride.future_ride_start == "1" &&
+//                    ride.status == "1") {
+//                binding.valueRideStatus.text = "Ride Started"
+//                binding.valueRideStatus.setTextColor(
+//                    ContextCompat.getColor(
+//                        binding.root.context,
+//                        R.color.green_color
+//                    )
+//                )
+//            } else {
+//                binding.valueRideStatus.text = "Accepted"
+//                binding.valueRideStatus.setTextColor(
+//                    ContextCompat.getColor(
+//                        binding.root.context,
+//                        R.color.green_color
+//                    )
+//                )
+//            }
             binding.btnEditRideInfo.setOnClickListener {
                 callback?.onResult("edit_ride", ride)
             }

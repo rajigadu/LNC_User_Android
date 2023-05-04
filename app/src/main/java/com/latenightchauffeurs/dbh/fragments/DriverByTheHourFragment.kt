@@ -221,6 +221,7 @@ class DriverByTheHourFragment: Fragment() {
             dataMap?.set("two",rideInfo?.pickup_lat ?: "")
             dataMap?.set("three",rideInfo?.pickup_long ?: "")
             dataMap?.set("city_name",rideInfo?.city_pickup ?: "")
+            dataMap?.set("booking_id",rideInfo?.id ?: "")
         }
         dataMap?.set("date_ride", binding?.textDate?.text?.trim().toString())
         dataMap?.set("time_ride", binding?.textTime?.text?.trim().toString())
