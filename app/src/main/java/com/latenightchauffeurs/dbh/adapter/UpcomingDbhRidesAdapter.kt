@@ -49,28 +49,6 @@ class UpcomingDbhRidesAdapter(val callback: FragmentCallBack? = null) :
             binding.valueRideStatus.setTextColor(
                 ConstantUtils.rideStatusTextColor(ride, binding.root.context))
 
-//            if (ride.future_accept == "0") {
-//                binding.valueRideStatus.text = "Pending"
-//                binding.valueRideStatus.setTextColor(
-//                    ConstantUtils.rideStatusTextColor(ride, binding.root.context))
-//            } else if (ride.future_ride_start == "1" &&
-//                    ride.status == "1") {
-//                binding.valueRideStatus.text = "Ride Started"
-//                binding.valueRideStatus.setTextColor(
-//                    ContextCompat.getColor(
-//                        binding.root.context,
-//                        R.color.green_color
-//                    )
-//                )
-//            } else {
-//                binding.valueRideStatus.text = "Accepted"
-//                binding.valueRideStatus.setTextColor(
-//                    ContextCompat.getColor(
-//                        binding.root.context,
-//                        R.color.green_color
-//                    )
-//                )
-//            }
             binding.btnEditRideInfo.setOnClickListener {
                 callback?.onResult("edit_ride", ride)
             }
