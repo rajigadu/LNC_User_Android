@@ -10,8 +10,6 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.latenightchauffeurs.FragmentCallBack
 import com.latenightchauffeurs.R
-import com.latenightchauffeurs.Utils.ConstantUtil.EDIT_RIDE_INFO
-import com.latenightchauffeurs.Utils.ConstantUtil.RIDE_INFO
 import com.latenightchauffeurs.Utils.Utils
 import com.latenightchauffeurs.databinding.FragmentRidesViewLayoutBinding
 import com.latenightchauffeurs.dbh.activities.DriveByHourActivity
@@ -19,10 +17,10 @@ import com.latenightchauffeurs.dbh.adapter.UpcomingDbhRidesAdapter
 import com.latenightchauffeurs.dbh.base.BaseActivity
 import com.latenightchauffeurs.dbh.model.response.DbhRide
 import com.latenightchauffeurs.dbh.model.response.DbhUpcomingRidesData
+import com.latenightchauffeurs.dbh.utils.DbhUtils
 import com.latenightchauffeurs.dbh.utils.ProgressCaller
 import com.latenightchauffeurs.dbh.utils.Resource
 import com.latenightchauffeurs.dbh.viewmodel.DbhViewModel
-import com.latenightchauffeurs.extension.replaceFragment
 import com.latenightchauffeurs.model.SavePref
 
 /**
@@ -35,24 +33,24 @@ class DbhUpcomingRidesFragment : Fragment() {
     private var preferences: SavePref? = null
 
 
-    private var upcomingDbhRodesAdapter =
+    private var upcomingDbhRidesAdapter =
         UpcomingDbhRidesAdapter(callback = object : FragmentCallBack {
             override fun onResult(param1: Any?, param2: Any?, param3: Any?) {
                 val rideInfo = param2 as? DbhRide
                 when (param1 as? String) {
-                    "edit_ride" -> {
+                    DbhUtils.EDIT_RIDE -> {
                         startActivity(
                             Intent(activity, DriveByHourActivity::class.java).apply {
-                                putExtra(RIDE_INFO, rideInfo)
-                                putExtra(EDIT_RIDE_INFO, "edit")
+                                putExtra(DbhUtils.RIDE_INFO, rideInfo)
+                                putExtra(DbhUtils.EDIT_RIDE_INFO, DbhUtils.VALUE_EDIT)
                             }
                         )
                     }
-                    "view_details" -> {
+                    DbhUtils.VIEW_DETAILS -> {
                         startActivity(
                             Intent(activity, DriveByHourActivity::class.java).apply {
-                                putExtra(RIDE_INFO, rideInfo)
-                                putExtra(EDIT_RIDE_INFO, "view")
+                                putExtra(DbhUtils.RIDE_INFO, rideInfo)
+                                putExtra(DbhUtils.EDIT_RIDE_INFO, DbhUtils.VALUE_VIEW)
                             }
                         )
                     }
@@ -88,6 +86,7 @@ class DbhUpcomingRidesFragment : Fragment() {
         preferences = SavePref()
         preferences?.SavePref(activity)
         if (Utils.isNetworkAvailable(activity)) {
+            initializeAdapter()
             getUpcomingDbhRides()
         }
     }
@@ -102,16 +101,10 @@ class DbhUpcomingRidesFragment : Fragment() {
                     Resource.Status.SUCCESS -> {
                         val upcomingRides = result?.data?.data
                         if (result.data?.status == "1") {
-                            if (result.data.data.ride.isNotEmpty()) {
-                                initializeAdapter(upcomingRides)
-                            } else {
-                                (activity as? BaseActivity)?.showAlertMessageDialog(
-                                    message = "Currently there no more upcoming rides"
-                                )
-                            }
+                            submitRidesList(upcomingRides)
                         } else (activity as? BaseActivity)?.showAlertMessageDialog(
-                            message = result.data?.message ?: getString(R.string.something_went_wrong)
-                        )
+                                message = result.data?.message ?: getString(R.string.something_went_wrong)
+                            )
                         ProgressCaller.hideProgressDialog()
                         binding?.refreshRides?.isRefreshing = false
                     }
@@ -126,7 +119,7 @@ class DbhUpcomingRidesFragment : Fragment() {
             }
     }
 
-    private fun initializeAdapter(upcomingRides: DbhUpcomingRidesData?) {
+    private fun submitRidesList(upcomingRides: DbhUpcomingRidesData?) {
         upcomingRides?.ride?.forEach { rides ->
             upcomingRides.future_edit_ride_status.forEach { futureEditRideStatus ->
                 if (rides.id == futureEditRideStatus.id) {
@@ -135,10 +128,14 @@ class DbhUpcomingRidesFragment : Fragment() {
                 }
             }
         }
+        upcomingDbhRidesAdapter.submitList(upcomingRides?.ride)
+    }
+
+    private fun initializeAdapter(upcomingRides: DbhUpcomingRidesData?= null) {
         binding?.recyclerviewRides?.apply {
             layoutManager = LinearLayoutManager(activity)
-            adapter = upcomingDbhRodesAdapter
+            adapter = upcomingDbhRidesAdapter
         }
-        upcomingDbhRodesAdapter.submitList(upcomingRides?.ride)
+        upcomingDbhRidesAdapter.submitList(upcomingRides?.ride)
     }
 }

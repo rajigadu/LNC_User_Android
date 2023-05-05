@@ -3,6 +3,7 @@ package com.latenightchauffeurs.Utils;
 import androidx.annotation.Nullable;
 
 import com.latenightchauffeurs.dbh.model.response.DbhBookingResponse;
+import com.latenightchauffeurs.dbh.model.response.DbhCancelRideAmountResponse;
 import com.latenightchauffeurs.dbh.model.response.DbhDriver;
 import com.latenightchauffeurs.dbh.model.response.DbhPaymentDetails;
 import com.latenightchauffeurs.dbh.model.response.DbhRideHistory;
@@ -90,7 +91,7 @@ public interface ServiceApi {
     );
 
     @GET(Settings.URL_DBH_CANCEL_RIDE_AMOUNT)
-    Call<DefaultResponseBody>cancelDbhRideAmount(
+    Call<DbhCancelRideAmountResponse>cancelDbhRideAmount(
             @Query("cancel_time") String cancelTime,
             @Query("ride_id") String rideId
     );

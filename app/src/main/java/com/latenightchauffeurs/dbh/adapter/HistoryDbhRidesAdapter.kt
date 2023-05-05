@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.latenightchauffeurs.FragmentCallBack
 import com.latenightchauffeurs.databinding.DbhRideHistoryViewBinding
 import com.latenightchauffeurs.dbh.model.response.DbhRideHistoryData
+import com.latenightchauffeurs.dbh.utils.DbhUtils
 
 /**
  * Create by Siru Malayil on 20-04-2023.
@@ -41,16 +42,16 @@ class HistoryDbhRidesAdapter(val callback: FragmentCallBack? = null) :
             binding.rideCost.text = "$${rideHistory?.ride_amt ?: "0.00"}"
             binding.promoCode.text = "$${rideHistory?.promo_amt ?: "0.00"}"
             binding.transactionId.text = rideHistory?.transaction_id
-            binding.distance.text = "Miles"
+            binding.distance.text = rideHistory?.distance
 
             binding.btnAddTip.setOnClickListener {
-                callback?.onResult("add-tip", rideHistory)
+                callback?.onResult(DbhUtils.ADD_TIP, rideHistory)
             }
             binding.btnFeedBack.setOnClickListener {
-                callback?.onResult("feedback", rideHistory)
+                callback?.onResult(DbhUtils.FEEDBACK, rideHistory)
             }
             binding.btnPaymentSummary.setOnClickListener {
-                callback?.onResult("payment-summary", rideHistory)
+                callback?.onResult(DbhUtils.PAYMENT_SUMMARY, rideHistory)
             }
         }
     }

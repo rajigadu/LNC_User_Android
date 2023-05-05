@@ -10,7 +10,6 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.latenightchauffeurs.FragmentCallBack
 import com.latenightchauffeurs.R
-import com.latenightchauffeurs.Utils.ConstantUtil.RIDE_HISTORY
 import com.latenightchauffeurs.databinding.FragmentRidesViewLayoutBinding
 import com.latenightchauffeurs.dbh.activities.DbhPaymentSummary
 import com.latenightchauffeurs.dbh.activities.DbhRideAddTip
@@ -18,6 +17,7 @@ import com.latenightchauffeurs.dbh.activities.DbhRideFeedback
 import com.latenightchauffeurs.dbh.adapter.HistoryDbhRidesAdapter
 import com.latenightchauffeurs.dbh.base.BaseActivity
 import com.latenightchauffeurs.dbh.model.response.DbhRideHistoryData
+import com.latenightchauffeurs.dbh.utils.DbhUtils
 import com.latenightchauffeurs.dbh.utils.ProgressCaller
 import com.latenightchauffeurs.dbh.utils.Resource
 import com.latenightchauffeurs.dbh.viewmodel.DbhViewModel
@@ -54,6 +54,7 @@ class DbhRideHistoryFragment : Fragment() {
             binding?.refreshRides?.isRefreshing = true
             getDbhRidesHistory()
         }
+        initializeRideHistoryAdapter()
         getDbhRidesHistory()
     }
 
@@ -68,7 +69,7 @@ class DbhRideHistoryFragment : Fragment() {
                     val rideHistory = result.data?.data
                     if (result.data?.status == "1") {
                         if (result.data.data?.isNotEmpty() == true) {
-                            initializeRideHistoryAdapter(rideHistory)
+                            rideHistoryAdapter.submitList(rideHistory)
                         } else {
                             (activity as? BaseActivity)?.showAlertMessageDialog(
                                 message = "There is no more ride history!"
@@ -97,37 +98,38 @@ class DbhRideHistoryFragment : Fragment() {
      * @see DbhPaymentSummary will show the payment details
      * @see DbhRideFeedback for submit feedback
      */
-    private fun initializeRideHistoryAdapter(rideHistoryList: List<DbhRideHistoryData>?) {
-        val rideHistoryAdapter = HistoryDbhRidesAdapter(
-            callback = object : FragmentCallBack {
-                override fun onResult(param1: Any?, param2: Any?, param3: Any?) {
-                    val rideHistory = param2 as DbhRideHistoryData
-                    when(param1) {
-                        "add-tip" -> {
-                            startActivity(
-                                Intent(activity, DbhRideAddTip::class.java).apply {
-                                    putExtra(RIDE_HISTORY, rideHistory)
-                                }
-                            )
-                        }
-                        "feedback" -> {
-                            startActivity(
-                                Intent(activity, DbhRideFeedback::class.java).apply {
-                                    putExtra(RIDE_HISTORY, rideHistory)
-                                }
-                            )
-                        }
-                        "payment-summary" -> {
-                            startActivity(
-                                Intent(activity, DbhPaymentSummary::class.java).apply {
-                                    putExtra(RIDE_HISTORY, rideHistory)
-                                }
-                            )
-                        }
+    private val rideHistoryAdapter = HistoryDbhRidesAdapter(
+        callback = object : FragmentCallBack {
+            override fun onResult(param1: Any?, param2: Any?, param3: Any?) {
+                val rideHistory = param2 as DbhRideHistoryData
+                when(param1) {
+                    DbhUtils.ADD_TIP -> {
+                        startActivity(
+                            Intent(activity, DbhRideAddTip::class.java).apply {
+                                putExtra(DbhUtils.RIDE_HISTORY, rideHistory)
+                            }
+                        )
+                    }
+                    DbhUtils.FEEDBACK -> {
+                        startActivity(
+                            Intent(activity, DbhRideFeedback::class.java).apply {
+                                putExtra(DbhUtils.RIDE_HISTORY, rideHistory)
+                            }
+                        )
+                    }
+                    DbhUtils.PAYMENT_SUMMARY -> {
+                        startActivity(
+                            Intent(activity, DbhPaymentSummary::class.java).apply {
+                                putExtra(DbhUtils.RIDE_HISTORY, rideHistory)
+                            }
+                        )
                     }
                 }
             }
-        )
+        }
+    )
+
+    private fun initializeRideHistoryAdapter(rideHistoryList: List<DbhRideHistoryData>? = null) {
         binding?.recyclerviewRides?.apply {
             layoutManager = LinearLayoutManager(activity)
             adapter = rideHistoryAdapter

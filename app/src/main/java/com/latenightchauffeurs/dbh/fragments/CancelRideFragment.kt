@@ -5,6 +5,7 @@ import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.latenightchauffeurs.FragmentCallBack
@@ -57,12 +58,18 @@ class CancelRideFragment : Fragment() {
         binding?.toolbarCancelRide?.setNavigationOnClickListener {
             activity?.supportFragmentManager?.popBackStack()
         }
+
+        binding?.edttextReaon?.doOnTextChanged { text, _, _, _ ->
+            if (!TextUtils.isEmpty(text)) {
+                binding?.edttextReaon?.error = null
+            }
+        }
     }
 
     private fun validated(): Boolean {
-        val rideCancelReason = binding?.reason?.text?.toString()?.trim()
+        val rideCancelReason = binding?.edttextReaon?.text?.toString()?.trim()
         if (TextUtils.isEmpty(rideCancelReason)) {
-            binding?.reason?.error = "Please enter a reason for cancellation"
+            binding?.edttextReaon?.error = "Please enter a reason for cancellation"
             return false
         }
         return true

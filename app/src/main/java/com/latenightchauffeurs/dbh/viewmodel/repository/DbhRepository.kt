@@ -184,13 +184,13 @@ class DbhRepository {
         return dbhUpcomingRideResponse
     }
 
-    fun cancelDbhRideAmount(cancelTime: String,rideId: String): MutableLiveData<Resource<DefaultResponseBody>> {
-        val dbhUpcomingRideResponse = MutableLiveData<Resource<DefaultResponseBody>>()
+    fun cancelDbhRideAmount(cancelTime: String,rideId: String): MutableLiveData<Resource<DbhCancelRideAmountResponse>> {
+        val dbhUpcomingRideResponse = MutableLiveData<Resource<DbhCancelRideAmountResponse>>()
         dbhUpcomingRideResponse.postValue(Resource.loading(null))
-        apiService.cancelDbhRideAmount(cancelTime, rideId).enqueue(object : Callback<DefaultResponseBody> {
+        apiService.cancelDbhRideAmount(cancelTime, rideId).enqueue(object : Callback<DbhCancelRideAmountResponse> {
             override fun onResponse(
-                call: Call<DefaultResponseBody>,
-                response: Response<DefaultResponseBody>) {
+                call: Call<DbhCancelRideAmountResponse>,
+                response: Response<DbhCancelRideAmountResponse>) {
                 if (response.isSuccessful) {
                     dbhUpcomingRideResponse.postValue(Resource.success(response.body()!!))
                 } else {
@@ -198,7 +198,7 @@ class DbhRepository {
                     dbhUpcomingRideResponse.postValue(Resource.error(response.message() ?: "An error occurred", null))
                 }
             }
-            override fun onFailure(call: Call<DefaultResponseBody>, t: Throwable) {
+            override fun onFailure(call: Call<DbhCancelRideAmountResponse>, t: Throwable) {
                 // handle error
                 dbhUpcomingRideResponse.postValue(Resource.error(t.localizedMessage ?: "An error occurred", null))
             }

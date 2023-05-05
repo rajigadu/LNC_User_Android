@@ -14,6 +14,7 @@ import com.latenightchauffeurs.databinding.LayoutUpcomingDbhRidesBinding
 import com.latenightchauffeurs.dbh.model.response.DbhRide
 import com.latenightchauffeurs.dbh.utils.ConstantUtils
 import com.latenightchauffeurs.dbh.utils.ConstantUtils.capitalizeWords
+import com.latenightchauffeurs.dbh.utils.DbhUtils
 
 /**
  * Create by Siru Malayil on 15-04-2023.
@@ -50,16 +51,22 @@ class UpcomingDbhRidesAdapter(val callback: FragmentCallBack? = null) :
                 ConstantUtils.rideStatusTextColor(ride, binding.root.context))
 
             binding.btnEditRideInfo.setOnClickListener {
-                callback?.onResult("edit_ride", ride)
+                callback?.onResult(DbhUtils.EDIT_RIDE, ride)
             }
             binding.btnViewDetails.setOnClickListener {
-                callback?.onResult("view_details", ride)
+                callback?.onResult(DbhUtils.VIEW_DETAILS, ride)
             }
+
+            /**
+             * EditRideInfo Button And ViewDetails Button will show -
+             * as per the following conditions satisfied
+             */
             binding.btnEditRideInfo.isVisible =
                 ride.future_edit_ride_status == "1" && ride.status == "0"
             binding.btnViewDetails.isVisible =
                 ride.future_edit_ride_status == "1" && ride.status == "1" ||
-                        ride.future_edit_ride_status == "0" && ride.status == "0"
+                        ride.future_edit_ride_status == "0" && ride.status == "0" ||
+                        ride.future_accept == "1"
 
         }
     }

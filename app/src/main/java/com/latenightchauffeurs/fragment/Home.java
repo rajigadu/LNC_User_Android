@@ -74,7 +74,6 @@ import com.google.gson.reflect.TypeToken;
 import com.latenightchauffeurs.R;
 import com.latenightchauffeurs.Utils.AppManager;
 import com.latenightchauffeurs.Utils.ConstVariable;
-import com.latenightchauffeurs.Utils.ConstantUtil;
 import com.latenightchauffeurs.Utils.IonAppListners;
 import com.latenightchauffeurs.Utils.JsonPost;
 import com.latenightchauffeurs.Utils.OnlineRequest;
@@ -86,6 +85,7 @@ import com.latenightchauffeurs.activity.Navigation;
 import com.latenightchauffeurs.activity.Rating;
 import com.latenightchauffeurs.adapter.PlaceArrayAdapter;
 import com.latenightchauffeurs.dbh.activities.DriveByHourActivity;
+import com.latenightchauffeurs.dbh.utils.DbhUtils;
 import com.latenightchauffeurs.model.DataParser;
 import com.latenightchauffeurs.model.GPSTracker;
 import com.latenightchauffeurs.model.SavePref;
@@ -772,7 +772,7 @@ public class Home extends Fragment implements OnMapReadyCallback, View.OnClickLi
         switch (v.getId()) {
             case R.id.btnBookByHour:
                 Intent intent = new Intent(requireActivity(), DriveByHourActivity.class);
-                intent.putExtra(ConstantUtil.DATA_MAP, curentMdata);
+                intent.putExtra(DbhUtils.DATA_MAP, curentMdata);
                 startActivity(intent);
                 break;
             case R.id.bookreserve:

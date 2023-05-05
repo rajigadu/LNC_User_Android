@@ -10,6 +10,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
@@ -22,9 +23,11 @@ import com.latenightchauffeurs.dbh.model.response.DbhDriverData
 import com.latenightchauffeurs.dbh.model.response.DbhRide
 import com.latenightchauffeurs.dbh.utils.AlertDialogMessageFragment.Companion.ACTION_OK
 import com.latenightchauffeurs.dbh.utils.ConstantUtils
+import com.latenightchauffeurs.dbh.utils.ConstantUtils.capitalizeWords
 import com.latenightchauffeurs.dbh.utils.ProgressCaller
 import com.latenightchauffeurs.dbh.utils.Resource
 import com.latenightchauffeurs.dbh.viewmodel.DbhViewModel
+import com.latenightchauffeurs.extension.navigate
 import com.latenightchauffeurs.extension.replaceFragment
 import com.latenightchauffeurs.model.SavePref
 
@@ -64,15 +67,13 @@ class DbhRideInfoViewDetailsFragment : Fragment() {
         onClickListeners()
     }
 
+    @SuppressLint("SetTextI18n")
     private fun setDViewDetails() {
         getDriverDetails()
-        val status = if (rideInfo?.future_accept == "0") "Pending" else "Accepted"
-        binding?.driverName?.text = ""
-        binding?.driverNumber?.text = ""
-        binding?.rideStatus?.text = status
-        binding?.date?.text = rideInfo?.ride_start_time
-
-        binding?.layoutDriverDetails?.isVisible = rideInfo?.status == "1"
+        binding?.rideStatus?.text = ConstantUtils.getRideStatus(rideInfo)
+            .replace("_", " ")
+            .capitalizeWords()
+        binding?.date?.text = "${rideInfo?.otherdate} ${rideInfo?.time}"
     }
 
     private fun getDriverDetails() {
@@ -183,11 +184,10 @@ class DbhRideInfoViewDetailsFragment : Fragment() {
             when (result.status) {
                 Resource.Status.LOADING -> { activity?.let { ProgressCaller.showProgressDialog(it) }}
                 Resource.Status.SUCCESS -> {
-
                     val message = if (result.data?.status == "1") {
-                        "will be charged for Ride Cancellation. \n Are you sure want you to cancel this ride ?"
+                        "$${result.data.data.firstOrNull()?.amount.toString()} will be charged for Ride Cancellation. \n Are you sure want you to cancel this ride ?"
                     } else {
-                        result?.data?.data?.firstOrNull()?.msg ?: "You can cancel this ride without any charges"
+                        result?.data?.data?.firstOrNull()?.msg ?: "You can cancel ride without any charges"
                     }
                     (activity as? BaseActivity)?.showAlertMessageDialog(
                         message = message,
@@ -212,9 +212,11 @@ class DbhRideInfoViewDetailsFragment : Fragment() {
     }
 
     private fun cancelDbhRide() {
-        replaceFragment(
-            fragment = CancelRideFragment(),
-            fragmentManager = childFragmentManager
+        (activity as? AppCompatActivity)?.navigate(
+            fragment = CancelRideFragment.newInstance(
+                rideId = rideInfo?.id,
+                userId = rideInfo?.user_id
+            )
         )
     }
 }

@@ -6,11 +6,11 @@ import androidx.core.widget.doOnTextChanged
 import androidx.lifecycle.ViewModelProvider
 import com.latenightchauffeurs.FragmentCallBack
 import com.latenightchauffeurs.R
-import com.latenightchauffeurs.Utils.ConstantUtil
 import com.latenightchauffeurs.Utils.Utils
 import com.latenightchauffeurs.databinding.FragmentTipLayoutBinding
 import com.latenightchauffeurs.dbh.base.BaseActivity
 import com.latenightchauffeurs.dbh.model.response.DbhRideHistoryData
+import com.latenightchauffeurs.dbh.utils.DbhUtils
 import com.latenightchauffeurs.dbh.utils.ProgressCaller
 import com.latenightchauffeurs.dbh.utils.Resource
 import com.latenightchauffeurs.dbh.viewmodel.DbhViewModel
@@ -33,7 +33,7 @@ class DbhRideAddTip : BaseActivity() {
         super.onCreate(savedInstanceState)
 
         dbhViewModel = ViewModelProvider(this)[DbhViewModel::class.java]
-        rideHistory = intent?.extras?.getParcelable(ConstantUtil.RIDE_HISTORY) as? DbhRideHistoryData
+        rideHistory = intent?.extras?.getParcelable(DbhUtils.RIDE_HISTORY) as? DbhRideHistoryData
 
         onClickListeners()
 

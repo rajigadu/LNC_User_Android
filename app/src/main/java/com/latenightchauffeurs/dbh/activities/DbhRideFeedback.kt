@@ -12,10 +12,10 @@ import androidx.appcompat.widget.AppCompatEditText
 import androidx.core.widget.doOnTextChanged
 import androidx.lifecycle.ViewModelProvider
 import com.latenightchauffeurs.FragmentCallBack
-import com.latenightchauffeurs.Utils.ConstantUtil.RIDE_HISTORY
 import com.latenightchauffeurs.databinding.FragmentDbhFeedbackBinding
 import com.latenightchauffeurs.dbh.base.BaseActivity
 import com.latenightchauffeurs.dbh.model.response.DbhRideHistoryData
+import com.latenightchauffeurs.dbh.utils.DbhUtils
 import com.latenightchauffeurs.dbh.utils.ProgressCaller
 import com.latenightchauffeurs.dbh.utils.Resource
 import com.latenightchauffeurs.dbh.viewmodel.DbhViewModel
@@ -38,7 +38,7 @@ class DbhRideFeedback : BaseActivity() {
         setContentView(binding?.root)
 
         dbhViewModel = ViewModelProvider(this)[DbhViewModel::class.java]
-        rideHistory = intent?.extras?.getParcelable(RIDE_HISTORY) as? DbhRideHistoryData
+        rideHistory = intent?.extras?.getParcelable(DbhUtils.RIDE_HISTORY) as? DbhRideHistoryData
 
         onClickListener()
     }

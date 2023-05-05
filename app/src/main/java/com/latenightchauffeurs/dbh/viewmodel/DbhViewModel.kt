@@ -45,7 +45,7 @@ class DbhViewModel : ViewModel() {
         return bookingRepository.editDbhRide(json)
     }
 
-    fun cancelDbhRideAmount(cancelTime: String, rideId: String): MutableLiveData<Resource<DefaultResponseBody>> {
+    fun cancelDbhRideAmount(cancelTime: String, rideId: String): MutableLiveData<Resource<DbhCancelRideAmountResponse>> {
         return bookingRepository.cancelDbhRideAmount(cancelTime, rideId)
     }
 

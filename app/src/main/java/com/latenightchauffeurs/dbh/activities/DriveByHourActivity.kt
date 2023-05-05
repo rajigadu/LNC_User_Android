@@ -1,14 +1,13 @@
 package com.latenightchauffeurs.dbh.activities
 
 import android.os.Bundle
-import com.latenightchauffeurs.FragmentCallBack
-import com.latenightchauffeurs.Utils.ConstantUtil
 import com.latenightchauffeurs.databinding.ActivityDbhLayoutBinding
 import com.latenightchauffeurs.extension.navigate
 import com.latenightchauffeurs.dbh.fragments.DriverByTheHourFragment
 import com.latenightchauffeurs.dbh.base.BaseActivity
 import com.latenightchauffeurs.dbh.fragments.DbhRideInfoViewDetailsFragment
 import com.latenightchauffeurs.dbh.model.response.DbhRide
+import com.latenightchauffeurs.dbh.utils.DbhUtils
 
 /**
  * Create by Sirumalayil on 01-04-2023.
@@ -25,9 +24,9 @@ class DriveByHourActivity: BaseActivity() {
         setContentView(binding?.root)
 
         binding?.toolbarDbh?.title = "Driver By The Hour"
-        val dataMap = intent?.extras?.getSerializable(ConstantUtil.DATA_MAP) as? HashMap<String, Any>
-        val rideInfo = intent?.getParcelableExtra(ConstantUtil.RIDE_INFO) as? DbhRide
-        val viewOrEdit = intent?.getStringExtra(ConstantUtil.EDIT_RIDE_INFO)
+        val dataMap = intent?.extras?.getSerializable(DbhUtils.DATA_MAP) as? HashMap<String, Any>
+        val rideInfo = intent?.getParcelableExtra(DbhUtils.RIDE_INFO) as? DbhRide
+        val viewOrEdit = intent?.getStringExtra(DbhUtils.EDIT_RIDE_INFO)
 
         if (savedInstanceState == null) {
             when (viewOrEdit) {

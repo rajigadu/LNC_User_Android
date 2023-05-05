@@ -41,7 +41,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <EditText
-                android:id="@+id/message"
+                android:id="@+id/edttext_reaon"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/reason"
@@ -49,6 +49,7 @@
                 android:gravity="top"
                 android:hint="@string/enter_your_message"
                 android:inputType="textNoSuggestions|textMultiLine"
+                android:imeOptions="actionDone"
                 android:lines="5"
                 android:maxLength="200"
                 android:maxLines="5"
