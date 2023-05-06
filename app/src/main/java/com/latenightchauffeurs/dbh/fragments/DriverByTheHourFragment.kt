@@ -79,6 +79,12 @@ class DriverByTheHourFragment: Fragment() {
     }
 
     private fun setRideInfo() {
+        dataMap = HashMap()
+        dataMap?.set("one",rideInfo?.pickup_address ?: "")
+        dataMap?.set("two",rideInfo?.pickup_lat ?: "")
+        dataMap?.set("three",rideInfo?.pickup_long ?: "")
+        dataMap?.set("city_name",rideInfo?.city_pickup ?: "")
+        dataMap?.set("booking_id",rideInfo?.id ?: "")
         binding?.edtTextNotes?.setText(rideInfo?.notes)
         binding?.textDate?.setText(rideInfo?.otherdate)
         binding?.textTime?.setText(rideInfo?.time)
@@ -171,7 +177,7 @@ class DriverByTheHourFragment: Fragment() {
                 result?.data?.let { intent ->
                     val place = Autocomplete.getPlaceFromIntent(intent)
                     binding?.textPickupPlace?.setText(place.address)
-                    place.address?.let { dataMap?.set("one", it) }
+
                     val geocoder = Geocoder(requireContext(), Locale.getDefault())
                     //TODO geocoder.getFromLocation is deprecated, need to set geocoder.getFromLocationAsync minSDK v26
                     val addresses = place.latLng?.let {
@@ -183,6 +189,9 @@ class DriverByTheHourFragment: Fragment() {
                     }
                     if (addresses != null) {
                         dataMap?.set("city_name", addresses.firstOrNull()?.locality.toString())
+                        place.address?.let { dataMap?.set("one", it) }
+                        dataMap?.set("two", place.latLng?.latitude.toString())
+                        dataMap?.set("three", place.latLng?.longitude.toString())
                     } else {
                         (activity as? BaseActivity)?.showAlertMessageDialog(
                             message = "No location found with these address."
@@ -215,14 +224,6 @@ class DriverByTheHourFragment: Fragment() {
     }
 
     private fun bookMyChauffeur() {
-        if (isEditableRide) {
-            dataMap = HashMap()
-            dataMap?.set("one",rideInfo?.pickup_address ?: "")
-            dataMap?.set("two",rideInfo?.pickup_lat ?: "")
-            dataMap?.set("three",rideInfo?.pickup_long ?: "")
-            dataMap?.set("city_name",rideInfo?.city_pickup ?: "")
-            dataMap?.set("booking_id",rideInfo?.id ?: "")
-        }
         dataMap?.set("date_ride", binding?.textDate?.text?.trim().toString())
         dataMap?.set("time_ride", binding?.textTime?.text?.trim().toString())
         dataMap?.set("notes", binding?.edtTextNotes?.text?.trim().toString())

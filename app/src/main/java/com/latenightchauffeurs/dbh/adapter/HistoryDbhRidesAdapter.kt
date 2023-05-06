@@ -43,6 +43,7 @@ class HistoryDbhRidesAdapter(val callback: FragmentCallBack? = null) :
             binding.promoCode.text = "$${rideHistory?.promo_amt ?: "0.00"}"
             binding.transactionId.text = rideHistory?.transaction_id
             binding.distance.text = rideHistory?.distance
+            binding.dropLocation.text = rideHistory?.d_address
 
             binding.btnAddTip.setOnClickListener {
                 callback?.onResult(DbhUtils.ADD_TIP, rideHistory)
